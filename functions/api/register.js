@@ -1,5 +1,5 @@
 function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store"}})}
-const TEACHER_CODE_SHA256="cac7380ba4df8f313641c78c7cb613a2a7b3e1a69e65bcc5417b61d1b67fb7d2";
+const TEACHER_CODE_SHA256="abe2b41a3ac47a6a020d421fec8bac888b0745014a8cc6957bf234bb5455c415";
 async function matchesTeacherCode(value){
  const bytes=new TextEncoder().encode(value);
  const digest=await crypto.subtle.digest("SHA-256",bytes);
@@ -13,7 +13,7 @@ export async function onRequestPost({request,env}){
  const kunya=String(body.kunya||"").trim().slice(0,60);
  const role=String(body.role||"student");
  const phone=String(body.phone||"").replace(/[\s-]/g,"");
- const teacherCode=String(body.teacherCode||"");
+ const teacherCode=String(body.teacherCode||"").trim();
  if(body.consent!==true)return json({success:false,message:"يلزم الموافقة على استخدام البيانات."},400);
  if(!["student","teacher"].includes(role))return json({success:false,message:"نوع الدخول غير صالح."},400);
  if(!name||!kunya||!/^05\d{8}$/.test(phone))return json({success:false,message:"تحقق من الاسم والكنية ورقم الجوال."},400);
