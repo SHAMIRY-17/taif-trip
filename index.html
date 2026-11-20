@@ -96,8 +96,8 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
  <section id="identity" class="screen">
   <div class="panel">
    <div class="steps"><span class="step current">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step">4 · الدعوة</span></div>
-   <h2>اختر بطاقتك الشخصية</h2>
-   <p class="muted">اختر البطاقة التي أعدّها المنظّم لك. هذه بطاقات تجريبية مؤقتة إلى أن تُضاف صور وأسماء المشاركين بموافقتهم.</p>
+   <h2>تسجيل دخول المشارك</h2>
+   <p class="muted">اختر بطاقتك المعدّة من المنظّم. البطاقات الحالية تجريبية، وسيتم استبدالها بصور وأسماء حقيقية بعد موافقة أصحابها.</p>
    <div class="participants" id="participantCards">
     <button class="person" type="button" data-name="مشارك تجريبي 1" data-kunya="أبو سعود"><div class="avatar">👤</div><b>أبو سعود</b><small>مشارك تجريبي 1</small></button>
     <button class="person" type="button" data-name="مشارك تجريبي 2" data-kunya="أبو فارس"><div class="avatar">👤</div><b>أبو فارس</b><small>مشارك تجريبي 2</small></button>
@@ -105,8 +105,8 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
    </div>
    <label class="field" for="phone">رقم الجوال للتأكيد</label>
    <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05XXXXXXXX">
-   <p class="note">نسخة تجريبية: لا يتم إرسال رمز SMS ولا حفظ رقم الجوال على الخادم. أدخل رقمك بموافقتك فقط. سنضيف التحقق الحقيقي لاحقًا إذا توفرت خدمة مناسبة وموافقة المنظّم.</p>
-   <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button id="confirmIdentity" disabled>تأكيد ومتابعة</button></div>
+   <label style="display:flex;gap:9px;align-items:flex-start;text-align:right;margin-top:14px;color:#d6dce5;line-height:1.8"><input id="dataConsent" type="checkbox" style="margin-top:6px"> أوافق على إرسال اسمي وكنيتي ورقم جوالي إلى منظّم الرحلة لغرض تسجيل المشاركة والتواصل بشأن الرحلة.</label><p class="note">لن يتم حفظ البيانات دون موافقتك. هذه خطوة تسجيل وليست تحققًا من ملكية الرقم؛ لا يوجد رمز SMS في النسخة الحالية. يجب أن يكون جمع بيانات المشاركين بموافقتهم وموافقة ولي الأمر عند الحاجة.</p>
+   <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button id="confirmIdentity" disabled>تسجيل ومتابعة</button></div>
    <p id="identityMessage" class="note" role="status"></p>
   </div>
  </section>
@@ -119,9 +119,9 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
    <div class="game-controls">
     <button class="secondary" id="leftBtn">◀ يسار</button><button id="gasBtn">تسارع</button><button class="secondary" id="brakeBtn">فرامل</button><button class="secondary" id="rightBtn">يمين ▶</button><button id="boostBtn">BOOST</button><button class="secondary" id="hornBtn">بوق</button>
    </div>
-   <p class="note">تحكم بلوحة المفاتيح: الأسهم أو W A S D. زر BOOST مؤثر خيالي داخل اللعبة فقط.</p>
+   <p class="note">تحكم بلوحة المفاتيح: الأسهم أو W A S D. على الجوال استخدم أزرار الشاشة. الأداء يتكيف مع قدرة جهازك؛ لا يمكن ضمان 90 إطارًا على كل هاتف.</p>
    <div id="stationBox" class="station-box"><h2 id="stationTitle">محطة توقف</h2><p class="muted" id="stationText">توقف للاستراحة ثم تابع الرحلة.</p><button id="resumeBtn">متابعة الرحلة</button></div>
-   <div class="actions"><button class="secondary" id="toCinema">الانتقال إلى السينما</button><button class="secondary" id="exitGame">العودة للبداية</button></div>
+   <div class="actions"><button class="secondary" id="toCinema" disabled title="سيتم تجهيز السينما لاحقًا">السينما — قريبًا</button><button class="secondary" id="exitGame">العودة للبداية</button></div>
   </div>
  </section>
 
@@ -135,7 +135,7 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
    </div>
    <label class="field" for="videoFile">ملف إعلان الرحلة (من جهاز المنظّم)</label><input id="videoFile" type="file" accept="video/*" style="max-width:100%">
    <video id="adVideo" controls playsinline class="hidden"></video>
-   <div class="actions"><button class="secondary" id="backGame">العودة للعبة</button><button id="toInvite">متابعة إلى الدعوة</button></div>
+   <div class="actions"><button class="secondary" id="backGame">العودة للعبة</button><button id="toInvite" disabled title="سيتم تجهيز الدعوة لاحقًا">الدعوة — قريبًا</button></div>
   </div>
  </section>
 
@@ -163,11 +163,15 @@ document.querySelectorAll('.person').forEach(card=>card.addEventListener('click'
  card.classList.add('selected');selected={name:card.dataset.name,kunya:card.dataset.kunya};
  $('confirmIdentity').disabled=false;$('identityMessage').textContent='تم اختيار '+selected.kunya;
 }));
-$('confirmIdentity').addEventListener('click',()=>{
+$('confirmIdentity').addEventListener('click',async()=>{
  phoneValue=$('phone').value.trim();
  if(!selected){$('identityMessage').textContent='اختر بطاقتك أولاً.';return}
- if(!/^05\d{8}$/.test(phoneValue)){ $('identityMessage').textContent='اكتب رقم جوال سعوديًا مكوّنًا من 10 أرقام ويبدأ بـ 05.';return}
- showScreen('gameScreen');startGame();
+ if(!/^05\d{8}$/.test(phoneValue)){$('identityMessage').textContent='اكتب رقم جوال سعوديًا مكوّنًا من 10 أرقام ويبدأ بـ 05.';return}
+ if(!$('dataConsent').checked){$('identityMessage').textContent='يرجى الموافقة على استخدام البيانات قبل التسجيل.';return}
+ $('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
+ try{const response=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:selected.name,kunya:selected.kunya,phone:phoneValue,consent:true})});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'تعذر التسجيل');$('identityMessage').textContent='تم تسجيلك بنجاح. أهلاً بك!';showScreen('gameScreen');startGame();}
+ catch(error){$('identityMessage').textContent=error.message||'تعذر الاتصال بالخادم. حاول لاحقًا.';}
+ finally{$('confirmIdentity').disabled=false;}
 });
 $('exitGame').addEventListener('click',()=>showScreen('landing'));
 $('toCinema').addEventListener('click',()=>showScreen('cinemaScreen'));
@@ -193,7 +197,7 @@ async function startGame(){
  try{THREE=await import('https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js')}catch(e){$('stationValue').textContent='تعذر تحميل الرسومات';return}
  const canvas=$('bus-canvas');scene=new THREE.Scene();scene.background=new THREE.Color(0x9bb4c9);scene.fog=new THREE.Fog(0x9bb4c9,35,150);
  camera=new THREE.PerspectiveCamera(65,1,.1,300);camera.position.set(0,2.1,5);camera.lookAt(0,1,-18);
- renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;
+ const lowPower=matchMedia("(max-width: 700px)").matches||(navigator.hardwareConcurrency||8)<=4;renderer=new THREE.WebGLRenderer({canvas,antialias:!lowPower,powerPreference:"high-performance"});renderer.setPixelRatio(Math.min(devicePixelRatio,lowPower?1.25:1.6));renderer.shadowMap.enabled=false;
  scene.add(new THREE.HemisphereLight(0xffffff,0x59616a,2));
  const sun=new THREE.DirectionalLight(0xffe4c0,2.1);sun.position.set(-12,20,10);sun.castShadow=true;scene.add(sun);
  const road=new THREE.Mesh(new THREE.PlaneGeometry(16,280),new THREE.MeshStandardMaterial({color:0x34383d,roughness:.95}));road.rotation.x=-Math.PI/2;road.position.z=-115;road.receiveShadow=true;scene.add(road);
