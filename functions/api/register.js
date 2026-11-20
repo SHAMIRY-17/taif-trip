@@ -12,7 +12,7 @@ export async function onRequestPost({request,env}){
  const name=String(body.name||"").trim().slice(0,80);
  const kunya=String(body.kunya||"").trim().slice(0,60);
  const role=String(body.role||"student");
- const phone=String(body.phone||"").replace(/[\s-]/g,"");
+ const phone=String(body.phone||"").replace(/[٠-٩]/g,d=>String("٠١٢٣٤٥٦٧٨٩".indexOf(d))).replace(/[۰-۹]/g,d=>String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))).replace(/[\\s-]/g,"");
  const teacherCode=String(body.teacherCode||"").trim();
  if(body.consent!==true)return json({success:false,message:"يلزم الموافقة على استخدام البيانات."},400);
  if(!["student","teacher"].includes(role))return json({success:false,message:"نوع الدخول غير صالح."},400);
