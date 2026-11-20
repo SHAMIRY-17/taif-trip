@@ -55,7 +55,35 @@ input[type=tel]{width:100%;padding:14px;border-radius:8px;border:1px solid #5260
 .game-controls button{min-width:92px}
 .station-box{display:none;padding:20px;margin-top:12px;background:#172235;border:1px solid var(--gold);border-radius:12px}
 .station-box.show{display:block}
-.cinema-layout{display:grid;grid-template-columns:1fr;gap:20px}
+.cinema-layout{display:grid;grid-template-columns:1fr;gap:24px}
+.cinema-room{position:relative;padding:25px 12px 35px;border:1px solid #b99a5b66;border-radius:22px;background:radial-gradient(ellipse at 50% 0%,#34445b 0,#131e2e 44%,#080d16 100%);box-shadow:inset 0 0 60px #000b,0 20px 55px #0008;overflow:hidden}
+.cinema-room:before{content:"";position:absolute;top:0;left:12%;right:12%;height:7px;border-radius:0 0 50% 50%;background:linear-gradient(90deg,transparent,#e4c47e,transparent);box-shadow:0 0 28px #d7b56d}
+.cinema-screen{margin:12px auto 34px;width:min(88%,720px);height:190px;border:3px solid #c6a45e;border-radius:48% 48% 12px 12px/15% 15% 12px 12px;background:linear-gradient(180deg,#263a54,#070b12);box-shadow:0 12px 50px #d6b36c35,0 0 0 8px #b99a5b12;min-height:0}
+.cinema-screen:after{content:"";position:absolute;left:16%;right:16%;top:210px;height:1px;background:#e8d7b0;box-shadow:0 0 32px 12px #e8d7b022}
+.seat-rows{display:grid;gap:13px;max-width:660px;margin:0 auto;position:relative;z-index:1}
+.seat-row{display:grid;grid-template-columns:repeat(5,minmax(42px,1fr));gap:9px;align-items:center}
+.row-label{grid-column:1/-1;text-align:center;font-size:11px;letter-spacing:3px;color:#aeb8c6}
+.seat{position:relative;min-height:55px;padding:9px 3px 6px;border-radius:12px 12px 7px 7px;font-size:13px;font-weight:bold;box-shadow:inset 0 -5px 0 #0005,0 5px 10px #0008;transition:.18s}
+.seat:before{content:"";position:absolute;left:5px;right:5px;top:-5px;height:10px;border-radius:7px 7px 2px 2px;background:inherit;filter:brightness(1.25)}
+.seat[data-tier="A"]{background:linear-gradient(145deg,#f4df9f,#9f762c);color:#211708;border:1px solid #ffe6a4;box-shadow:0 0 17px #e7c87566,inset 0 -5px 0 #76521c}
+.seat[data-tier="B"]{background:linear-gradient(145deg,#dce5ee,#69798e);color:#111b28;border:1px solid #e6eff8}
+.seat[data-tier="C"]{background:linear-gradient(145deg,#d49b62,#744321);color:#fff1df;border:1px solid #e0ad78}
+.seat[data-tier="D"]{background:linear-gradient(145deg,#697487,#303b4d);color:#fff;border:1px solid #8d9aaf}
+.seat.selected{outline:3px solid #fff;transform:translateY(-5px);filter:brightness(1.25)}
+.seat:disabled{opacity:.3;filter:grayscale(1);cursor:not-allowed}
+.tier-legend{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:15px auto;color:#dce3ed;font-size:12px}
+.tier-legend span{padding:8px 12px;border-radius:30px;background:#101a29;border:1px solid #ffffff25}
+.game-screen-mode{position:fixed!important;inset:0!important;z-index:9999!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;padding:0!important;margin:0!important;background:#000!important;overflow:hidden!important}
+.game-screen-mode .game-wrap{width:100%;height:100%;max-width:none;margin:0;display:flex;flex-direction:column}
+.game-screen-mode .game-top,.game-screen-mode .steps,.game-screen-mode .sim-tools,.game-screen-mode .game-wrap>p,.game-screen-mode .actions{display:none!important}
+.game-screen-mode .sim-stage{height:100dvh!important;min-height:0!important;width:100vw;border:0;border-radius:0;margin:0}
+.game-screen-mode #bus-canvas{width:100%;height:100%}
+.game-screen-mode .sim-bottom{bottom:16px}
+.game-screen-mode .in-game-controls{bottom:clamp(65px,10vh,110px);left:3%;right:3%;max-width:720px;margin:auto}
+.game-screen-mode .in-game-controls button{min-height:58px;font-size:clamp(12px,2vw,16px)}
+.game-screen-mode .sim-hud{top:12px}
+.game-screen-mode .start-overlay{border-radius:0}
+@media(max-width:600px){.cinema-screen{height:135px}.seat-row{gap:5px}.seat{min-height:47px;font-size:11px}.cinema-room{padding:18px 7px 25px}}
 .cinema-screen{background:linear-gradient(135deg,#24334a,#070b12);border:2px solid #a98b56;border-radius:12px;padding:20px;min-height:190px;display:grid;place-items:center;color:#f1dcae}
 .seats{display:grid;grid-template-columns:repeat(4,minmax(45px,70px));gap:10px;justify-content:center;margin:20px}
 .seat{padding:12px 4px;background:#26344a;border:1px solid #8290a4;border-radius:8px;color:#fff}
@@ -159,7 +187,7 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
  <section id="cinemaScreen" class="screen">
   <div class="panel">
    <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step current">3 · السينما</span><span class="step">4 · الدعوة</span></div>
-   <h2>السينما الافتراضية</h2><p class="muted">اختر مقعدك، ثم شغّل إعلان الرحلة عند توفر ملف الفيديو.</p>
+   <h2>السينما الافتراضية</h2><p class="muted" id="cinemaWelcome">أهلًا بك في قاعة العرض الخاصة برحلة الطائف.</p>
    <div class="cinema-layout">
     <div class="cinema-screen"><div><div style="font-size:34px">🎬</div><b>TAIF TRIP CINEMA</b><p>شاشة العرض</p></div></div>
     <div><b>اختر مقعدك</b><div class="seats" id="seatGrid"></div><p id="seatStatus" class="note">لم يتم اختيار مقعد بعد.</p></div>
@@ -217,10 +245,10 @@ $('confirmIdentity').addEventListener('click',async()=>{
  finally{$('confirmIdentity').disabled=false;}
 });
 $('enterJourney').addEventListener('click',()=>{showScreen('gameScreen');$('startOverlay').classList.remove('hidden')});
-$('startDriveBtn').addEventListener('click',()=>{$('startOverlay').classList.add('hidden');startGame()});
-$('fullscreenBtn').addEventListener('click',()=>{const el=$('.sim-stage');if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()});
-$('exitGame').addEventListener('click',()=>showScreen('landing'));
-$('toCinema').addEventListener('click',()=>showScreen('cinemaScreen'));
+$('startDriveBtn').addEventListener('click',async()=>{$('startOverlay').classList.add('hidden');document.body.classList.add('driving-mode');$('gameScreen').classList.add('game-screen-mode');try{if(!document.fullscreenElement)await $('.sim-stage').requestFullscreen?.();if(screen.orientation?.lock)await screen.orientation.lock('landscape').catch(()=>{});}catch(e){}startGame()});
+$('fullscreenBtn').addEventListener('click',()=>{const el=$('.sim-stage');if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()});document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&$('gameScreen').classList.contains('game-screen-mode')){ $('gameScreen').classList.remove('game-screen-mode');document.body.classList.remove('driving-mode');resize();}});
+$('exitGame').addEventListener('click',()=>{document.exitFullscreen?.();$('gameScreen').classList.remove('game-screen-mode');document.body.classList.remove('driving-mode');active=false;showScreen('landing')});
+$('toCinema').addEventListener('click',()=>{document.exitFullscreen?.();$('gameScreen').classList.remove('game-screen-mode');document.body.classList.remove('driving-mode');showScreen('cinemaScreen');renderSeats()});
 $('backGame').addEventListener('click',()=>showScreen('gameScreen'));
 $('toInvite').addEventListener('click',()=>{
  if(!selected){showScreen('identity');return}
@@ -231,7 +259,27 @@ $('shareWhatsApp').addEventListener('click',()=>window.open('https://wa.me/?text
 $('copyInvite').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('inviteText').textContent);$('copyInvite').textContent='تم النسخ ✓'}catch(e){$('copyInvite').textContent='تعذر النسخ؛ حدّد النص وانسخه'}});
 $('restart').addEventListener('click',()=>showScreen('landing'));
 const seats=$('seatGrid');
-for(let i=1;i<=12;i++){const b=document.createElement('button');b.className='seat';b.textContent='A'+i;b.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selectedSeat='A'+i;$('seatStatus').textContent='تم اختيار المقعد '+selectedSeat});seats.appendChild(b)}
+function renderSeats(){
+ seats.innerHTML='';selectedSeat=null;
+ $('cinemaWelcome').textContent=selected?.kunya?'مرحبًا '+selected.kunya+' — '+(selectedRole==='teacher'?'مقاعدك الألماسية مخصصة لك ضمن صف A.':'اختر مقعدك من الفئات المتاحة للطلاب.'):'اختر مقعدك في قاعة العرض.';
+ for(const tier of ['A','B','C','D']){
+  const row=document.createElement('div');row.className='seat-row';
+  const label=document.createElement('div');label.className='row-label';label.textContent={A:'A · DIAMOND',B:'B · SILVER',C:'C · BRONZE',D:'D · STANDARD'}[tier];row.appendChild(label);
+  for(let i=1;i<=5;i++){
+   const id=tier+i,b=document.createElement('button');b.className='seat';b.dataset.tier=tier;b.textContent=id;
+   const allowed=selectedRole==='teacher'?tier==='A':tier!=='A';
+   b.disabled=!allowed;
+   b.title=!allowed?(tier==='A'?'مخصص للمعلمين':'متاح للطلاب'):('المقعد '+id);
+   b.addEventListener('click',()=>{
+    document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));
+    b.classList.add('selected');selectedSeat=id;
+    $('seatStatus').textContent='تم حجز '+id+' لك — '+({A:'المستوى الألماسي',B:'المستوى الفضي',C:'المستوى البرونزي',D:'المستوى العادي'}[tier]);
+    $('toInvite').disabled=false;
+   });row.appendChild(b);
+  }seats.appendChild(row);
+ }
+ $('toInvite').disabled=true;
+}
 let videoUrl=null;
 $('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden')});
 
@@ -307,10 +355,17 @@ function loop(now){requestAnimationFrame(loop);if(!renderer)return;const dt=Math
  renderer.render(scene,camera)
 }
 function hold(id,down,up){const el=$(id);el.addEventListener('pointerdown',e=>{e.preventDefault();down()});['pointerup','pointerleave','pointercancel'].forEach(t=>el.addEventListener(t,up))}
+let wheelPointer=null;canvasWheelSetup();
+function canvasWheelSetup(){
+ const c=$('bus-canvas');
+ c.addEventListener('pointerdown',e=>{if(e.clientX>innerWidth*.65)return;wheelPointer=e.pointerId;c.setPointerCapture(e.pointerId);});
+ c.addEventListener('pointermove',e=>{if(wheelPointer!==e.pointerId)return;const rect=c.getBoundingClientRect();const x=(e.clientX-rect.left)/rect.width;steer=x<.28?-1:x>.58?1:0;});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(t=>c.addEventListener(t,e=>{if(wheelPointer===e.pointerId){wheelPointer=null;steer=0}}));
+}
 hold('gasBtn',()=>gas=true,()=>gas=false);hold('brakeBtn',()=>brake=true,()=>brake=false);hold('leftBtn',()=>steer=-1,()=>{if(steer===-1)steer=0});hold('rightBtn',()=>steer=1,()=>{if(steer===1)steer=0});hold('boostBtn',()=>boost=true,()=>boost=false);
 window.addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key.toLowerCase()==='w')gas=true;if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')brake=true;if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')steer=-1;if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')steer=1;if(e.code==='Space')boost=true});
 window.addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key.toLowerCase()==='w')gas=false;if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')brake=false;if(['ArrowLeft','ArrowRight','a','d'].includes(e.key))steer=0;if(e.code==='Space')boost=false});
-$('resumeBtn').addEventListener('click',()=>{stationIndex++;$('stationBox').classList.remove('show');$('stationValue').textContent=stationIndex<4?stations[stationIndex]:'الطريق إلى الطائف';if(stationIndex>=4){$('stationTitle').textContent='وصلت إلى الطائف';$('stationText').textContent='أكملت المحطات الأربع بنجاح! انتقل إلى السينما عندما تكون جاهزًا.';$('stationBox').classList.add('show');$('resumeBtn').textContent='إنهاء الرحلة';$('resumeBtn').onclick=()=>{$('stationBox').classList.remove('show');showScreen('cinemaScreen')}}else{active=true}});
+$('resumeBtn').addEventListener('click',()=>{stationIndex++;$('stationBox').classList.remove('show');$('stationValue').textContent=stationIndex<4?stations[stationIndex]:'الطريق إلى الطائف';if(stationIndex>=4){$('stationTitle').textContent='وصلت إلى الطائف';$('stationText').textContent='أكملت المحطات الأربع بنجاح!';$('stationBox').classList.add('show');$('resumeBtn').textContent='دخول السينما';$('resumeBtn').onclick=()=>{$('stationBox').classList.remove('show');$('gameScreen').classList.remove('game-screen-mode');document.body.classList.remove('driving-mode');document.exitFullscreen?.();$('toCinema').disabled=false;showScreen('cinemaScreen');renderSeats()}}else{active=true}});
 
 $('ambientToggle').addEventListener('change',e=>{if(scene){scene.traverse(o=>{if(o.isMesh&&o.material&&o.material.color&&o.material.color.getHex()===0x39a8c7)o.visible=e.target.checked})}});
 $('ambientLevel').addEventListener('input',e=>{const v=Number(e.target.value)/100;if(scene)scene.traverse(o=>{if(o.isMesh&&o.material&&o.material.color&&o.material.color.getHex()===0x39a8c7)o.material.color.setRGB(.12*v,.48*v,.62*v)})});
