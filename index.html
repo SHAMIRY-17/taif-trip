@@ -344,13 +344,13 @@ $('changeRole').addEventListener('click',()=>{$('registrationFields').classList.
 function normalizeDigits(value){
  return String(value).replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d))).replace(/[۰-۹]/g,d=>String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
 }
-function normalizePhone(value){return normalizeDigits(value).replace(/[\\s-]/g,'').trim()}
+function normalizePhone(value){return normalizeDigits(value).replace(/[\s-]/g,'').trim()}
 function updateRegistrationButton(){$('confirmIdentity').disabled=false}
 ['fullName','kunya','phone','teacherCode','dataConsent'].forEach(id=>$(id).addEventListener('input',updateRegistrationButton));
 $('dataConsent').addEventListener('change',updateRegistrationButton);
 $('confirmIdentity').addEventListener('click',async()=>{
  const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=normalizePhone($('phone').value),teacherCode=$('teacherCode').value.trim();
- const message=!name?'اكتب اسمك.':!kunya?'اكتب الكنية.':!/^05\\d{8}$/.test(phone)?'تأكد من رقم الجوال؛ اكتبه بصيغة 05XXXXXXXX.':!$('dataConsent').checked?'فعّل مربع الموافقة للمتابعة.':selectedRole==='teacher'&&!teacherCode?'أدخل رمز المعلمين.':'';
+ const message=!name?'اكتب اسمك.':!kunya?'اكتب الكنية.':!/^05\d{8}$/.test(phone)?'تأكد من رقم الجوال؛ اكتبه بصيغة 05XXXXXXXX.':!$('dataConsent').checked?'فعّل مربع الموافقة للمتابعة.':selectedRole==='teacher'&&!teacherCode?'أدخل رمز المعلمين.':'';
  if(message){$('identityMessage').textContent=message;return}
  selected={name,kunya};$('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
  try{
