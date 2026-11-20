@@ -231,14 +231,14 @@ footer{background:#070b12;color:#8995a5}
    <div class="content">
     <div class="eyebrow">من جدة… إلى قمم الورد والضباب</div>
     <h1>رحلة <span>الطائف</span></h1>
-    <p class="description">مغامرة تجمعنا، وذكريات تبقى.</p>
-    <div class="actions"><button id="beginBtn">ادخل أجواء الرحلة ✦</button></div>
-    <div class="hero-poetry" aria-label="مساحة مخصصة لأبيات الترحيب">
+    <p class="description">من جدةٍ نبدأ، ووجهتنا الطائف؛ حيث الورد والضباب.<br>رحلةٌ تجمع الرفاق بالمغامرة، وتترك أجمل الذكريات.</p>
+    <div class="hero-poetry" aria-label="بيتا ترحيب بالرحلة">
      <div class="poetry-grid">
-      <div class="poetry-cell" aria-label="شطر البيت الأول"></div><div class="poetry-cell" aria-label="الشطر الثاني من البيت الأول"></div>
-      <div class="poetry-cell" aria-label="شطر البيت الثاني"></div><div class="poetry-cell" aria-label="الشطر الثاني من البيت الثاني"></div>
+      <div class="poetry-cell">من جدةٍ نبدأ، ووجهتنا الطايف</div><div class="poetry-cell">والورد والضباب يروون السوالف</div>
+      <div class="poetry-cell">نمشي رفقةٍ، والفرح دربٍ يجمعنا</div><div class="poetry-cell">وتبقى ليالينا ذكرى ما تفارقنا</div>
      </div>
     </div>
+    <div class="actions"><button id="beginBtn">ادخل أجواء الرحلة ✦</button></div>
    </div>
   </div>
   <section>
@@ -274,7 +274,7 @@ footer{background:#070b12;color:#8995a5}
    <div id="teacherCodeWrap" class="hidden"><label class="field" for="teacherCode">الرمز الموحد للمعلمين</label><input id="teacherCode" type="password" autocomplete="off" placeholder="أدخل الرمز الذي استلمته من المنظّم" style="width:100%;padding:14px;border-radius:8px;border:1px solid #b99a5b;background:#080f1b;color:white"><p class="note">هذا الرمز خاص بالمعلمين الخمسة فقط. لا تشاركه مع الطلاب.</p></div>
    <div id="welcomeCard" class="invite-card hidden" aria-live="polite"><div style="font-size:34px">✦</div><h2 id="welcomeTitle">أهلًا بك</h2><p id="welcomeMessage" class="muted"></p><button id="enterJourney" type="button">دخول الرحلة</button></div>
    <label style="display:flex;gap:9px;align-items:flex-start;text-align:right;margin-top:14px;color:#d6dce5;line-height:1.8"><input id="dataConsent" type="checkbox" style="margin-top:6px"> أوافق على إرسال اسمي وكنيتي ورقم جوالي إلى منظّم الرحلة لغرض تسجيل المشاركة والتواصل بشأن الرحلة.</label><p class="note">لن يتم حفظ البيانات دون موافقتك. هذه خطوة تسجيل وليست تحققًا من ملكية الرقم؛ لا يوجد رمز SMS في النسخة الحالية. يجب أن يكون جمع بيانات المشاركين بموافقتهم وموافقة ولي الأمر عند الحاجة.</p>
-   <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button class="secondary" id="changeRole" type="button">تغيير نوع الدخول</button><button id="confirmIdentity" disabled>تسجيل ومتابعة</button></div></div>
+   <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button class="secondary" id="changeRole" type="button">تغيير نوع الدخول</button><button id="confirmIdentity" type="button">تسجيل ومتابعة</button></div></div>
    <p id="identityMessage" class="note" role="status"></p>
   </div>
  </section>
@@ -338,18 +338,20 @@ document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener
  $('roleHeading').textContent=selectedRole==='teacher'?'تسجيل المعلم':'تسجيل الطالب';
  $('teacherCodeWrap').classList.toggle('hidden',selectedRole!=='teacher');
  $('confirmIdentity').textContent=selectedRole==='teacher'?'تأكيد بيانات المعلم':'تسجيل ومتابعة';
+ $('identityMessage').textContent='';$('confirmIdentity').disabled=false;
 }));
-$('changeRole').addEventListener('click',()=>{$('registrationFields').classList.add('hidden');$('roleChoices').classList.remove('hidden');$('identityMessage').textContent='';$('confirmIdentity').disabled=true});
-function updateRegistrationButton(){
- const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=$('phone').value.replace(/[\s-]/g,''),consent=$('dataConsent').checked,teacherCode=$('teacherCode').value.trim();
- const valid=name.split(/\s+/).filter(Boolean).length>=3&&!!kunya&&/^05\d{8}$/.test(phone)&&consent&&(selectedRole!=='teacher'||!!teacherCode);
- $('confirmIdentity').disabled=!valid;
+$('changeRole').addEventListener('click',()=>{$('registrationFields').classList.add('hidden');$('roleChoices').classList.remove('hidden');$('identityMessage').textContent='';$('confirmIdentity').disabled=false});
+function normalizeDigits(value){
+ return String(value).replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d))).replace(/[۰-۹]/g,d=>String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
 }
+function normalizePhone(value){return normalizeDigits(value).replace(/[\\s-]/g,'').trim()}
+function updateRegistrationButton(){$('confirmIdentity').disabled=false}
 ['fullName','kunya','phone','teacherCode','dataConsent'].forEach(id=>$(id).addEventListener('input',updateRegistrationButton));
 $('dataConsent').addEventListener('change',updateRegistrationButton);
 $('confirmIdentity').addEventListener('click',async()=>{
- const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=$('phone').value.replace(/[\s-]/g,''),teacherCode=$('teacherCode').value.trim();
- if($('confirmIdentity').disabled)return;
+ const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=normalizePhone($('phone').value),teacherCode=$('teacherCode').value.trim();
+ const message=!name?'اكتب اسمك.':!kunya?'اكتب الكنية.':!/^05\\d{8}$/.test(phone)?'تأكد من رقم الجوال؛ اكتبه بصيغة 05XXXXXXXX.':!$('dataConsent').checked?'فعّل مربع الموافقة للمتابعة.':selectedRole==='teacher'&&!teacherCode?'أدخل رمز المعلمين.':'';
+ if(message){$('identityMessage').textContent=message;return}
  selected={name,kunya};$('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
  try{
   const r=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,kunya,phone,consent:true,role:selectedRole,teacherCode})});
