@@ -178,6 +178,33 @@ footer{background:#070b12;color:#8995a5}
 .invite-message{color:#f1eadb;line-height:2.3;font-size:17px}.invite-footer{margin-top:28px;color:#d7b66d;letter-spacing:2px;font-size:12px}
 @media(max-width:600px){.hero-poetry{font-size:14px;padding:12px 8px}.movie-theater{padding:24px 8px}.movie-screen{height:100px;margin-bottom:28px}.movie-theater .seat{min-height:40px;font-size:11px}.movie-theater .tier-A .seat{min-height:46px}.invite-cover{padding:28px 16px}}
 
+
+.tablet-booking{max-width:1060px;margin:24px auto;padding:13px;border:8px solid #263346;border-radius:30px;background:linear-gradient(145deg,#1a2637,#080e18);box-shadow:0 25px 70px #000b,inset 0 0 0 1px #d7b66d66}
+.tablet-top,.tablet-bottom{display:flex;justify-content:space-between;align-items:center;padding:8px 15px;color:#e7d2a2;font-size:11px;letter-spacing:1px}.tablet-camera{width:7px;height:7px;background:#56677e;border-radius:50%;box-shadow:0 0 0 4px #101923}.tablet-bottom{color:#8291a5}
+.tablet-booking .movie-theater{margin:8px auto 2px;border-radius:18px}
+.cinema-experience{max-width:1050px;margin:28px auto;padding:18px;border:1px solid #d8b66f77;border-radius:22px;background:linear-gradient(145deg,#14243a,#080e18);box-shadow:0 25px 70px #0009}
+.experience-header{display:flex;justify-content:space-between;color:#efd69e;margin:0 5px 14px;font-weight:bold}
+.immersive-hall{height:470px;position:relative;overflow:hidden;border-radius:16px;border:1px solid #b89a62;background:radial-gradient(ellipse at 65% 20%,#34475f 0,#1a293d 38%,#090e17 82%)}
+.hall-screen{position:absolute;top:6%;left:31%;width:43%;height:23%;border:5px solid #d5b36f;border-radius:12px 12px 45% 45%;background:linear-gradient(135deg,#324f70,#080f1b);box-shadow:0 0 45px #d8b66f55;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#f5dca8;z-index:1}
+.hall-screen-title{font-size:clamp(20px,4vw,36px);font-weight:bold}.hall-screen small{color:#c5d0df;margin-top:8px}
+.hall-screen-glow{position:absolute;inset:0;background:linear-gradient(120deg,transparent,#fff2,transparent)}
+.hall-door{position:absolute;left:3%;top:35%;width:15%;height:43%;border:5px solid #927347;border-bottom:0;border-radius:8px 8px 0 0;background:linear-gradient(90deg,#0b1018,#34465a);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#e8d1a0;box-shadow:inset 0 0 30px #000}
+.hall-door span{font-size:38px}.hall-door small{font-size:11px}
+.hall-aisle{position:absolute;left:18%;top:34%;width:12%;height:62%;background:linear-gradient(90deg,#111a28,#3c4653,#111a28);clip-path:polygon(30% 0,70% 0,100% 100%,0 100%);opacity:.8}
+.hall-seats{position:absolute;left:31%;right:5%;top:34%;height:59%;display:flex;flex-direction:column;justify-content:space-around;gap:7px}
+.hall-row{display:flex;justify-content:center;gap:clamp(4px,1.5vw,14px);height:18%;align-items:center}
+.hall-chair{width:clamp(15px,3.5vw,34px);height:85%;border-radius:7px 7px 3px 3px;background:linear-gradient(145deg,#7b8797,#293648);border-bottom:5px solid #111a25;box-shadow:0 4px 6px #0009}
+.hall-row-A .hall-chair{background:linear-gradient(145deg,#f0d58c,#8d682e)}.hall-row-B .hall-chair{background:linear-gradient(145deg,#d9e1ec,#65758b)}.hall-row-C .hall-chair{background:linear-gradient(145deg,#d49b62,#744321)}
+.hall-chair.destination{outline:3px solid #fff;box-shadow:0 0 22px #fff,0 0 32px #e7c875;transform:translateY(-4px)}
+.hall-guest{position:absolute;z-index:5;left:7%;top:77%;width:42px;height:78px;transition:left 2.5s cubic-bezier(.2,.75,.25,1),top 2.5s cubic-bezier(.2,.75,.25,1),transform .5s;filter:drop-shadow(0 6px 6px #000b)}
+.guest-head{width:25px;height:25px;border-radius:50%;background:linear-gradient(145deg,#d9ad82,#805a42);margin:auto;border:2px solid #e5c79c}.guest-body{width:35px;height:43px;margin:-1px auto 0;border-radius:13px 13px 5px 5px;background:linear-gradient(145deg,#e1d5bd,#6e7784);border:1px solid #fff6}
+.guest-popcorn{position:absolute;right:-13px;top:20px;font-size:20px;opacity:0;transform:scale(.3);transition:.5s}.guest-popcorn.popcorn{opacity:1;transform:scale(1.2);animation:popcornNibble 1.2s infinite alternate}
+.hall-guest.seated{transform:translate(-10px,-4px) rotate(-5deg) scale(.9)}.hall-guest.walking .guest-body{animation:walkBounce .28s infinite alternate}
+.guest-caption{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:max-content;max-width:90%;padding:9px 15px;border-radius:30px;background:#07111ddd;border:1px solid #d7b66d88;color:#f1d9a5;font-size:12px;text-align:center}
+.experience-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 5px}
+@keyframes walkBounce{to{transform:translateY(-5px)}}@keyframes popcornNibble{to{transform:scale(1.35) rotate(12deg)}}
+@media(max-width:600px){.tablet-booking{padding:7px;border-width:5px;border-radius:20px}.tablet-booking .movie-theater{padding:18px 5px}.tablet-top,.tablet-bottom{font-size:9px;padding:6px}.immersive-hall{height:390px}.hall-door{width:17%;left:2%}.hall-screen{left:25%;width:53%}.hall-seats{left:25%;right:2%}.hall-guest{width:32px}.guest-head{width:21px;height:21px}.guest-body{width:29px;height:36px}.guest-caption{font-size:10px}}
+
 </style>
 </head>
 <body>
@@ -241,11 +268,28 @@ footer{background:#070b12;color:#8995a5}
   <div class="panel">
    <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step current">2 · السينما</span><span class="step">3 · الدعوة</span></div>
    <h2>قاعة سينما رحلة الطائف</h2><p class="muted" id="cinemaWelcome">اختر مقعدك من خريطة القاعة؛ المقاعد الأمامية أقرب للشاشة، ولكل فئة تصميمها وسعرها.</p>
-   <div class="cinema-room movie-theater">
-    <div class="movie-screen"><span>TAIF TRIP</span><small>شاشة العرض</small></div>
-    <div class="tier-legend"><span>💎 A ألماسي · 10,000 ريال</span><span>🥈 B فضي · 150 ريال</span><span>🥉 C برونزي · 120 ريال</span><span>◼ D عادي · 90 ريال</span></div>
-    <div class="seat-rows" id="seatGrid"></div>
-    <p id="seatStatus" class="note">لم يتم اختيار مقعد بعد.</p>
+   <div class="tablet-booking">
+    <div class="tablet-top"><span>TAIF CINEMA · حجز المقاعد</span><span class="tablet-camera"></span><span>● متصل</span></div>
+    <div class="cinema-room movie-theater">
+     <div class="movie-screen"><span>TAIF TRIP</span><small>شاشة العرض</small></div>
+     <div class="tier-legend"><span>💎 A ألماسي · 10,000 ريال</span><span>🥈 B فضي · 150 ريال</span><span>🥉 C برونزي · 120 ريال</span><span>◼ D عادي · 90 ريال</span></div>
+     <div class="seat-rows" id="seatGrid"></div>
+     <p id="seatStatus" class="note">اختر مقعدك من الخريطة، ثم ادخل القاعة.</p>
+    </div>
+    <div class="tablet-bottom"><span>اختر مقعدك المفضل</span><span>TAIF TRIP BOOKING</span></div>
+   </div>
+   <div class="actions"><button class="secondary" id="backGame">العودة لبطاقة المشاركة</button><button id="toInvite" disabled>تأكيد المقعد والدخول للقاعة</button></div>
+   <div id="cinemaExperience" class="cinema-experience hidden">
+    <div class="experience-header"><span>قاعة العرض الخاصة بك</span><span id="experienceSeat">المقعد —</span></div>
+    <div class="immersive-hall">
+     <div class="hall-screen"><div class="hall-screen-glow"></div><div id="hallScreenTitle" class="hall-screen-title">رحلة الطائف</div><small>العرض على وشك البدء</small></div>
+     <div class="hall-door"><span>🚪</span><small>المدخل</small></div><div class="hall-aisle"></div>
+     <div class="hall-seats" id="hallSeats"></div>
+     <div id="hallGuest" class="hall-guest"><div class="guest-head"></div><div class="guest-body"></div><div class="guest-popcorn">🍿</div></div>
+     <div id="guestCaption" class="guest-caption">أهلًا بك… تفضل إلى مقعدك</div>
+    </div>
+    <div class="experience-controls"><button id="replayWalk" class="secondary">إعادة الدخول إلى المقعد</button><button id="watchMovie" disabled>شغّل العرض ▶</button><button id="experienceInvite" class="secondary" disabled>متابعة إلى الدعوة</button></div>
+    <p class="note">محاكاة مرئية: تدخل من الباب، وتتجه إلى مقعدك المحدد، ثم تجلس ويظهر معك الفشار.</p>
    </div>
    <label class="field" for="videoFile">ملف إعلان الرحلة (من جهاز المنظّم)</label><input id="videoFile" type="file" accept="video/*" style="max-width:100%">
    <video id="adVideo" controls playsinline class="hidden"></video>
@@ -302,12 +346,17 @@ $('enterJourney').addEventListener('click',()=>{showScreen('cinemaScreen');rende
 $('previewCinemaBtn').addEventListener('click',()=>{selected={name:'معاينة',kunya:'أبو سعود'};selectedRole='student';showScreen('cinemaScreen');renderSeats(true)});
 $('previewInviteBtn').addEventListener('click',()=>{selected={name:'معاينة',kunya:'أبو سعود'};showInvite()});
 $('backGame').addEventListener('click',()=>showScreen('identity'));
-$('toInvite').addEventListener('click',showInvite);
+$('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('cinemaExperience').classList.remove('hidden');$('experienceSeat').textContent='مقعدك '+selectedSeat;buildHallSeats();walkGuest();$('cinemaExperience').scrollIntoView({behavior:'smooth',block:'start'})});
+$('replayWalk').addEventListener('click',()=>{buildHallSeats();walkGuest()});
+$('watchMovie').addEventListener('click',()=>{$('hallScreenTitle').textContent='الطائف… حكاية تبدأ الآن';$('guestCaption').textContent='استمتع بالعرض يا '+(selected?.kunya||'ضيفنا')+' 🍿';$('experienceInvite').disabled=false});
+$('experienceInvite').addEventListener('click',showInvite);
+function buildHallSeats(){const host=$('hallSeats');host.innerHTML='';[{t:'A',n:5},{t:'B',n:7},{t:'C',n:9},{t:'D',n:11}].forEach(r=>{const line=document.createElement('div');line.className='hall-row hall-row-'+r.t;for(let i=1;i<=r.n;i++){const chair=document.createElement('span');chair.className='hall-chair'+(selectedSeat===r.t+i?' destination':'');line.appendChild(chair)}host.appendChild(line)})}
+function walkGuest(){const guest=$('hallGuest');guest.classList.remove('walking','seated');guest.querySelector('.guest-popcorn').classList.remove('popcorn');guest.style.left='7%';guest.style.top='77%';$('guestCaption').textContent='دخلت القاعة… جاري التوجه إلى '+selectedSeat;$('watchMovie').disabled=true;$('experienceInvite').disabled=true;const tier=selectedSeat.charAt(0),num=Number(selectedSeat.slice(1)),counts={A:5,B:7,C:9,D:11},ri={A:0,B:1,C:2,D:3}[tier],x=38+(num-1)/(counts[tier]-1)*48,y=34+ri*12;requestAnimationFrame(()=>{guest.classList.add('walking');guest.style.left=x+'%';guest.style.top=y+'%'});setTimeout(()=>{guest.classList.remove('walking');guest.classList.add('seated');guest.querySelector('.guest-popcorn').classList.add('popcorn');$('guestCaption').textContent='وصلت إلى '+selectedSeat+'… تفضل بالجلوس 🍿';$('watchMovie').disabled=false},2700)}
 function showInvite(){if(!selected)selected={name:'معاينة',kunya:'أبو سعود'};const safeKunya=String(selected.kunya).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));$('inviteText').innerHTML='<strong>إلى '+safeKunya+' العزيز،</strong><br>يسعدنا دعوتك لمشاركتنا رحلة الطائف؛ رحلة استثنائية بين جمال الجبال وروعة الأجواء، وأيام نملؤها بالمغامرة والأنشطة والضحكات والذكريات الجميلة.<br><br><strong>كن على الموعد… فالحكاية أجمل بوجودك.</strong>'+(selectedSeat?'<br><small>مقعدك المختار في السينما: '+selectedSeat+'</small>':'');showScreen('inviteScreen')}
 $('shareWhatsApp').addEventListener('click',()=>window.open('https://wa.me/?text='+encodeURIComponent($('inviteText').textContent),'_blank','noopener'));
 $('copyInvite').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('inviteText').textContent);$('copyInvite').textContent='تم النسخ ✓'}catch(e){$('copyInvite').textContent='تعذر النسخ؛ حدّد النص وانسخه'}});
 $('restart').addEventListener('click',()=>{selected=null;selectedSeat=null;showScreen('landing')});
-function renderSeats(preview=false){
+function renderSeats(preview=false){$('cinemaExperience')?.classList.add('hidden');
  const seats=$('seatGrid');seats.innerHTML='';selectedSeat=null;$('toInvite').disabled=true;
  $('cinemaWelcome').textContent=preview?'معاينة القاعة: الصف A الأقرب للشاشة والأعلى سعرًا، ثم تتسع الصفوف كلما ابتعدت عن الشاشة وتنخفض الأسعار.':selected?.kunya?'مرحبًا '+selected.kunya+' — '+(selectedRole==='teacher'?'مقاعد الصف A الألماسية متاحة لك.':'اختر من الصفوف الفضية والبرونزية والعادية.'):'اختر مقعدك في قاعة العرض.';
  const config=[{tier:'A',count:5,price:'10,000',label:'ألماسي',icon:'💎'},{tier:'B',count:7,price:'150',label:'فضي',icon:'🥈'},{tier:'C',count:9,price:'120',label:'برونزي',icon:'🥉'},{tier:'D',count:11,price:'90',label:'عادي',icon:'◼'}];
