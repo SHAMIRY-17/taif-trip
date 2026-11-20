@@ -1,0 +1,4 @@
+function json(data,status=200,headers={}){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store",...headers}})}
+async function hash(value){const x=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));return Array.from(new Uint8Array(x),b=>b.toString(16).padStart(2,"0")).join("")}
+function getCookie(r,n){for(const part of (r.headers.get("Cookie")||"").split(";")){const [k,...v]=part.trim().split("=");if(k===n)return v.join("=")}return ""}
+export async function onRequestPost({request,env}){const t=getCookie(request,"admin_session");if(t&&env.DB){try{await env.DB.prepare("DELETE FROM admin_sessions WHERE token_hash=?1").bind(await hash(t)).run()}catch(e){}}return json({success:true},200,{"Set-Cookie":"admin_session=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0"})}
