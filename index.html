@@ -97,13 +97,12 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
   <div class="panel">
    <div class="steps"><span class="step current">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step">4 · الدعوة</span></div>
    <h2>تسجيل دخول المشارك</h2>
-   <p class="muted">اختر بطاقتك المعدّة من المنظّم. البطاقات الحالية تجريبية، وسيتم استبدالها بصور وأسماء حقيقية بعد موافقة أصحابها.</p>
-   <div class="participants" id="participantCards">
-    <button class="person" type="button" data-name="مشارك تجريبي 1" data-kunya="أبو سعود"><div class="avatar">👤</div><b>أبو سعود</b><small>مشارك تجريبي 1</small></button>
-    <button class="person" type="button" data-name="مشارك تجريبي 2" data-kunya="أبو فارس"><div class="avatar">👤</div><b>أبو فارس</b><small>مشارك تجريبي 2</small></button>
-    <button class="person" type="button" data-name="مشارك تجريبي 3" data-kunya="أبو حامد"><div class="avatar">👤</div><b>أبو حامد</b><small>مشارك تجريبي 3</small></button>
-   </div>
-   <label class="field" for="phone">رقم الجوال للتأكيد</label>
+   <p class="muted">أكمل بياناتك في الخانات التالية لتسجيل مشاركتك في الرحلة.</p>
+   <label class="field" for="fullName">اسمك الثلاثي</label>
+   <input id="fullName" type="text" autocomplete="name" maxlength="80" placeholder="اكتب اسمك الثلاثي" style="width:100%;padding:14px;border-radius:8px;border:1px solid #526078;background:#080f1b;color:white">
+   <label class="field" for="kunya">الكنية</label>
+   <input id="kunya" type="text" maxlength="60" placeholder="مثال: أبو سعود" style="width:100%;padding:14px;border-radius:8px;border:1px solid #526078;background:#080f1b;color:white">
+   <label class="field" for="phone">رقم الجوال</label>
    <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05XXXXXXXX">
    <label style="display:flex;gap:9px;align-items:flex-start;text-align:right;margin-top:14px;color:#d6dce5;line-height:1.8"><input id="dataConsent" type="checkbox" style="margin-top:6px"> أوافق على إرسال اسمي وكنيتي ورقم جوالي إلى منظّم الرحلة لغرض تسجيل المشاركة والتواصل بشأن الرحلة.</label><p class="note">لن يتم حفظ البيانات دون موافقتك. هذه خطوة تسجيل وليست تحققًا من ملكية الرقم؛ لا يوجد رمز SMS في النسخة الحالية. يجب أن يكون جمع بيانات المشاركين بموافقتهم وموافقة ولي الأمر عند الحاجة.</p>
    <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button id="confirmIdentity" disabled>تسجيل ومتابعة</button></div>
@@ -158,18 +157,18 @@ const screens=['identity','gameScreen','cinemaScreen','inviteScreen'];
 function showScreen(id){$('landing').style.display=id==='landing'?'block':'none';screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
 $('beginBtn').addEventListener('click',()=>showScreen('identity'));
 $('backLanding').addEventListener('click',()=>showScreen('landing'));
-document.querySelectorAll('.person').forEach(card=>card.addEventListener('click',()=>{
- document.querySelectorAll('.person').forEach(c=>c.classList.remove('selected'));
- card.classList.add('selected');selected={name:card.dataset.name,kunya:card.dataset.kunya};
- $('confirmIdentity').disabled=false;$('identityMessage').textContent='تم اختيار '+selected.kunya;
-}));
+$('confirmIdentity').disabled=false;
 $('confirmIdentity').addEventListener('click',async()=>{
+ const fullName=$('fullName').value.trim();
+ const kunya=$('kunya').value.trim();
  phoneValue=$('phone').value.trim();
- if(!selected){$('identityMessage').textContent='اختر بطاقتك أولاً.';return}
+ if(fullName.split(/\s+/).filter(Boolean).length<3){$('identityMessage').textContent='اكتب اسمك الثلاثي.';return}
+ if(!kunya){$('identityMessage').textContent='اكتب الكنية.';return}
  if(!/^05\d{8}$/.test(phoneValue)){$('identityMessage').textContent='اكتب رقم جوال سعوديًا مكوّنًا من 10 أرقام ويبدأ بـ 05.';return}
  if(!$('dataConsent').checked){$('identityMessage').textContent='يرجى الموافقة على استخدام البيانات قبل التسجيل.';return}
+ selected={name:fullName,kunya};
  $('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
- try{const response=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:selected.name,kunya:selected.kunya,phone:phoneValue,consent:true})});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'تعذر التسجيل');$('identityMessage').textContent='تم تسجيلك بنجاح. أهلاً بك!';showScreen('gameScreen');startGame();}
+ try{const response=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fullName,kunya,phone:phoneValue,consent:true})});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'تعذر التسجيل');$('identityMessage').textContent='تم تسجيلك بنجاح. أهلاً بك!';showScreen('gameScreen');startGame();}
  catch(error){$('identityMessage').textContent=error.message||'تعذر الاتصال بالخادم. حاول لاحقًا.';}
  finally{$('confirmIdentity').disabled=false;}
 });
