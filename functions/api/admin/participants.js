@@ -1,18 +1,5 @@
 function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store"}})}
-const ADMIN_CODE_SHA256="e84fb0a88a88f3af6e2fb3508bb1b0c658db5a281ccd9027024b23c870bd2a92";
-async function isAdminCode(value){
- const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));
- const hex=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,"0")).join("");
- return hex===ADMIN_CODE_SHA256;
-}
-export async function onRequestGet({request,env}){
- const token=(request.headers.get("Authorization")||"").replace(/^Bearer\s+/i,"");
- if(!(await isAdminCode(token)))return json({success:false,message:"رمز المشرف غير صحيح."},401);
- if(!env.DB)return json({success:false,message:"قاعدة البيانات غير مربوطة."},503);
- try{
-  await env.DB.prepare("CREATE TABLE IF NOT EXISTS participants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, kunya TEXT NOT NULL, phone TEXT NOT NULL, consent_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
-  try{await env.DB.prepare("ALTER TABLE participants ADD COLUMN role TEXT NOT NULL DEFAULT 'student'").run()}catch(e){}
-  const {results=[]}=await env.DB.prepare("SELECT id,name,kunya,phone,role,consent_at,created_at FROM participants ORDER BY id DESC LIMIT 500").all();
-  return json({success:true,participants:results});
- }catch(e){return json({success:false,message:"تعذر قراءة التسجيلات."},500)}
-}
+async function hash(value){const x=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));return Array.from(new Uint8Array(x),b=>b.toString(16).padStart(2,"0")).join("")}
+function getCookie(r,n){for(const part of (r.headers.get("Cookie")||"").split(";")){const [k,...v]=part.trim().split("=");if(k===n)return v.join("=")}return ""}
+export async function onRequestGet({request,env}){if(!env.DB)return json({success:false,message:"قاعدة البيانات غير مربوطة."},503);const t=getCookie(request,"admin_session");if(!t)return json({success:false,message:"يلزم تسجيل دخول المشرف."},401);try{const h=await hash(t),s=await env.DB.prepare("SELECT token_hash FROM admin_sessions WHERE token_hash=?1 AND expires_at>?2").bind(h,Date.now()).first();if(!s)return json({success:false,message:"انتهت جلسة المشرف. سجّل الدخول مجددًا."},401);
+await env.DB.prepare("CREATE TABLE IF NOT EXISTS participants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, kunya TEXT NOT NULL, phone TEXT NOT NULL, consent_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();try{await env.DB.prepare("ALTER TABLE participants ADD COLUMN role TEXT NOT NULL DEFAULT 'student'").run()}catch(e){}const {results=[]}=await env.DB.prepare("SELECT id,name,kunya,phone,role,consent_at,created_at FROM participants ORDER BY id DESC LIMIT 500").all();return json({success:true,participants:results})}catch(e){return json({success:false,message:"تعذر قراءة التسجيلات."},500)}}
