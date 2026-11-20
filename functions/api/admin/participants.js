@@ -1,5 +1,5 @@
 function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store"}})}
-const ADMIN_CODE_SHA256="0473561c2c81c423cc76807166417020203fb7d623436e4d545572967a5a1519";
+const ADMIN_CODE_SHA256="e84fb0a88a88f3af6e2fb3508bb1b0c658db5a281ccd9027024b23c870bd2a92";
 async function isAdminCode(value){
  const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));
  const hex=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,"0")).join("");
