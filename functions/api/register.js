@@ -8,8 +8,9 @@ export async function onRequestPost({request,env}){
  if(body.consent!==true)return json({success:false,message:"يلزم الموافقة على استخدام البيانات."},400);
  if(!name||!kunya||!/^05\d{8}$/.test(phone))return json({success:false,message:"تحقق من الاسم والكنية ورقم الجوال."},400);
  try{
-  await env.DB.prepare("CREATE TABLE IF NOT EXISTS participants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, kunya TEXT NOT NULL, phone TEXT NOT NULL, consent_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
-  const result=await env.DB.prepare("INSERT INTO participants (name,kunya,phone,consent_at) VALUES (?1,?2,?3,?4)").bind(name,kunya,phone,new Date().toISOString()).run();
+  await env.DB.prepare("CREATE TABLE IF NOT EXISTS participants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, kunya TEXT NOT NULL, phone TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'student', consent_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
+  try{await env.DB.prepare("ALTER TABLE participants ADD COLUMN role TEXT NOT NULL DEFAULT 'student'").run()}catch(e){}
+  const result=await env.DB.prepare("INSERT INTO participants (name,kunya,phone,role,consent_at) VALUES (?1,?2,?3,?4,?5)").bind(name,kunya,phone,role,new Date().toISOString()).run();
   return json({success:true,id:result.meta?.last_row_id||null,message:"تم تسجيل المشاركة."},201);
  }catch(error){return json({success:false,message:"تعذر حفظ التسجيل في قاعدة البيانات."},500)}
 }
