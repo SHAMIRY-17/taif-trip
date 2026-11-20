@@ -219,9 +219,9 @@ footer{background:#070b12;color:#8995a5}
    <div class="content">
     <div class="eyebrow">من جدة… إلى قمم الورد والضباب</div>
     <h1>رحلة <span>الطائف</span></h1>
-    <p class="description">بين الجبال والغيوم، وبين عبق الورد وجمال الطبيعة، نأخذكم في رحلة استثنائية صُممت لتكون أكثر من مجرد نزهة؛ أيام من المغامرة، والتحديات، والضحكات، والذكريات التي تبقى.</p>
-    <div class="hero-poetry"><p>يا طائفَ الوردِ يا سحرًا نُسافرُهُ<br>وفي رُباكِ يحلو الشوقُ والسَّمَرُ</p><p>بينَ الغيومِ وجبالِ الحُسنِ موعدُنا<br>وفي رحابِكِ للأحبابِ مُدَّخَرُ</p><small>أبيات ترحيبية صيغت خصيصًا للموقع</small></div>
-    <div class="actions"><button id="beginBtn">ابدأ المغامرة</button><button type="button" class="secondary" id="previewCinemaBtn">معاينة السينما</button><button type="button" class="secondary" id="previewInviteBtn">معاينة الدعوة</button></div>
+    <p class="description">مو مجرد طلعة عابرة؛ هي رحلة قصيرة بوقتها، طويلة بتفاصيلها ومواقفها. بين جبال الطائف وغيومها، نعيش يومًا مختلفًا مليئًا بالحماس والتحديات والضحكات. يمكن وقتها يمضي بسرعة، لكن سوالفها ومواقفها وذكرياتها بتخلّيها كأنها رحلة طويلة… لأن أجمل الرحلات ما تُقاس بعدد أيامها، بل باللي نعيشه فيها.</p>
+    <div class="hero-poetry"><p>على دروبِ الطائفِ نمضي، والجبالُ لنا رفيق</p><p>والغيمُ يروي حكايةَ يومٍ، بالفرحِ يصبحُ عتيق</p><p>وقتنا قصيرٌ، لكنّ مواقفَهُ تطولُ فينا سنين</p><p>نعودُ منهُ بذكرياتٍ، كأنّنا عشنا العمرَ مرتين</p></div>
+    <div class="actions"><button id="beginBtn">ادخل أجواء الرحلة ✦</button></div>
    </div>
   </div>
   <section>
@@ -343,8 +343,8 @@ $('confirmIdentity').addEventListener('click',async()=>{
  finally{$('confirmIdentity').disabled=false}
 });
 $('enterJourney').addEventListener('click',()=>{showScreen('cinemaScreen');renderSeats()});
-$('previewCinemaBtn').addEventListener('click',()=>{selected={name:'معاينة',kunya:'أبو سعود'};selectedRole='student';showScreen('cinemaScreen');renderSeats(true)});
-$('previewInviteBtn').addEventListener('click',()=>{selected={name:'معاينة',kunya:'أبو سعود'};showInvite()});
+
+
 $('backGame').addEventListener('click',()=>showScreen('identity'));
 $('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('cinemaExperience').classList.remove('hidden');$('experienceSeat').textContent='مقعدك '+selectedSeat;buildHallSeats();walkGuest();$('cinemaExperience').scrollIntoView({behavior:'smooth',block:'start'})});
 $('replayWalk').addEventListener('click',()=>{buildHallSeats();walkGuest()});
