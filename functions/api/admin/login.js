@@ -1,0 +1,9 @@
+function json(data,status=200,headers={}){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store",...headers}})}
+const PASSWORD_SHA256="c5193860c054f312a2f65ff0da413db09629e3a50451f02f9e98161a05f26994";
+const VERIFY_SHA256="012cae5f8b6191ba25d4617666904ec871c89d08093dcc0b0329cbe2388b5582";
+async function hash(value){const x=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));return Array.from(new Uint8Array(x),b=>b.toString(16).padStart(2,"0")).join("")}
+function equal(a,b){if(a.length!==b.length)return false;let n=0;for(let i=0;i<a.length;i++)n|=a.charCodeAt(i)^b.charCodeAt(i);return n===0}
+function token(){const b=crypto.getRandomValues(new Uint8Array(32));let s="";for(const x of b)s+=String.fromCharCode(x);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+export async function onRequestPost({request,env}){if(!env.DB)return json({success:false,message:"قاعدة البيانات غير مربوطة."},503);let body;try{body=await request.json()}catch{return json({success:false,message:"الطلب غير صالح."},400)}
+const p=await hash(String(body.password||"")),v=await hash(String(body.verificationCode||""));if(!equal(p,PASSWORD_SHA256)||!equal(v,VERIFY_SHA256))return json({success:false,message:"كلمة المرور أو رمز التحقق غير صحيح."},401);
+try{await env.DB.prepare("CREATE TABLE IF NOT EXISTS admin_sessions (token_hash TEXT PRIMARY KEY, expires_at INTEGER NOT NULL)").run();const t=token(),h=await hash(t),expiry=Date.now()+7200000;await env.DB.prepare("DELETE FROM admin_sessions WHERE expires_at<=?1").bind(Date.now()).run();await env.DB.prepare("INSERT INTO admin_sessions (token_hash,expires_at) VALUES (?1,?2)").bind(h,expiry).run();return json({success:true},200,{"Set-Cookie":"admin_session="+t+"; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=7200"})}catch(e){return json({success:false,message:"تعذر إنشاء جلسة المشرف."},500)}}
