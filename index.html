@@ -112,6 +112,8 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
    <input id="kunya" type="text" maxlength="60" placeholder="مثال: أبو سعود" style="width:100%;padding:14px;border-radius:8px;border:1px solid #526078;background:#080f1b;color:white">
    <label class="field" for="phone">رقم الجوال</label>
    <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05XXXXXXXX">
+   <div id="teacherCodeWrap" class="hidden"><label class="field" for="teacherCode">الرمز الموحد للمعلمين</label><input id="teacherCode" type="password" autocomplete="off" placeholder="أدخل الرمز الذي استلمته من المنظّم" style="width:100%;padding:14px;border-radius:8px;border:1px solid #b99a5b;background:#080f1b;color:white"><p class="note">هذا الرمز خاص بالمعلمين الخمسة فقط. لا تشاركه مع الطلاب.</p></div>
+   <div id="welcomeCard" class="invite-card hidden" aria-live="polite"><div style="font-size:34px">✦</div><h2 id="welcomeTitle">أهلًا بك</h2><p id="welcomeMessage" class="muted"></p><button id="enterJourney" type="button">دخول الرحلة</button></div>
    <label style="display:flex;gap:9px;align-items:flex-start;text-align:right;margin-top:14px;color:#d6dce5;line-height:1.8"><input id="dataConsent" type="checkbox" style="margin-top:6px"> أوافق على إرسال اسمي وكنيتي ورقم جوالي إلى منظّم الرحلة لغرض تسجيل المشاركة والتواصل بشأن الرحلة.</label><p class="note">لن يتم حفظ البيانات دون موافقتك. هذه خطوة تسجيل وليست تحققًا من ملكية الرقم؛ لا يوجد رمز SMS في النسخة الحالية. يجب أن يكون جمع بيانات المشاركين بموافقتهم وموافقة ولي الأمر عند الحاجة.</p>
    <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button class="secondary" id="changeRole" type="button">تغيير نوع الدخول</button><button id="confirmIdentity" disabled>تسجيل ومتابعة</button></div></div>
    <p id="identityMessage" class="note" role="status"></p>
@@ -170,8 +172,9 @@ document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener
  if(selectedRole==='supervisor'){window.location.href='/admin.html';return}
  $('roleChoices').classList.add('hidden');
  $('registrationFields').classList.remove('hidden');
- $('roleHeading').textContent=selectedRole==='teacher'?'تسجيل دخول المعلم':'تسجيل دخول الطالب';
- $('confirmIdentity').textContent=selectedRole==='teacher'?'تسجيل المعلم ومتابعة':'تسجيل ومتابعة';
+ $('roleHeading').textContent=selectedRole==='teacher'?'تسجيل المعلم':'تسجيل الطالب';
+ $('teacherCodeWrap').classList.toggle('hidden',selectedRole!=='teacher');
+ $('confirmIdentity').textContent=selectedRole==='teacher'?'تأكيد بيانات المعلم':'تسجيل ومتابعة';
 }));
 $('changeRole').addEventListener('click',()=>{$('registrationFields').classList.add('hidden');$('roleChoices').classList.remove('hidden');$('identityMessage').textContent='';});
 $('confirmIdentity').disabled=false;
@@ -179,16 +182,19 @@ $('confirmIdentity').addEventListener('click',async()=>{
  const fullName=$('fullName').value.trim();
  const kunya=$('kunya').value.trim();
  phoneValue=$('phone').value.trim();
+ const teacherCode=$('teacherCode').value.trim();
  if(fullName.split(/\s+/).filter(Boolean).length<3){$('identityMessage').textContent='اكتب اسمك الثلاثي.';return}
+ if(selectedRole==='teacher'&&!teacherCode){$('identityMessage').textContent='أدخل الرمز الموحد للمعلمين.';return}
  if(!kunya){$('identityMessage').textContent='اكتب الكنية.';return}
  if(!/^05\d{8}$/.test(phoneValue)){$('identityMessage').textContent='اكتب رقم جوال سعوديًا مكوّنًا من 10 أرقام ويبدأ بـ 05.';return}
  if(!$('dataConsent').checked){$('identityMessage').textContent='يرجى الموافقة على استخدام البيانات قبل التسجيل.';return}
  selected={name:fullName,kunya};
  $('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
- try{const response=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fullName,kunya,phone:phoneValue,consent:true,role:selectedRole})});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'تعذر التسجيل');$('identityMessage').textContent='تم تسجيلك بنجاح. أهلاً بك!';showScreen('gameScreen');startGame();}
+ try{const response=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fullName,kunya,phone:phoneValue,consent:true,role:selectedRole,teacherCode})});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'تعذر التسجيل');$('registrationFields').querySelectorAll('input').forEach(el=>{if(el.type!=='checkbox')el.disabled=true});$('roleChoices').classList.add('hidden');$('welcomeCard').classList.remove('hidden');$('welcomeTitle').textContent='مرحبًا بك يا '+kunya;$('welcomeMessage').textContent=selectedRole==='teacher'?'أنت المعلم '+kunya+'، سررنا بدخولك موقع رحلة الطائف. جهّز نفسك لتجربة خاصة ومقعد ألماسي في السينما.':'يا مرحبًا بك '+kunya+'، سررنا بانضمامك إلى رحلة الطائف. نتمنى لك تجربة ممتعة ومليئة بالمغامرة.';$('identityMessage').textContent='';}
  catch(error){$('identityMessage').textContent=error.message||'تعذر الاتصال بالخادم. حاول لاحقًا.';}
  finally{$('confirmIdentity').disabled=false;}
 });
+$('enterJourney').addEventListener('click',()=>{showScreen('gameScreen');startGame()});
 $('exitGame').addEventListener('click',()=>showScreen('landing'));
 $('toCinema').addEventListener('click',()=>showScreen('cinemaScreen'));
 $('backGame').addEventListener('click',()=>showScreen('gameScreen'));
