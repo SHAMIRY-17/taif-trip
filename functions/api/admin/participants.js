@@ -6,7 +6,8 @@ export async function onRequestGet({request,env}){
  if(!env.DB)return json({success:false,message:"قاعدة البيانات غير مربوطة."},503);
  try{
   await env.DB.prepare("CREATE TABLE IF NOT EXISTS participants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, kunya TEXT NOT NULL, phone TEXT NOT NULL, consent_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
-  const {results=[]}=await env.DB.prepare("SELECT id,name,kunya,phone,consent_at,created_at FROM participants ORDER BY id DESC LIMIT 500").all();
+  try{await env.DB.prepare("ALTER TABLE participants ADD COLUMN role TEXT NOT NULL DEFAULT 'student'").run()}catch(e){}
+  const {results=[]}=await env.DB.prepare("SELECT id,name,kunya,phone,role,consent_at,created_at FROM participants ORDER BY id DESC LIMIT 500").all();
   return json({success:true,participants:results});
  }catch(e){return json({success:false,message:"تعذر قراءة التسجيلات."},500)}
 }
