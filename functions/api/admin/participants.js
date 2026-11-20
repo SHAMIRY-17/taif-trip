@@ -6,7 +6,7 @@ async function isAdminCode(value){
  return hex===ADMIN_CODE_SHA256;
 }
 export async function onRequestGet({request,env}){
- const token=(request.headers.get("Authorization")||"").replace(/^Bearer\\s+/i,"");
+ const token=(request.headers.get("Authorization")||"").replace(/^Bearer\s+/i,"");
  if(!(await isAdminCode(token)))return json({success:false,message:"رمز المشرف غير صحيح."},401);
  if(!env.DB)return json({success:false,message:"قاعدة البيانات غير مربوطة."},503);
  try{
