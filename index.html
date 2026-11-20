@@ -138,7 +138,7 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
  <section id="gameScreen" class="screen">
   <div class="game-wrap">
    <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step current">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step">4 · الدعوة</span></div>
-   <div class="game-top"><b>TAIF TRIP · BUS JOURNEY</b><div class="stats"><span>السرعة: <b id="speedValue">0</b> كم/س</span><span>المسافة: <b id="distanceValue">0</b> كم</span><span>المحطة: <b id="stationValue">جدة</b></span></div></div>
+   <div class="game-top"><b>TAIF TRIP · BUS JOURNEY</b><div class="stats"><span>المسافة: <b id="distanceValue">0</b> كم</span><span>المحطة: <b id="stationValue">جدة</b></span></div></div>
    <div class="sim-stage">
     <canvas id="bus-canvas"></canvas>
     <div class="sim-hud"><div class="hud-card"><small>TAIF LUXURY COACH</small><strong><span id="speedValue">0</span> <span style="font-size:11px">KM/H</span></strong><small id="gearValue">D · DRIVE</small></div><div class="hud-card hud-right"><small>FUEL · RANGE</small><strong><span id="fuelValue">92</span>%</strong><small id="tempValue">ENGINE NORMAL</small></div></div>
@@ -281,7 +281,6 @@ function resize(){if(!renderer||!camera)return;const c=$('bus-canvas'),w=c.clien
 function loop(now){requestAnimationFrame(loop);if(!renderer)return;const dt=Math.min((now-lastTime)/1000,.05);lastTime=now;
  if(active){const target=boost?400:180;if(gas)speed+=24*dt;else speed-=5.5*dt;if(brake)speed-=48*dt;speed=Math.max(0,Math.min(target,speed));distance+=speed*dt/3600*22;offset=Math.max(-5,Math.min(5,offset+steer*dt*(1.25+speed/90)));camera.position.x+=(offset*.13-camera.position.x)*.055;camera.position.y=2.08+Math.sin(now*.0018)*.012;camera.lookAt(camera.position.x*.25,1.45,-24);traffic.forEach(car=>{car.position.z+=speed*dt*.12;if(car.position.z>5){car.position.z=-450-Math.random()*230;car.position.x=[-7,-3,2,6][Math.floor(Math.random()*4)]}if(car.position.z>2&&car.position.z<7&&Math.abs(car.position.x-camera.position.x)<1.8&&speed>30){speed=Math.max(0,speed-75);car.position.z=-380-Math.random()*80;$('drivingMessage').textContent='تنبيه: اقتربت من مركبة أمامك. خفّف السرعة.'}});
  $('speedValue').textContent=Math.round(speed);$('distanceValue').textContent=distance.toFixed(1);$('fuelValue').textContent=Math.max(1,Math.round(92-distance*.13));$('gearValue').textContent=speed<1?'D · READY':'D · DRIVE';$('gpsDetail').textContent='المسافة إلى الطائف: '+Math.max(0,190-distance).toFixed(1)+' كم · المحطة: '+(stations[stationIndex]||'الطريق إلى الطائف');$('gpsProgress').style.width=Math.min(100,distance/190*100)+'%';
- traffic.forEach(car=>{if(car.position.z>2&&car.position.z<7&&Math.abs(car.position.x-camera.position.x)<1.8&&speed>30){speed=Math.max(0,speed-55);car.position.z=-400-Math.random()*80}});
  if(stationIndex<4&&distance>=stationMarks[stationIndex]){active=false;speed=0;$('stationTitle').textContent='محطة '+stations[stationIndex];$('stationText').textContent='وصلت إلى '+stations[stationIndex]+'. يمكنك التوقف للاستراحة ثم متابعة الطريق.';$('stationBox').classList.add('show');$('stationValue').textContent=stations[stationIndex]}
  }
  renderer.render(scene,camera)
