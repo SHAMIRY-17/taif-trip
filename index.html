@@ -341,14 +341,14 @@ document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener
 }));
 $('changeRole').addEventListener('click',()=>{$('registrationFields').classList.add('hidden');$('roleChoices').classList.remove('hidden');$('identityMessage').textContent='';$('confirmIdentity').disabled=true});
 function updateRegistrationButton(){
- const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=$('phone').value.replace(/[\\s-]/g,''),consent=$('dataConsent').checked,teacherCode=$('teacherCode').value.trim();
- const valid=name.split(/\\s+/).filter(Boolean).length>=3&&!!kunya&&/^05\\d{8}$/.test(phone)&&consent&&(selectedRole!=='teacher'||!!teacherCode);
+ const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=$('phone').value.replace(/[\s-]/g,''),consent=$('dataConsent').checked,teacherCode=$('teacherCode').value.trim();
+ const valid=name.split(/\s+/).filter(Boolean).length>=3&&!!kunya&&/^05\d{8}$/.test(phone)&&consent&&(selectedRole!=='teacher'||!!teacherCode);
  $('confirmIdentity').disabled=!valid;
 }
 ['fullName','kunya','phone','teacherCode','dataConsent'].forEach(id=>$(id).addEventListener('input',updateRegistrationButton));
 $('dataConsent').addEventListener('change',updateRegistrationButton);
 $('confirmIdentity').addEventListener('click',async()=>{
- const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=$('phone').value.replace(/[\\s-]/g,''),teacherCode=$('teacherCode').value.trim();
+ const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=$('phone').value.replace(/[\s-]/g,''),teacherCode=$('teacherCode').value.trim();
  if($('confirmIdentity').disabled)return;
  selected={name,kunya};$('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
  try{
