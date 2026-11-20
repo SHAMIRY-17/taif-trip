@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,246 +6,221 @@
 <meta name="theme-color" content="#080b12">
 <title>TAIF TRIP | رحلة الطائف</title>
 <style>
+:root{--bg:#080b12;--panel:#111a29;--gold:#dfbd78;--gold2:#a98242;--muted:#b8c0cc;--line:#b99a5b55}
 *{box-sizing:border-box}
-body{margin:0;background:#080b12;color:#fff;font-family:Tahoma,Arial,sans-serif}
-header{display:flex;justify-content:space-between;align-items:center;padding:22px 7%;background:#0c1320;border-bottom:1px solid #b99552}
-.logo{color:#e8cc91;font-size:25px;font-weight:bold;letter-spacing:3px}
+body{margin:0;background:var(--bg);color:#fff;font-family:Tahoma,Arial,sans-serif}
+button,input{font:inherit}
+button{border:1px solid var(--gold);background:linear-gradient(135deg,#e5cb91,#a98242);color:#111;padding:13px 22px;border-radius:8px;font-weight:bold;cursor:pointer}
+button.secondary{background:#182235;color:#f4dfb1;border-color:#8d7449}
+button:disabled{opacity:.45;cursor:not-allowed}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 7%;background:#0c1320;border-bottom:1px solid var(--gold)}
+.logo{color:#e8cc91;font-size:24px;font-weight:bold;letter-spacing:3px}
 .tag{color:#aaa;font-size:12px;margin-top:5px}
-.hero{min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:35px 20px;background:radial-gradient(ellipse at 50% 90%,#92704455,transparent 55%),linear-gradient(150deg,#1b2b43,#080b12 75%)}
-.content{max-width:780px}
+.hero{min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px;background:radial-gradient(ellipse at 50% 90%,#92704466,transparent 55%),linear-gradient(150deg,#1b2b43,#080b12 75%)}
+.content{max-width:800px}
 .eyebrow{color:#d9b66d;letter-spacing:3px;font-size:12px}
 h1{font-size:clamp(42px,9vw,76px);margin:22px 0;color:#f3dfb0}
 h1 span{display:block;color:#d3ad67}
 .description{color:#c4cad4;line-height:2.1;font-size:16px}
-button{border:1px solid #e0c17f;background:linear-gradient(135deg,#e5cb91,#a98242);color:#111;padding:16px 35px;border-radius:5px;font-weight:bold;font-size:17px;cursor:pointer;margin-top:25px}
-section{padding:65px 7%;text-align:center}
+section{padding:55px 7%;text-align:center}
 .section-title{color:#e4c47e;font-size:28px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:30px}
-.card{padding:30px 20px;background:linear-gradient(145deg,#182235,#0d1420);border:1px solid #b99a5b66;border-radius:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:30px}
+.card{padding:28px 20px;background:linear-gradient(145deg,#182235,#0d1420);border:1px solid var(--line);border-radius:14px}
 .symbol{font-size:38px}
 .card h3{color:#e4c47e}
 .card p{color:#abb4c3;line-height:1.9}
 footer{text-align:center;padding:25px;color:#888;border-top:1px solid #ffffff18}
-#guide{display:none;position:fixed;inset:0;z-index:10;background:#080b12f5;align-items:center;justify-content:center;padding:20px;text-align:center}
-.guide-box{max-width:420px;background:#141e2e;padding:30px;border:1px solid #c5a35e;border-radius:14px}
-.guide-box h2{color:#e6c783}
-.guide-box p{line-height:2;color:#d1d5dc}
+.screen{display:none;min-height:80vh;padding:28px 5%;background:radial-gradient(ellipse at top,#18263a,#080b12 70%)}
+.screen.active{display:block}
+.panel{max-width:980px;margin:20px auto;padding:26px;background:#111a29;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 60px #0008}
+.panel h2{color:#e6c783;margin-top:0}
+.muted{color:var(--muted);line-height:1.9}
+.steps{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0 24px}
+.step{padding:8px 12px;border:1px solid #ffffff20;border-radius:30px;color:#aeb7c4;font-size:12px}
+.step.current{color:#111;background:var(--gold);border-color:var(--gold)}
+.participants{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:22px 0}
+.person{border:1px solid #ffffff25;background:#0c1421;border-radius:13px;padding:18px;color:#fff;cursor:pointer}
+.person.selected{border:2px solid var(--gold);background:#263044}
+.avatar{width:70px;height:70px;border-radius:50%;margin:0 auto 12px;background:linear-gradient(145deg,#d9bd83,#6d5531);display:grid;place-items:center;font-size:30px;color:#111}
+.person small{display:block;color:#abb4c3;margin-top:7px}
+.field{display:block;text-align:right;color:#e6c783;margin:16px 0 7px}
+input[type=tel]{width:100%;padding:14px;border-radius:8px;border:1px solid #526078;background:#080f1b;color:white;direction:ltr;text-align:left}
+.note{font-size:12px;color:#9da8b7;line-height:1.8}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.game-wrap{max-width:1200px;margin:auto}
+.game-top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;padding:12px;background:#111a29;border:1px solid var(--line);border-radius:12px}
+.stats{display:flex;gap:18px;flex-wrap:wrap;color:#e9d4a4}
+#bus-canvas{width:100%;height:min(58vh,560px);display:block;background:#172335;border-radius:12px;margin-top:12px}
+.game-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.game-controls button{min-width:92px}
+.station-box{display:none;padding:20px;margin-top:12px;background:#172235;border:1px solid var(--gold);border-radius:12px}
+.station-box.show{display:block}
+.cinema-layout{display:grid;grid-template-columns:1fr;gap:20px}
+.cinema-screen{background:linear-gradient(135deg,#24334a,#070b12);border:2px solid #a98b56;border-radius:12px;padding:20px;min-height:190px;display:grid;place-items:center;color:#f1dcae}
+.seats{display:grid;grid-template-columns:repeat(4,minmax(45px,70px));gap:10px;justify-content:center;margin:20px}
+.seat{padding:12px 4px;background:#26344a;border:1px solid #8290a4;border-radius:8px;color:#fff}
+.seat.selected{background:var(--gold);color:#111}
+video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:14px}
+.invite-card{max-width:700px;margin:18px auto;padding:28px;border:1px solid var(--gold);border-radius:14px;background:linear-gradient(145deg,#1c2b40,#0b111c);line-height:2}
+.hidden{display:none!important}
+@media(max-width:600px){header{padding:15px 5%}.logo{font-size:19px}.hero{min-height:70vh}.panel{padding:18px}.screen{padding:18px 4%}#bus-canvas{height:48vh}}
 </style>
 </head>
 <body>
 <header>
-<div>
-<div class="logo">TAIF TRIP</div>
-<div class="tag">THE JOURNEY BEGINS</div>
-</div>
-<div class="tag">JEDDAH → TAIF</div>
+ <div><div class="logo">TAIF TRIP</div><div class="tag">THE JOURNEY BEGINS</div></div>
+ <div class="tag">JEDDAH → TAIF</div>
 </header>
+
 <main>
-<div class="hero">
-<div class="content">
-<div class="eyebrow">A PREMIUM INTERACTIVE EXPERIENCE</div>
-<h1>رحلة إلى <span>الطائف</span></h1>
-<p class="description">رحلة استثنائية تجمع بين المغامرة والترفيه، وتجربة تفاعلية نصنع فيها ذكريات جميلة من جدة إلى الطائف.</p>
-<button onclick="document.getElementById('guide').style.display='flex'">ابدأ المغامرة</button>
-</div>
-</div>
-<section>
-<div class="eyebrow">DISCOVER YOUR JOURNEY</div>
-<h2 class="section-title">ماذا ينتظرك؟</h2>
-<div class="cards">
-<div class="card">
-<div class="symbol">🚌</div>
-<h3>قيادة الباص</h3>
-<p>رحلة قيادة ثلاثية الأبعاد من جدة إلى الطائف.</p>
-</div>
-<div class="card">
-<div class="symbol">🎬</div>
-<h3>السينما الافتراضية</h3>
-<p>اختر مقعدك واستمتع بمشاهدة إعلان الرحلة.</p>
-</div>
-<div class="card">
-<div class="symbol">🏆</div>
-<h3>النقاط والمكافآت</h3>
-<p>أكمل مراحل الرحلة واجمع نقاطك.</p>
-</div>
-<div class="card">
-<div class="symbol">💌</div>
-<h3>دعوة الغالين</h3>
-<p>دعوة خاصة لأصحاب المقام الرفيع والأشخاص الأعزاء، لمشاركتنا أجمل لحظات الرحلة وصناعة ذكريات لا تُنسى.</p>
-</div>
-</div>
-</section>
+ <div id="landing">
+  <div class="hero">
+   <div class="content">
+    <div class="eyebrow">A PREMIUM INTERACTIVE EXPERIENCE</div>
+    <h1>رحلة إلى <span>الطائف</span></h1>
+    <p class="description">رحلة استثنائية تجمع بين المغامرة والترفيه، وتجربة تفاعلية نصنع فيها ذكريات جميلة من جدة إلى الطائف.</p>
+    <button id="beginBtn">ابدأ المغامرة</button>
+   </div>
+  </div>
+  <section>
+   <div class="eyebrow">DISCOVER YOUR JOURNEY</div><h2 class="section-title">ماذا ينتظرك؟</h2>
+   <div class="cards">
+    <div class="card"><div class="symbol">🚌</div><h3>قيادة الباص</h3><p>رحلة قيادة ثلاثية الأبعاد من جدة إلى الطائف.</p></div>
+    <div class="card"><div class="symbol">🎬</div><h3>السينما الافتراضية</h3><p>اختر مقعدك وشاهد إعلان الرحلة.</p></div>
+    <div class="card"><div class="symbol">🏆</div><h3>النقاط والمكافآت</h3><p>أكمل مراحل الرحلة واجمع نقاطك.</p></div>
+    <div class="card"><div class="symbol">💌</div><h3>دعوة الغالين</h3><p>دعوة خاصة لمشاركة أجمل لحظات الرحلة وصناعة ذكريات لا تُنسى.</p></div>
+   </div>
+  </section>
+ </div>
+
+ <section id="identity" class="screen">
+  <div class="panel">
+   <div class="steps"><span class="step current">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step">4 · الدعوة</span></div>
+   <h2>اختر بطاقتك الشخصية</h2>
+   <p class="muted">اختر البطاقة التي أعدّها المنظّم لك. هذه بطاقات تجريبية مؤقتة إلى أن تُضاف صور وأسماء المشاركين بموافقتهم.</p>
+   <div class="participants" id="participantCards">
+    <button class="person" type="button" data-name="مشارك تجريبي 1" data-kunya="أبو سعود"><div class="avatar">👤</div><b>أبو سعود</b><small>مشارك تجريبي 1</small></button>
+    <button class="person" type="button" data-name="مشارك تجريبي 2" data-kunya="أبو فارس"><div class="avatar">👤</div><b>أبو فارس</b><small>مشارك تجريبي 2</small></button>
+    <button class="person" type="button" data-name="مشارك تجريبي 3" data-kunya="أبو حامد"><div class="avatar">👤</div><b>أبو حامد</b><small>مشارك تجريبي 3</small></button>
+   </div>
+   <label class="field" for="phone">رقم الجوال للتأكيد</label>
+   <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05XXXXXXXX">
+   <p class="note">نسخة تجريبية: لا يتم إرسال رمز SMS ولا حفظ رقم الجوال على الخادم. أدخل رقمك بموافقتك فقط. سنضيف التحقق الحقيقي لاحقًا إذا توفرت خدمة مناسبة وموافقة المنظّم.</p>
+   <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button id="confirmIdentity" disabled>تأكيد ومتابعة</button></div>
+   <p id="identityMessage" class="note" role="status"></p>
+  </div>
+ </section>
+
+ <section id="gameScreen" class="screen">
+  <div class="game-wrap">
+   <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step current">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step">4 · الدعوة</span></div>
+   <div class="game-top"><b>TAIF TRIP · BUS JOURNEY</b><div class="stats"><span>السرعة: <b id="speedValue">0</b> كم/س</span><span>المسافة: <b id="distanceValue">0</b> كم</span><span>المحطة: <b id="stationValue">جدة</b></span></div></div>
+   <canvas id="bus-canvas"></canvas>
+   <div class="game-controls">
+    <button class="secondary" id="leftBtn">◀ يسار</button><button id="gasBtn">تسارع</button><button class="secondary" id="brakeBtn">فرامل</button><button class="secondary" id="rightBtn">يمين ▶</button><button id="boostBtn">BOOST</button><button class="secondary" id="hornBtn">بوق</button>
+   </div>
+   <p class="note">تحكم بلوحة المفاتيح: الأسهم أو W A S D. زر BOOST مؤثر خيالي داخل اللعبة فقط.</p>
+   <div id="stationBox" class="station-box"><h2 id="stationTitle">محطة توقف</h2><p class="muted" id="stationText">توقف للاستراحة ثم تابع الرحلة.</p><button id="resumeBtn">متابعة الرحلة</button></div>
+   <div class="actions"><button class="secondary" id="toCinema">الانتقال إلى السينما</button><button class="secondary" id="exitGame">العودة للبداية</button></div>
+  </div>
+ </section>
+
+ <section id="cinemaScreen" class="screen">
+  <div class="panel">
+   <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step current">3 · السينما</span><span class="step">4 · الدعوة</span></div>
+   <h2>السينما الافتراضية</h2><p class="muted">اختر مقعدك، ثم شغّل إعلان الرحلة عند توفر ملف الفيديو.</p>
+   <div class="cinema-layout">
+    <div class="cinema-screen"><div><div style="font-size:34px">🎬</div><b>TAIF TRIP CINEMA</b><p>شاشة العرض</p></div></div>
+    <div><b>اختر مقعدك</b><div class="seats" id="seatGrid"></div><p id="seatStatus" class="note">لم يتم اختيار مقعد بعد.</p></div>
+   </div>
+   <label class="field" for="videoFile">ملف إعلان الرحلة (من جهاز المنظّم)</label><input id="videoFile" type="file" accept="video/*" style="max-width:100%">
+   <video id="adVideo" controls playsinline class="hidden"></video>
+   <div class="actions"><button class="secondary" id="backGame">العودة للعبة</button><button id="toInvite">متابعة إلى الدعوة</button></div>
+  </div>
+ </section>
+
+ <section id="inviteScreen" class="screen">
+  <div class="panel">
+   <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step current">4 · الدعوة</span></div>
+   <h2>دعوتك الخاصة</h2><p class="muted">تُنشأ الرسالة باسم الكنية التي اخترتها. لن تُرسل تلقائيًا؛ يمكنك مراجعتها ثم مشاركتها عبر واتساب.</p>
+   <div class="invite-card" id="inviteText">يا مرحبًا بك في رحلة الطائف!</div>
+   <div class="actions"><button id="shareWhatsApp">مشاركة الدعوة عبر واتساب</button><button class="secondary" id="copyInvite">نسخ نص الدعوة</button><button class="secondary" id="restart">العودة للبداية</button></div>
+   <p class="note">زر واتساب يفتح تطبيق واتساب برسالة جاهزة لتراجعها وترسلها بنفسك. لا يتم إرسال أي رسالة دون ضغطك على إرسال.</p>
+  </div>
+ </section>
 </main>
-<div id="guide">
-<div class="guide-box">
-<h2>استعد للانطلاق</h2>
-<p>📱 أدر هاتفك إلى الوضع الأفقي (Landscape) للحصول على أفضل تجربة.</p>
-<button onclick="document.getElementById('guide').style.display='none'">جاهز؟ لننطلق!</button>
-</div>
-</div>
 <footer>TAIF TRIP © 2026</footer>
 
-<div id="bus-game" style="display:none;position:fixed;inset:0;z-index:9999;background:#080d16;color:white;font-family:Tahoma,Arial;text-align:center">
-  <div style="padding:12px;background:#101a29;display:flex;justify-content:space-between">
-    <b>TAIF TRIP | BUS SIMULATOR</b>
-    <button onclick="document.getElementById('bus-game').style.display='none'">إغلاق</button>
-  </div>
-  <canvas id="bus-canvas" style="width:100%;height:65vh;display:block"></canvas>
-  <div style="padding:10px">
-    <div style="font-size:22px;color:#e7c77e"><span id="bus-speed">0</span> KM/H</div>
-    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:12px">
-      <button id="bus-left">◀ يسار</button>
-      <button id="bus-gas">تسارع</button>
-      <button id="bus-brake">فرامل</button>
-      <button id="bus-right">يمين ▶</button>
-      <button id="bus-boost">BOOST</button>
-    </div>
-    <p>استخدم الأسهم أو الأزرار للتحكم بالباص</p>
-  </div>
-</div>
-
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js';
-
-const game=document.getElementById('bus-game');
-const canvas=document.getElementById('bus-canvas');
-const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x101c2b);
-scene.fog=new THREE.Fog(0x101c2b,25,130);
-
-const camera=new THREE.PerspectiveCamera(65,1,0.1,300);
-camera.position.set(0,3,9);
-camera.lookAt(0,0,-12);
-
-const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-renderer.shadowMap.enabled=true;
-
-scene.add(new THREE.HemisphereLight(0xffffff,0x354052,2));
-const sun=new THREE.DirectionalLight(0xffe4b5,2);
-sun.position.set(-5,12,8);
-sun.castShadow=true;
-scene.add(sun);
-
-const road=new THREE.Mesh(new THREE.PlaneGeometry(14,250),new THREE.MeshStandardMaterial({color:0x252a32,roughness:0.9}));
-road.rotation.x=-Math.PI/2;
-road.position.z=-80;
-road.receiveShadow=true;
-scene.add(road);
-
-const ground=new THREE.Mesh(new THREE.PlaneGeometry(300,300),new THREE.MeshStandardMaterial({color:0x18251e}));
-ground.rotation.x=-Math.PI/2;
-ground.position.y=-0.08;
-ground.position.z=-80;
-scene.add(ground);
-
-for(let z=-180;z<20;z+=12){
-  const line=new THREE.Mesh(new THREE.BoxGeometry(.16,.025,5),new THREE.MeshStandardMaterial({color:0xe9d9a6}));
-  line.position.set(0,.02,z);
-  scene.add(line);
-}
-
-for(let z=-180;z<20;z+=9){
-  for(const x of [-10,10]){
-    const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.18,.25,2,7),new THREE.MeshStandardMaterial({color:0x59422d}));
-    trunk.position.set(x,1,z);
-    scene.add(trunk);
-    const tree=new THREE.Mesh(new THREE.ConeGeometry(1.4,4,8),new THREE.MeshStandardMaterial({color:0x244b35}));
-    tree.position.set(x,3.5,z);
-    scene.add(tree);
-  }
-}
-
-const dash=new THREE.Mesh(new THREE.BoxGeometry(5,.55,1.2),new THREE.MeshStandardMaterial({color:0x30251e,roughness:.55}));
-dash.position.set(0,.8,1.4);
-scene.add(dash);
-
-const screen=new THREE.Mesh(new THREE.BoxGeometry(1.5,.38,.06),new THREE.MeshStandardMaterial({color:0x172c38,metalness:.4,roughness:.2}));
-screen.position.set(0,1.18,.78);
-scene.add(screen);
-
-const wheel=new THREE.Mesh(new THREE.TorusGeometry(.48,.09,12,32),new THREE.MeshStandardMaterial({color:0x171717,metalness:.4}));
-wheel.position.set(0,1.15,1.0);
-scene.add(wheel);
-
-const traffic=[];
-for(let i=0;i<5;i++){
-  const car=new THREE.Mesh(new THREE.BoxGeometry(1.8,.9,3),new THREE.MeshStandardMaterial({color:[0x20252d,0x8b2020,0xc0c0c0,0x173d62][i%4],metalness:.5,roughness:.3}));
-  car.position.set([-4,-2,2,4,0][i],.55,-25-i*27);
-  scene.add(car);
-  traffic.push(car);
-}
-
-let speed=0,steer=0,gas=false,brake=false,boost=false,active=false,offset=0;
-const speedText=document.getElementById('bus-speed');
-
-function hold(id,down,up){
-  const el=document.getElementById(id);
-  el.addEventListener('pointerdown',e=>{e.preventDefault();down()});
-  ['pointerup','pointerleave','pointercancel'].forEach(type=>el.addEventListener(type,up));
-}
-hold('bus-gas',()=>gas=true,()=>gas=false);
-hold('bus-brake',()=>brake=true,()=>brake=false);
-hold('bus-left',()=>steer=-1,()=>{if(steer===-1)steer=0});
-hold('bus-right',()=>steer=1,()=>{if(steer===1)steer=0});
-hold('bus-boost',()=>boost=true,()=>boost=false);
-
-window.addEventListener('keydown',e=>{
-  if(e.key==='ArrowUp'||e.key==='w')gas=true;
-  if(e.key==='ArrowDown'||e.key==='s')brake=true;
-  if(e.key==='ArrowLeft'||e.key==='a')steer=-1;
-  if(e.key==='ArrowRight'||e.key==='d')steer=1;
-  if(e.code==='Space')boost=true;
+const $=id=>document.getElementById(id);
+let selected=null,selectedSeat=null,phoneValue='';
+const screens=['identity','gameScreen','cinemaScreen','inviteScreen'];
+function showScreen(id){$('landing').style.display=id==='landing'?'block':'none';screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
+$('beginBtn').addEventListener('click',()=>showScreen('identity'));
+$('backLanding').addEventListener('click',()=>showScreen('landing'));
+document.querySelectorAll('.person').forEach(card=>card.addEventListener('click',()=>{
+ document.querySelectorAll('.person').forEach(c=>c.classList.remove('selected'));
+ card.classList.add('selected');selected={name:card.dataset.name,kunya:card.dataset.kunya};
+ $('confirmIdentity').disabled=false;$('identityMessage').textContent='تم اختيار '+selected.kunya;
+}));
+$('confirmIdentity').addEventListener('click',()=>{
+ phoneValue=$('phone').value.trim();
+ if(!selected){$('identityMessage').textContent='اختر بطاقتك أولاً.';return}
+ if(!/^05\d{8}$/.test(phoneValue)){ $('identityMessage').textContent='اكتب رقم جوال سعوديًا مكوّنًا من 10 أرقام ويبدأ بـ 05.';return}
+ showScreen('gameScreen');startGame();
 });
-window.addEventListener('keyup',e=>{
-  if(e.key==='ArrowUp'||e.key==='w')gas=false;
-  if(e.key==='ArrowDown'||e.key==='s')brake=false;
-  if(['ArrowLeft','ArrowRight','a','d'].includes(e.key))steer=0;
-  if(e.code==='Space')boost=false;
+$('exitGame').addEventListener('click',()=>showScreen('landing'));
+$('toCinema').addEventListener('click',()=>showScreen('cinemaScreen'));
+$('backGame').addEventListener('click',()=>showScreen('gameScreen'));
+$('toInvite').addEventListener('click',()=>{
+ if(!selected){showScreen('identity');return}
+ $('inviteText').textContent='يا '+selected.kunya+'، يا مرحبًا بك في رحلة الطائف! جهّز نفسك ليوم مليء بالمغامرة والأنشطة والذكريات الجميلة. موعدنا على خير، ونسأل الله أن يجمعنا على المحبة والفرح.';
+ showScreen('inviteScreen');
 });
+$('shareWhatsApp').addEventListener('click',()=>window.open('https://wa.me/?text='+encodeURIComponent($('inviteText').textContent),'_blank','noopener'));
+$('copyInvite').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('inviteText').textContent);$('copyInvite').textContent='تم النسخ ✓'}catch(e){$('copyInvite').textContent='تعذر النسخ؛ حدّد النص وانسخه'}});
+$('restart').addEventListener('click',()=>showScreen('landing'));
+const seats=$('seatGrid');
+for(let i=1;i<=12;i++){const b=document.createElement('button');b.className='seat';b.textContent='A'+i;b.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selectedSeat='A'+i;$('seatStatus').textContent='تم اختيار المقعد '+selectedSeat});seats.appendChild(b)}
+let videoUrl=null;
+$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden')});
 
-function resize(){
-  const w=canvas.clientWidth,h=canvas.clientHeight;
-  if(!w||!h)return;
-  renderer.setSize(w,h,false);
-  camera.aspect=w/h;
-  camera.updateProjectionMatrix();
+let THREE,renderer,scene,camera,animationStarted=false,active=false,speed=0,distance=0,steer=0,gas=false,brake=false,boost=false,offset=0,lastTime=0,stationIndex=0;
+const stations=['الدريس','ساسكو','أرامكو','بترومين'],stationMarks=[1.5,3,4.5,6];
+let traffic=[];
+async function startGame(){
+ if(animationStarted){active=true;return}
+ try{THREE=await import('https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js')}catch(e){$('stationValue').textContent='تعذر تحميل الرسومات';return}
+ const canvas=$('bus-canvas');scene=new THREE.Scene();scene.background=new THREE.Color(0x9bb4c9);scene.fog=new THREE.Fog(0x9bb4c9,35,150);
+ camera=new THREE.PerspectiveCamera(65,1,.1,300);camera.position.set(0,2.1,5);camera.lookAt(0,1,-18);
+ renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;
+ scene.add(new THREE.HemisphereLight(0xffffff,0x59616a,2));
+ const sun=new THREE.DirectionalLight(0xffe4c0,2.1);sun.position.set(-12,20,10);sun.castShadow=true;scene.add(sun);
+ const road=new THREE.Mesh(new THREE.PlaneGeometry(16,280),new THREE.MeshStandardMaterial({color:0x34383d,roughness:.95}));road.rotation.x=-Math.PI/2;road.position.z=-115;road.receiveShadow=true;scene.add(road);
+ const land=new THREE.Mesh(new THREE.PlaneGeometry(320,320),new THREE.MeshStandardMaterial({color:0x7c8068}));land.rotation.x=-Math.PI/2;land.position.set(0,-.08,-115);scene.add(land);
+ for(let z=-250;z<15;z+=12){const stripe=new THREE.Mesh(new THREE.BoxGeometry(.16,.025,5),new THREE.MeshStandardMaterial({color:0xe7dfc9}));stripe.position.set(0,.02,z);scene.add(stripe)}
+ for(let z=-245;z<15;z+=15)for(const x of [-13,13]){const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.2,.28,2.2,7),new THREE.MeshStandardMaterial({color:0x5b4632}));trunk.position.set(x,1,z);scene.add(trunk);const crown=new THREE.Mesh(new THREE.ConeGeometry(1.6,4.2,8),new THREE.MeshStandardMaterial({color:0x35513b}));crown.position.set(x,3.8,z);scene.add(crown)}
+ const dash=new THREE.Mesh(new THREE.BoxGeometry(6,.55,1.35),new THREE.MeshStandardMaterial({color:0x3b2b20,roughness:.5}));dash.position.set(0,.75,1.3);scene.add(dash);
+ const trim=new THREE.Mesh(new THREE.BoxGeometry(5.7,.08,1.38),new THREE.MeshStandardMaterial({color:0xb08b50,metalness:.65,roughness:.3}));trim.position.set(0,1.04,1.28);scene.add(trim);
+ const display=new THREE.Mesh(new THREE.BoxGeometry(1.6,.4,.08),new THREE.MeshStandardMaterial({color:0x102b38,emissive:0x071b26}));display.position.set(0,1.25,.62);scene.add(display);
+ const steering=new THREE.Mesh(new THREE.TorusGeometry(.48,.075,12,36),new THREE.MeshStandardMaterial({color:0x171717,metalness:.5}));steering.position.set(0,1.18,.9);scene.add(steering);
+ for(let i=0;i<6;i++){const car=new THREE.Group();const body=new THREE.Mesh(new THREE.BoxGeometry(1.8,.8,3.4),new THREE.MeshStandardMaterial({color:[0x20252d,0x8d2424,0xc7c7c7,0x163d60,0x171717,0xaaa08b][i],metalness:.45,roughness:.35}));body.position.y=.55;car.add(body);const top=new THREE.Mesh(new THREE.BoxGeometry(1.5,.65,1.6),new THREE.MeshStandardMaterial({color:0x253746,metalness:.3,roughness:.2}));top.position.set(0,1.18,-.2);car.add(top);car.position.set([-5,-2,2,5,-3,3][i],0,-28-i*34);scene.add(car);traffic.push(car)}
+ animationStarted=true;active=true;resize();window.addEventListener('resize',resize);lastTime=performance.now();requestAnimationFrame(loop);
 }
-window.addEventListener('resize',resize);
-
-function animate(){
-  requestAnimationFrame(animate);
-  if(active){
-    if(gas)speed+=.45;
-    else speed-=.12;
-    if(brake)speed-=.8;
-    speed=Math.max(0,Math.min(boost?400:180,speed));
-    offset+=steer*.09*(speed/80+0.2);
-    offset=Math.max(-4,Math.min(4,offset));
-    camera.position.x+=(offset-camera.position.x)*.04;
-    camera.position.y=3+Math.min(speed/400,.2);
-    camera.lookAt(camera.position.x*.4,0,-12);
-    wheel.rotation.z=-steer*.35;
-    traffic.forEach(car=>{
-      car.position.z+=speed*.012+.08;
-      if(car.position.z>12){
-        car.position.z=-130-Math.random()*50;
-        car.position.x=[-4,-2,2,4,0][Math.floor(Math.random()*5)];
-      }
-    });
-    speedText.textContent=Math.round(speed);
-  }
-  renderer.render(scene,camera);
+function resize(){if(!renderer||!camera)return;const c=$('bus-canvas'),w=c.clientWidth,h=c.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+function loop(now){requestAnimationFrame(loop);if(!renderer)return;const dt=Math.min((now-lastTime)/1000,.05);lastTime=now;
+ if(active){const target=boost?400:180;if(gas)speed+=42*dt;else speed-=12*dt;if(brake)speed-=75*dt;speed=Math.max(0,Math.min(target,speed));distance+=speed*dt/3600*12;offset=Math.max(-5,Math.min(5,offset+steer*dt*(1.4+speed/70)));camera.position.x+=(offset*.28-camera.position.x)*.08;camera.lookAt(camera.position.x*.35,1,-18);$('speedValue').textContent=Math.round(speed);$('distanceValue').textContent=distance.toFixed(1);
+ traffic.forEach(car=>{car.position.z+=speed*dt*.075;if(car.position.z>9){car.position.z=-190-Math.random()*60;car.position.x=[-5,-2,2,5][Math.floor(Math.random()*4)]}});
+ if(stationIndex<4&&distance>=stationMarks[stationIndex]){active=false;speed=0;$('stationTitle').textContent='محطة '+stations[stationIndex];$('stationText').textContent='وصلت إلى '+stations[stationIndex]+'. خذ استراحة قصيرة ثم تابع مسارك إلى الطائف.';$('stationBox').classList.add('show');$('stationValue').textContent=stations[stationIndex]}
+ }
+ renderer.render(scene,camera)
 }
-
-function startGame(){
-  game.style.display='block';
-  active=true;
-  resize();
-}
-document.querySelector('#guide button').addEventListener('click',startGame);
-animate();
+function hold(id,down,up){const el=$(id);el.addEventListener('pointerdown',e=>{e.preventDefault();down()});['pointerup','pointerleave','pointercancel'].forEach(t=>el.addEventListener(t,up))}
+hold('gasBtn',()=>gas=true,()=>gas=false);hold('brakeBtn',()=>brake=true,()=>brake=false);hold('leftBtn',()=>steer=-1,()=>{if(steer===-1)steer=0});hold('rightBtn',()=>steer=1,()=>{if(steer===1)steer=0});hold('boostBtn',()=>boost=true,()=>boost=false);
+window.addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key.toLowerCase()==='w')gas=true;if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')brake=true;if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')steer=-1;if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')steer=1;if(e.code==='Space')boost=true});
+window.addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key.toLowerCase()==='w')gas=false;if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')brake=false;if(['ArrowLeft','ArrowRight','a','d'].includes(e.key))steer=0;if(e.code==='Space')boost=false});
+$('resumeBtn').addEventListener('click',()=>{stationIndex++;$('stationBox').classList.remove('show');$('stationValue').textContent=stationIndex<4?stations[stationIndex]:'الطريق إلى الطائف';if(stationIndex>=4){$('stationTitle').textContent='وصلت إلى الطائف';$('stationText').textContent='أكملت المحطات الأربع بنجاح! انتقل إلى السينما عندما تكون جاهزًا.';$('stationBox').classList.add('show');$('resumeBtn').textContent='إنهاء الرحلة';$('resumeBtn').onclick=()=>{$('stationBox').classList.remove('show');showScreen('cinemaScreen')}}else{active=true}});
+$('hornBtn').addEventListener('click',()=>{try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='sawtooth';osc.frequency.value=210;gain.gain.value=.08;osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.22);osc.onended=()=>ctx.close()}catch(e){}});
 </script>
-
 </body>
 </html>
