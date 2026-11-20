@@ -96,8 +96,16 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
  <section id="identity" class="screen">
   <div class="panel">
    <div class="steps"><span class="step current">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step">4 · الدعوة</span></div>
-   <h2>تسجيل دخول المشارك</h2>
-   <p class="muted">أكمل بياناتك في الخانات التالية لتسجيل مشاركتك في الرحلة.</p>
+   <h2>اختر نوع الدخول</h2>
+   <p class="muted">اختر الفئة المناسبة للمتابعة.</p>
+   <div class="participants" id="roleChoices">
+    <button type="button" class="person" data-role="student"><div class="avatar">🎓</div><b>دخول الطالب</b><small>تسجيل ومتابعة تجربة الرحلة</small></button>
+    <button type="button" class="person" data-role="teacher"><div class="avatar">👨‍🏫</div><b>دخول المعلم</b><small>مسار خاص بالمعلمين</small></button>
+    <button type="button" class="person" data-role="supervisor"><div class="avatar">🛡️</div><b>دخول المشرف</b><small>لوحة إدارة التسجيلات</small></button>
+   </div>
+   <div id="registrationFields" class="hidden">
+   <h2 id="roleHeading">تسجيل الطالب</h2>
+   <p class="muted">أكمل بياناتك في الخانات التالية.</p>
    <label class="field" for="fullName">اسمك الثلاثي</label>
    <input id="fullName" type="text" autocomplete="name" maxlength="80" placeholder="اكتب اسمك الثلاثي" style="width:100%;padding:14px;border-radius:8px;border:1px solid #526078;background:#080f1b;color:white">
    <label class="field" for="kunya">الكنية</label>
@@ -105,7 +113,7 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
    <label class="field" for="phone">رقم الجوال</label>
    <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05XXXXXXXX">
    <label style="display:flex;gap:9px;align-items:flex-start;text-align:right;margin-top:14px;color:#d6dce5;line-height:1.8"><input id="dataConsent" type="checkbox" style="margin-top:6px"> أوافق على إرسال اسمي وكنيتي ورقم جوالي إلى منظّم الرحلة لغرض تسجيل المشاركة والتواصل بشأن الرحلة.</label><p class="note">لن يتم حفظ البيانات دون موافقتك. هذه خطوة تسجيل وليست تحققًا من ملكية الرقم؛ لا يوجد رمز SMS في النسخة الحالية. يجب أن يكون جمع بيانات المشاركين بموافقتهم وموافقة ولي الأمر عند الحاجة.</p>
-   <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button id="confirmIdentity" disabled>تسجيل ومتابعة</button></div>
+   <div class="actions"><button class="secondary" id="backLanding">رجوع</button><button class="secondary" id="changeRole" type="button">تغيير نوع الدخول</button><button id="confirmIdentity" disabled>تسجيل ومتابعة</button></div></div>
    <p id="identityMessage" class="note" role="status"></p>
   </div>
  </section>
@@ -152,11 +160,20 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
 
 <script type="module">
 const $=id=>document.getElementById(id);
-let selected=null,selectedSeat=null,phoneValue='';
+let selected=null,selectedSeat=null,phoneValue='',selectedRole='student';
 const screens=['identity','gameScreen','cinemaScreen','inviteScreen'];
 function showScreen(id){$('landing').style.display=id==='landing'?'block':'none';screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
 $('beginBtn').addEventListener('click',()=>showScreen('identity'));
 $('backLanding').addEventListener('click',()=>showScreen('landing'));
+document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>{
+ selectedRole=button.dataset.role;
+ if(selectedRole==='supervisor'){window.location.href='/admin.html';return}
+ $('roleChoices').classList.add('hidden');
+ $('registrationFields').classList.remove('hidden');
+ $('roleHeading').textContent=selectedRole==='teacher'?'تسجيل دخول المعلم':'تسجيل دخول الطالب';
+ $('confirmIdentity').textContent=selectedRole==='teacher'?'تسجيل المعلم ومتابعة':'تسجيل ومتابعة';
+}));
+$('changeRole').addEventListener('click',()=>{$('registrationFields').classList.add('hidden');$('roleChoices').classList.remove('hidden');$('identityMessage').textContent='';});
 $('confirmIdentity').disabled=false;
 $('confirmIdentity').addEventListener('click',async()=>{
  const fullName=$('fullName').value.trim();
@@ -168,7 +185,7 @@ $('confirmIdentity').addEventListener('click',async()=>{
  if(!$('dataConsent').checked){$('identityMessage').textContent='يرجى الموافقة على استخدام البيانات قبل التسجيل.';return}
  selected={name:fullName,kunya};
  $('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
- try{const response=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fullName,kunya,phone:phoneValue,consent:true})});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'تعذر التسجيل');$('identityMessage').textContent='تم تسجيلك بنجاح. أهلاً بك!';showScreen('gameScreen');startGame();}
+ try{const response=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fullName,kunya,phone:phoneValue,consent:true,role:selectedRole})});const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'تعذر التسجيل');$('identityMessage').textContent='تم تسجيلك بنجاح. أهلاً بك!';showScreen('gameScreen');startGame();}
  catch(error){$('identityMessage').textContent=error.message||'تعذر الاتصال بالخادم. حاول لاحقًا.';}
  finally{$('confirmIdentity').disabled=false;}
 });
