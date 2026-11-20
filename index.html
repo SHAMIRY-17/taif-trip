@@ -227,6 +227,19 @@ footer{background:#070b12;color:#8995a5}
 #landing .card p{max-width:230px}
 @media(max-width:520px){#landing .cards{gap:11px}#landing .card{padding:15px 10px}#landing .card h3{font-size:16px}#landing .card p{font-size:12px}.poetry-grid{gap:6px 12px}.poetry-cell{min-height:46px;font-size:13px}.hero-poetry{padding:17px 8px}.taif-teasers{gap:7px;margin-top:17px}.teaser,.teaser:first-child{min-height:82px}.teaser img,.teaser:first-child img{min-height:82px}.teaser span{font-size:10px;right:7px;bottom:7px}}
 
+/* Refined invitation note and flowing six-line poetry */
+.poetry-grid{row-gap:8px;column-gap:30px}
+.poetry-cell{min-height:39px;font-size:clamp(13px,1.8vw,16px);letter-spacing:0}
+.poetry-cell:nth-child(5),.poetry-cell:nth-child(6){color:#f5d99c}
+.invite-cover{position:relative;overflow:hidden;padding:42px 30px 36px;border-radius:26px;border:1px solid #e5c77e;background:radial-gradient(ellipse at 50% -5%,#56647a 0,#24364d 38%,#0a111d 78%);box-shadow:0 28px 85px #000b,inset 0 0 0 1px #fff2,inset 0 0 0 8px #d8b66f0d}
+.invite-cover:before,.invite-cover:after{content:"✦  ✧  ✦";display:block;color:#d9b66f;letter-spacing:13px;font-size:12px;text-shadow:0 0 18px #d9b66f88}
+.invite-cover:before{margin-bottom:18px}.invite-cover:after{margin-top:22px}
+.invite-kicker{letter-spacing:4px;color:#f3dba8}
+.invite-message{max-width:570px;margin:0 auto;color:#f7f0df;line-height:2.15;font-size:clamp(15px,2vw,18px)}
+.invite-whatsapp-note{max-width:620px;margin:20px auto 0;padding:15px 18px;border-block:1px solid #d8b66f88;color:#f1dcae;line-height:2;font-size:14px;background:linear-gradient(90deg,transparent,#d8b66f0b,transparent)}
+.invite-whatsapp-note strong{color:#f7d78e}
+@media(max-width:520px){.poetry-grid{gap:5px 10px}.poetry-cell{font-size:12px;min-height:38px}.invite-cover{padding:30px 15px}.invite-whatsapp-note{font-size:13px;padding:12px 8px}}
+
 </style>
 </head>
 <body>
@@ -246,6 +259,7 @@ footer{background:#070b12;color:#8995a5}
      <div class="poetry-grid">
       <div class="poetry-cell">من جدةٍ نبدأ، ووجهتنا الطايف</div><div class="poetry-cell">والورد والضباب يروون السوالف</div>
       <div class="poetry-cell">نمشي رفقةٍ، والفرح دربٍ يجمعنا</div><div class="poetry-cell">وتبقى ليالينا ذكرى ما تفارقنا</div>
+      <div class="poetry-cell">وعنواننا «تحابّوا»؛ بالمودّة نلتقي</div><div class="poetry-cell">وبطيب الأخوّة أجملَ العمر نرتقي</div>
      </div>
     </div>
     <div class="taif-teasers" aria-label="لمحات تشويقية عن الرحلة">
@@ -332,9 +346,10 @@ footer{background:#070b12;color:#8995a5}
  <section id="inviteScreen" class="screen">
   <div class="panel">
    <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step current">3 · الدعوة</span></div>
-   <div class="invite-cover"><div class="invite-kicker">دعوة خاصة</div><div class="invite-emblem">✦</div><h2>رحلة الطائف</h2><p>موعدنا مع أيامٍ استثنائية</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف!</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
-   <div class="actions"><button id="shareWhatsApp">مشاركة الدعوة عبر واتساب</button><button class="secondary" id="copyInvite">نسخ نص الدعوة</button><button class="secondary" id="restart">العودة للبداية</button></div>
-   <p class="note">زر واتساب يفتح تطبيق واتساب برسالة جاهزة لتراجعها وترسلها بنفسك. لا يتم إرسال أي رسالة دون ضغطك على إرسال.</p>
+   <div class="invite-cover"><div class="invite-kicker">بطاقة ترحيبية</div><div class="invite-emblem">✦</div><h2>أهلًا بك في رحلة الطائف</h2><p>وجودك يكمّل فرحتنا… والتحابّ يجمعنا</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف! يسعدنا وجودك معنا في رحلة تجمعنا بالمودّة والأخوّة والذكريات الجميلة.</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
+   <div class="invite-whatsapp-note">📱 <strong>انتظر دعوتك الرسمية على واتساب</strong><br>ستصلك الدعوة الخاصة بك على رقم الجوال المسجّل، وتتضمن تفاصيل الرحلة ورابط دعوتك الشخصية.</div>
+   <div class="actions"><button class="secondary" id="restart">العودة للبداية</button></div>
+   <p class="note">هذه بطاقة ترحيبية داخل الموقع، وليست الدعوة الرسمية. إرسال الدعوات تلقائيًا عبر واتساب يحتاج تفعيل الربط الرسمي قبل الإطلاق.</p>
   </div>
  </section>
 </main>
@@ -385,7 +400,7 @@ $('watchMovie').addEventListener('click',()=>{$('hallScreenTitle').textContent='
 $('experienceInvite').addEventListener('click',showInvite);
 function buildHallSeats(){const host=$('hallSeats');host.innerHTML='';[{t:'A',n:5},{t:'B',n:7},{t:'C',n:9},{t:'D',n:11}].forEach(r=>{const line=document.createElement('div');line.className='hall-row hall-row-'+r.t;for(let i=1;i<=r.n;i++){const chair=document.createElement('span');chair.className='hall-chair'+(selectedSeat===r.t+i?' destination':'');line.appendChild(chair)}host.appendChild(line)})}
 function walkGuest(){const guest=$('hallGuest');guest.classList.remove('walking','seated');guest.querySelector('.guest-popcorn').classList.remove('popcorn');guest.style.left='7%';guest.style.top='77%';$('guestCaption').textContent='دخلت القاعة… جاري التوجه إلى '+selectedSeat;$('watchMovie').disabled=true;$('experienceInvite').disabled=true;const tier=selectedSeat.charAt(0),num=Number(selectedSeat.slice(1)),counts={A:5,B:7,C:9,D:11},ri={A:0,B:1,C:2,D:3}[tier],x=38+(num-1)/(counts[tier]-1)*48,y=34+ri*12;requestAnimationFrame(()=>{guest.classList.add('walking');guest.style.left=x+'%';guest.style.top=y+'%'});setTimeout(()=>{guest.classList.remove('walking');guest.classList.add('seated');guest.querySelector('.guest-popcorn').classList.add('popcorn');$('guestCaption').textContent='وصلت إلى '+selectedSeat+'… تفضل بالجلوس 🍿';$('watchMovie').disabled=false},2700)}
-function showInvite(){if(!selected)selected={name:'معاينة',kunya:'أبو سعود'};const safeKunya=String(selected.kunya).replace(/[&<>\"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));$('inviteText').innerHTML='<strong>إلى '+safeKunya+' العزيز،</strong><br>يسعدنا دعوتك لمشاركتنا رحلة الطائف؛ رحلة استثنائية بين جمال الجبال وروعة الأجواء، وأيام نملؤها بالمغامرة والأنشطة والضحكات والذكريات الجميلة.<br><br><strong>كن على الموعد… فالحكاية أجمل بوجودك.</strong>'+(selectedSeat?'<br><small>مقعدك المختار في السينما: '+selectedSeat+'</small>':'');showScreen('inviteScreen')}
+function showInvite(){if(!selected)selected={name:'معاينة',kunya:'ضيفنا'};const safeKunya=String(selected.kunya).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));$('inviteText').innerHTML='<strong>يا '+safeKunya+'، مرحبًا بك!</strong><br>يسرّنا انضمامك إلينا في رحلة الطائف؛ أيامٌ تجمعنا بالمودّة والأخوّة، وتملؤها المغامرة والضحكات والذكريات الجميلة.<br><br><strong>وجودك يسعدنا، وعنوان جمعتنا: تحابّوا.</strong>'+(selectedSeat?'<br><small>مقعدك المختار في السينما: '+selectedSeat+'</small>':'');showScreen('inviteScreen')}
 $('shareWhatsApp').addEventListener('click',()=>window.open('https://wa.me/?text='+encodeURIComponent($('inviteText').textContent),'_blank','noopener'));
 $('copyInvite').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('inviteText').textContent);$('copyInvite').textContent='تم النسخ ✓'}catch(e){$('copyInvite').textContent='تعذر النسخ؛ حدّد النص وانسخه'}});
 $('restart').addEventListener('click',()=>{selected=null;selectedSeat=null;showScreen('landing')});
