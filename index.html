@@ -154,6 +154,30 @@ input[type=tel],input[type=text],input[type=password]{border-radius:12px!importa
 footer{background:#070b12;color:#8995a5}
 @media(max-width:600px){.content{padding:34px 18px;border-radius:22px}.hero{min-height:74vh}.card{padding:23px 17px}}
 
+
+/* New Taif landing, cinema seating and invitation */
+.hero-poetry{margin:22px auto 28px;padding:15px 20px;max-width:590px;border-block:1px solid #d8b66f55;color:#f0d9a9;line-height:2;font-size:17px}
+.hero-poetry p{margin:5px 0}.hero-poetry small{font-size:10px;color:#9eabbc}
+.movie-theater{margin:25px auto 8px;max-width:900px;padding:30px 18px 38px;background:radial-gradient(ellipse at 50% 0%,#34475f,#121e30 48%,#080d16 100%);border:1px solid #d7b66d88;border-radius:28px;box-shadow:inset 0 0 90px #000d,0 22px 65px #000a}
+.movie-screen{height:130px;max-width:720px;margin:0 auto 35px;border:5px solid #d5b36f;border-bottom-width:10px;border-radius:12px 12px 35% 35%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(140deg,#283f5c,#080e18);box-shadow:0 15px 55px #d8b66f35,0 35px 35px -28px #fff8;color:#f3dba8;letter-spacing:4px;font-size:22px}
+.movie-screen small{font-size:11px;letter-spacing:2px;color:#b7c4d5;margin-top:7px}
+.movie-theater .seat-rows{display:grid;gap:22px;max-width:820px;margin:0 auto}
+.movie-theater .seat-row{display:block;text-align:center}
+.movie-theater .row-label{display:flex;justify-content:space-between;align-items:center;max-width:740px;margin:0 auto 10px;padding:0 8px;letter-spacing:0;color:#f0d9aa}
+.movie-theater .row-label span{font-size:12px;color:#d9c18f}
+.movie-theater .seat-line{display:grid;grid-template-columns:repeat(var(--seat-count),minmax(0,1fr));gap:clamp(4px,1.5vw,12px);max-width:740px;margin:auto}
+.movie-theater .seat{width:100%;min-width:0;min-height:48px;padding:8px 1px;border-radius:12px 12px 7px 7px;position:relative}
+.movie-theater .seat:after{content:"";position:absolute;left:17%;right:17%;bottom:5px;height:3px;border-radius:5px;background:#ffffff55}
+.movie-theater .tier-A .seat{min-height:58px;border-radius:15px 15px 8px 8px;box-shadow:0 0 17px #e7c87555,inset 0 -6px 0 #76521c}
+.movie-theater .tier-B .seat{background:linear-gradient(145deg,#e6edf5,#78899e);color:#17202d}
+.movie-theater .tier-C .seat{background:linear-gradient(145deg,#d49b62,#744321);color:#fff1df}
+.movie-theater .tier-D .seat{background:linear-gradient(145deg,#697487,#303b4d);color:#fff}
+.movie-theater .seat:disabled{opacity:.42}
+.invite-cover{max-width:720px;margin:25px auto;padding:38px 28px;border:1px solid #e5c77e;border-radius:24px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#41516a,#17263a 48%,#090f1b 100%);box-shadow:0 25px 80px #000a,inset 0 0 0 7px #d8b66f12,inset 0 0 50px #0007}
+.invite-kicker{color:#edcf91;letter-spacing:5px;font-size:13px}.invite-emblem{font-size:38px;color:#f1d59b;margin:15px}.invite-cover h2{font-size:clamp(34px,7vw,52px);margin:8px;color:#f3dca9}.invite-cover>p{color:#d4c39f}.invite-divider{height:1px;max-width:330px;margin:24px auto;background:linear-gradient(90deg,transparent,#e6c77e,transparent)}
+.invite-message{color:#f1eadb;line-height:2.3;font-size:17px}.invite-footer{margin-top:28px;color:#d7b66d;letter-spacing:2px;font-size:12px}
+@media(max-width:600px){.hero-poetry{font-size:14px;padding:12px 8px}.movie-theater{padding:24px 8px}.movie-screen{height:100px;margin-bottom:28px}.movie-theater .seat{min-height:40px;font-size:11px}.movie-theater .tier-A .seat{min-height:46px}.invite-cover{padding:28px 16px}}
+
 </style>
 </head>
 <body>
@@ -166,9 +190,10 @@ footer{background:#070b12;color:#8995a5}
  <div id="landing">
   <div class="hero">
    <div class="content">
-    <div class="eyebrow">A PREMIUM INTERACTIVE EXPERIENCE</div>
-    <h1>رحلة إلى <span>الطائف</span></h1>
-    <p class="description">رحلة استثنائية تجمع بين المغامرة والترفيه، وتجربة تفاعلية نصنع فيها ذكريات جميلة من جدة إلى الطائف.</p>
+    <div class="eyebrow">من جدة… إلى قمم الورد والضباب</div>
+    <h1>رحلة <span>الطائف</span></h1>
+    <p class="description">بين الجبال والغيوم، وبين عبق الورد وجمال الطبيعة، نأخذكم في رحلة استثنائية صُممت لتكون أكثر من مجرد نزهة؛ أيام من المغامرة، والتحديات، والضحكات، والذكريات التي تبقى.</p>
+    <div class="hero-poetry"><p>يا طائفَ الوردِ يا سحرًا نُسافرُهُ<br>وفي رُباكِ يحلو الشوقُ والسَّمَرُ</p><p>بينَ الغيومِ وجبالِ الحُسنِ موعدُنا<br>وفي رحابِكِ للأحبابِ مُدَّخَرُ</p><small>أبيات ترحيبية صيغت خصيصًا للموقع</small></div>
     <div class="actions"><button id="beginBtn">ابدأ المغامرة</button><button type="button" class="secondary" id="previewCinemaBtn">معاينة السينما</button><button type="button" class="secondary" id="previewInviteBtn">معاينة الدعوة</button></div>
    </div>
   </div>
@@ -215,10 +240,12 @@ footer{background:#070b12;color:#8995a5}
  <section id="cinemaScreen" class="screen">
   <div class="panel">
    <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step current">2 · السينما</span><span class="step">3 · الدعوة</span></div>
-   <h2>السينما الافتراضية</h2><p class="muted" id="cinemaWelcome">أهلًا بك في قاعة العرض الخاصة برحلة الطائف.</p>
-   <div class="cinema-layout">
-    <div class="cinema-screen"><div><div style="font-size:34px">🎬</div><b>TAIF TRIP CINEMA</b><p>شاشة العرض</p></div></div>
-    <div><b>اختر مقعدك</b><div class="seats" id="seatGrid"></div><p id="seatStatus" class="note">لم يتم اختيار مقعد بعد.</p></div>
+   <h2>قاعة سينما رحلة الطائف</h2><p class="muted" id="cinemaWelcome">اختر مقعدك من خريطة القاعة؛ المقاعد الأمامية أقرب للشاشة، ولكل فئة تصميمها وسعرها.</p>
+   <div class="cinema-room movie-theater">
+    <div class="movie-screen"><span>TAIF TRIP</span><small>شاشة العرض</small></div>
+    <div class="tier-legend"><span>💎 A ألماسي · 10,000 ريال</span><span>🥈 B فضي · 150 ريال</span><span>🥉 C برونزي · 120 ريال</span><span>◼ D عادي · 90 ريال</span></div>
+    <div class="seat-rows" id="seatGrid"></div>
+    <p id="seatStatus" class="note">لم يتم اختيار مقعد بعد.</p>
    </div>
    <label class="field" for="videoFile">ملف إعلان الرحلة (من جهاز المنظّم)</label><input id="videoFile" type="file" accept="video/*" style="max-width:100%">
    <video id="adVideo" controls playsinline class="hidden"></video>
@@ -229,8 +256,7 @@ footer{background:#070b12;color:#8995a5}
  <section id="inviteScreen" class="screen">
   <div class="panel">
    <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step current">3 · الدعوة</span></div>
-   <h2>دعوتك الخاصة</h2><p class="muted">تُنشأ الرسالة باسم الكنية التي اخترتها. لن تُرسل تلقائيًا؛ يمكنك مراجعتها ثم مشاركتها عبر واتساب.</p>
-   <div class="invite-card" id="inviteText">يا مرحبًا بك في رحلة الطائف!</div>
+   <div class="invite-cover"><div class="invite-kicker">دعوة خاصة</div><div class="invite-emblem">✦</div><h2>رحلة الطائف</h2><p>موعدنا مع أيامٍ استثنائية</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف!</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
    <div class="actions"><button id="shareWhatsApp">مشاركة الدعوة عبر واتساب</button><button class="secondary" id="copyInvite">نسخ نص الدعوة</button><button class="secondary" id="restart">العودة للبداية</button></div>
    <p class="note">زر واتساب يفتح تطبيق واتساب برسالة جاهزة لتراجعها وترسلها بنفسك. لا يتم إرسال أي رسالة دون ضغطك على إرسال.</p>
   </div>
@@ -277,19 +303,22 @@ $('previewCinemaBtn').addEventListener('click',()=>{selected={name:'معاينة
 $('previewInviteBtn').addEventListener('click',()=>{selected={name:'معاينة',kunya:'أبو سعود'};showInvite()});
 $('backGame').addEventListener('click',()=>showScreen('identity'));
 $('toInvite').addEventListener('click',showInvite);
-function showInvite(){if(!selected)selected={name:'معاينة',kunya:'أبو سعود'};$('inviteText').textContent='يا '+selected.kunya+'، يا مرحبًا بك في رحلة الطائف! جهّز نفسك ليوم مليء بالمغامرة والأنشطة والذكريات الجميلة. موعدنا على خير، ونسأل الله أن يجمعنا على المحبة والفرح.';showScreen('inviteScreen')}
+function showInvite(){if(!selected)selected={name:'معاينة',kunya:'أبو سعود'};$('inviteText').innerHTML='<strong>إلى '+selected.kunya+' العزيز،</strong><br>يسعدنا دعوتك لمشاركتنا رحلة الطائف؛ رحلة استثنائية بين جمال الجبال وروعة الأجواء، وأيام نملؤها بالمغامرة والأنشطة والضحكات والذكريات الجميلة.<br><br><strong>كن على الموعد… فالحكاية أجمل بوجودك.</strong>'+(selectedSeat?'<br><small>مقعدك المختار في السينما: '+selectedSeat+'</small>':'');showScreen('inviteScreen')}
 $('shareWhatsApp').addEventListener('click',()=>window.open('https://wa.me/?text='+encodeURIComponent($('inviteText').textContent),'_blank','noopener'));
 $('copyInvite').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('inviteText').textContent);$('copyInvite').textContent='تم النسخ ✓'}catch(e){$('copyInvite').textContent='تعذر النسخ؛ حدّد النص وانسخه'}});
 $('restart').addEventListener('click',()=>{selected=null;selectedSeat=null;showScreen('landing')});
 function renderSeats(preview=false){
  const seats=$('seatGrid');seats.innerHTML='';selectedSeat=null;$('toInvite').disabled=true;
- $('cinemaWelcome').textContent=preview?'هذه معاينة للسينما. اختر مقعدًا ثم انتقل لمعاينة الدعوة.':selected?.kunya?'مرحبًا '+selected.kunya+' — '+(selectedRole==='teacher'?'مقاعدك الألماسية مخصصة لك ضمن صف A.':'اختر مقعدك من الفئات المتاحة للطلاب.'):'اختر مقعدك في قاعة العرض.';
- for(const tier of ['A','B','C','D']){
-  const row=document.createElement('div');row.className='seat-row';const label=document.createElement('div');label.className='row-label';label.textContent={A:'A · DIAMOND',B:'B · SILVER',C:'C · BRONZE',D:'D · STANDARD'}[tier];row.appendChild(label);
-  for(let i=1;i<=5;i++){const id=tier+i,btn=document.createElement('button');btn.className='seat';btn.dataset.tier=tier;btn.textContent=id;
-   const allowed=selectedRole==='teacher'?tier==='A':tier!=='A';btn.disabled=!allowed;btn.title=!allowed?'مخصص للمعلمين':'المقعد '+id;
-   btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;$('seatStatus').textContent='تم اختيار '+id+' — '+({A:'المستوى الألماسي',B:'المستوى الفضي',C:'المستوى البرونزي',D:'المستوى العادي'}[tier]);$('toInvite').disabled=false});
-   row.appendChild(btn)}seats.appendChild(row)}
+ $('cinemaWelcome').textContent=preview?'معاينة القاعة: الصف A الأقرب للشاشة والأعلى سعرًا، ثم تتسع الصفوف كلما ابتعدت عن الشاشة وتنخفض الأسعار.':selected?.kunya?'مرحبًا '+selected.kunya+' — '+(selectedRole==='teacher'?'مقاعد الصف A الألماسية متاحة لك.':'اختر من الصفوف الفضية والبرونزية والعادية.'):'اختر مقعدك في قاعة العرض.';
+ const config=[{tier:'A',count:5,price:'10,000',label:'ألماسي',icon:'💎'},{tier:'B',count:7,price:'150',label:'فضي',icon:'🥈'},{tier:'C',count:9,price:'120',label:'برونزي',icon:'🥉'},{tier:'D',count:11,price:'90',label:'عادي',icon:'◼'}];
+ for(const item of config){
+  const row=document.createElement('div');row.className='seat-row tier-'+item.tier;row.style.setProperty('--seat-count',item.count);
+  const label=document.createElement('div');label.className='row-label';label.innerHTML='<b>الصف '+item.tier+' · '+item.icon+' '+item.label+'</b><span>'+item.price+' ريال</span>';row.appendChild(label);
+  const seatsLine=document.createElement('div');seatsLine.className='seat-line';
+  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.className='seat';btn.dataset.tier=item.tier;btn.textContent=i;btn.setAttribute('aria-label','المقعد '+id+' - '+item.label+' - '+item.price+' ريال');
+   const allowed=selectedRole==='teacher'?item.tier==='A':item.tier!=='A';btn.disabled=!allowed;btn.title=!allowed?'مخصص للمعلمين':'المقعد '+id+' · '+item.price+' ريال';
+   btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;$('seatStatus').textContent='تم اختيار المقعد '+id+' — '+item.label+' — '+item.price+' ريال';$('toInvite').disabled=false});
+   seatsLine.appendChild(btn)}row.appendChild(seatsLine);seats.appendChild(row)}
 }
 let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden')});
 </script>
