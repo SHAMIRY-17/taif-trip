@@ -85,5 +85,168 @@ footer{text-align:center;padding:25px;color:#888;border-top:1px solid #ffffff18}
 </div>
 </div>
 <footer>TAIF TRIP © 2026</footer>
+
+<div id="bus-game" style="display:none;position:fixed;inset:0;z-index:9999;background:#080d16;color:white;font-family:Tahoma,Arial;text-align:center">
+  <div style="padding:12px;background:#101a29;display:flex;justify-content:space-between">
+    <b>TAIF TRIP | BUS SIMULATOR</b>
+    <button onclick="document.getElementById('bus-game').style.display='none'">إغلاق</button>
+  </div>
+  <canvas id="bus-canvas" style="width:100%;height:65vh;display:block"></canvas>
+  <div style="padding:10px">
+    <div style="font-size:22px;color:#e7c77e"><span id="bus-speed">0</span> KM/H</div>
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:12px">
+      <button id="bus-left">◀ يسار</button>
+      <button id="bus-gas">تسارع</button>
+      <button id="bus-brake">فرامل</button>
+      <button id="bus-right">يمين ▶</button>
+      <button id="bus-boost">BOOST</button>
+    </div>
+    <p>استخدم الأسهم أو الأزرار للتحكم بالباص</p>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js';
+
+const game=document.getElementById('bus-game');
+const canvas=document.getElementById('bus-canvas');
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x101c2b);
+scene.fog=new THREE.Fog(0x101c2b,25,130);
+
+const camera=new THREE.PerspectiveCamera(65,1,0.1,300);
+camera.position.set(0,3,9);
+camera.lookAt(0,0,-12);
+
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x354052,2));
+const sun=new THREE.DirectionalLight(0xffe4b5,2);
+sun.position.set(-5,12,8);
+sun.castShadow=true;
+scene.add(sun);
+
+const road=new THREE.Mesh(new THREE.PlaneGeometry(14,250),new THREE.MeshStandardMaterial({color:0x252a32,roughness:0.9}));
+road.rotation.x=-Math.PI/2;
+road.position.z=-80;
+road.receiveShadow=true;
+scene.add(road);
+
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(300,300),new THREE.MeshStandardMaterial({color:0x18251e}));
+ground.rotation.x=-Math.PI/2;
+ground.position.y=-0.08;
+ground.position.z=-80;
+scene.add(ground);
+
+for(let z=-180;z<20;z+=12){
+  const line=new THREE.Mesh(new THREE.BoxGeometry(.16,.025,5),new THREE.MeshStandardMaterial({color:0xe9d9a6}));
+  line.position.set(0,.02,z);
+  scene.add(line);
+}
+
+for(let z=-180;z<20;z+=9){
+  for(const x of [-10,10]){
+    const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.18,.25,2,7),new THREE.MeshStandardMaterial({color:0x59422d}));
+    trunk.position.set(x,1,z);
+    scene.add(trunk);
+    const tree=new THREE.Mesh(new THREE.ConeGeometry(1.4,4,8),new THREE.MeshStandardMaterial({color:0x244b35}));
+    tree.position.set(x,3.5,z);
+    scene.add(tree);
+  }
+}
+
+const dash=new THREE.Mesh(new THREE.BoxGeometry(5,.55,1.2),new THREE.MeshStandardMaterial({color:0x30251e,roughness:.55}));
+dash.position.set(0,.8,1.4);
+scene.add(dash);
+
+const screen=new THREE.Mesh(new THREE.BoxGeometry(1.5,.38,.06),new THREE.MeshStandardMaterial({color:0x172c38,metalness:.4,roughness:.2}));
+screen.position.set(0,1.18,.78);
+scene.add(screen);
+
+const wheel=new THREE.Mesh(new THREE.TorusGeometry(.48,.09,12,32),new THREE.MeshStandardMaterial({color:0x171717,metalness:.4}));
+wheel.position.set(0,1.15,1.0);
+scene.add(wheel);
+
+const traffic=[];
+for(let i=0;i<5;i++){
+  const car=new THREE.Mesh(new THREE.BoxGeometry(1.8,.9,3),new THREE.MeshStandardMaterial({color:[0x20252d,0x8b2020,0xc0c0c0,0x173d62][i%4],metalness:.5,roughness:.3}));
+  car.position.set([-4,-2,2,4,0][i],.55,-25-i*27);
+  scene.add(car);
+  traffic.push(car);
+}
+
+let speed=0,steer=0,gas=false,brake=false,boost=false,active=false,offset=0;
+const speedText=document.getElementById('bus-speed');
+
+function hold(id,down,up){
+  const el=document.getElementById(id);
+  el.addEventListener('pointerdown',e=>{e.preventDefault();down()});
+  ['pointerup','pointerleave','pointercancel'].forEach(type=>el.addEventListener(type,up));
+}
+hold('bus-gas',()=>gas=true,()=>gas=false);
+hold('bus-brake',()=>brake=true,()=>brake=false);
+hold('bus-left',()=>steer=-1,()=>{if(steer===-1)steer=0});
+hold('bus-right',()=>steer=1,()=>{if(steer===1)steer=0});
+hold('bus-boost',()=>boost=true,()=>boost=false);
+
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowUp'||e.key==='w')gas=true;
+  if(e.key==='ArrowDown'||e.key==='s')brake=true;
+  if(e.key==='ArrowLeft'||e.key==='a')steer=-1;
+  if(e.key==='ArrowRight'||e.key==='d')steer=1;
+  if(e.code==='Space')boost=true;
+});
+window.addEventListener('keyup',e=>{
+  if(e.key==='ArrowUp'||e.key==='w')gas=false;
+  if(e.key==='ArrowDown'||e.key==='s')brake=false;
+  if(['ArrowLeft','ArrowRight','a','d'].includes(e.key))steer=0;
+  if(e.code==='Space')boost=false;
+});
+
+function resize(){
+  const w=canvas.clientWidth,h=canvas.clientHeight;
+  if(!w||!h)return;
+  renderer.setSize(w,h,false);
+  camera.aspect=w/h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize',resize);
+
+function animate(){
+  requestAnimationFrame(animate);
+  if(active){
+    if(gas)speed+=.45;
+    else speed-=.12;
+    if(brake)speed-=.8;
+    speed=Math.max(0,Math.min(boost?400:180,speed));
+    offset+=steer*.09*(speed/80+0.2);
+    offset=Math.max(-4,Math.min(4,offset));
+    camera.position.x+=(offset-camera.position.x)*.04;
+    camera.position.y=3+Math.min(speed/400,.2);
+    camera.lookAt(camera.position.x*.4,0,-12);
+    wheel.rotation.z=-steer*.35;
+    traffic.forEach(car=>{
+      car.position.z+=speed*.012+.08;
+      if(car.position.z>12){
+        car.position.z=-130-Math.random()*50;
+        car.position.x=[-4,-2,2,4,0][Math.floor(Math.random()*5)];
+      }
+    });
+    speedText.textContent=Math.round(speed);
+  }
+  renderer.render(scene,camera);
+}
+
+function startGame(){
+  game.style.display='block';
+  active=true;
+  resize();
+}
+document.querySelector('#guide button').addEventListener('click',startGame);
+animate();
+</script>
+
 </body>
 </html>
