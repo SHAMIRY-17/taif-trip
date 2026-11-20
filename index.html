@@ -206,16 +206,26 @@ footer{background:#070b12;color:#8995a5}
 @media(max-width:600px){.tablet-booking{padding:7px;border-width:5px;border-radius:20px}.tablet-booking .movie-theater{padding:18px 5px}.tablet-top,.tablet-bottom{font-size:9px;padding:6px}.immersive-hall{height:390px}.hall-door{width:17%;left:2%}.hall-screen{left:25%;width:53%}.hall-seats{left:25%;right:2%}.hall-guest{width:32px}.guest-head{width:21px;height:21px}.guest-body{width:29px;height:36px}.guest-caption{font-size:10px}}
 
 
-/* Landing refinements requested: short intro, blank four-part poetry frame, square feature cards */
-.hero-poetry{max-width:680px;margin:26px auto 0;padding:16px 18px;border:1px solid #d8b66f66;border-radius:18px;background:linear-gradient(145deg,#111d2dcc,#090f19dd);box-shadow:0 16px 40px #0006}
-.poetry-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px 24px}
-.poetry-cell{min-height:58px;display:flex;align-items:center;justify-content:center;border:0;border-bottom:1px solid #d8b66f55;border-radius:0;background:transparent;color:#f0d9a9;font-size:16px;letter-spacing:.2px}
-.poetry-cell:nth-child(odd){border-left:1px solid #d8b66f55}
+/* Landing poetry ribbon and Taif teaser gallery */
+.hero-poetry{position:relative;max-width:760px;margin:27px auto 25px;padding:22px 10px 20px;border:0;border-radius:0;background:transparent;box-shadow:none;color:#f5dfb0}
+.hero-poetry:before,.hero-poetry:after{content:"";display:block;width:min(88%,620px);height:1px;margin:0 auto;background:linear-gradient(90deg,transparent,#9b753c 12%,#f4d995 50%,#9b753c 88%,transparent);box-shadow:0 0 10px #d8b66f55}
+.hero-poetry:before{margin-bottom:15px}.hero-poetry:after{margin-top:15px}
+.poetry-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px 24px;position:relative}
+.poetry-cell{min-height:42px;display:flex;align-items:center;justify-content:center;border:0!important;border-radius:0;background:transparent;color:#f2dfb9;font-size:clamp(14px,2vw,17px);font-weight:500;letter-spacing:.15px;text-shadow:0 2px 12px #000;line-height:1.8}
+.hero-poetry .poetry-grid:before,.hero-poetry .poetry-grid:after{content:"✦";position:absolute;top:50%;transform:translateY(-50%);color:#d7b36e;font-size:11px;text-shadow:0 0 12px #d7b36e}
+.hero-poetry .poetry-grid:before{right:-4px}.hero-poetry .poetry-grid:after{left:-4px}
+.taif-teasers{display:grid;grid-template-columns:1.12fr 1fr 1fr;gap:12px;max-width:700px;margin:22px auto 4px}
+.teaser{position:relative;min-height:104px;overflow:hidden;border:1px solid #d9b66f88;border-radius:13px;background:#101a29;box-shadow:0 10px 24px #0007}
+.teaser img{width:100%;height:100%;min-height:104px;position:absolute;inset:0;object-fit:cover;opacity:.76;transition:transform .5s,opacity .3s}
+.teaser:hover img{transform:scale(1.06);opacity:.95}
+.teaser:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#050a12ef,transparent 78%)}
+.teaser span{position:absolute;z-index:1;bottom:9px;right:11px;color:#f4dfb0;font-size:12px;font-weight:bold;text-shadow:0 2px 7px #000}
+.teaser:first-child{min-height:116px}.teaser:first-child img{min-height:116px}
 #confirmIdentity:disabled{opacity:.48;cursor:not-allowed;filter:grayscale(.35)}
 #landing .cards{grid-template-columns:repeat(2,minmax(0,1fr));max-width:780px;margin:30px auto 0;gap:18px}
 #landing .card{aspect-ratio:1/1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;max-width:100%}
 #landing .card p{max-width:230px}
-@media(max-width:520px){#landing .cards{gap:11px}#landing .card{padding:15px 10px}#landing .card h3{font-size:16px}#landing .card p{font-size:12px}.poetry-cell{min-height:54px}}
+@media(max-width:520px){#landing .cards{gap:11px}#landing .card{padding:15px 10px}#landing .card h3{font-size:16px}#landing .card p{font-size:12px}.poetry-grid{gap:6px 12px}.poetry-cell{min-height:46px;font-size:13px}.hero-poetry{padding:17px 8px}.taif-teasers{gap:7px;margin-top:17px}.teaser,.teaser:first-child{min-height:82px}.teaser img,.teaser:first-child img{min-height:82px}.teaser span{font-size:10px;right:7px;bottom:7px}}
 
 </style>
 </head>
@@ -237,6 +247,11 @@ footer{background:#070b12;color:#8995a5}
       <div class="poetry-cell">من جدةٍ نبدأ، ووجهتنا الطايف</div><div class="poetry-cell">والورد والضباب يروون السوالف</div>
       <div class="poetry-cell">نمشي رفقةٍ، والفرح دربٍ يجمعنا</div><div class="poetry-cell">وتبقى ليالينا ذكرى ما تفارقنا</div>
      </div>
+    </div>
+    <div class="taif-teasers" aria-label="لمحات تشويقية عن الرحلة">
+     <div class="teaser"><img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=720&q=80" alt="حافلة سياحية على الطريق" loading="lazy"><span>رحلتنا تبدأ بالطريق 🚌</span></div>
+     <div class="teaser"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="مناظر جبلية وطبيعة" loading="lazy"><span>جبال الطائف والضباب</span></div>
+     <div class="teaser"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=600&q=80" alt="زهور ملونة" loading="lazy"><span>الورد وأجمل الذكريات</span></div>
     </div>
     <div class="actions"><button id="beginBtn">ادخل أجواء الرحلة ✦</button></div>
    </div>
