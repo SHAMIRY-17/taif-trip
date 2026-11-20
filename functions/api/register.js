@@ -6,12 +6,20 @@ export async function onRequestPost({request,env}){
  const kunya=String(body.kunya||"").trim().slice(0,60);
  const role=String(body.role||"student");
  const phone=String(body.phone||"").replace(/[\s-]/g,"");
+ const teacherCode=String(body.teacherCode||"");
  if(body.consent!==true)return json({success:false,message:"يلزم الموافقة على استخدام البيانات."},400);
  if(!["student","teacher"].includes(role))return json({success:false,message:"نوع الدخول غير صالح."},400);
  if(!name||!kunya||!/^05\d{8}$/.test(phone))return json({success:false,message:"تحقق من الاسم والكنية ورقم الجوال."},400);
+ if(role==="teacher"&&(!env.TEACHER_CODE||teacherCode!==env.TEACHER_CODE))return json({success:false,message:"رمز المعلمين غير صحيح."},401);
  try{
   await env.DB.prepare("CREATE TABLE IF NOT EXISTS participants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, kunya TEXT NOT NULL, phone TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'student', consent_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
   try{await env.DB.prepare("ALTER TABLE participants ADD COLUMN role TEXT NOT NULL DEFAULT 'student'").run()}catch(e){}
+  if(role==="teacher"){
+   const existing=await env.DB.prepare("SELECT id FROM participants WHERE role='teacher' AND phone=?1 LIMIT 1").bind(phone).first();
+   if(existing)return json({success:false,message:"هذا الرقم مسجل مسبقًا كحساب معلم. تواصل مع المنظّم إذا احتجت مساعدة."},409);
+   const count=await env.DB.prepare("SELECT COUNT(*) AS total FROM participants WHERE role='teacher'").first();
+   if(Number(count?.total||0)>=5)return json({success:false,message:"اكتمل عدد حسابات المعلمين الخمسة."},409);
+  }
   const result=await env.DB.prepare("INSERT INTO participants (name,kunya,phone,role,consent_at) VALUES (?1,?2,?3,?4,?5)").bind(name,kunya,phone,role,new Date().toISOString()).run();
   return json({success:true,id:result.meta?.last_row_id||null,message:"تم تسجيل المشاركة."},201);
  }catch(error){return json({success:false,message:"تعذر حفظ التسجيل في قاعدة البيانات."},500)}
