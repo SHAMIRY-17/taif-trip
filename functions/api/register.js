@@ -1,4 +1,11 @@
 function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store"}})}
+const TEACHER_CODE_SHA256="cac7380ba4df8f313641c78c7cb613a2a7b3e1a69e65bcc5417b61d1b67fb7d2";
+async function matchesTeacherCode(value){
+ const bytes=new TextEncoder().encode(value);
+ const digest=await crypto.subtle.digest("SHA-256",bytes);
+ const hex=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,"0")).join("");
+ return hex===TEACHER_CODE_SHA256;
+}
 export async function onRequestPost({request,env}){
  if(!env.DB)return json({success:false,message:"قاعدة البيانات غير مربوطة."},503);
  let body;try{body=await request.json()}catch{return json({success:false,message:"الطلب غير صالح."},400)}
@@ -10,7 +17,7 @@ export async function onRequestPost({request,env}){
  if(body.consent!==true)return json({success:false,message:"يلزم الموافقة على استخدام البيانات."},400);
  if(!["student","teacher"].includes(role))return json({success:false,message:"نوع الدخول غير صالح."},400);
  if(!name||!kunya||!/^05\d{8}$/.test(phone))return json({success:false,message:"تحقق من الاسم والكنية ورقم الجوال."},400);
- if(role==="teacher"&&(!env.TEACHER_CODE||teacherCode!==env.TEACHER_CODE))return json({success:false,message:"رمز المعلمين غير صحيح."},401);
+ if(role==="teacher"&&!(await matchesTeacherCode(teacherCode)))return json({success:false,message:"رمز المعلمين غير صحيح."},401);
  try{
   await env.DB.prepare("CREATE TABLE IF NOT EXISTS participants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, kunya TEXT NOT NULL, phone TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'student', consent_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
   try{await env.DB.prepare("ALTER TABLE participants ADD COLUMN role TEXT NOT NULL DEFAULT 'student'").run()}catch(e){}
