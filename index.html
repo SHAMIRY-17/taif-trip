@@ -1072,6 +1072,62 @@ img,video,canvas,iframe{max-width:100%}
  .site-header{width:100%!important;max-width:100%!important}
 }
 
+
+/* AGREED LANDING LAYOUT: photos frame the square at every viewport */
+#landing .hero{
+ position:relative!important;display:flex!important;align-items:center!important;
+ justify-content:center!important;min-height:740px!important;height:auto!important;
+ padding:70px 18px!important;overflow:hidden!important;
+}
+#landing .hero>.content{
+ position:relative!important;z-index:3!important;
+ width:min( min(42vw,540px), 88vw)!important;
+ height:min( min(42vw,540px), 88vw)!important;
+ aspect-ratio:1/1!important;flex:none!important;
+}
+#landing .hero>.taif-gallery{
+ position:absolute!important;inset:0!important;z-index:4!important;
+ display:block!important;width:100%!important;height:100%!important;
+ pointer-events:none!important;
+}
+#landing .hero .taif-photo{
+ position:absolute!important;display:block!important;margin:0!important;
+ overflow:hidden!important;
+}
+#landing .hero .photo-hada{
+ width:clamp(145px,17vw,220px)!important;height:clamp(112px,13vw,168px)!important;
+ right:4%!important;top:7%!important;left:auto!important;bottom:auto!important;
+}
+#landing .hero .photo-rose{
+ width:clamp(118px,14vw,178px)!important;height:clamp(155px,18vw,230px)!important;
+ left:4%!important;top:31%!important;right:auto!important;bottom:auto!important;
+}
+#landing .hero .photo-mist{
+ width:clamp(160px,18vw,235px)!important;height:clamp(108px,12vw,158px)!important;
+ right:7%!important;bottom:6%!important;left:auto!important;top:auto!important;
+}
+@media(min-width:521px) and (max-width:900px){
+ #landing .hero{min-height:650px!important;padding:65px 12px!important}
+ #landing .hero>.content{width:min(62vw,470px)!important;height:min(62vw,470px)!important}
+ #landing .hero .photo-hada{width:135px!important;height:105px!important;right:2%!important;top:3%!important}
+ #landing .hero .photo-rose{width:112px!important;height:145px!important;left:2%!important;top:35%!important}
+ #landing .hero .photo-mist{width:145px!important;height:100px!important;right:3%!important;bottom:3%!important}
+}
+@media(max-width:520px){
+ #landing .hero{min-height:570px!important;padding:82px 5px 72px!important}
+ #landing .hero>.content{
+  width:min(88vw,360px)!important;height:min(88vw,360px)!important;
+  padding:15px 12px!important;
+ }
+ #landing .hero .photo-hada{width:88px!important;height:68px!important;right:2%!important;top:7px!important}
+ #landing .hero .photo-rose{width:70px!important;height:96px!important;left:1%!important;top:42%!important}
+ #landing .hero .photo-mist{width:100px!important;height:70px!important;right:3%!important;bottom:7px!important}
+ #landing .hero .taif-photo figcaption{font-size:8px!important;right:6px!important;left:6px!important;bottom:5px!important}
+}
+/* The four discovery cards belong only to the landing screen. */
+#landing .cards-section{display:block}
+#landing[style*="display: none"]{display:none!important}
+
 </style>
 </head>
 <body>
@@ -1200,7 +1256,7 @@ img,video,canvas,iframe{max-width:100%}
 const $=id=>document.getElementById(id);
 let selected=null,selectedSeat=null,selectedRole='student';
 const screens=['identity','gameScreen','cinemaScreen','inviteScreen'];
-function showScreen(id){$('landing').style.display=id==='landing'?'block':'none';screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
+function showScreen(id){const isLanding=id==='landing';$('landing').style.display=isLanding?'block':'none';$('landing').setAttribute('aria-hidden',String(!isLanding));screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
 $('beginBtn').addEventListener('click',()=>showScreen('identity'));
 $('gameToCinema')?.addEventListener('click',()=>{showScreen('cinemaScreen');renderSeats()});
 $('backLanding').addEventListener('click',()=>showScreen('landing'));
