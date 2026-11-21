@@ -1240,6 +1240,53 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .journey-finished p{color:#F0F1ED;line-height:2}
 .journey-finished>strong{color:#E8D1A5}
 @media(max-width:600px){.tablet-booking{width:100%!important;aspect-ratio:4/3!important;border-width:5px!important;border-radius:20px!important;padding:6px!important}.tablet-booking .movie-theater{padding:8px 5px!important}.tablet-booking .movie-screen{width:90%!important;height:92px!important;min-height:92px!important;margin-bottom:8px!important}.tablet-booking .seat-rows{gap:10px!important}.tablet-booking .seat-line{gap:4px!important}.tablet-booking .seat{min-height:38px!important;padding:5px 1px!important}.tablet-top,.tablet-bottom{font-size:9px!important;padding:5px 7px!important}.pov-screen-frame{left:11%!important;width:78%!important;height:27%!important}.pov-touch-hint{font-size:10px!important}}
+
+/* Interactive landscape tablet + cinema snack checkout */
+.wallet-card{max-width:560px!important;min-height:230px!important;padding:22px 26px!important;border-radius:22px!important;background:linear-gradient(125deg,#182b3a,#3c5967 55%,#987c52)!important;border:1px solid #e1c995!important;box-shadow:0 20px 48px #151b1f88,inset 0 1px #ffffff44!important}
+.wallet-card:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 25%,#ffffff0c 48%,transparent 70%);pointer-events:none}
+.wallet-card-face{display:flex;align-items:center;justify-content:space-between;gap:14px;direction:ltr}
+.wallet-card-chip{width:46px;height:34px;border:1px solid #f0dfb9;border-radius:8px;background:linear-gradient(135deg,#e6d5a9,#9e895f);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.wallet-card-chip i{border:1px solid #6c6048;border-radius:5px}
+.wallet-contactless{font-size:27px;letter-spacing:-9px;transform:rotate(90deg);color:#f3e5c6;margin-right:8px}
+.wallet-card-number{direction:ltr;text-align:left;font:700 14px/1.4 monospace;letter-spacing:1.7px;color:#f2e6c9;margin:18px 0 10px}
+.wallet-name{font-size:20px!important;letter-spacing:.8px!important}
+.wallet-note{color:#f3e8d2!important}
+.tablet-booking{width:min(100%,1240px)!important;max-width:1240px!important;min-height:640px!important;aspect-ratio:16/10!important;padding:14px!important;border-width:8px!important;border-radius:34px!important;touch-action:pan-y pinch-zoom!important}
+.tablet-booking .movie-theater{min-height:0!important;overflow:auto!important;overscroll-behavior:contain!important;touch-action:pan-y!important}
+.tablet-booking .seat-rows{padding:8px 10px 16px!important}
+.tablet-booking .seat-line{gap:clamp(8px,1.5vw,16px)!important}
+.tablet-booking .seat{min-height:56px!important;font-size:15px!important;cursor:pointer!important;touch-action:manipulation!important}
+.tablet-booking .seat:active{transform:translateY(2px) scale(.97)!important}
+.tablet-top,.tablet-bottom{font-size:12px!important;padding:10px 18px!important}
+.snack-shop{max-width:1050px;margin:26px auto;padding:24px;border:1px solid #C5A880;border-radius:22px;background:linear-gradient(145deg,#51595C,#343B3E);box-shadow:0 20px 55px #20262977;color:#F1F1EC}
+.snack-heading{text-align:center;margin-bottom:20px}.snack-kicker{font-size:10px;letter-spacing:3px;color:#E2C99B}.snack-heading h3{font-size:clamp(22px,3vw,30px);color:#F0D7A8;margin:8px 0}.snack-heading p{color:#D2D7D5;margin:0}
+.snack-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.snack-item{display:flex;flex-direction:column;gap:12px;padding:18px;border:1px solid #BDA27B;border-radius:17px;background:linear-gradient(145deg,#60696C,#42494C)}
+.snack-emoji{font-size:38px}.snack-item strong{display:block;color:#F4DEB6;font-size:19px}.snack-item small{display:block;color:#D2D7D5;margin-top:5px}
+.snack-item label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#F0E5D0;font-size:13px}
+.snack-item select{min-width:100px;max-width:58%;padding:9px;border:1px solid #C5A880;border-radius:9px;background:#343B3E;color:#fff;font:inherit}
+.snack-checkout{margin-top:18px;padding:18px;border-radius:16px;background:#30383B;border:1px solid #C5A88077}
+.snack-total-line,.receipt-line{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.snack-total-line{font-size:18px;color:#F3E7D1}.snack-total-line strong{color:#F1D6A3;font-size:24px}
+.snack-checkout>p{color:#C4CBB8;font-size:12px;line-height:1.8}
+.snack-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.snack-receipt{margin:16px auto;padding:16px;max-width:620px;border:1px dashed #D8BD91;border-radius:13px;background:#41494C;color:#F5F0E6;line-height:2}
+.snack-receipt h4{margin:0 0 10px;color:#F1D6A3}.receipt-line{padding:5px 0;border-bottom:1px solid #ffffff18}.receipt-total{font-weight:800;color:#F1D6A3}
+#buySnacks:disabled{opacity:.45;cursor:not-allowed}
+#enterAuditorium{display:block;margin:14px auto 0}
+.pov-scene{touch-action:pan-y pinch-zoom!important;user-select:none;-webkit-user-select:none;cursor:grab}
+.pov-scene:active{cursor:grabbing}
+@media(max-width:760px){
+ .tablet-booking{min-height:590px!important;aspect-ratio:16/11!important;padding:8px!important;border-width:6px!important;border-radius:25px!important}
+ .tablet-booking .seat{min-height:49px!important;font-size:13px!important}
+ .snack-grid{grid-template-columns:1fr!important}
+ .snack-item{display:grid;grid-template-columns:auto 1fr;align-items:center}
+ .snack-item label{grid-column:1/-1}
+ .snack-item select{max-width:65%}
+ .wallet-card{min-height:215px!important;padding:18px!important}
+}
+@media(min-width:761px) and (max-width:1050px){.snack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.snack-item:last-child{grid-column:1/-1}}
+
 </style>
 </head>
 <body>
@@ -1323,10 +1370,14 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
    <h2>قاعة سينما رحلة الطائف</h2>
    <div class="wallet-card" id="walletCard">
     <div class="wallet-top"><span>TAIF TRIP · WALLET</span><span>بطاقة المحفظة الافتراضية</span></div>
-    <div class="wallet-chip">▦</div>
+    <div class="wallet-card-face">
+     <div class="wallet-card-chip" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+     <div class="wallet-contactless" aria-hidden="true">)))</div>
+     <div class="wallet-card-number">•••• &nbsp; •••• &nbsp; •••• &nbsp; 2026</div>
+    </div>
     <div class="wallet-name" id="walletName">اسم المشارك</div>
-    <div class="wallet-bottom"><span>رصيدك الافتراضي</span><strong><b id="walletBalance">1,000</b> ريال</strong></div>
-    <p class="wallet-note">رصيد تجريبي داخل الرحلة فقط، وليس بطاقة بنكية حقيقية.</p>
+    <div class="wallet-bottom"><span>الرصيد المتاح</span><strong><b id="walletBalance">1,000</b> ريال</strong></div>
+    <p class="wallet-note">محفظة افتراضية للرحلة — ليست بطاقة بنكية حقيقية ولا وسيلة دفع مصرفية.</p>
    </div>
 <p class="muted" id="cinemaWelcome">اختر مقعدك من خريطة القاعة؛ المقاعد الأمامية أقرب للشاشة، ولكل فئة تصميمها وسعرها.</p>
    <div class="tablet-booking">
@@ -1339,7 +1390,16 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
     </div>
     <div class="tablet-bottom"><span>اختر مقعدك المفضل</span><span>TAIF TRIP BOOKING</span></div>
    </div>
-   <div class="actions"><button class="secondary" id="backGame">العودة للعبة</button><button id="toInvite" disabled>تأكيد المقعد والدخول للقاعة</button></div>
+   <div class="actions"><button class="secondary" id="backGame">العودة للعبة</button><button id="toInvite" disabled>تأكيد المقعد والمتابعة للطلبات</button></div>
+   <div id="snackShop" class="snack-shop hidden">
+    <div class="snack-heading"><span class="snack-kicker">TAIF CINEMA · CONCESSIONS</span><h3>ماذا تريد أن تتناول قبل العرض؟</h3><p>اختر طلباتك، وشاهد الإجمالي قبل تأكيد الشراء.</p></div>
+    <div class="snack-grid">
+     <article class="snack-item"><div class="snack-emoji">🍿</div><div><strong>فشار</strong><small>اختر النكهة · 10 ريالات</small></div><label>النكهة<select id="popcornFlavor"><option value="جبن">جبن</option><option value="ملح">ملح</option><option value="كراميل">كراميل</option></select></label><label>الكمية<select id="popcornQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
+     <article class="snack-item"><div class="snack-emoji">🧀</div><div><strong>دوريتوس</strong><small>8 ريالات للعبوة</small></div><label>الكمية<select id="doritosQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
+     <article class="snack-item"><div class="snack-emoji">🥤</div><div><strong>سلاش كنزا</strong><small>8 ريالات للكوب</small></div><label>النكهة<select id="slushFlavor"><option value="كنزا كولا">كنزا كولا</option><option value="كنزا ليمون">كنزا ليمون</option><option value="كنزا حمضيات">كنزا حمضيات</option><option value="كنزا دايت">كنزا دايت</option></select></label><label>الكمية<select id="slushQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
+    </div>
+    <div class="snack-checkout"><div class="snack-total-line"><span>إجمالي الطلب</span><strong><b id="snackTotal">0</b> ريال</strong></div><p id="snackBalanceHint">سيتم الخصم من رصيد محفظتك الافتراضية بعد تأكيد الشراء.</p><div class="snack-actions"><button class="secondary" id="editSeatOrder">تعديل المقعد</button><button id="buySnacks">تأكيد الشراء والخصم</button></div><p id="snackMessage" class="note" role="status"></p><div id="snackReceipt" class="snack-receipt hidden"></div><button id="enterAuditorium" class="hidden">الدخول إلى قاعة السينما</button></div>
+   </div>
    <div id="cinemaExperience" class="cinema-experience hidden">
     <div class="experience-header"><span>قاعة سينما رحلة الطائف · قاعة واحدة للجميع</span><span id="experienceSeat">المقعد —</span></div>
     <div class="tier-route-note" id="tierRouteNote">اختر مقعدك لتظهر لك رحلة الوصول الخاصة بفئتك.</div>
@@ -1420,7 +1480,36 @@ $('enterJourney').addEventListener('click',()=>showScreen('gameScreen'));
 
 
 $('backGame').addEventListener('click',()=>showScreen('identity'));
-$('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('cinemaExperience').classList.remove('hidden');$('experienceSeat').textContent='مقعدك '+selectedSeat;buildPovHall();walkToSeat();$('cinemaExperience').scrollIntoView({behavior:'smooth',block:'start'})});
+$('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('snackShop').classList.remove('hidden');$('snackShop').scrollIntoView({behavior:'smooth',block:'center'});updateSnackTotal()});
+$('editSeatOrder').addEventListener('click',()=>{$('snackShop').classList.add('hidden');$('seatGrid').scrollIntoView({behavior:'smooth',block:'center'})});
+['popcornQty','doritosQty','slushQty','popcornFlavor','slushFlavor'].forEach(id=>$(id).addEventListener('change',updateSnackTotal));
+function getSnackOrder(){
+ const popcorn=Number($('popcornQty').value),doritos=Number($('doritosQty').value),slush=Number($('slushQty').value);
+ const lines=[];
+ if(popcorn)lines.push({name:'فشار '+$('popcornFlavor').value,qty:popcorn,unit:10,total:popcorn*10});
+ if(doritos)lines.push({name:'دوريتوس',qty:doritos,unit:8,total:doritos*8});
+ if(slush)lines.push({name:'سلاش '+$('slushFlavor').value,qty:slush,unit:8,total:slush*8});
+ return {lines,total:lines.reduce((sum,x)=>sum+x.total,0)};
+}
+function updateSnackTotal(){
+ const order=getSnackOrder();$('snackTotal').textContent=order.total.toLocaleString('en-US');
+ $('snackBalanceHint').textContent='رصيدك الحالي '+walletBalance.toLocaleString('en-US')+' ريال · الأسعار: فشار 10، دوريتوس 8، سلاش كنزا 8 ريالات.';
+ $('buySnacks').disabled=order.total===0;
+}
+$('buySnacks').addEventListener('click',()=>{
+ const order=getSnackOrder();
+ if(!order.total){$('snackMessage').textContent='اختر صنفًا واحدًا على الأقل.';return}
+ if(order.total>walletBalance){$('snackMessage').textContent='رصيدك غير كافٍ لإتمام الطلب. خفّض الكمية أو أضف رصيدًا من مكافآت الرحلة.';return}
+ walletBalance-=order.total;$('walletBalance').textContent=walletBalance.toLocaleString('en-US');
+ $('snackMessage').textContent='تم تسجيل الطلب وخصم قيمته من المحفظة الافتراضية.';
+ $('snackReceipt').innerHTML='<h4>فاتورة طلبك · المقعد '+selectedSeat+'</h4>'+order.lines.map(x=>'<div class="receipt-line"><span>'+x.name+' × '+x.qty+'</span><b>'+x.total+' ريال</b></div>').join('')+'<div class="receipt-line receipt-total"><span>الإجمالي المخصوم</span><b>'+order.total+' ريال</b></div><div class="receipt-line"><span>الرصيد المتبقي</span><b>'+walletBalance.toLocaleString('en-US')+' ريال</b></div>';
+ $('snackReceipt').classList.remove('hidden');$('buySnacks').disabled=true;$('enterAuditorium').classList.remove('hidden');
+});
+$('enterAuditorium').addEventListener('click',()=>{
+ $('snackShop').classList.add('hidden');$('cinemaExperience').classList.remove('hidden');
+ $('experienceSeat').textContent='مقعدك '+selectedSeat;buildPovHall();walkToSeat();
+ $('cinemaExperience').scrollIntoView({behavior:'smooth',block:'start'});
+});
 $('replayWalk').addEventListener('click',()=>{buildPovHall();walkToSeat()});
 $('watchMovie').addEventListener('click',()=>{$('povScreen').innerHTML='<span>الطائف… حكاية تبدأ الآن</span><small>استمتعوا بالعرض معًا</small>'; $('povViewerCaption').textContent='أنت جالس في '+selectedSeat+' وتشاهد الشاشة من زاويتك';$('experienceInvite').disabled=false});
 $('experienceInvite').addEventListener('click',showInvite);
@@ -1475,9 +1564,22 @@ function showInvite(){
  $('inviteText').innerHTML='<strong>يا '+safe+'، مرحبًا بك!</strong><br>يسرّنا انضمامك إلينا في رحلة الطائف؛ أيامٌ تجمعنا بالمودّة والأخوّة والذكريات الجميلة.<br><br><strong>وجودك يسعدنا، وعنوان جمعتنا: تحابّوا.</strong>'+(selectedSeat?'<br><small>مقعدك في السينما: '+selectedSeat+'</small>':'');
  showScreen('inviteScreen');
 }
-$('restart').addEventListener('click',()=>{selected=null;selectedSeat=null;showScreen('landing')});
+// لا يوجد زر عودة من شاشة نهاية الرحلة؛ نتجنب ربط عنصر غير موجود.
 
 let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden')});
+// Horizontal touch/trackpad dragging turns the first-person view; vertical swipes remain normal page scrolling.
+(()=>{
+ const scene=$('povScene');let startX=0,startY=0,lastX=0,dragging=false;
+ scene.addEventListener('pointerdown',e=>{startX=lastX=e.clientX;startY=e.clientY;dragging=true;scene.setPointerCapture?.(e.pointerId)});
+ scene.addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  const dx=e.clientX-lastX,dy=e.clientY-startY;
+  if(Math.abs(e.clientX-startX)>10&&Math.abs(e.clientX-startX)>Math.abs(dy)*1.15){
+   setPovLook(Math.max(-32,Math.min(32,povLook-dx*.22)));lastX=e.clientX;
+  }
+ });
+ const stop=()=>{dragging=false};scene.addEventListener('pointerup',stop);scene.addEventListener('pointercancel',stop);scene.addEventListener('lostpointercapture',stop);
+})();
 </script>
 </body>
 </html>
