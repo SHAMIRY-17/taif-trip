@@ -1360,7 +1360,9 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .ticket-cut{margin-top:12px;overflow:hidden;white-space:nowrap;color:var(--ticket-accent);letter-spacing:5px;text-align:center}
 @media(max-width:760px){.taif-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;width:92%!important;gap:9px!important}.taif-photo{height:125px!important}.taif-photo:first-child{grid-column:span 2;height:160px!important}.ticket-main{gap:10px}.ticket-main strong{font-size:15px}}
 </style>
-</head>
+<style>
+.wealth-dua{max-width:620px;margin:16px auto;padding:18px;border:1px solid #C5A880;border-radius:15px;background:linear-gradient(145deg,#35251b,#24170f);text-align:center;color:#F6EFE6}.wealth-dua strong{color:#E8D4B4}.wealth-dua p{font-size:18px;line-height:2;color:#fff6e9;margin:9px 0}.wealth-dua small{color:#D2B49C}
+</style></head>
 <body>
 <header class="site-header">
  <div class="header-partner"><div class="partner-mark">حفاظ الوحي</div><div class="partner-caption">رفقةٌ على الخير</div></div>
@@ -1509,7 +1511,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
  <section id="inviteScreen" class="screen">
   <div class="panel">
    <div class="invite-cover"><div class="invite-kicker">بطاقة ترحيبية</div><div class="invite-emblem">✦</div><h2>أهلًا بك في رحلة الطائف</h2><p>وجودك يكمّل فرحتنا… والتحابّ يجمعنا</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف! يسعدنا وجودك معنا في رحلة تجمعنا بالمودّة والأخوّة والذكريات الجميلة.</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
-   <div class="cash-only-note" id="cashOnlyNote"><span class="cash-icon">💵💸</span><strong>طريقة الدفع: كاش 💵</strong><p>وكما يقال: <b>الكاش ينهي النقاش! 😎💰</b></p><span class="cash-footnote">جهّز مبلغك نقدًا، ونلتقي على خير!</span></div>
+   <div class="cash-only-note" id="cashOnlyNote"><span class="cash-icon">💵💳</span><strong>طرق الدفع المتاحة</strong><p>الدفع كاش 💵 أو عبر الشبكة 💳، بحسب اعتماد المنظّم.</p><span class="cash-footnote">اختيار طريقة الدفع لا يُعدّ تأكيدًا لوصول المبلغ.</span></div><div class="wealth-dua"><strong>دعاء نبوي للرزق والغنى والبركة</strong><p>«اللهم إني أسألك الهدى والتقى والعفاف والغنى»</p><small>رواه مسلم في صحيحه (2721).</small></div>
    <div class="invite-whatsapp-note">📱 <strong>انتظر دعوتك الرسمية على واتساب</strong><br>ستصلك الدعوة الخاصة بك على رقم الجوال المسجّل، وتتضمن تفاصيل الرحلة ورابط دعوتك الشخصية.</div>
    
    <div class="journey-finished" role="status" aria-live="polite"><div class="finished-mark">✓</div><div class="finished-kicker">TAIF TRIP · THE END</div><h2>وصلت إلى نهاية الرحلة الرقمية</h2><p>شكرًا لمشاركتك معنا. انتهت خطوات الموقع، وباقي نلتقي على خير في الرحلة بإذن الله.</p><strong>ننتظر دعوتك الرسمية على واتساب.</strong></div><p class="note">هذه نهاية تجربة الموقع، ولا يوجد زر للعودة إلى الصفحة الرئيسية من هنا.</p>
@@ -1576,8 +1578,8 @@ function getSnackOrder(){
 }
 function updateSnackTotal(){
  const order=getSnackOrder();$('snackTotal').textContent=order.total.toLocaleString('en-US');
- $('snackBalanceHint').textContent='رصيدك الحالي '+walletBalance.toLocaleString('en-US')+' ريال · الأسعار بأسلوب أسعار السينما، وتظهر قيمة الحجم المختار في الفاتورة.';
- $('buySnacks').disabled=order.total===0;
+ $('snackBalanceHint').textContent=selectedRole==='teacher'?'ميزة المعلمين: جميع الأصناف مجانية بخصم 100٪.':'رصيدك الحالي '+walletBalance.toLocaleString('en-US')+' ريال · تظهر قيمة الحجم المختار في الفاتورة.';
+ $('buySnacks').disabled=order.lines.length===0;
 }
 $('buySnacks').addEventListener('click',()=>{
  const order=getSnackOrder();
