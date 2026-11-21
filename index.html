@@ -1242,7 +1242,13 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 @media(max-width:600px){.tablet-booking{width:100%!important;aspect-ratio:4/3!important;border-width:5px!important;border-radius:20px!important;padding:6px!important}.tablet-booking .movie-theater{padding:8px 5px!important}.tablet-booking .movie-screen{width:90%!important;height:92px!important;min-height:92px!important;margin-bottom:8px!important}.tablet-booking .seat-rows{gap:10px!important}.tablet-booking .seat-line{gap:4px!important}.tablet-booking .seat{min-height:38px!important;padding:5px 1px!important}.tablet-top,.tablet-bottom{font-size:9px!important;padding:5px 7px!important}.pov-screen-frame{left:11%!important;width:78%!important;height:27%!important}.pov-touch-hint{font-size:10px!important}}
 
 /* Interactive landscape tablet + cinema snack checkout */
-.wallet-card{max-width:560px!important;min-height:230px!important;padding:22px 26px!important;border-radius:22px!important;background:linear-gradient(125deg,#182b3a,#3c5967 55%,#987c52)!important;border:1px solid #e1c995!important;box-shadow:0 20px 48px #151b1f88,inset 0 1px #ffffff44!important}
+.wallet-card{max-width:590px!important;min-height:252px!important;padding:24px 30px!important;border-radius:25px!important;background:radial-gradient(ellipse at 88% 8%,#d2b77a33,transparent 34%),linear-gradient(125deg,#101c2b 0%,#263e51 48%,#826c4c 100%)!important;border:1px solid #e7d1a2!important;box-shadow:0 24px 58px #10182099,inset 0 1px #ffffff66!important;position:relative!important;isolation:isolate}
+.wallet-card:after{content:"";position:absolute;inset:8px;border:1px solid #f1dfba35;border-radius:18px;pointer-events:none;z-index:-1}
+.wallet-card .wallet-top{font-size:10px!important;letter-spacing:1.4px!important;color:#f0dfbd!important}
+.wallet-card-face{min-height:48px;align-items:center!important}
+.wallet-card-number{font-size:16px!important;letter-spacing:2.2px!important;text-shadow:0 2px 5px #0007}
+.wallet-bottom{border-top:1px solid #ffffff55!important}
+.wallet-bottom strong{font-size:25px!important;color:#ffe3a8!important;text-shadow:0 2px 8px #0006}
 .wallet-card:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 25%,#ffffff0c 48%,transparent 70%);pointer-events:none}
 .wallet-card-face{display:flex;align-items:center;justify-content:space-between;gap:14px;direction:ltr}
 .wallet-card-chip{width:46px;height:34px;border:1px solid #f0dfb9;border-radius:8px;background:linear-gradient(135deg,#e6d5a9,#9e895f);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
@@ -1298,6 +1304,15 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .tray-cup,.tray-popcorn,.tray-doritos{position:relative;filter:drop-shadow(0 5px 4px #0008)}
 .tray-doritos{font-size:28px;color:#e0a04e;text-shadow:0 0 2px #ffd28a}
 @media(max-width:760px){.pov-snack-tray{left:2%;bottom:4%;gap:5px;padding:7px 9px}.seat-neighbors{padding:12px}}
+
+
+.seat-direction{text-align:center;color:#e5d0a6;font-size:12px;font-weight:800;letter-spacing:.4px;margin:8px auto 12px;padding:8px 12px;border-radius:12px;background:linear-gradient(90deg,#182331,#34495b,#182331);border:1px solid #c5a88055}
+.seat-selection-info{max-width:620px;margin:16px auto 8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border:1px solid #c5a88088;border-radius:14px;background:linear-gradient(120deg,#27394a,#192637);color:#f4e6c9;text-align:right}
+.seat-selection-info span{font-size:12px;color:#d8c49c}.seat-selection-info strong{font-size:19px;color:#ffe0a0}.seat-selection-info small{font-size:11px;color:#d1d9df}
+.cash-only-note{position:relative;overflow:hidden;border:1px solid #d7b778!important;background:linear-gradient(125deg,#263b3c,#3f5148 52%,#695338)!important;box-shadow:0 16px 38px #0005!important}
+.cash-only-note:after{content:"💵";position:absolute;left:18px;bottom:-14px;font-size:58px;opacity:.12;transform:rotate(-18deg);pointer-events:none}
+.cash-only-note strong{font-size:20px;color:#ffe0a4}.cash-only-note p{font-size:16px}.cash-footnote{display:block;margin-top:8px;font-size:11px;color:#e5decf}
+@media(max-width:760px){.seat-selection-info{justify-content:center;text-align:center}.seat-direction{font-size:10px}.wallet-card{min-height:240px!important;padding:20px!important}}
 
 </style>
 </head>
@@ -1395,10 +1410,12 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
    <div class="tablet-booking">
     <div class="tablet-top"><span>TAIF CINEMA · حجز المقاعد</span><span class="tablet-camera"></span><span>● متصل</span></div>
     <div class="cinema-room movie-theater">
-     <div class="movie-screen"><span>TAIF TRIP</span><small>شاشة العرض</small></div>
-     <div class="tier-legend"><span>💎 A ألماسي</span><span>🥇 B ذهبي</span><span>🥈 C فضي</span><span>🥉 D برونزي</span></div>
+     <div class="movie-screen"><span>TAIF TRIP</span><small>🎬 شاشة العرض · مقدمة القاعة</small></div>
+     <div class="seat-direction">⬇ المقاعد الأمامية الأقرب للشاشة · ثم الذهبية · الفضية · البرونزية ⬇</div>
+     <div class="tier-legend"><span>💎 A ألماسي · أمامي</span><span>🥇 B ذهبي</span><span>🥈 C فضي</span><span>🥉 D برونزي · خلفي</span></div>
      <div class="seat-rows" id="seatGrid"></div>
-     <p id="seatStatus" class="note">اختر مقعدك من الخريطة، ثم ادخل القاعة.</p>
+     <div class="seat-selection-info" id="seatSelectionInfo"><span>📍 مقعدك المختار</span><strong>لم تختر مقعدًا بعد</strong><small>اضغط على رقم المقعد داخل الصف المناسب لتحديد مكانك.</small></div>
+     <p id="seatStatus" class="note">الشاشة أمامك، والصفوف مرتبة من الأمام إلى الخلف. اختر مقعدك باللمس.</p>
     </div>
     <div class="tablet-bottom"><span>اختر مقعدك المفضل</span><span>TAIF TRIP BOOKING</span></div>
    </div>
@@ -1445,7 +1462,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
  <section id="inviteScreen" class="screen">
   <div class="panel">
    <div class="invite-cover"><div class="invite-kicker">بطاقة ترحيبية</div><div class="invite-emblem">✦</div><h2>أهلًا بك في رحلة الطائف</h2><p>وجودك يكمّل فرحتنا… والتحابّ يجمعنا</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف! يسعدنا وجودك معنا في رحلة تجمعنا بالمودّة والأخوّة والذكريات الجميلة.</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
-   <div class="cash-only-note" id="cashOnlyNote"><span class="cash-icon">💵</span><strong>الدفع كاش فقط</strong><p>كما يقال: <b>الكاش ينهي النقاش!</b></p></div>
+   <div class="cash-only-note" id="cashOnlyNote"><span class="cash-icon">💵💸</span><strong>طريقة الدفع: كاش 💵</strong><p>وكما يقال: <b>الكاش ينهي النقاش! 😎💰</b></p><span class="cash-footnote">جهّز مبلغك نقدًا، ونلتقي على خير!</span></div>
    <div class="invite-whatsapp-note">📱 <strong>انتظر دعوتك الرسمية على واتساب</strong><br>ستصلك الدعوة الخاصة بك على رقم الجوال المسجّل، وتتضمن تفاصيل الرحلة ورابط دعوتك الشخصية.</div>
    
    <div class="journey-finished" role="status" aria-live="polite"><div class="finished-mark">✓</div><div class="finished-kicker">TAIF TRIP · THE END</div><h2>وصلت إلى نهاية الرحلة الرقمية</h2><p>شكرًا لمشاركتك معنا. انتهت خطوات الموقع، وباقي نلتقي على خير في الرحلة بإذن الله.</p><strong>ننتظر دعوتك الرسمية على واتساب.</strong></div><p class="note">هذه نهاية تجربة الموقع، ولا يوجد زر للعودة إلى الصفحة الرئيسية من هنا.</p>
@@ -1574,7 +1591,7 @@ function renderSeats(){
   const line=document.createElement('div');line.className='seat-line';
   for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.type='button';btn.className='seat';btn.textContent=i;btn.setAttribute('aria-label','المقعد '+id+' '+item.label);
    const allowed=selectedRole==='teacher'?item.tier==='A':item.tier!=='A';btn.disabled=!allowed;
-   btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;$('seatStatus').textContent='اخترت المقعد '+id+' · '+item.label;$('toInvite').disabled=false});
+   btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;$('seatStatus').textContent='تم اختيار '+id+' في الصف '+item.label+' · اضغط تأكيد المقعد للمتابعة.';$('seatSelectionInfo').innerHTML='<span>📍 مقعدك المختار</span><strong>'+id+' · '+item.label+'</strong><small>هذا المقعد محدد لك في شاشة الحجز الحالية.</small>';$('toInvite').disabled=false});
    line.appendChild(btn)}
   row.appendChild(line);host.appendChild(row)
  });
