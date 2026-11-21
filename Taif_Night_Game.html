@@ -8,110 +8,77 @@
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#090b10;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-#launcher{position:fixed;inset:0;display:grid;place-items:center;padding:18px;text-align:center;background:radial-gradient(ellipse at 50% 18%,#34465f 0,#111b2b 48%,#070a10 100%);z-index:2}
+#launcher{position:fixed;inset:0;display:grid;place-items:center;padding:16px;text-align:center;background:radial-gradient(ellipse at 50% 18%,#34465f 0,#111b2b 48%,#070a10 100%);z-index:2}
 .panel{width:min(520px,100%);padding:clamp(18px,4vw,30px);border:1px solid #d8b66f77;border-radius:24px;background:linear-gradient(145deg,#17263bee,#0c1421f5);box-shadow:0 24px 80px #000b}
 .brand{display:flex;align-items:center;justify-content:center;gap:10px;color:#f2d99f;font-weight:900;letter-spacing:1px;font-size:14px}
-.brand svg{width:52px;height:52px}
-h1{font-size:clamp(25px,5vw,36px);margin:10px 0;color:#f4dfb1}
-p{color:#d2d9e5;line-height:1.8;margin:8px 0}
-.rotate{font-size:54px;margin:14px 0;animation:tilt 1.8s ease-in-out infinite alternate}
+.brand svg{width:44px;height:44px}
+h1{font-size:clamp(25px,5vw,36px);margin:8px 0;color:#f4dfb1}
+p{color:#d2d9e5;line-height:1.7;margin:7px 0}
+.rotate{font-size:42px;margin:8px 0;animation:tilt 1.8s ease-in-out infinite alternate}
 @keyframes tilt{from{transform:rotate(0)}to{transform:rotate(90deg)}}
-#hint{font-weight:800;color:#f4d38c;margin:12px 0;min-height:28px}
-#start{border:0;border-radius:14px;padding:16px 24px;font-size:19px;font-weight:900;background:linear-gradient(135deg,#f1d18a,#b88b43);color:#17120a;cursor:pointer;width:100%;margin-top:12px;box-shadow:0 8px 25px #0006}
-#start:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}
-#start:not(:disabled):active{transform:scale(.985)}
+#hint{font-weight:800;color:#f4d38c;margin:10px 0;min-height:25px}
+.progress{height:8px;border-radius:10px;background:#ffffff18;overflow:hidden;margin:12px 0}
+#bar{height:100%;width:0;background:linear-gradient(90deg,#b88b43,#f1d18a);transition:width .2s}
+#start{border:0;border-radius:14px;padding:15px 24px;font-size:19px;font-weight:900;background:linear-gradient(135deg,#f1d18a,#b88b43);color:#17120a;cursor:pointer;width:100%;margin-top:8px;box-shadow:0 8px 25px #0006}
+#start:disabled{opacity:.6;cursor:wait}
 #game{position:fixed;inset:0;width:100%;height:100%;border:0;background:#000;display:none}
-#error{color:#ffb4b4;font-size:14px}
-@media (orientation:landscape){.panel{padding:14px 24px;max-width:650px}.brand svg{width:36px;height:36px}.rotate{font-size:32px;margin:3px 0}h1{margin:3px 0 6px}p{line-height:1.45;margin:4px 0}#start{max-width:360px}}
+#error{color:#ffb4b4;font-size:13px}
+@media (orientation:landscape){.panel{padding:12px 22px;max-width:650px}.brand svg{width:32px;height:32px}.rotate{font-size:28px;margin:1px 0}h1{margin:2px 0 5px}p{line-height:1.4;margin:3px 0}#start{max-width:360px}}
 </style>
 </head>
 <body>
 <main id="launcher">
  <section class="panel">
   <div class="brand">
-   <svg viewBox="0 0 100 100" role="img" aria-label="شعار رحلة الطائف"><path d="M8 72 34 30l14 22 13-18 31 38Z" fill="none" stroke="#e7c783" stroke-width="5" stroke-linejoin="round"/><path d="M18 77h64M34 83h32" stroke="#e7c783" stroke-width="4" stroke-linecap="round"/><path d="M50 8c-10 9-13 17-13 24a13 13 0 0 0 26 0C63 25 60 17 50 8Z" fill="#e7c783"/><path d="M50 25v12" stroke="#17263b" stroke-width="3" stroke-linecap="round"/></svg>
+   <svg viewBox="0 0 100 100" role="img" aria-label="رمز رحلة الطائف"><path d="M8 72 34 30l14 22 13-18 31 38Z" fill="none" stroke="#e7c783" stroke-width="5" stroke-linejoin="round"/><path d="M18 77h64M34 83h32" stroke="#e7c783" stroke-width="4" stroke-linecap="round"/><path d="M50 8c-10 9-13 17-13 24a13 13 0 0 0 26 0C63 25 60 17 50 8Z" fill="#e7c783"/></svg>
    <span>TAIF NIGHT · رحلة الطائف</span>
   </div>
   <h1>استعد للمغامرة!</h1>
-  <p>لأفضل تجربة، أدر جوالك إلى الوضع الأفقي ثم اضغط زر بدء اللعب.</p>
+  <p>أدر جوالك أفقيًا، ثم اضغط «ابدأ اللعب». نجهّز اللعبة في الخلفية.</p>
   <div class="rotate" aria-hidden="true">📱</div>
-  <div id="hint">⏳ جارٍ تجهيز اللعبة…</div>
-  <button id="start" type="button" disabled>ابدأ اللعب</button>
+  <div id="hint" aria-live="polite">⏳ جارٍ تجهيز اللعبة…</div>
+  <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+  <button id="start" type="button">ابدأ اللعب</button>
   <p id="error" role="alert"></p>
  </section>
 </main>
 <iframe id="game" title="لعبة قيادة حافلة رحلة الطائف" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen></iframe>
 <script>
 (function(){
- const launcher=document.getElementById('launcher'),start=document.getElementById('start'),hint=document.getElementById('hint'),error=document.getElementById('error'),game=document.getElementById('game');
- let original=null,loadError=null,launched=false,pressed=false;
+ 'use strict';
+ const launcher=document.getElementById('launcher'),start=document.getElementById('start'),hint=document.getElementById('hint'),error=document.getElementById('error'),bar=document.getElementById('bar'),game=document.getElementById('game');
+ let source=null,failed=null,pressed=false,launched=false,loaded=0;
  const paths=Array.from({length:11},(_,i)=>'/game-parts/part-'+String(i).padStart(2,'0')+'.txt');
- const loading=Promise.all(paths.map(async path=>{
-   const response=await fetch(path,{cache:'force-cache'});
-   if(!response.ok)throw new Error('تعذر تحميل ملفات اللعبة ('+response.status+').');
-   return response.text();
- })).then(parts=>{
-   original=parts.join('');
-   if(!/^<!doctype html>/i.test(original)||!original.trimEnd().endsWith('</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
-   hint.textContent='جاهزة! اضغط ابدأ للانطلاق';
-   if(pressed)launchGame();
- }).catch(e=>{
-   loadError=e;hint.textContent='تعذر تحميل اللعبة — أعد المحاولة';
-   error.textContent=e.message;start.disabled=false;
- });
- function launchGame(){
-   if(launched||!original)return;
-   launched=true;
+ function launch(){
+   if(launched||!source)return;
+   launched=true;start.disabled=true;hint.textContent='🎮 انطلاق اللعبة!';
    try{if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});}catch(e){}
    try{if(screen.orientation&&screen.orientation.lock)screen.orientation.lock('landscape').catch(()=>{});}catch(e){}
-   game.srcdoc=original;
-   game.style.display='block';
-   launcher.style.display='none';
+   game.srcdoc=source;game.style.display='block';launcher.style.display='none';
  }
- start.disabled=false;
- start.textContent='ابدأ اللعب';
- hint.textContent='اضغط ابدأ، ونجهز اللعبة في الخلفية';
  start.addEventListener('click',()=>{
    if(launched)return;
    pressed=true;
-   if(original){launchGame();return;}
-   start.disabled=true;
-   start.textContent='جارٍ بدء اللعبة…';
-   hint.textContent='لحظات ونبدأ تلقائيًا — لا تحتاج تضغط مرة ثانية';
-   if(loadError){error.textContent='تعذر التحميل. أعد تحميل الصفحة.';start.disabled=false;start.textContent='حاول مرة أخرى';}
+   if(source){launch();return;}
+   if(failed){hint.textContent='تعذر التحميل. أعد المحاولة بعد تحديث الصفحة.';return;}
+   start.disabled=true;start.textContent='جارٍ التجهيز — سيبدأ تلقائيًا';
+   hint.textContent='يتم تحميل ملفات اللعبة…';
  });
-})();
-</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
-   original=source;
-   refresh();
- }).catch(e=>{loadError=e;hint.textContent='تعذر تجهيز اللعبة';error.textContent=e.message;});
- function refresh(){
-   if(launched)return;
-   if(loadError){start.disabled=true;return;}
-   if(!original){hint.textContent='⏳ جارٍ تجهيز اللعبة…';start.disabled=true;return;}
-   if(isLandscape()){
-     hint.textContent='✓ ممتاز! جوالك بالوضع الأفقي — اضغط وابدأ المغامرة';
-     start.disabled=false;
-   }else{
-     hint.textContent='↻ أدر جوالك للوضع الأفقي، وسيظهر لك زر بدء اللعب';
-     start.disabled=true;
-   }
- }
- function launchGame(){
-   if(launched||!original||!isLandscape())return;
-   launched=true;
-   start.disabled=true;
-   try{if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});}catch(e){}
-   try{if(screen.orientation&&screen.orientation.lock)screen.orientation.lock('landscape').catch(()=>{});}catch(e){}
-   game.srcdoc=original;
-   game.style.display='block';
-   launcher.style.display='none';
- }
- start.addEventListener('click',launchGame);
- window.addEventListener('resize',refresh);
- window.addEventListener('orientationchange',()=>setTimeout(refresh,150));
- if(screen.orientation&&screen.orientation.addEventListener)screen.orientation.addEventListener('change',refresh);
- refresh();
+ Promise.all(paths.map(async path=>{
+   const response=await fetch(path,{cache:'force-cache'});
+   if(!response.ok)throw new Error('تعذر تحميل ملف من ملفات اللعبة ('+response.status+').');
+   const text=await response.text();loaded++;
+   bar.style.width=Math.round(loaded/paths.length*100)+'%';
+   hint.textContent='تجهيز اللعبة '+loaded+' من '+paths.length;
+   return text;
+ })).then(parts=>{
+   source=parts.join('');
+   if(!/^<!doctype html>/i.test(source)||!source.trimEnd().endsWith('</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
+   start.disabled=false;start.textContent='ابدأ اللعب';hint.textContent='✓ اللعبة جاهزة — أدر الجوال أفقيًا وابدأ';
+   if(pressed)launch();
+ }).catch(e=>{
+   failed=e;start.disabled=false;start.textContent='حاول مرة أخرى';hint.textContent='تعذر تجهيز اللعبة';error.textContent=e.message;
+ });
 })();
 </script>
 </body>
