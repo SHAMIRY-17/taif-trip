@@ -1174,6 +1174,40 @@ img,video,canvas,iframe{max-width:100%}
  #landing .hero .taif-photo figcaption{font-size:7px!important;right:5px!important;left:5px!important;bottom:5px!important}
 }
 
+
+/* Shared single-auditorium first-person cinema */
+.tier-route-note{max-width:900px;margin:12px auto;padding:14px 18px;border:1px solid #d8b66f66;border-radius:14px;background:linear-gradient(100deg,#101b2b,#1c2a3e);color:#f0d9aa;line-height:1.9;text-align:center}
+.pov-shell{max-width:1100px;margin:18px auto;padding:14px;border:1px solid #d7b66f88;border-radius:22px;background:linear-gradient(145deg,#101b2b,#050910);box-shadow:0 25px 75px #000b}
+.pov-topline{display:flex;justify-content:space-between;gap:10px;color:#e8d09c;font-size:11px;letter-spacing:1px;padding:4px 8px 12px}
+.pov-scene{height:clamp(390px,58vw,590px);position:relative;overflow:hidden;border-radius:15px;background:#080e18;perspective:950px;isolation:isolate;--view-angle:0deg;--view-shift:0px}
+.pov-world{position:absolute;inset:0;overflow:hidden;transform:rotateY(var(--view-angle)) translateX(var(--view-shift));transform-origin:50% 72%;transition:transform .65s cubic-bezier(.2,.7,.2,1);background:linear-gradient(180deg,#1b2b40 0%,#26364a 36%,#101a29 65%,#080d15 100%)}
+.pov-ceiling{position:absolute;inset:0 0 64%;background:linear-gradient(180deg,#0b111c,#26364b);clip-path:polygon(0 0,100% 0,82% 100%,18% 100%);border-bottom:1px solid #c8a45d55}
+.pov-wall{position:absolute;top:8%;height:70%;width:22%;background:linear-gradient(90deg,#111c2a,#35465a,#111a27);opacity:.9}
+.pov-wall-left{left:-8%;transform:skewY(18deg)}.pov-wall-right{right:-8%;transform:skewY(-18deg)}
+.pov-screen-frame{position:absolute;z-index:2;top:9%;left:25%;width:50%;height:24%;padding:7px;border:2px solid #d6b66f;border-radius:10px 10px 25% 25%;background:#101a29;box-shadow:0 0 48px #e5c77955}
+.pov-screen{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(145deg,#385575,#080e18 78%);border-radius:5px;color:#f4dfb0;box-shadow:inset 0 0 35px #000b;font-size:clamp(18px,3vw,30px);font-weight:bold;letter-spacing:2px}
+.pov-screen small{font-size:10px;letter-spacing:1px;color:#d0d8e2;margin-top:8px}
+.pov-floor{position:absolute;z-index:0;left:5%;right:5%;bottom:-5%;height:56%;background:linear-gradient(180deg,#29364a,#101722 72%,#070b12);clip-path:polygon(39% 0,61% 0,100% 100%,0 100%);border-top:1px solid #b99a5b55}
+.pov-aisle-branch{position:absolute;z-index:1;bottom:0;left:43%;width:14%;height:59%;background:linear-gradient(90deg,#151e2b,#8a7047 48%,#151e2b);clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);display:flex;justify-content:center;align-items:flex-end;padding-bottom:7%;color:#fff0c7;font-size:clamp(8px,1.3vw,12px);text-align:center;text-shadow:0 2px 5px #000}
+.pov-seat-field{position:absolute;z-index:3;left:8%;right:8%;top:37%;height:53%;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
+.pov-row{display:flex;justify-content:space-around;gap:5px;height:17%;transform:perspective(500px) rotateX(-12deg) scale(calc(1 - var(--row-depth)*.09));transform-origin:bottom center}
+.pov-chair{display:block;width:7%;height:100%;border-radius:12px 12px 5px 5px;background:linear-gradient(145deg,#aeb9c8,#344356 65%,#172231);border:1px solid #d6e0ed66;box-shadow:0 8px 8px #0009,inset 0 -7px #0005;position:relative}
+.pov-chair:before{content:"";position:absolute;left:12%;right:12%;bottom:-8px;height:12px;background:inherit;border-radius:3px 3px 7px 7px}
+.pov-row.tier-A .pov-chair{background:linear-gradient(145deg,#fff0bb,#bd984f 55%,#62451e);width:10%;border-color:#ffe8a5}
+.pov-row.tier-B .pov-chair{background:linear-gradient(145deg,#ffe9a2,#b58a36 60%,#684719);width:8.5%}
+.pov-row.tier-C .pov-chair{background:linear-gradient(145deg,#e7edf5,#8293a8 60%,#39485b)}
+.pov-row.tier-D .pov-chair{background:linear-gradient(145deg,#c58c59,#754629 65%,#3a251a);width:6.5%}
+.pov-chair.pov-destination{outline:2px solid #fff;filter:brightness(1.7);box-shadow:0 0 18px #fff,0 0 24px #e6c87c}
+.pov-near-seat{position:absolute;z-index:4;bottom:-8%;width:25%;height:43%;border-radius:38px 38px 10px 10px;background:linear-gradient(145deg,#9daabe,#354459 60%,#111c2a);box-shadow:0 0 35px #000b;opacity:.92}
+.pov-near-left{left:-9%;transform:rotate(8deg)}.pov-near-right{right:-9%;transform:rotate(-8deg)}
+.pov-welcome-sign{position:absolute;z-index:5;top:35%;left:50%;transform:translateX(-50%);padding:7px 13px;border:1px solid #d8b66f77;border-radius:30px;background:#07111ddd;color:#f4dfb0;font-size:11px;white-space:nowrap}
+.pov-viewer-caption{position:absolute;z-index:6;bottom:12px;left:50%;transform:translateX(-50%);width:max-content;max-width:90%;padding:9px 14px;border-radius:30px;background:#050a12dd;border:1px solid #d7b66d77;color:#f3dfb4;text-align:center;font-size:12px}
+.pov-controls,.experience-controls{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:14px 0 4px}
+.pov-controls button{font-size:12px;padding:10px 14px}
+.pov-scene.pov-entered .pov-world{animation:pov-arrive 1.8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes pov-arrive{0%{transform:translateY(9%) scale(1.08) rotateY(var(--view-angle))}100%{transform:translateY(0) scale(1) rotateY(var(--view-angle))}}
+@media(max-width:600px){.pov-shell{padding:8px}.pov-scene{height:440px}.pov-screen-frame{left:19%;width:62%;top:10%;height:22%}.pov-seat-field{left:3%;right:3%;top:39%}.pov-chair{width:8%}.pov-row.tier-A .pov-chair{width:12%}.pov-near-seat{width:30%;height:35%}.pov-topline{font-size:9px}.pov-controls button{padding:9px 10px;font-size:11px}}
+
 </style>
 </head>
 <body>
@@ -1260,7 +1294,7 @@ img,video,canvas,iframe{max-width:100%}
     <div class="tablet-top"><span>TAIF CINEMA · حجز المقاعد</span><span class="tablet-camera"></span><span>● متصل</span></div>
     <div class="cinema-room movie-theater">
      <div class="movie-screen"><span>TAIF TRIP</span><small>شاشة العرض</small></div>
-     <div class="tier-legend"><span>💎 A ألماسي · 10,000 ريال</span><span>🥈 B فضي · 150 ريال</span><span>🥉 C برونزي · 120 ريال</span><span>◼ D عادي · 90 ريال</span></div>
+     <div class="tier-legend"><span>💎 A ألماسي</span><span>🥇 B ذهبي</span><span>🥈 C فضي</span><span>🥉 D برونزي</span></div>
      <div class="seat-rows" id="seatGrid"></div>
      <p id="seatStatus" class="note">اختر مقعدك من الخريطة، ثم ادخل القاعة.</p>
     </div>
@@ -1268,20 +1302,34 @@ img,video,canvas,iframe{max-width:100%}
    </div>
    <div class="actions"><button class="secondary" id="backGame">العودة لبطاقة المشاركة</button><button id="toInvite" disabled>تأكيد المقعد والدخول للقاعة</button></div>
    <div id="cinemaExperience" class="cinema-experience hidden">
-    <div class="experience-header"><span>قاعة العرض الخاصة بك</span><span id="experienceSeat">المقعد —</span></div>
-    <div class="immersive-hall">
-     <div class="hall-screen"><div class="hall-screen-glow"></div><div id="hallScreenTitle" class="hall-screen-title">رحلة الطائف</div><small>العرض على وشك البدء</small></div>
-     <div class="hall-door"><span>🚪</span><small>المدخل</small></div><div class="hall-aisle"></div>
-     <div class="hall-seats" id="hallSeats"></div>
-     <div id="hallGuest" class="hall-guest"><div class="guest-head"></div><div class="guest-body"></div><div class="guest-popcorn">🍿</div></div>
-     <div id="guestCaption" class="guest-caption">أهلًا بك… تفضل إلى مقعدك</div>
+    <div class="experience-header"><span>قاعة سينما رحلة الطائف · قاعة واحدة للجميع</span><span id="experienceSeat">المقعد —</span></div>
+    <div class="tier-route-note" id="tierRouteNote">اختر مقعدك لتظهر لك رحلة الوصول الخاصة بفئتك.</div>
+    <div class="pov-shell" id="povShell">
+     <div class="pov-topline"><span id="povTierLabel">الممر الرئيسي</span><span>TAIF GRAND CINEMA</span></div>
+     <div class="pov-scene" id="povScene" style="--view-angle:0deg;--view-shift:0px">
+      <div class="pov-world">
+       <div class="pov-ceiling"></div>
+       <div class="pov-wall pov-wall-left"></div><div class="pov-wall pov-wall-right"></div>
+       <div class="pov-screen-frame"><div class="pov-screen" id="povScreen"><span>TAIF TRIP</span><small>الشاشة العملاقة · العرض قريبًا</small></div></div>
+       <div class="pov-floor"></div>
+       <div class="pov-aisle-branch" id="povAisleBranch"><span id="povAisleWords">من هنا تبدأ حكاية العرض</span></div>
+       <div class="pov-seat-field" id="povSeatField"></div>
+       <div class="pov-near-seat pov-near-left"></div><div class="pov-near-seat pov-near-right"></div>
+       <div class="pov-welcome-sign" id="povWelcomeSign">أهلًا بك في سينما الرحلة</div>
+      </div>
+      <div class="pov-viewer-caption" id="povViewerCaption">أنت الآن عند مدخل القاعة</div>
+     </div>
+     <div class="pov-controls">
+      <button type="button" class="secondary" id="povLookLeft">انظر يسارًا ↶</button>
+      <button type="button" class="secondary" id="povLookCenter">النظر إلى الشاشة</button>
+      <button type="button" class="secondary" id="povLookRight">انظر يمينًا ↷</button>
+     </div>
     </div>
-    <div class="experience-controls"><button id="replayWalk" class="secondary">إعادة الدخول إلى المقعد</button><button id="watchMovie" disabled>شغّل العرض ▶</button><button id="experienceInvite" class="secondary" disabled>متابعة إلى الدعوة</button></div>
-    <p class="note">محاكاة مرئية: تدخل من الباب، وتتجه إلى مقعدك المحدد، ثم تجلس ويظهر معك الفشار.</p>
+    <div class="experience-controls"><button id="replayWalk" class="secondary">إعادة الدخول إلى مقعدي</button><button id="watchMovie" disabled>شغّل العرض ▶</button><button id="experienceInvite" class="secondary" disabled>متابعة إلى الدعوة</button></div>
+    <p class="note">هذه معاينة منظور مقعد فردي داخل قاعة موحّدة. تتغير زاوية الرؤية حسب المقعد، ويمكن الالتفات لرؤية المقاعد المجاورة.</p>
    </div>
    <label class="field" for="videoFile">ملف إعلان الرحلة (من جهاز المنظّم)</label><input id="videoFile" type="file" accept="video/*" style="max-width:100%">
    <video id="adVideo" controls playsinline class="hidden"></video>
-   <div class="actions"><button class="secondary" id="backGame">العودة لبطاقة المشارك</button><button id="toInvite" disabled title="سيتم تجهيز الدعوة لاحقًا">الدعوة — قريبًا</button></div>
   </div>
  </section>
 
@@ -1337,26 +1385,37 @@ $('enterJourney').addEventListener('click',()=>showScreen('gameScreen'));
 
 
 $('backGame').addEventListener('click',()=>showScreen('identity'));
-$('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('cinemaExperience').classList.remove('hidden');$('experienceSeat').textContent='مقعدك '+selectedSeat;buildHallSeats();walkGuest();$('cinemaExperience').scrollIntoView({behavior:'smooth',block:'start'})});
-$('replayWalk').addEventListener('click',()=>{buildHallSeats();walkGuest()});
-$('watchMovie').addEventListener('click',()=>{$('hallScreenTitle').textContent='الطائف… حكاية تبدأ الآن';$('guestCaption').textContent='استمتع بالعرض يا '+(selected?.kunya||'ضيفنا')+' 🍿';$('experienceInvite').disabled=false});
+$('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('cinemaExperience').classList.remove('hidden');$('experienceSeat').textContent='مقعدك '+selectedSeat;buildPovHall();walkToSeat();$('cinemaExperience').scrollIntoView({behavior:'smooth',block:'start'})});
+$('replayWalk').addEventListener('click',()=>{buildPovHall();walkToSeat()});
+$('watchMovie').addEventListener('click',()=>{$('povScreen').innerHTML='<span>الطائف… حكاية تبدأ الآن</span><small>استمتعوا بالعرض معًا</small>'; $('povViewerCaption').textContent='أنت جالس في '+selectedSeat+' وتشاهد الشاشة من زاويتك';$('experienceInvite').disabled=false});
 $('experienceInvite').addEventListener('click',showInvite);
-function buildHallSeats(){const host=$('hallSeats');host.innerHTML='';[{t:'A',n:5},{t:'B',n:7},{t:'C',n:9},{t:'D',n:11}].forEach(r=>{const line=document.createElement('div');line.className='hall-row hall-row-'+r.t;for(let i=1;i<=r.n;i++){const chair=document.createElement('span');chair.className='hall-chair'+(selectedSeat===r.t+i?' destination':'');line.appendChild(chair)}host.appendChild(line)})}
-function walkGuest(){const guest=$('hallGuest');guest.classList.remove('walking','seated');guest.querySelector('.guest-popcorn').classList.remove('popcorn');guest.style.left='7%';guest.style.top='77%';$('guestCaption').textContent='دخلت القاعة… جاري التوجه إلى '+selectedSeat;$('watchMovie').disabled=true;$('experienceInvite').disabled=true;const tier=selectedSeat.charAt(0),num=Number(selectedSeat.slice(1)),counts={A:5,B:7,C:9,D:11},ri={A:0,B:1,C:2,D:3}[tier],x=38+(num-1)/(counts[tier]-1)*48,y=34+ri*12;requestAnimationFrame(()=>{guest.classList.add('walking');guest.style.left=x+'%';guest.style.top=y+'%'});setTimeout(()=>{guest.classList.remove('walking');guest.classList.add('seated');guest.querySelector('.guest-popcorn').classList.add('popcorn');$('guestCaption').textContent='وصلت إلى '+selectedSeat+'… تفضل بالجلوس 🍿';$('watchMovie').disabled=false},2700)}
-function showInvite(){if(!selected)selected={name:'معاينة',kunya:'ضيفنا'};const safeKunya=String(selected.kunya).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));$('inviteText').innerHTML='<strong>يا '+safeKunya+'، مرحبًا بك!</strong><br>يسرّنا انضمامك إلينا في رحلة الطائف؛ أيامٌ تجمعنا بالمودّة والأخوّة، وتملؤها المغامرة والضحكات والذكريات الجميلة.<br><br><strong>وجودك يسعدنا، وعنوان جمعتنا: تحابّوا.</strong>'+(selectedSeat?'<br><small>مقعدك المختار في السينما: '+selectedSeat+'</small>':'');showScreen('inviteScreen')}
-$('restart').addEventListener('click',()=>{selected=null;selectedSeat=null;showScreen('landing')});
-function renderSeats(preview=false){$('cinemaExperience')?.classList.add('hidden');
- const seats=$('seatGrid');seats.innerHTML='';selectedSeat=null;$('toInvite').disabled=true;
- $('cinemaWelcome').textContent=preview?'معاينة القاعة: الصف A الأقرب للشاشة والأعلى سعرًا، ثم تتسع الصفوف كلما ابتعدت عن الشاشة وتنخفض الأسعار.':selected?.kunya?'مرحبًا '+selected.kunya+' — '+(selectedRole==='teacher'?'مقاعد الصف A الألماسية متاحة لك.':'اختر من الصفوف الفضية والبرونزية والعادية.'):'اختر مقعدك في قاعة العرض.';
- const config=[{tier:'A',count:5,price:'10,000',label:'ألماسي',icon:'💎'},{tier:'B',count:7,price:'150',label:'فضي',icon:'🥈'},{tier:'C',count:9,price:'120',label:'برونزي',icon:'🥉'},{tier:'D',count:11,price:'90',label:'عادي',icon:'◼'}];
- for(const item of config){
-  const row=document.createElement('div');row.className='seat-row tier-'+item.tier;row.style.setProperty('--seat-count',item.count);
-  const label=document.createElement('div');label.className='row-label';label.innerHTML='<b>الصف '+item.tier+' · '+item.icon+' '+item.label+'</b><span>'+item.price+' ريال</span>';row.appendChild(label);
-  const seatsLine=document.createElement('div');seatsLine.className='seat-line';
-  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.className='seat';btn.dataset.tier=item.tier;btn.textContent=i;btn.setAttribute('aria-label','المقعد '+id+' - '+item.label+' - '+item.price+' ريال');
-   const allowed=selectedRole==='teacher'?item.tier==='A':item.tier!=='A';btn.disabled=!allowed;btn.title=!allowed?'مخصص للمعلمين':'المقعد '+id+' · '+item.price+' ريال';
-   btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;$('seatStatus').textContent='تم اختيار المقعد '+id+' — '+item.label+' — '+item.price+' ريال';$('toInvite').disabled=false});
-   seatsLine.appendChild(btn)}row.appendChild(seatsLine);seats.appendChild(row)}
+let povLook=0;
+function setPovLook(deg){povLook=deg;$('povScene').style.setProperty('--view-angle',deg+'deg');$('povViewerCaption').textContent=deg<0?'تنظر الآن إلى المقاعد المجاورة على يسارك':deg>0?'تنظر الآن إلى المقاعد المجاورة على يمينك':'تنظر إلى الشاشة من مقعدك '+(selectedSeat||'');}
+$('povLookLeft').addEventListener('click',()=>setPovLook(-12));
+$('povLookCenter').addEventListener('click',()=>setPovLook(0));
+$('povLookRight').addEventListener('click',()=>setPovLook(12));
+function buildPovHall(){
+ const host=$('povSeatField');host.innerHTML='';
+ const rows=[{t:'A',n:5},{t:'B',n:7},{t:'C',n:9},{t:'D',n:11}];
+ rows.forEach((r,ri)=>{const row=document.createElement('div');row.className='pov-row tier-'+r.t;row.style.setProperty('--row-depth',ri);for(let i=1;i<=r.n;i++){const chair=document.createElement('span');chair.className='pov-chair'+(selectedSeat===r.t+i?' pov-destination':'');chair.title='المقعد '+r.t+i;row.appendChild(chair)}host.appendChild(row)});
+ const tier=selectedSeat.charAt(0),num=Number(selectedSeat.slice(1));
+ const tierNames={A:'الألماسي',B:'الذهبي',C:'الفضي',D:'البرونزي'};
+ const messages={A:'مرحبًا بك في الممر الألماسي… هنا تلمع تفاصيل الإعلان وتبدأ الحكاية من أرقى الممرات.',B:'أهلًا بك في الممر الذهبي… رفقةٌ ثمينة وذكريات تزداد بريقًا مع كل خطوة.',C:'مرحبًا بك في الممر الفضي… اقتربت لحظة العرض، واستعد لمشاهدة الحكاية.',D:'أهلًا بك في الممر البرونزي… المتعة تجمعنا، وأجمل اللحظات نصنعها معًا.'};
+ const words={A:'💎 بريق الإعلان يبدأ من هنا',B:'🥇 للرفقة الذهبية حكايات لا تُنسى',C:'🥈 اقترب موعد الحكاية',D:'🥉 كل خطوة تقرّبنا من المتعة'};
+ $('povTierLabel').textContent='الممر '+tierNames[tier]+' · يتصل بالقاعة الرئيسية';
+ $('tierRouteNote').textContent=messages[tier];
+ $('povAisleWords').textContent=words[tier];
+ $('povWelcomeSign').textContent='مقعدك '+selectedSeat+' · '+tierNames[tier];
+ const angle=(num-1)/Math.max(1,({A:5,B:7,C:9,D:11}[tier])-1)-.5;
+ $('povScene').style.setProperty('--view-angle',(angle*9)+'deg');
+ $('povScene').style.setProperty('--view-shift',(angle*36)+'px');
+ setPovLook(0);
+}
+function walkToSeat(){
+ $('watchMovie').disabled=true;$('experienceInvite').disabled=true;
+ $('povViewerCaption').textContent='دخلت من الممر '+({A:'الألماسي',B:'الذهبي',C:'الفضي',D:'البرونزي'}[selectedSeat.charAt(0)])+'… تتجه الآن إلى '+selectedSeat;
+ $('povScene').classList.remove('pov-entered');void $('povScene').offsetWidth;$('povScene').classList.add('pov-entered');
+ setTimeout(()=>{$('povViewerCaption').textContent='جلست في '+selectedSeat+'؛ أمامك مقاعد رفاقك والشاشة العملاقة. يمكنك الالتفات لرؤيتهم.';$('watchMovie').disabled=false},1800);
 }
 let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden')});
 </script>
