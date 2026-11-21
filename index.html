@@ -354,12 +354,124 @@ footer{background:rgba(246,239,230,.92);color:#8b725d;border-color:#C5A88066}
  .hero{background-position:center}
 }
 
+
+/* 2026-11-21 — Tahabbu premium editorial landing refresh */
+:root{
+ --bg:#24170f;--panel:#35251b;--gold:#C5A880;--gold2:#9B7653;
+ --muted:#D2B49C;--line:#C5A88088;--ink:#F6EFE6;
+ --caramel:#9B7653;--sage:#C4CBB8;--cream:#F6EFE6;--sand:#EAE0D5;
+}
+body{
+ color:var(--cream);background:#24170f;
+ background-image:radial-gradient(ellipse at 12% 8%,#9B765533,transparent 34%),radial-gradient(ellipse at 90% 28%,#C5A88020,transparent 28%),linear-gradient(145deg,#24170f,#302116 52%,#17100c);
+ background-attachment:fixed;
+}
+.site-header{
+ min-height:94px;padding:13px clamp(18px,6vw,90px);background:linear-gradient(110deg,#21150f,#3a281c 52%,#21150f);
+ border-bottom:1px solid #C5A88099;box-shadow:0 12px 36px #120b07aa;
+}
+.site-header:after{content:"";position:absolute;bottom:0;left:7%;right:7%;height:1px;background:linear-gradient(90deg,transparent,#C5A880,transparent)}
+.brand-lockup{position:relative;z-index:2;text-align:right}
+.site-header .logo{font-family:Tahoma,Arial,sans-serif;color:#F6EFE6;font-size:clamp(25px,3vw,34px);letter-spacing:0;text-shadow:0 3px 18px #0008}
+.site-header .tag{color:#D2B49C;letter-spacing:.4px;font-size:11px}
+.header-landmark{display:flex;align-items:center;gap:12px;color:#EAE0D5;font-size:12px}
+.header-landmark img{width:84px;height:58px;object-fit:cover;border-radius:12px;border:1px solid #C5A880;box-shadow:0 5px 18px #0008}
+.hero{
+ min-height:790px;padding:38px clamp(14px,4vw,50px) 48px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+ background:radial-gradient(ellipse at 50% 48%,#9B76552b,transparent 52%),linear-gradient(145deg,#2d2017,#21160f 58%,#17100c);
+}
+.hero:before{content:"";position:absolute;inset:0;z-index:0;opacity:.22;pointer-events:none;background-image:radial-gradient(#C5A88055 .7px,transparent .7px);background-size:22px 22px;mask-image:linear-gradient(90deg,#000,transparent 34%,transparent 66%,#000)}
+.hero:after{display:none}
+.hero-stage{position:relative;width:min(100%,1320px);min-height:680px;display:grid;place-items:center;isolation:isolate}
+.content{
+ z-index:2;width:min(100%,790px);max-width:790px;padding:clamp(30px,4vw,54px) clamp(20px,4vw,48px);
+ border:1px solid #C5A880;background:linear-gradient(145deg,rgba(67,46,31,.97),rgba(39,26,18,.98));
+ border-radius:30px;box-shadow:0 32px 90px #100905bb,inset 0 1px #fff2,inset 0 0 0 7px #C5A8800b;
+ backdrop-filter:blur(10px);
+}
+.content:before{content:"";display:block;width:86px;height:3px;margin:0 auto 22px;border-radius:5px;background:linear-gradient(90deg,#9B7653,#C5A880,#EAE0D5);box-shadow:0 0 18px #C5A88066}
+.eyebrow{color:#D2B49C;letter-spacing:1.3px;font-size:13px}
+#landing h1{color:#F6EFE6;font-size:clamp(43px,7vw,76px);margin:17px 0 14px;text-shadow:0 8px 28px #0008}
+#landing h1 span{background:linear-gradient(100deg,#F6EFE6,#C5A880 52%,#9B7653);-webkit-background-clip:text;background-clip:text;color:transparent}
+.description{color:#EAE0D5;max-width:610px;line-height:2.15}
+.hero-poetry{max-width:680px;margin:26px auto 26px;padding:18px 8px;color:#F6EFE6}
+.hero-poetry:before,.hero-poetry:after{background:linear-gradient(90deg,transparent,#9B7653 12%,#C5A880 50%,#9B7653 88%,transparent);box-shadow:0 0 13px #C5A88044}
+.poetry-cell{color:#F6EFE6;font-size:clamp(14px,1.8vw,17px);text-shadow:0 2px 10px #0008}
+.poetry-cell:nth-child(5),.poetry-cell:nth-child(6){color:#E6C99F}
+.hero-poetry .poetry-grid:before,.hero-poetry .poetry-grid:after{color:#C5A880;text-shadow:0 0 12px #C5A88066}
+#beginBtn,button{color:#24170f;background:linear-gradient(135deg,#E8D4B4,#C5A880 55%,#9B7653);border:1px solid #E9D7B8;box-shadow:0 10px 28px #120b0780,inset 0 1px #fff9}
+button.secondary{background:linear-gradient(135deg,#493326,#302117);color:#F6EFE6;border-color:#C5A880}
+.taif-gallery{position:absolute;inset:0;z-index:1;pointer-events:none}
+.taif-photo{position:absolute;margin:0;overflow:hidden;border:1px solid #C5A880;border-radius:18px;background:#35251b;box-shadow:0 20px 48px #100905aa,0 0 0 6px #C5A88012}
+.taif-photo img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.04)}
+.taif-photo:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#1b110be8)}
+.taif-photo figcaption{position:absolute;z-index:1;bottom:10px;right:13px;color:#F6EFE6;font-size:12px;text-shadow:0 2px 8px #000}
+.photo-hada{width:235px;height:158px;right:1%;top:5%;transform:rotate(2deg)}
+.photo-rose{width:185px;height:224px;left:1%;top:17%;transform:rotate(-3deg)}
+.photo-mist{width:245px;height:164px;left:3%;bottom:2%;transform:rotate(2deg)}
+#landing section:not(.hero){background:linear-gradient(180deg,#2a1d14ee,#21160ff5);border-top:1px solid #C5A88033}
+#landing .section-title{color:#E8D4B4}
+#landing .card{background:linear-gradient(145deg,#493326,#302117);color:#F6EFE6;border-color:#C5A88088;box-shadow:0 18px 42px #10090588,inset 0 1px #fff1}
+#landing .card h3{color:#E8D4B4}
+#landing .card p{color:#D2B49C}
+#landing .card:before{background:linear-gradient(90deg,transparent,#C5A880,transparent)}
+#landing .cards .card:nth-child(4){display:none}
+.screen{background:linear-gradient(145deg,#24170f,#332319)}
+.panel,.invite-card,.invite-cover{background:linear-gradient(145deg,#493326,#2b1c13);color:#F6EFE6;border-color:#C5A880;box-shadow:0 22px 60px #10090599,inset 0 1px #fff2}
+.panel h2,.invite-cover h2{color:#E8D4B4}
+.muted,.note{color:#D2B49C}
+.steps .step{background:#35251b;color:#EAE0D5;border-color:#C5A88055}
+.steps .step.current{background:#C5A880;color:#24170f;border-color:#E8D4B4}
+.field{color:#E8D4B4}
+input[type=tel],input[type=text],input[type=password]{background:#21160f!important;color:#F6EFE6!important;border-color:#C5A880!important}
+.person{background:#35251b;color:#F6EFE6;border-color:#C5A880}
+.person small{color:#D2B49C}
+.person.selected{background:#493326;border-color:#E8D4B4}
+.taif-teasers{display:none}
+.invite-cover{background:linear-gradient(145deg,#493326,#24170f)}
+.invite-cover h2,.invite-message{color:#F6EFE6}
+.invite-cover>p,.invite-footer,.invite-kicker{color:#E8D4B4}
+.invite-whatsapp-note{color:#F6EFE6;border-color:#C5A880;background:#35251b}
+.invite-whatsapp-note strong{color:#E8D4B4}
+footer{background:#1b120d;color:#C5A880;border-color:#C5A88055}
+.movie-theater,.cinema-room,.tablet-booking,.cinema-experience{background:linear-gradient(145deg,#493326,#24170f);border-color:#C5A880;box-shadow:0 18px 48px #10090588}
+.movie-screen{background:linear-gradient(135deg,#5C3D28,#9B7653);border-color:#C5A880;color:#F6EFE6}
+.movie-screen small,.row-label,.tier-legend{color:#F6EFE6}
+.tier-legend span{background:#35251b;color:#F6EFE6;border-color:#C5A880}
+.tablet-booking{border-color:#C5A880}
+.tablet-top,.tablet-bottom,.cinema-experience,.experience-header{color:#F6EFE6}
+.guest-caption{background:#5C3D28;color:#F6EFE6;border-color:#C5A880}
+@media(max-width:900px){
+ .hero{min-height:auto;padding-top:28px}
+ .hero-stage{min-height:0;display:flex;flex-direction:column;gap:18px}
+ .content{order:1}
+ .taif-gallery{position:relative;inset:auto;order:2;display:grid;grid-template-columns:1.1fr .9fr;gap:10px;width:min(100%,790px)}
+ .taif-photo{position:relative;inset:auto;width:auto;height:150px;transform:none}
+ .photo-rose{height:190px;grid-row:span 2}
+ .photo-mist{height:150px}
+}
+@media(max-width:520px){
+ .site-header{min-height:78px;padding:10px 15px}
+ .site-header .logo{font-size:25px}
+ .header-landmark img{width:66px;height:48px}
+ .header-landmark span{font-size:10px}
+ .hero{padding:22px 12px 34px}
+ .content{padding:30px 15px;border-radius:22px}
+ .hero-poetry{padding:14px 2px}
+ .poetry-grid{gap:5px 8px}
+ .poetry-cell{font-size:12px;min-height:40px}
+ .taif-gallery{grid-template-columns:1fr 1fr}
+ .taif-photo{height:118px}
+ .photo-rose{height:152px}
+ .photo-mist{height:118px}
+}
+
 </style>
 </head>
 <body>
-<header>
- <div><div class="logo">TAIF TRIP</div><div class="tag">THE JOURNEY BEGINS</div></div>
- <div class="tag">JEDDAH → TAIF</div>
+<header class="site-header">
+ <div class="brand-lockup"><div class="logo">تحابّوا</div><div class="tag">رحلة الطائف · بالمودّة نلتقي</div></div>
+ <div class="header-landmark"><img src="https://portalcdn.spa.gov.sa/backend/original/202407/ye20dpljMRCACaRvGo7oaYEiOIC04bYdj3FpNtdH.jpg" alt="مناظر جبال الهدا في الطائف"><span>من جدة إلى الطائف</span></div>
 </header>
 
 <main>
@@ -376,12 +488,13 @@ footer{background:rgba(246,239,230,.92);color:#8b725d;border-color:#C5A88066}
       <div class="poetry-cell">وعنواننا «تحابّوا»؛ بالمودّة نلتقي</div><div class="poetry-cell">وبطيب الأخوّة أجملَ العمر نرتقي</div>
      </div>
     </div>
-    <div class="taif-teasers" aria-label="لمحات تشويقية عن الرحلة">
-     <div class="teaser"><img src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=720&q=80" alt="حافلة سياحية على الطريق" loading="lazy"><span>رحلتنا تبدأ بالطريق 🚌</span></div>
-     <div class="teaser"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="مناظر جبلية وطبيعة" loading="lazy"><span>جبال الطائف والضباب</span></div>
-     <div class="teaser"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=600&q=80" alt="زهور ملونة" loading="lazy"><span>الورد وأجمل الذكريات</span></div>
-    </div>
     <div class="actions"><button id="beginBtn">ادخل أجواء الرحلة ✦</button></div>
+   </div>
+   <div class="taif-gallery" aria-label="صور من الطائف">
+    <figure class="taif-photo photo-hada"><img src="https://portalcdn.spa.gov.sa/backend/original/202407/ye20dpljMRCACaRvGo7oaYEiOIC04bYdj3FpNtdH.jpg" alt="جبال الهدا والطبيعة في الطائف" loading="lazy"><figcaption>الهدا · عناق الجبال</figcaption></figure>
+    <figure class="taif-photo photo-rose"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=760&q=85" alt="زهور وردية تذكّر بورد الطائف" loading="lazy"><figcaption>الورد · حكاية الطائف</figcaption></figure>
+    <figure class="taif-photo photo-mist"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=760&q=85" alt="مشهد جبلي أخضر وضبابي" loading="lazy"><figcaption>قممٌ يلامسها الضباب</figcaption></figure>
+   </div>
    </div>
   </div>
   <section>
