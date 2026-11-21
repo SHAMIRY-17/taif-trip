@@ -1367,25 +1367,53 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 @media(max-width:700px){.role-entry-grid{grid-template-columns:1fr;gap:13px}.role-entry{min-height:205px;display:grid;grid-template-columns:42% 1fr;align-items:end}.role-art{inset:0 0 0 48%}.role-copy{grid-column:1;grid-row:1;align-self:end;padding:18px 14px}.role-art:before{width:150px;height:150px}.teacher-thobe{width:112px;height:130px}.teacher-head{top:24px;width:55px;height:65px}.teacher-shemagh{top:7px;width:90px;height:56px}.student-head{top:26px;width:52px;height:60px}.student-body{width:112px;height:112px}.student-bag{left:calc(50% + 36px);height:82px;width:42px}.student-book{left:calc(50% - 68px);height:49px;width:35px}.supervisor-screen{top:25px;width:125px;height:75px}.supervisor-person{top:45px}.supervisor-desk{width:160px}}
 
 
-/* Correct Saudi red-and-white shemagh: white fabric with red woven checks, draped over the head */
+/* Saudi teacher headwear: clearly draped red-and-white shemagh with a visible black agal */
+.teacher-head{
+ top:43px!important;
+ width:72px!important;
+ height:82px!important;
+}
 .teacher-shemagh{
- width:132px!important;height:92px!important;top:13px!important;
- border-radius:48% 48% 8px 8px!important;
- background-color:#f4eee3!important;
+ width:158px!important;
+ height:126px!important;
+ top:3px!important;
+ border-radius:0!important;
+ background-color:#f8f5ed!important;
  background-image:
-  repeating-linear-gradient(0deg,transparent 0 8px,#b32632 8px 10px,transparent 10px 13px),
-  repeating-linear-gradient(90deg,transparent 0 8px,#b32632 8px 10px,transparent 10px 13px),
-  repeating-linear-gradient(45deg,transparent 0 17px,#b3263233 17px 19px,transparent 19px 22px)!important;
- clip-path:polygon(8% 17%,22% 0,78% 0,92% 17%,100% 100%,78% 83%,66% 100%,50% 78%,34% 100%,22% 83%,0 100%)!important;
- box-shadow:0 7px 12px #0009,inset 0 0 0 2px #fff9!important;
+  repeating-linear-gradient(0deg,transparent 0 7px,#b51f2b 7px 9px,transparent 9px 12px),
+  repeating-linear-gradient(90deg,transparent 0 7px,#b51f2b 7px 9px,transparent 9px 12px),
+  repeating-linear-gradient(45deg,transparent 0 15px,#b51f2b38 15px 17px,transparent 17px 20px),
+  repeating-linear-gradient(-45deg,transparent 0 15px,#b51f2b30 15px 17px,transparent 17px 20px)!important;
+ clip-path:polygon(18% 12%,29% 0,71% 0,82% 12%,91% 36%,100% 100%,78% 84%,66% 100%,50% 80%,34% 100%,22% 84%,0 100%,9% 36%)!important;
+ box-shadow:0 8px 13px #0009,inset 0 0 0 2px #fff!important;
+ z-index:2;
+}
+.teacher-shemagh:before{
+ content:"";
+ position:absolute;
+ z-index:3;
+ left:50%;
+ top:0;
+ transform:translateX(-50%);
+ width:76px;
+ height:22px;
+ border:7px solid #171717;
+ border-radius:50%;
+ background:transparent;
+ box-shadow:0 2px 4px #0009;
 }
 .teacher-shemagh:after{
- content:"";position:absolute;inset:0;
- background:linear-gradient(90deg,#a71e2b22,transparent 23% 77%,#a71e2b22);
+ content:"";
+ position:absolute;
+ inset:0;
+ background:linear-gradient(90deg,#a71e2b18,transparent 25% 75%,#a71e2b18);
+ pointer-events:none;
 }
-@media(max-width:700px){.teacher-shemagh{width:108px!important;height:76px!important;top:4px!important}}
-
-</style>
+@media(max-width:700px){
+ .teacher-head{top:31px!important;width:59px!important;height:68px!important}
+ .teacher-shemagh{width:132px!important;height:105px!important;top:0!important}
+ .teacher-shemagh:before{width:64px;height:18px;border-width:6px}
+}</style>
 <style>
 /* Ticket, tier pricing, payment choice and expanded Taif photo gallery */
 .taif-gallery{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:12px!important;width:min(1120px,94%)!important;margin:28px auto 8px!important;position:relative;z-index:2}
