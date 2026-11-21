@@ -1362,6 +1362,18 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 </style>
 <style>
 .wealth-dua{max-width:620px;margin:16px auto;padding:18px;border:1px solid #C5A880;border-radius:15px;background:linear-gradient(145deg,#35251b,#24170f);text-align:center;color:#F6EFE6}.wealth-dua strong{color:#E8D4B4}.wealth-dua p{font-size:18px;line-height:2;color:#fff6e9;margin:9px 0}.wealth-dua small{color:#D2B49C}
+
+/* دعاء السينما، شارة الشبكة، وبطاقة تسليم التذكرة عند البوابة */
+.wealth-dua{max-width:620px;margin:18px auto 24px;padding:18px;border:1px solid #C5A880;border-radius:15px;background:linear-gradient(145deg,#35251b,#24170f);text-align:center;color:#F6EFE6}
+.wealth-dua strong{color:#E8D4B4}.wealth-dua p{font-size:18px;line-height:2;color:#fff6e9;margin:9px 0}.wealth-dua small{color:#D2B49C}
+.network-only{border-color:#d8b66f88}.network-mark{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border:1px solid #d8b66f88;border-radius:999px;background:#18283a;color:#f5dfb0;font-weight:bold}
+.network-only small{flex-basis:100%}
+.entry-gate{display:flex;align-items:center;gap:13px;max-width:650px;margin:18px auto 10px;padding:14px 17px;border:1px solid #d8b66f88;border-radius:14px;background:linear-gradient(110deg,#18283a,#0b1422);text-align:right;color:#f5dfb0}
+.gate-attendant{font-size:30px}.entry-gate div{flex:1}.entry-gate strong,.entry-gate small{display:block}.entry-gate small{margin-top:5px;color:#c1cad5;line-height:1.7;font-size:11px}.gate-arrow{font-size:22px;color:#e7c98b}
+.network-ticket{color:#f2dba9!important}
+.ticket-stub{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 4px 0;border-top:2px dashed #ffffff66;color:var(--ticket-accent)}
+.ticket-stub .stub-brand{font-size:10px;letter-spacing:1px}.ticket-stub strong{padding:6px 12px;border:1px solid currentColor;border-radius:7px}.ticket-stub small{color:#c4ceda;font-size:10px}.stub-code{width:100%;font-size:20px;letter-spacing:5px;text-align:center;opacity:.85}
+@media(max-width:600px){.entry-gate{padding:11px}.ticket-stub{justify-content:center;text-align:center}.ticket-stub small{width:100%}}
 </style></head>
 <body>
 <header class="site-header">
@@ -1470,13 +1482,13 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
    </div>
    <div class="actions"><button class="secondary" id="backGame">العودة للعبة</button><button id="toInvite" disabled>تأكيد المقعد والمتابعة للطلبات</button></div>
    <div id="snackShop" class="snack-shop hidden">
-    <div class="snack-heading"><span class="snack-kicker">TAIF CINEMA · CONCESSIONS</span><h3>ماذا تريد أن تتناول قبل العرض؟</h3><p>اختر طلباتك، وشاهد الإجمالي قبل تأكيد الشراء.</p></div>
+    <div class="snack-heading"><span class="snack-kicker">TAIF CINEMA · CONCESSIONS</span><h3>ماذا تريد أن تتناول قبل العرض؟</h3><p>اختر طلباتك، وشاهد الإجمالي قبل تأكيد الشراء.</p></div><div class="wealth-dua"><strong>دعاء نبوي للرزق والغنى والبركة</strong><p>«اللهم إني أسألك الهدى والتقى والعفاف والغنى»</p><small>رواه مسلم في صحيحه (2721).</small></div>
     <div class="snack-grid">
      <article class="snack-item"><div class="snack-emoji">🍿</div><div><strong>فشار السينما</strong><small>اختر النكهة والحجم المناسب لك.</small></div><label class="snack-flavor">النكهة<select id="popcornFlavor"><option value="جبن">جبن</option><option value="ملح">ملح</option><option value="كراميل">كراميل</option></select></label><label class="snack-add"><input id="popcornInclude" type="checkbox"> إضافة الفشار للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="popcornSize" value="large"><span><b>أ</b> كبير<small>24 ريال</small></span></label><label><input type="radio" name="popcornSize" value="medium" checked><span><b>ب</b> وسط<small>18 ريال</small></span></label></div></article>
      <article class="snack-item"><div class="snack-emoji">🧀</div><div><strong>دوريتوس</strong><small>اختر الحجم المناسب لك.</small></div><label class="snack-add"><input id="doritosInclude" type="checkbox"> إضافة الدوريتوس للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="doritosSize" value="large"><span><b>أ</b> كبير<small>16 ريال</small></span></label><label><input type="radio" name="doritosSize" value="medium" checked><span><b>ب</b> وسط<small>12 ريال</small></span></label></div></article>
      <article class="snack-item"><div class="snack-emoji">🥤</div><div><strong>سلاش كنزا</strong><small>اختر النكهة والحجم المناسب لك.</small></div><label class="snack-flavor">النكهة<select id="slushFlavor"><option value="كنزا كولا">كنزا كولا</option><option value="كنزا ليمون">كنزا ليمون</option><option value="كنزا حمضيات">كنزا حمضيات</option><option value="كنزا دايت">كنزا دايت</option></select></label><label class="snack-add"><input id="slushInclude" type="checkbox"> إضافة السلاش للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="slushSize" value="large"><span><b>أ</b> كبير<small>16 ريال</small></span></label><label><input type="radio" name="slushSize" value="medium" checked><span><b>ب</b> وسط<small>12 ريال</small></span></label></div></article>
     </div>
-    <div class="snack-checkout"><div class="seat-payment-choice"><strong>طريقة دفع المقعد</strong><label><input type="radio" name="seatPaymentMethod" value="cash" checked> 💵 كاش</label><label><input type="radio" name="seatPaymentMethod" value="network"> 💳 شبكة</label><small>اختيار الطريقة لا يعني تنفيذ عملية دفع إلكترونية؛ يتم اعتماد السداد من المنظّم.</small></div><div id="cinemaTicket" class="cinema-ticket hidden"><div class="ticket-top"><span>TAIF GRAND CINEMA</span><b id="ticketTier">💎 تذكرة ألماسية</b></div><div class="ticket-main"><div><small>اسم صاحب التذكرة</small><strong id="ticketName">—</strong></div><div><small>رقم المقعد</small><strong id="ticketSeat">—</strong></div><div><small>قيمة المقعد</small><strong id="ticketPrice">—</strong></div><div><small>طريقة الدفع</small><strong id="ticketPayment">—</strong></div></div><div id="ticketDiscount" class="ticket-discount hidden"></div><div class="ticket-items"><b>طلباتك داخل القاعة</b><div id="ticketItems">لم تتم إضافة أصناف.</div></div><div class="ticket-status" id="ticketStatus">بانتظار تأكيد السداد من المنظّم</div><div class="ticket-cut">✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦</div></div><div class="snack-total-line"><span>إجمالي الطلب</span><strong><b id="snackTotal">0</b> ريال</strong></div><p id="snackBalanceHint">سيتم الخصم من رصيد محفظتك الافتراضية بعد تأكيد الشراء.</p><div class="snack-actions"><button class="secondary" id="editSeatOrder">تعديل المقعد</button><button id="buySnacks">تأكيد الشراء والخصم</button></div><p id="snackMessage" class="note" role="status"></p><div id="snackReceipt" class="snack-receipt hidden"></div><button id="enterAuditorium" class="hidden">الدخول إلى قاعة السينما</button></div>
+    <div class="snack-checkout"><div class="seat-payment-choice network-only"><strong>الدفع عند شباك السينما</strong><span class="network-mark" aria-label="الدفع عبر الشبكة">💳 شبكة</span><small>تُعرض وسيلة الدفع على التذكرة كعلامة فقط؛ اعتماد السداد لدى المنظّم.</small></div><div class="entry-gate"><span class="gate-attendant">🎟️</span><div><strong>بوابة دخول القاعة</strong><small>جهّز تذكرتك وقدّمها لموظف الاستقبال عند الباب قبل الدخول.</small></div><span class="gate-arrow">←</span></div><div id="cinemaTicket" class="cinema-ticket hidden"><div class="ticket-top"><span>TAIF GRAND CINEMA</span><b id="ticketTier">💎 تذكرة ألماسية</b></div><div class="ticket-main"><div><small>اسم صاحب التذكرة</small><strong id="ticketName">—</strong></div><div><small>رقم المقعد</small><strong id="ticketSeat">—</strong></div><div><small>قيمة المقعد</small><strong id="ticketPrice">—</strong></div><div><small>وسيلة الدفع</small><strong id="ticketPayment" class="network-ticket-label">💳 شبكة</strong></div></div><div id="ticketDiscount" class="ticket-discount hidden"></div><div class="ticket-items"><b>طلباتك داخل القاعة</b><div id="ticketItems">لم تتم إضافة أصناف.</div></div><div class="ticket-status" id="ticketStatus">بانتظار تأكيد السداد من المنظّم</div><div class="ticket-cut">✂ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ✂</div><div class="ticket-stub"><span class="stub-brand">TAIF CINEMA</span><strong>💳 شبكة</strong><small>قسيمة التحقق عند الباب · احتفظ بها مع التذكرة</small><b class="stub-code">▥ ▥ ▥ ▥ ▥ ▥ ▥ ▥ ▥</b></div></div><div class="snack-total-line"><span>إجمالي الطلب</span><strong><b id="snackTotal">0</b> ريال</strong></div><p id="snackBalanceHint">سيتم الخصم من رصيد محفظتك الافتراضية بعد تأكيد الشراء.</p><div class="snack-actions"><button class="secondary" id="editSeatOrder">تعديل المقعد</button><button id="buySnacks">تأكيد الشراء والخصم</button></div><p id="snackMessage" class="note" role="status"></p><div id="snackReceipt" class="snack-receipt hidden"></div><button id="enterAuditorium" class="hidden">الدخول إلى قاعة السينما</button></div>
    </div>
    <div id="cinemaExperience" class="cinema-experience hidden">
     <div class="experience-header"><span>قاعة سينما رحلة الطائف · قاعة واحدة للجميع</span><span id="experienceSeat">المقعد —</span></div>
@@ -1511,7 +1523,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
  <section id="inviteScreen" class="screen">
   <div class="panel">
    <div class="invite-cover"><div class="invite-kicker">بطاقة ترحيبية</div><div class="invite-emblem">✦</div><h2>أهلًا بك في رحلة الطائف</h2><p>وجودك يكمّل فرحتنا… والتحابّ يجمعنا</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف! يسعدنا وجودك معنا في رحلة تجمعنا بالمودّة والأخوّة والذكريات الجميلة.</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
-   <div class="cash-only-note" id="cashOnlyNote"><span class="cash-icon">💵💳</span><strong>طرق الدفع المتاحة</strong><p>الدفع كاش 💵 أو عبر الشبكة 💳، بحسب اعتماد المنظّم.</p><span class="cash-footnote">اختيار طريقة الدفع لا يُعدّ تأكيدًا لوصول المبلغ.</span></div><div class="wealth-dua"><strong>دعاء نبوي للرزق والغنى والبركة</strong><p>«اللهم إني أسألك الهدى والتقى والعفاف والغنى»</p><small>رواه مسلم في صحيحه (2721).</small></div>
+   
    <div class="invite-whatsapp-note">📱 <strong>انتظر دعوتك الرسمية على واتساب</strong><br>ستصلك الدعوة الخاصة بك على رقم الجوال المسجّل، وتتضمن تفاصيل الرحلة ورابط دعوتك الشخصية.</div>
    
    <div class="journey-finished" role="status" aria-live="polite"><div class="finished-mark">✓</div><div class="finished-kicker">TAIF TRIP · THE END</div><h2>وصلت إلى نهاية الرحلة الرقمية</h2><p>شكرًا لمشاركتك معنا. انتهت خطوات الموقع، وباقي نلتقي على خير في الرحلة بإذن الله.</p><strong>ننتظر دعوتك الرسمية على واتساب.</strong></div><p class="note">هذه نهاية تجربة الموقع، ولا يوجد زر للعودة إلى الصفحة الرئيسية من هنا.</p>
@@ -1621,8 +1633,8 @@ function buildPovHall(){
 
 function renderCinemaTicket(order){
  const tier=selectedSeat?.charAt(0)||'D',meta={A:['💎 التذكرة الألماسية','ألماسي'],B:['🥇 التذكرة الذهبية','ذهبي'],C:['🥈 التذكرة الفضية','فضي'],D:['🥉 التذكرة البرونزية','برونزي']}[tier];
- const teacher=selectedRole==='teacher',method=document.querySelector('input[name="seatPaymentMethod"]:checked')?.value||'cash';
- const payment=method==='network'?'شبكة 💳':'كاش 💵';
+ const teacher=selectedRole==='teacher';
+ const payment='شبكة 💳';
  $('cinemaTicket').className='cinema-ticket ticket-'+tier;
  $('ticketTier').textContent=teacher?'💎 تذكرة المعلم الألماسية':meta[0];
  $('ticketName').textContent=(selected?.kunya||selected?.name||'المشارك')+' · '+(selected?.name||'');
@@ -1634,7 +1646,6 @@ function renderCinemaTicket(order){
  $('ticketItems').innerHTML=order.lines.length?order.lines.map(x=>'<div>'+x.name+' — '+(teacher?'مجانًا (بدلًا من '+x.originalUnit+' ريال)':x.total+' ريال')+'</div>').join(''):'لا توجد طلبات إضافية.';
  $('ticketStatus').textContent=teacher?'تذكرة معلم مجانية · جاهزة للدخول': 'طريقة الدفع المختارة: '+payment+' · بانتظار تأكيد السداد من المنظّم';
 }
-document.querySelectorAll('input[name="seatPaymentMethod"]').forEach(el=>el.addEventListener('change',()=>{if(!$('cinemaTicket').classList.contains('hidden'))renderCinemaTicket(getSnackOrder())}));
 
 function renderCinemaSnacks(order){
  const tray=$('povSnackTray');if(!tray)return;
