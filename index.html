@@ -1416,7 +1416,22 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
  .teacher-shemagh{width:134px!important;height:110px!important;top:0!important}
  .teacher-agal{top:2px!important;width:79px!important;height:17px!important;border-width:6px!important}
  .teacher-marzaq{top:75px!important;width:36px!important;height:37px!important}
-}</style>
+}
+/* Personal welcome, feedback and shareable invitation */
+.welcome-poem{max-width:850px;margin:22px auto;padding:24px 18px;border:1px solid #d8b66f88;border-radius:18px;background:linear-gradient(145deg,#17263a,#090f19);box-shadow:0 18px 50px #0008}
+.welcome-poem h3{color:#f0d69e;text-align:center;margin:0 0 18px}
+.poem-line{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center;padding:13px 8px;border-bottom:1px solid #d8b66f25;color:#f5e7c7;font-size:clamp(14px,2.3vw,19px);line-height:1.9}
+.poem-line:last-child{border-bottom:0}.poem-line span:first-child{text-align:right}.poem-line span:last-child{text-align:left}
+.feedback-wrap{max-width:850px;margin:24px auto;padding:22px;border:1px solid #d8b66f66;border-radius:18px;background:#0b1422}
+.feedback-wrap h3{color:#efd49a;margin-top:0}.feedback-question{padding:15px 0;border-bottom:1px solid #ffffff18;text-align:right}
+.feedback-question label{display:block;color:#f6e8c9;font-weight:bold;margin-bottom:10px}
+.feedback-question select{width:100%;padding:13px;border-radius:10px;border:1px solid #8d7449;background:#111d2d;color:#fff}
+.feedback-note{font-size:12px;color:#b8c0cc;line-height:1.8}
+.invite-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px auto}
+#inviteCanvas{display:block;width:min(100%,520px);height:auto;margin:18px auto;border:1px solid #d8b66f88;border-radius:14px;background:#080d16}
+@media(max-width:560px){.poem-line{gap:8px;font-size:13px;padding:10px 2px}.welcome-poem,.feedback-wrap{padding:17px 12px}}
+
+</style>
 <style>
 /* Ticket, tier pricing, payment choice and expanded Taif photo gallery */
 .taif-gallery{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:12px!important;width:min(1120px,94%)!important;margin:28px auto 8px!important;position:relative;z-index:2}
@@ -1657,6 +1672,25 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
   </div>
  </section>
 
+
+ <section id="welcomeScreen" class="screen">
+  <div class="panel">
+   <div class="steps"><span class="step current">ترحيب خاص</span><span class="step">رأيك يهمنا</span><span class="step">متابعة الرحلة</span></div>
+   <div class="welcome-poem" id="welcomePoemWrap">
+    <h3 id="welcomePoemTitle">قصيدتك الخاصة</h3>
+    <div id="welcomePoemLines"></div>
+   </div>
+   <div class="feedback-wrap">
+    <h3>نبي نسمع رأيك ✦</h3>
+    <p class="feedback-note">رأيك يساعدنا نحسّن الموقع ونرتّب رحلة أجمل. الإجابة اختيارية، وتقدر تتخطّى الاستبيان.</p>
+    <div id="feedbackQuestions"></div>
+    <p id="feedbackStatus" class="feedback-note" role="status"></p>
+    <div class="actions"><button class="secondary" id="skipFeedback" type="button">تخطي الاستبيان</button><button id="submitFeedback" type="button">إرسال الإجابات ومتابعة الرحلة</button></div>
+   </div>
+   <div class="actions"><button id="welcomeContinue" type="button">دخول أجواء الرحلة ←</button></div>
+  </div>
+ </section>
+
  <section id="gameScreen" class="screen" aria-label="لعبة الباص">
   <div id="externalGameMount"></div>
   <div class="panel" id="gameNextPanel">
@@ -1757,6 +1791,14 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
   <div class="panel">
    <div class="invite-cover"><div class="invite-kicker">بطاقة ترحيبية</div><div class="invite-emblem">✦</div><h2>أهلًا بك في رحلة الطائف</h2><p>وجودك يكمّل فرحتنا… والتحابّ يجمعنا</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف! يسعدنا وجودك معنا في رحلة تجمعنا بالمودّة والأخوّة والذكريات الجميلة.</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
    
+
+   <div class="invite-actions">
+    <button id="createInviteCard" type="button">إنشاء بطاقة دعوتي ✦</button>
+    <button id="shareInviteWhatsApp" type="button" class="secondary" disabled>مشاركة البطاقة عبر واتساب</button>
+   </div>
+   <canvas id="inviteCanvas" width="1200" height="1500" class="hidden" aria-label="بطاقة الدعوة الشخصية"></canvas>
+   <p id="inviteShareStatus" class="note" role="status"></p>
+
    <div class="invite-whatsapp-note">📱 <strong>انتظر دعوتك الرسمية على واتساب</strong><br>ستصلك الدعوة الخاصة بك على رقم الجوال المسجّل، وتتضمن تفاصيل الرحلة ورابط دعوتك الشخصية.</div>
    
    <div class="journey-finished" role="status" aria-live="polite"><div class="finished-mark">✓</div><div class="finished-kicker">TAIF TRIP · THE END</div><h2>وصلت إلى نهاية الرحلة الرقمية</h2><p>شكرًا لمشاركتك معنا. انتهت خطوات الموقع، وباقي نلتقي على خير في الرحلة بإذن الله.</p><strong>ننتظر دعوتك الرسمية على واتساب.</strong></div><p class="note">هذه نهاية تجربة الموقع، ولا يوجد زر للعودة إلى الصفحة الرئيسية من هنا.</p>
@@ -1768,7 +1810,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 <script>
 const $=id=>document.getElementById(id);
 let selected=null,selectedSeat=null,selectedSeatPrice=0,selectedRole='student';
-const screens=['identity','gameScreen','walletScreen','cinemaScreen','adScreen','inviteScreen'];
+const screens=['identity','welcomeScreen','gameScreen','walletScreen','cinemaScreen','adScreen','inviteScreen'];
 function showScreen(id){const isLanding=id==='landing';const landing=$('landing');landing.hidden=!isLanding;landing.style.display=isLanding?'block':'none';landing.setAttribute('aria-hidden',String(!isLanding));screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
 $('beginBtn').addEventListener('click',()=>showScreen('identity'));
 $('gameToCinema')?.addEventListener('click',()=>{showScreen('walletScreen');renderWalletSummary()});
@@ -1793,16 +1835,59 @@ function normalizePhone(value){return normalizeDigits(value).replace(/[\s-]/g,''
 function updateRegistrationButton(){$('confirmIdentity').disabled=false}
 ['fullName','kunya','phone','teacherCode','dataConsent'].forEach(id=>$(id).addEventListener('input',updateRegistrationButton));
 $('dataConsent').addEventListener('change',updateRegistrationButton);
+
+const teacherPoems={"أبو حامد":[["يا رفيعَ القدرِ يا عاليَ الشأنِ","يا من تزيّنَ بالمروءةِ والإحسانِ"],["لكَ في مكارمِكَ الجميلةِ رفعةٌ","وتطيبُ في دربِ المعالي خُطوتانِ"],["حيّاكَ في موقعِ رحلةِ الطائفِ","ترحيبُ مصمّمٍ يليقُ بمقامِكَ"]],"أبو عبد الله":[["يا صاحبَ الخُلقِ الرفيعِ ومجدِهِ","يا من تلألأَ بالوفاءِ عهودُهُ"],["لكَ من جميلِ الفعلِ أصدقُ شاهدٍ","وبطيبِ ذكركَ تستنيرُ دروبُهُ"],["أهلًا بكَ في موقعِ رحلةِ الطائفِ","من مصمّمٍ يزهو بحسنِ حضورِكَ"]],"أبو فارس":[["يا شامخَ الهمّاتِ يا نِعمَ الفتى","يا من لهُ بينَ الكرامِ مكانُ"],["فيكَ الشهامةُ والمروءةُ أشرقتْ","وبطيبِ فعلكَ يُستضاءُ زمانُ"],["حيّاكَ في موقعِ رحلةِ الطائفِ","ترحيبُ مصمّمٍ يليقُ بكَ يا عزيزَ الشأنِ"]],"أبو جابر":[["يا صاحبَ العزمِ الجميلِ وطيبِهِ","يا من سمتْ بالفضلِ فيهِ خصالُهْ"],["لكَ في المواقفِ سيرةٌ مشهودةٌ","وبصدقِ طبعِكَ تُعرفُ أفعالُهْ"],["مرحبًا بكَ في موقعِ رحلةِ الطائفِ","من مصمّمٍ أعدّ الترحيبَ تقديرًا لمقامِكَ"]],"أبو سعود":[["يا من لهُ في المجدِ أرفعُ منزِلِ","يا طيّبَ الذكرِ الكريمَ المَحفلِ"],["لكَ من جميلِ الخُلقِ أبهى صورةٍ","وبحسنِ رأيكَ يستقيمُ الأجملُ"],["حيّاكَ في موقعِ رحلةِ الطائفِ","من مصمّمٍ صاغَ الترحيبَ بكلِّ تقديرٍ واحتفاءٍ"]]};
+function renderWelcome(){
+ const wrap=$('welcomePoemWrap'), lines=$('welcomePoemLines');
+ if(selectedRole==='teacher'){
+  const poem=teacherPoems[selected?.kunya]||teacherPoems['أبو سعود'];
+  $('welcomePoemTitle').textContent='قصيدتك الخاصة';
+  lines.innerHTML=poem.map(pair=>'<div class="poem-line"><span>'+pair[0]+'</span><span>'+pair[1]+'</span></div>').join('');
+  wrap.classList.remove('hidden');
+ }else{
+  wrap.classList.add('hidden');
+ }
+ const questions=selectedRole==='teacher'?[
+  {q:'كيف تقيّم الموقع بشكل عام من 10؟',opts:['10 من 10 — ممتاز','8 من 10 — جيد جدًا','6 من 10 — جيد','4 من 10 — يحتاج تحسين','2 من 10 — ضعيف','0 من 10 — غير مناسب']},
+  {q:'ما نسبة جمال تصميم الموقع والثيم؟',opts:['100٪','75٪','50٪','25٪','0٪']},
+  {q:'ما نسبة سهولة استخدام الموقع والتنقّل بين أقسامه؟',opts:['100٪','75٪','50٪','25٪','0٪']},
+  {q:'ما تقييمك للعبة الباص وتجربتها؟',opts:['100٪ — ممتازة','75٪ — جميلة جدًا','50٪ — متوسطة','25٪ — تحتاج تطوير','0٪ — لم تعجبني']},
+  {q:'ما أكثر شيء تتمنى وجوده أو التركيز عليه في الرحلة؟',opts:['الألعاب والمسابقات','الأنشطة الجماعية','الاستكشاف والزيارات','الوقت الحر والراحة','اقتراحات أخرى']}
+ ]:[
+  {q:'كيف تقيّم الموقع بشكل عام من 10؟',opts:['10 من 10 — ممتاز','8 من 10 — جيد جدًا','6 من 10 — جيد','4 من 10 — يحتاج تحسين','2 من 10 — ضعيف','0 من 10 — غير مناسب']},
+  {q:'كم نسبة حماسك لرحلة الطائف؟',opts:['100٪ — متحمس جدًا','75٪ — متحمس','50٪ — حماسي متوسط','25٪ — قليل الحماس','0٪ — غير متحمس']},
+  {q:'وش أكثر شيء ودّك يكون في الرحلة؟',opts:['ألعاب ومسابقات','زيارات ومغامرات','جلسات وفعاليات جماعية','مفاجآت وتحديات','كلها!']}
+ ];
+ $('feedbackQuestions').innerHTML=questions.map((item,i)=>'<div class="feedback-question"><label for="feedbackQ'+i+'">'+(i+1+'. '+item.q)+'</label><select id="feedbackQ'+i+'"><option value="">اختر إجابتك</option>'+item.opts.map(v=>'<option>'+v+'</option>').join('')+'</select></div>').join('');
+ $('feedbackStatus').textContent='';$('submitFeedback').disabled=false;
+}
+async function sendFeedback(){
+ const controls=[...$('feedbackQuestions').querySelectorAll('select')];
+ const answers=controls.map((el,i)=>({question:el.previousElementSibling.textContent.replace(/^\d+\.\s*/,''),answer:el.value}));
+ const answered=answers.filter(x=>x.answer);
+ if(!answered.length){$('feedbackStatus').textContent='اختر إجابة واحدة على الأقل، أو اضغط تخطي الاستبيان.';return}
+ $('submitFeedback').disabled=true;$('feedbackStatus').textContent='جارٍ إرسال رأيك…';
+ try{
+  const res=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({participantId:selected?.id||null,role:selectedRole,answers})});
+  const data=await res.json();if(!res.ok||!data.success)throw new Error(data.message||'تعذر حفظ الإجابات');
+  $('feedbackStatus').textContent='شكرًا لك! تم استلام رأيك.';
+  $('welcomeContinue').click();
+ }catch(err){$('feedbackStatus').textContent='تعذر حفظ الإجابات الآن. يمكنك المتابعة دون إرسالها.';$('submitFeedback').disabled=false}
+}
+$('submitFeedback').addEventListener('click',sendFeedback);
+$('skipFeedback').addEventListener('click',()=>showScreen('gameScreen'));
+$('welcomeContinue').addEventListener('click',()=>showScreen('gameScreen'));
+
 $('confirmIdentity').addEventListener('click',async()=>{
  const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=normalizePhone($('phone').value),teacherCode=$('teacherCode').value.trim();
  const message=!name?'اكتب اسمك.':!kunya?'اكتب الكنية.':!/^05\d{8}$/.test(phone)?'تأكد من رقم الجوال؛ اكتبه بصيغة 05XXXXXXXX.':!$('dataConsent').checked?'فعّل مربع الموافقة للمتابعة.':selectedRole==='teacher'&&!teacherCode?'أدخل رمز المعلمين.':'';
  if(message){$('identityMessage').textContent=message;return}
- selected={name,kunya};if($('walletName'))$('walletName').textContent=name;$('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
+ selected={name,kunya,id:null};if($('walletName'))$('walletName').textContent=name;$('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
  try{
   const r=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,kunya,phone,consent:true,role:selectedRole,teacherCode})});
   const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'تعذر التسجيل');
-  $('identityMessage').textContent='تم التسجيل بنجاح، جاري نقلك إلى لعبة الباص…';
-  showScreen('gameScreen');
+  $('identityMessage').textContent='تم التسجيل بنجاح.';
+  selected.id=d.id||null;renderWelcome();showScreen('welcomeScreen');
  }catch(e){$('identityMessage').textContent=e.message||'تعذر الاتصال بالخادم.';updateRegistrationButton()}
 });
 $('enterJourney').addEventListener('click',()=>showScreen('gameScreen'));
@@ -1934,11 +2019,46 @@ function renderSeats(){
  });
  renderWalletSummary();
 }
+
+function drawInvitationCard(){
+ const canvas=$('inviteCanvas'),ctx=canvas.getContext('2d'),name=selected?.kunya||'ضيفنا';
+ const g=ctx.createLinearGradient(0,0,1200,1500);g.addColorStop(0,'#1b3048');g.addColorStop(.55,'#0b1523');g.addColorStop(1,'#080c14');ctx.fillStyle=g;ctx.fillRect(0,0,1200,1500);
+ ctx.strokeStyle='#d9b66d';ctx.lineWidth=5;ctx.strokeRect(48,48,1104,1404);ctx.strokeStyle='#d9b66d77';ctx.lineWidth=2;ctx.strokeRect(72,72,1056,1356);
+ ctx.textAlign='center';ctx.direction='rtl';ctx.fillStyle='#e8c985';ctx.font='bold 48px Tahoma';ctx.fillText('دعوة خاصة',600,230);
+ ctx.fillStyle='#f7e7c2';ctx.font='bold 94px Tahoma';ctx.fillText('رحلة الطائف',600,430);
+ ctx.fillStyle='#d8b66f';ctx.fillRect(390,500,420,3);
+ ctx.fillStyle='#f7e7c2';ctx.font='bold 58px Tahoma';ctx.fillText('أهلًا بك، '+name,600,690);
+ ctx.fillStyle='#d8dce4';ctx.font='40px Tahoma';ctx.fillText('يسرّنا وجودك في رحلةٍ تجمعنا بالمودّة',600,810);ctx.fillText('والأخوّة والذكريات الجميلة',600,880);
+ if(selectedSeat){ctx.fillStyle='#e8c985';ctx.font='bold 42px Tahoma';ctx.fillText('مقعد السينما: '+selectedSeat,600,1030)}
+ ctx.fillStyle='#d8b66f';ctx.font='bold 46px Tahoma';ctx.fillText('تحابّوا · بالمودّة نلتقي',600,1220);
+ ctx.fillStyle='#b7c0cc';ctx.font='30px Tahoma';ctx.fillText('دعوة شخصية من منظّمي رحلة الطائف',600,1320);
+ canvas.classList.remove('hidden');$('shareInviteWhatsApp').disabled=false;
+}
+$('createInviteCard').addEventListener('click',drawInvitationCard);
+$('shareInviteWhatsApp').addEventListener('click',async()=>{
+ const canvas=$('inviteCanvas');if(canvas.classList.contains('hidden'))drawInvitationCard();
+ const name=selected?.kunya||'ضيفنا',text='دعوتك الخاصة لرحلة الطائف يا '+name+' 🌹';
+ canvas.toBlob(async blob=>{
+  if(!blob){$('inviteShareStatus').textContent='تعذر إنشاء صورة الدعوة.';return}
+  const file=new File([blob],'taif-trip-invitation.png',{type:'image/png'});
+  try{
+   if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+    await navigator.share({files:[file],title:'دعوة رحلة الطائف',text});
+    $('inviteShareStatus').textContent='تم فتح قائمة المشاركة. اختر واتساب لإرسال صورة الدعوة.';
+   }else{
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='taif-trip-invitation.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),30000);
+    window.open('https://wa.me/?text='+encodeURIComponent(text+' — أرفق صورة الدعوة التي تم تنزيلها.'),'_blank','noopener');
+    $('inviteShareStatus').textContent='تم تنزيل صورة الدعوة وفتح واتساب. أرفق الصورة في المحادثة ثم أرسلها.';
+   }
+  }catch(err){if(err.name!=='AbortError')$('inviteShareStatus').textContent='تعذرت المشاركة من الجهاز. يمكنك إعادة المحاولة.'}
+ },'image/png');
+});
+
 function showInvite(){
  if(!selected)selected={name:'ضيفنا',kunya:'ضيفنا'};
  const safe=String(selected.kunya||'ضيفنا').replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  $('inviteText').innerHTML='<strong>يا '+safe+'، مرحبًا بك!</strong><br>يسرّنا انضمامك إلينا في رحلة الطائف؛ أيامٌ تجمعنا بالمودّة والأخوّة والذكريات الجميلة.<br><br><strong>وجودك يسعدنا، وعنوان جمعتنا: تحابّوا.</strong>'+(selectedSeat?'<br><small>مقعدك في السينما: '+selectedSeat+'</small>':'');
- showScreen('inviteScreen');
+ $('inviteCanvas').classList.add('hidden');$('shareInviteWhatsApp').disabled=true;$('inviteShareStatus').textContent='';showScreen('inviteScreen');
 }
 // لا يوجد زر عودة من شاشة نهاية الرحلة؛ نتجنب ربط عنصر غير موجود.
 
