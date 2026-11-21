@@ -2243,9 +2243,8 @@ let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.targ
 <script id="taif-sw-register">
 if('serviceWorker' in navigator){
  window.addEventListener('load',()=>{
-  navigator.serviceWorker.register('/sw.js').then(reg=>{
-   const warm=()=>{if(navigator.serviceWorker.controller)navigator.serviceWorker.controller.postMessage('CACHE_GAME_FILES');};
-   if(reg.active)warm();else navigator.serviceWorker.ready.then(warm);
+  navigator.serviceWorker.register('/sw.js').then(()=>navigator.serviceWorker.ready).then(reg=>{
+   if(reg.active)reg.active.postMessage('CACHE_GAME_FILES');
   }).catch(()=>{});
  });
 }
