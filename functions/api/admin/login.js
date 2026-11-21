@@ -1,6 +1,6 @@
 function json(data,status=200,headers={}){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store",...headers}})}
-const PASSWORD_SHA256="c5193860c054f312a2f65ff0da413db09629e3a50451f02f9e98161a05f26994";
-const VERIFY_SHA256="012cae5f8b6191ba25d4617666904ec871c89d08093dcc0b0329cbe2388b5582";
+const PASSWORD_SHA256="ba24a2ef15a626f9a3e47640b86cb07173b55bfc74f2b0cf6070ec48fe4c9b50";
+const VERIFY_SHA256="bc53ab5f8167bccbfd5b64e4d6eefad62f794976b75c93e7dd40aa69764b016f";
 async function hash(value){const x=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));return Array.from(new Uint8Array(x),b=>b.toString(16).padStart(2,"0")).join("")}
 function equal(a,b){if(a.length!==b.length)return false;let n=0;for(let i=0;i<a.length;i++)n|=a.charCodeAt(i)^b.charCodeAt(i);return n===0}
 function token(){const b=crypto.getRandomValues(new Uint8Array(32));let s="";for(const x of b)s+=String.fromCharCode(x);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
