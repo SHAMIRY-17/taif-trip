@@ -1675,17 +1675,10 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 
  <section id="welcomeScreen" class="screen">
   <div class="panel">
-   <div class="steps"><span class="step current">ترحيب خاص</span><span class="step">رأيك يهمنا</span><span class="step">متابعة الرحلة</span></div>
+   <div class="steps"><span class="step current">ترحيب خاص</span><span class="step">بداية الرحلة</span></div>
    <div class="welcome-poem" id="welcomePoemWrap">
     <h3 id="welcomePoemTitle">قصيدتك الخاصة</h3>
     <div id="welcomePoemLines"></div>
-   </div>
-   <div class="feedback-wrap">
-    <h3>نبي نسمع رأيك ✦</h3>
-    <p class="feedback-note">رأيك يساعدنا نحسّن الموقع ونرتّب رحلة أجمل. الإجابة اختيارية، وتقدر تتخطّى الاستبيان.</p>
-    <div id="feedbackQuestions"></div>
-    <p id="feedbackStatus" class="feedback-note" role="status"></p>
-    <div class="actions"><button class="secondary" id="skipFeedback" type="button">تخطي الاستبيان</button><button id="submitFeedback" type="button">إرسال الإجابات ومتابعة الرحلة</button></div>
    </div>
    <div class="actions"><button id="welcomeContinue" type="button">دخول أجواء الرحلة ←</button></div>
   </div>
@@ -1787,6 +1780,20 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
   </div>
  </section>
 
+
+ <section id="feedbackScreen" class="screen">
+  <div class="panel">
+   <div class="steps"><span class="step">اللعبة والسينما</span><span class="step current">تقييمك النهائي</span><span class="step">الدعوة الخاصة</span></div>
+   <div class="feedback-wrap">
+    <h3>وصلنا لآخر محطات الموقع… نبي تقييمك ✦</h3>
+    <p class="feedback-note">بعد ما جرّبت الموقع واللعبة والسينما، شاركنا رأيك. إجاباتك تساعدنا نطوّر التجربة. تقدر تتخطى الاستبيان إذا رغبت.</p>
+    <div id="feedbackQuestions"></div>
+    <p id="feedbackStatus" class="feedback-note" role="status"></p>
+    <div class="actions"><button class="secondary" id="skipFeedback" type="button">تخطي والانتقال للدعوة</button><button id="submitFeedback" type="button">إرسال التقييم واستلام الدعوة ←</button></div>
+   </div>
+  </div>
+ </section>
+
  <section id="inviteScreen" class="screen">
   <div class="panel">
    <div class="invite-cover"><div class="invite-kicker">بطاقة ترحيبية</div><div class="invite-emblem">✦</div><h2>أهلًا بك في رحلة الطائف</h2><p>وجودك يكمّل فرحتنا… والتحابّ يجمعنا</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف! يسعدنا وجودك معنا في رحلة تجمعنا بالمودّة والأخوّة والذكريات الجميلة.</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
@@ -1810,14 +1817,14 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 <script>
 const $=id=>document.getElementById(id);
 let selected=null,selectedSeat=null,selectedSeatPrice=0,selectedRole='student';
-const screens=['identity','welcomeScreen','gameScreen','walletScreen','cinemaScreen','adScreen','inviteScreen'];
+const screens=['identity','welcomeScreen','gameScreen','walletScreen','cinemaScreen','adScreen','feedbackScreen','inviteScreen'];
 function showScreen(id){const isLanding=id==='landing';const landing=$('landing');landing.hidden=!isLanding;landing.style.display=isLanding?'block':'none';landing.setAttribute('aria-hidden',String(!isLanding));screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
 $('beginBtn').addEventListener('click',()=>showScreen('identity'));
 $('gameToCinema')?.addEventListener('click',()=>{showScreen('walletScreen');renderWalletSummary()});
 $('continueToCinema').addEventListener('click',()=>{showScreen('cinemaScreen');renderSeats()});
 $('backToGameFromWallet').addEventListener('click',()=>showScreen('gameScreen'));
 $('backToCinemaFromAd').addEventListener('click',()=>showScreen('cinemaScreen'));
-$('adContinue').addEventListener('click',showInvite);
+$('adContinue').addEventListener('click',()=>{renderFeedbackQuestions();showScreen('feedbackScreen')});
 $('backLanding').addEventListener('click',()=>showScreen('landing'));
 document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>{
  selectedRole=button.dataset.role;if(selectedRole==='supervisor'){window.location.href='/admin.html';return}
@@ -1838,28 +1845,28 @@ $('dataConsent').addEventListener('change',updateRegistrationButton);
 
 const teacherPoems={"أبو حامد":[["يا رفيعَ القدرِ يا عاليَ الشأنِ","يا من تزيّنَ بالمروءةِ والإحسانِ"],["لكَ في مكارمِكَ الجميلةِ رفعةٌ","وتطيبُ في دربِ المعالي خُطوتانِ"],["حيّاكَ في موقعِ رحلةِ الطائفِ","ترحيبُ مصمّمٍ يليقُ بمقامِكَ"]],"أبو عبد الله":[["يا صاحبَ الخُلقِ الرفيعِ ومجدِهِ","يا من تلألأَ بالوفاءِ عهودُهُ"],["لكَ من جميلِ الفعلِ أصدقُ شاهدٍ","وبطيبِ ذكركَ تستنيرُ دروبُهُ"],["أهلًا بكَ في موقعِ رحلةِ الطائفِ","من مصمّمٍ يزهو بحسنِ حضورِكَ"]],"أبو فارس":[["يا شامخَ الهمّاتِ يا نِعمَ الفتى","يا من لهُ بينَ الكرامِ مكانُ"],["فيكَ الشهامةُ والمروءةُ أشرقتْ","وبطيبِ فعلكَ يُستضاءُ زمانُ"],["حيّاكَ في موقعِ رحلةِ الطائفِ","ترحيبُ مصمّمٍ يليقُ بكَ يا عزيزَ الشأنِ"]],"أبو جابر":[["يا صاحبَ العزمِ الجميلِ وطيبِهِ","يا من سمتْ بالفضلِ فيهِ خصالُهْ"],["لكَ في المواقفِ سيرةٌ مشهودةٌ","وبصدقِ طبعِكَ تُعرفُ أفعالُهْ"],["مرحبًا بكَ في موقعِ رحلةِ الطائفِ","من مصمّمٍ أعدّ الترحيبَ تقديرًا لمقامِكَ"]],"أبو سعود":[["يا من لهُ في المجدِ أرفعُ منزِلِ","يا طيّبَ الذكرِ الكريمَ المَحفلِ"],["لكَ من جميلِ الخُلقِ أبهى صورةٍ","وبحسنِ رأيكَ يستقيمُ الأجملُ"],["حيّاكَ في موقعِ رحلةِ الطائفِ","من مصمّمٍ صاغَ الترحيبَ بكلِّ تقديرٍ واحتفاءٍ"]]};
 function renderWelcome(){
- const wrap=$('welcomePoemWrap'), lines=$('welcomePoemLines');
+ const wrap=$('welcomePoemWrap'),lines=$('welcomePoemLines');
  if(selectedRole==='teacher'){
-  const normalizeKunya=value=>String(value||'').replace(/[أإآ]/g,'ا').replace(/\s+/g,'').trim();
+  const normalizeKunya=value=>String(value||'').replace(/[أإآ]/g,'ا').replace(/\\s+/g,'').trim();
   const chosenKunya=normalizeKunya(selected?.kunya);
   const poemKey=Object.keys(teacherPoems).find(key=>normalizeKunya(key)===chosenKunya)||'أبو سعود';
   const poem=teacherPoems[poemKey];
   $('welcomePoemTitle').textContent='قصيدتك الخاصة';
   lines.innerHTML=poem.map(pair=>'<div class="poem-line"><span>'+pair[0]+'</span><span>'+pair[1]+'</span></div>').join('');
   wrap.classList.remove('hidden');
- }else{
-  wrap.classList.add('hidden');
- }
+ }else{wrap.classList.add('hidden')}
+}
+function renderFeedbackQuestions(){
  const questions=selectedRole==='teacher'?[
   {q:'كيف تقيّم الموقع بشكل عام من 10؟',opts:['10 من 10 — ممتاز','8 من 10 — جيد جدًا','6 من 10 — جيد','4 من 10 — يحتاج تحسين','2 من 10 — ضعيف','0 من 10 — غير مناسب']},
-  {q:'ما نسبة جمال تصميم الموقع والثيم؟',opts:['100٪','75٪','50٪','25٪','0٪']},
-  {q:'ما نسبة سهولة استخدام الموقع والتنقّل بين أقسامه؟',opts:['100٪','75٪','50٪','25٪','0٪']},
-  {q:'ما تقييمك للعبة الباص وتجربتها؟',opts:['100٪ — ممتازة','75٪ — جميلة جدًا','50٪ — متوسطة','25٪ — تحتاج تطوير','0٪ — لم تعجبني']},
-  {q:'ما أكثر شيء تتمنى وجوده أو التركيز عليه في الرحلة؟',opts:['الألعاب والمسابقات','الأنشطة الجماعية','الاستكشاف والزيارات','الوقت الحر والراحة','اقتراحات أخرى']}
+  {q:'ما تقييمك لجمال التصميم والثيم وتناسق الألوان؟',opts:['100٪ — ممتاز','75٪ — جميل جدًا','50٪ — جيد','25٪ — يحتاج تحسين','0٪ — غير مناسب']},
+  {q:'ما تقييمك لسهولة التنقل واستخدام أقسام الموقع؟',opts:['100٪ — سهل جدًا','75٪ — سهل','50٪ — متوسط','25٪ — صعب','0٪ — صعب جدًا']},
+  {q:'ما تقييمك للعبة الباص من حيث المتعة والتنفيذ؟',opts:['100٪ — ممتازة','75٪ — ممتعة جدًا','50٪ — جيدة','25٪ — تحتاج تطوير','0٪ — غير مناسبة']},
+  {q:'ما تقييمك لتجربة السينما والحجز والطلبات؟',opts:['100٪ — ممتازة','75٪ — جميلة جدًا','50٪ — جيدة','25٪ — تحتاج تحسين','0٪ — غير مناسبة']}
  ]:[
   {q:'كيف تقيّم الموقع بشكل عام من 10؟',opts:['10 من 10 — ممتاز','8 من 10 — جيد جدًا','6 من 10 — جيد','4 من 10 — يحتاج تحسين','2 من 10 — ضعيف','0 من 10 — غير مناسب']},
   {q:'كم نسبة حماسك لرحلة الطائف؟',opts:['100٪ — متحمس جدًا','75٪ — متحمس','50٪ — حماسي متوسط','25٪ — قليل الحماس','0٪ — غير متحمس']},
-  {q:'وش أكثر شيء ودّك يكون في الرحلة؟',opts:['ألعاب ومسابقات','زيارات ومغامرات','جلسات وفعاليات جماعية','مفاجآت وتحديات','كلها!']}
+  {q:'وش أكثر قسم استمتعت فيه داخل الموقع؟',opts:['لعبة الباص','السينما وحجز المقعد','المحفظة والطلبات','إعلان الرحلة','كلها']}
  ];
  $('feedbackQuestions').innerHTML=questions.map((item,i)=>'<div class="feedback-question"><label for="feedbackQ'+i+'">'+(i+1+'. '+item.q)+'</label><select id="feedbackQ'+i+'"><option value="">اختر إجابتك</option>'+item.opts.map(v=>'<option>'+v+'</option>').join('')+'</select></div>').join('');
  $('feedbackStatus').textContent='';$('submitFeedback').disabled=false;
@@ -1874,11 +1881,11 @@ async function sendFeedback(){
   const res=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({participantId:selected?.id||null,role:selectedRole,answers})});
   const data=await res.json();if(!res.ok||!data.success)throw new Error(data.message||'تعذر حفظ الإجابات');
   $('feedbackStatus').textContent='شكرًا لك! تم استلام رأيك.';
-  $('welcomeContinue').click();
+  showInvite();
  }catch(err){$('feedbackStatus').textContent='تعذر حفظ الإجابات الآن. يمكنك المتابعة دون إرسالها.';$('submitFeedback').disabled=false}
 }
 $('submitFeedback').addEventListener('click',sendFeedback);
-$('skipFeedback').addEventListener('click',()=>showScreen('gameScreen'));
+$('skipFeedback').addEventListener('click',showInvite);
 $('welcomeContinue').addEventListener('click',()=>showScreen('gameScreen'));
 
 $('confirmIdentity').addEventListener('click',async()=>{
