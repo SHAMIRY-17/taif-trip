@@ -1389,8 +1389,8 @@ $('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('cinemaExp
 $('replayWalk').addEventListener('click',()=>{buildPovHall();walkToSeat()});
 $('watchMovie').addEventListener('click',()=>{$('povScreen').innerHTML='<span>الطائف… حكاية تبدأ الآن</span><small>استمتعوا بالعرض معًا</small>'; $('povViewerCaption').textContent='أنت جالس في '+selectedSeat+' وتشاهد الشاشة من زاويتك';$('experienceInvite').disabled=false});
 $('experienceInvite').addEventListener('click',showInvite);
-let povLook=0;
-function setPovLook(deg){povLook=deg;$('povScene').style.setProperty('--view-angle',deg+'deg');$('povViewerCaption').textContent=deg<0?'تنظر الآن إلى المقاعد المجاورة على يسارك':deg>0?'تنظر الآن إلى المقاعد المجاورة على يمينك':'تنظر إلى الشاشة من مقعدك '+(selectedSeat||'');}
+let povLook=0,povSeatAngle=0;
+function setPovLook(deg){povLook=deg;$('povScene').style.setProperty('--view-angle',(povSeatAngle+deg)+'deg');$('povViewerCaption').textContent=deg<0?'تنظر الآن إلى المقاعد المجاورة على يسارك':deg>0?'تنظر الآن إلى المقاعد المجاورة على يمينك':'تنظر إلى الشاشة من مقعدك '+(selectedSeat||'');}
 $('povLookLeft').addEventListener('click',()=>setPovLook(-12));
 $('povLookCenter').addEventListener('click',()=>setPovLook(0));
 $('povLookRight').addEventListener('click',()=>setPovLook(12));
@@ -1407,7 +1407,8 @@ function buildPovHall(){
  $('povAisleWords').textContent=words[tier];
  $('povWelcomeSign').textContent='مقعدك '+selectedSeat+' · '+tierNames[tier];
  const angle=(num-1)/Math.max(1,({A:5,B:7,C:9,D:11}[tier])-1)-.5;
- $('povScene').style.setProperty('--view-angle',(angle*9)+'deg');
+ povSeatAngle=angle*9;
+ $('povScene').style.setProperty('--view-angle',povSeatAngle+'deg');
  $('povScene').style.setProperty('--view-shift',(angle*36)+'px');
  setPovLook(0);
 }
