@@ -1806,9 +1806,9 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
    <canvas id="inviteCanvas" width="1200" height="1500" class="hidden" aria-label="بطاقة الدعوة الشخصية"></canvas>
    <p id="inviteShareStatus" class="note" role="status"></p>
 
-   <div class="invite-whatsapp-note">📱 <strong>انتظر دعوتك الرسمية على واتساب</strong><br>ستصلك الدعوة الخاصة بك على رقم الجوال المسجّل، وتتضمن تفاصيل الرحلة ورابط دعوتك الشخصية.</div>
    
-   <div class="journey-finished" role="status" aria-live="polite"><div class="finished-mark">✓</div><div class="finished-kicker">TAIF TRIP · THE END</div><h2>وصلت إلى نهاية الرحلة الرقمية</h2><p>شكرًا لمشاركتك معنا. انتهت خطوات الموقع، وباقي نلتقي على خير في الرحلة بإذن الله.</p><strong>ننتظر دعوتك الرسمية على واتساب.</strong></div><p class="note">هذه نهاية تجربة الموقع، ولا يوجد زر للعودة إلى الصفحة الرئيسية من هنا.</p>
+   
+   <div class="journey-finished" role="status" aria-live="polite"><div class="finished-mark">✓</div><div class="finished-kicker">TAIF TRIP · THE END</div><h2>وصلت إلى نهاية الرحلة الرقمية</h2><p>شكرًا لمشاركتك معنا. انتهت خطوات الموقع، وباقي نلتقي على خير في الرحلة بإذن الله.</p><strong>ننتظرك معنا في رحلة الطائف بإذن الله.</strong></div><p class="note">هذه نهاية تجربة الموقع، ولا يوجد زر للعودة إلى الصفحة الرئيسية من هنا.</p>
   </div>
  </section>
 </main>
@@ -1820,7 +1820,7 @@ let selected=null,selectedSeat=null,selectedSeatPrice=0,selectedRole='student';
 const screens=['identity','welcomeScreen','gameScreen','walletScreen','cinemaScreen','adScreen','feedbackScreen','inviteScreen'];
 function showScreen(id){const isLanding=id==='landing';const landing=$('landing');landing.hidden=!isLanding;landing.style.display=isLanding?'block':'none';landing.setAttribute('aria-hidden',String(!isLanding));screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
 $('beginBtn').addEventListener('click',()=>showScreen('identity'));
-$('gameToCinema')?.addEventListener('click',()=>{showScreen('walletScreen');renderWalletSummary()});
+$('gameToCinema')?.addEventListener('click',()=>{if(selectedRole==='teacher'){showScreen('cinemaScreen');renderSeats()}else{showScreen('walletScreen');renderWalletSummary()}});
 $('continueToCinema').addEventListener('click',()=>{showScreen('cinemaScreen');renderSeats()});
 $('backToGameFromWallet').addEventListener('click',()=>showScreen('gameScreen'));
 $('backToCinemaFromAd').addEventListener('click',()=>showScreen('cinemaScreen'));
@@ -1903,7 +1903,7 @@ $('confirmIdentity').addEventListener('click',async()=>{
 $('enterJourney').addEventListener('click',()=>showScreen('gameScreen'));
 
 
-$('backGame').addEventListener('click',()=>showScreen('walletScreen'));
+$('backGame').addEventListener('click',()=>{if(selectedRole==='teacher'){showScreen('gameScreen')}else{showScreen('walletScreen')}});
 $('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('snackShop').classList.remove('hidden');$('snackShop').scrollIntoView({behavior:'smooth',block:'center'});updateSnackTotal()});
 $('editSeatOrder').addEventListener('click',()=>{$('snackShop').classList.add('hidden');$('seatGrid').scrollIntoView({behavior:'smooth',block:'center'})});
 ['popcornInclude','doritosInclude','slushInclude','popcornFlavor','slushFlavor'].forEach(id=>$(id).addEventListener('change',updateSnackTotal));document.querySelectorAll('input[name="popcornSize"],input[name="doritosSize"],input[name="slushSize"]').forEach(el=>el.addEventListener('change',updateSnackTotal));
@@ -1974,7 +1974,7 @@ function renderCinemaTicket(order){
  $('ticketPrice').textContent=teacher?'مجانًا للمعلمين':selectedSeatPrice.toLocaleString('ar-SA')+' ريال';
  $('ticketPayment').textContent=teacher?'إعفاء المعلمين':payment;
  $('ticketDiscount').classList.toggle('hidden',!teacher);
- $('ticketDiscount').textContent=teacher?'خصم المعلمين: 300 ريال (100٪) · المقعد الألماسي والطلبات مجانًا تقديرًا للمعلمين.':'';
+ $('ticketDiscount').textContent=teacher?'إعفاء كامل للمعلمين: المقعد وجميع الطلبات مجانًا (100٪).':'';
  $('ticketItems').innerHTML=order.lines.length?order.lines.map(x=>'<div>'+x.name+' — '+(teacher?'مجانًا (بدلًا من '+x.originalUnit+' ريال)':x.total+' ريال')+'</div>').join(''):'لا توجد طلبات إضافية.';
  $('ticketStatus').textContent=teacher?'تذكرة معلم مجانية · جاهزة للدخول': 'طريقة الدفع المختارة: '+payment+' · بانتظار تأكيد السداد من المنظّم';
 }
@@ -1997,7 +1997,7 @@ let walletBalance=1000;
 function renderWalletSummary(){
  $('walletName').textContent=selected?.kunya||selected?.name||'اسم المشارك';
  $('walletBalance').textContent=walletBalance.toLocaleString('en-US');
- $('cinemaWalletBalance').textContent=walletBalance.toLocaleString('en-US');
+ $('cinemaWalletBalance').textContent=walletBalance.toLocaleString('en-US');document.querySelector('.cinema-wallet-strip')?.classList.toggle('hidden',selectedRole==='teacher');document.querySelector('.seat-payment-choice')?.classList.toggle('hidden',selectedRole==='teacher');
  const studentOnly=selectedRole==='student';
  ['studentTransferList','studentWalletTotal','studentWalletDisclaimer'].forEach(id=>$(id)?.classList.toggle('hidden',!studentOnly));
  const heading=$('walletScreen').querySelector('.wallet-intro h2');
@@ -2021,8 +2021,8 @@ function renderSeats(){
   const row=document.createElement('div');row.className='seat-row tier-'+item.tier;
   const heading=document.createElement('div');heading.className='row-label';heading.innerHTML='<b>الصف '+item.tier+' · '+item.icon+' '+item.label+(item.tier==='A'?' · خاص بالمعلمين فقط':'')+'</b>';row.appendChild(heading);
   const line=document.createElement('div');line.className='seat-line';
-  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.type='button';btn.className='seat';btn.innerHTML='<span>'+i+'</span><small class="seat-price-tag">'+(item.tier==='A'?(selectedRole==='teacher'?'مجانًا':'خاص بالمعلمين'):(item.price+' ر'))+'</small>';btn.setAttribute('aria-label','المقعد '+id+' '+item.label+' '+(item.tier==='A'?(selectedRole==='teacher'?'مجانًا للمعلمين':'مخصص للمعلمين فقط'):(item.price+' ريال')));
-   const allowed=selectedRole==='teacher'?item.tier==='A':item.tier!=='A';btn.disabled=!allowed;
+  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.type='button';btn.className='seat';btn.innerHTML='<span>'+i+'</span><small class="seat-price-tag">'+(selectedRole==='teacher'?'مجانًا':(item.tier==='A'?'خاص بالمعلمين':item.price+' ر'))+'</small>';btn.setAttribute('aria-label','المقعد '+id+' '+item.label+' '+(selectedRole==='teacher'?'مجانًا للمعلمين':(item.tier==='A'?'مخصص للمعلمين فقط':item.price+' ريال')));
+   const allowed=selectedRole==='teacher'?true:item.tier!=='A';btn.disabled=!allowed;
    btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;selectedSeatPrice=selectedRole==='teacher'?0:item.price;$('seatStatus').textContent='تم اختيار '+id+' في الصف '+item.label+' · قيمة المقعد: '+(selectedRole==='teacher'?'مجانًا للمعلمين':item.price+' ريال')+'.';$('seatSelectionInfo').innerHTML='<span>📍 مقعدك المختار</span><strong>'+id+' · '+item.label+'</strong><small>قيمة المقعد: '+(selectedRole==='teacher'?'مجانًا للمعلمين':item.price+' ريال')+'</small>';$('toInvite').disabled=false});
    line.appendChild(btn)}
   row.appendChild(line);host.appendChild(row)
