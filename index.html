@@ -118,6 +118,23 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
 .student-welcome-card p{color:#d2d9e3;line-height:2}
 .student-welcome-sub{font-size:13px;color:#b9c4d2!important}
 @media(max-width:700px){#busGameFrame{height:72dvh;min-height:500px}.external-game-mount{border-radius:12px}.student-welcome-card{padding:22px 15px}}
+
+.payment-panel{margin-top:22px}
+.payment-method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.payment-method{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 12px;border:1px solid #64748b;border-radius:14px;background:#101b2a;color:#edf2f8;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+.payment-method:hover{border-color:#d8b66f;transform:translateY(-2px)}
+.payment-method[aria-pressed="true"]{border:2px solid #d8b66f;background:linear-gradient(145deg,#29364a,#111c2a);box-shadow:0 0 0 2px #d8b66f22}
+.payment-method-icon{font-size:30px;color:#e2c783}
+.payment-method strong{font-size:17px}
+.payment-method small{color:#b9c4d2;line-height:1.7;text-align:center}
+.payment-detail{padding:18px;margin:12px 0;border:1px solid #d8b66f66;border-radius:14px;background:#0c1522}
+.payment-detail h4{margin:0 0 8px;color:#f0d69e}
+.payment-detail p{color:#d1d9e4;line-height:1.9;margin:0}
+.payment-qr-placeholder{min-height:175px;margin-top:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed #b99a5b;border-radius:12px;background:#121f30;color:#e4d3a8;text-align:center;padding:18px}
+.payment-qr-placeholder span{font-size:44px}
+.payment-qr-placeholder small{color:#aeb9c8}
+.payment-encouragement{margin:16px 0 0;padding:14px 16px;border-right:3px solid #d8b66f;border-radius:8px;background:#172438;color:#e7dfcc;line-height:2}
+@media(max-width:560px){.payment-method-grid{grid-template-columns:1fr}}
 /* TAIF TRIP — visual redesign only; gameplay flow and sections remain unchanged */
 :root{--bg:#070b12;--panel:#101a29;--gold:#e7c98b;--gold2:#9f7940;--muted:#c0c9d6;--line:#d8b66f55}
 body{background:#070b12;color:#f7f3eb;background-image:radial-gradient(ellipse at 12% 8%,#25405a55,transparent 35%),radial-gradient(ellipse at 88% 32%,#9a713322,transparent 32%),linear-gradient(180deg,#080d16,#05080e 75%);background-attachment:fixed}
@@ -1880,7 +1897,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
      <article class="trip-info-item"><span>🚌 وقت الانطلاق</span><strong>07:00 صباحًا</strong><small>نأمل الحضور والاستعداد قبل الموعد</small></article>
      <article class="trip-info-item"><span>🌙 موعد العودة</span><strong>الجمعة 27 نوفمبر 2026</strong><small>العودة إلى المنزل في مساء يوم الجمعة</small></article>
      <article class="trip-info-item trip-info-price"><span>💳 رسوم المشاركة</span><strong>350 ريالًا</strong><small>رسوم الرحلة للفرد</small></article>
-     <article class="trip-info-item trip-info-early"><span>⏳ تنبيه مهم</span><strong>السداد المبكر أفضل</strong><small>بادر بالسداد مبكرًا حتى نتمكن من تأكيد مشاركتك وترتيب التجهيزات بكل سهولة</small></article>
+     <article class="trip-info-item trip-info-early"><span>⏳ تنبيه مهم</span><strong>السداد المبكر أفضل</strong><small>يا بطل، إذا تيسّر لك السداد مبكرًا فبادر؛ فذلك يعيننا على تأكيد مشاركتك وترتيب التجهيزات مبكرًا. شاكرين لك حرصك وتعاونك.</small></article>
     </div>
     <p class="trip-info-note">✨ نرجو الالتزام بوقت الانطلاق، وتجهيز أغراضك قبل موعد الرحلة. نتمنى لك رحلة ممتعة مليئة بالألفة والذكريات الجميلة.</p>
    </section>
@@ -1891,6 +1908,27 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
     <div class="packing-section"><h4>🧼 أدوات النظافة الشخصية</h4><ul><li>فرشة أسنان ومعجون.</li><li>عطر.</li><li>شامبو وصابون.</li><li>مزيل عرق.</li></ul></div>
     <div class="packing-section"><h4>🎒 أغراض أخرى</h4><ul><li>جزمة رياضية 👟.</li><li>لحاف خفيف ومخدة.</li><li>منشفة.</li><li>مصحف 📖.</li><li>أغراضك الشخصية والخاصة.</li></ul></div>
     <p class="trip-info-note">✅ راجع القائمة قبل إغلاق شنطتك، وتأكد أن جميع أغراضك الشخصية معك.</p>
+   </section>
+   <section id="paymentPanel" class="participant-info-panel payment-panel">
+    <div class="trip-info-heading"><span class="trip-info-icon">💳</span><div><h3>طريقة سداد رسوم الرحلة</h3><p>اختر الطريقة المناسبة لك</p></div></div>
+    <div class="payment-method-grid" role="group" aria-label="طرق الدفع">
+     <button type="button" class="payment-method" data-payment="network" aria-pressed="false">
+      <span class="payment-method-icon">▦</span><strong>شبكة / تحويل</strong><small>الدفع إلكترونيًا عبر بيانات التحويل</small>
+     </button>
+     <button type="button" class="payment-method" data-payment="cash" aria-pressed="false">
+      <span class="payment-method-icon">💵</span><strong>كاش</strong><small>الدفع نقدًا وقت الرحلة</small>
+     </button>
+    </div>
+    <div id="networkPaymentDetails" class="payment-detail hidden" aria-live="polite">
+     <h4>الدفع عبر الشبكة أو التحويل</h4>
+     <p>ستظهر هنا صورة بيانات المستفيد ورمز QR بعد إضافتها من المنظّم.</p>
+     <div class="payment-qr-placeholder"><span>▦</span><strong>مكان صورة الآيبان ورمز QR</strong><small>بانتظار إرفاق الصورة المعتمدة</small></div>
+    </div>
+    <div id="cashPaymentDetails" class="payment-detail hidden" aria-live="polite">
+     <h4>الدفع نقدًا</h4>
+     <p>يمكنك اختيار الدفع كاش، وتسليم رسوم الرحلة للمنظّم وقت الرحلة بإذن الله.</p>
+    </div>
+    <p class="payment-encouragement">🌟 نصيحة من فريق الرحلة: إذا كان السداد المبكر مناسبًا لك، فبادر به؛ فمبادرتك تساعدنا على ترتيب الحجوزات والتجهيزات براحة أكبر. شكرًا لحرصك، ونسعد بانضمامك!</p>
    </section>
    <p id="participantCardStatus" class="note" role="status">هذه بطاقتك الشخصية داخل موقع رحلة الطائف.</p>
   </div>
@@ -2151,6 +2189,12 @@ async function showInvite(){
 }
 $('tripDetailsBtn').addEventListener('click',()=>{$('tripDetailsPanel').classList.toggle('hidden');$('requirementsPanel').classList.add('hidden')});
 $('requirementsBtn').addEventListener('click',()=>{$('requirementsPanel').classList.toggle('hidden');$('tripDetailsPanel').classList.add('hidden')});
+document.querySelectorAll('[data-payment]').forEach(button=>button.addEventListener('click',()=>{
+ const method=button.dataset.payment;
+ document.querySelectorAll('[data-payment]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+ $('networkPaymentDetails').classList.toggle('hidden',method!=='network');
+ $('cashPaymentDetails').classList.toggle('hidden',method!=='cash');
+}));
 // لا يوجد زر عودة من شاشة نهاية الرحلة؛ نتجنب ربط عنصر غير موجود.
 
 let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden');$('adPlaceholder').classList.add('hidden')});
