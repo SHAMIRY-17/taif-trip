@@ -1452,6 +1452,23 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .participant-info-panel h3{margin:0 0 8px;color:#E8D2A8}
 @media(max-width:560px){.participant-card-body{grid-template-columns:1fr;justify-items:center;gap:16px}.participant-photo-frame{width:124px;height:142px}.participant-fields{width:100%}.participant-card-head{align-items:flex-start;flex-direction:column}.participant-card-foot{font-size:9px}}
 
+
+.trip-info-heading{display:flex;align-items:center;gap:14px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #c5a88055}
+.trip-info-heading h3{margin:0 0 4px;color:#f0d9b5;font-size:21px}.trip-info-heading p{margin:0;color:#d4d8d1;font-size:13px}
+.trip-info-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border:1px solid #c5a88088;border-radius:15px;background:#c5a88018;font-size:27px}
+.trip-info-intro{line-height:2;color:#eee5d7;margin:0 0 16px}
+.trip-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.trip-info-item{padding:14px;border:1px solid #c5a88044;border-radius:13px;background:#ffffff08;display:flex;flex-direction:column;gap:7px}
+.trip-info-item>span{font-size:12px;color:#e0c99f}.trip-info-item strong{font-size:16px;color:#fff5e5;line-height:1.7}.trip-info-item small{font-size:12px;line-height:1.8;color:#cbd0cd}
+.trip-info-price{background:#c5a88015;border-color:#c5a88099}.trip-info-price strong{font-size:22px;color:#f3d69e}
+.trip-info-early{background:#ffffff0c}
+.trip-info-note{margin:16px 0 0;padding:13px;border-radius:12px;background:#c5a88012;color:#ead8b8;line-height:2;font-size:13px}
+.packing-section{margin:13px 0;padding:15px;border:1px solid #c5a88044;border-radius:13px;background:#ffffff08}
+.packing-section h4{margin:0 0 10px;color:#f0d9b5;font-size:16px}
+.packing-section ul{margin:0;padding-right:22px;line-height:2.1;color:#eee5d7}
+.packing-section li{padding-right:2px}
+@media(max-width:520px){.trip-info-grid{grid-template-columns:1fr}.trip-info-item{padding:13px}.trip-info-heading h3{font-size:18px}}
+
 </style>
 <style>
 /* Ticket, tier pricing, payment choice and expanded Taif photo gallery */
@@ -1836,8 +1853,26 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
     <button id="tripDetailsBtn" type="button">تفاصيل الطلعة</button>
     <button id="requirementsBtn" type="button" class="secondary">متطلباتي الشخصية</button>
    </div>
-   <section id="tripDetailsPanel" class="participant-info-panel hidden"><h3>تفاصيل الطلعة</h3><p>سيتم عرض تفاصيل الرحلة المعتمدة هنا بعد إضافتها من المنظّم.</p></section>
-   <section id="requirementsPanel" class="participant-info-panel hidden"><h3>متطلباتي الشخصية</h3><p>ستظهر هنا المتطلبات الخاصة بك بعد اعتمادها من المنظّم.</p></section>
+   <section id="tripDetailsPanel" class="participant-info-panel hidden">
+    <div class="trip-info-heading"><span class="trip-info-icon">🏔️</span><div><h3>تفاصيل رحلة الطائف</h3><p>ثلاثة أيام من الأجواء الجميلة والرفقة الطيبة بإذن الله</p></div></div>
+    <div class="trip-info-grid">
+     <article class="trip-info-item"><span>📍 الوجهة</span><strong>الطائف</strong><small>رحلة إلى أجواء الطائف وطبيعتها</small></article>
+     <article class="trip-info-item"><span>🗓️ موعد الانطلاق</span><strong>الأربعاء 25 نوفمبر 2026</strong><small>التجمع والانطلاق صباحًا</small></article>
+     <article class="trip-info-item"><span>🚌 وقت الانطلاق</span><strong>07:00 صباحًا</strong><small>نأمل الحضور والاستعداد قبل الموعد</small></article>
+     <article class="trip-info-item"><span>🌙 موعد العودة</span><strong>الجمعة 27 نوفمبر 2026</strong><small>العودة إلى المنزل في مساء يوم الجمعة</small></article>
+     <article class="trip-info-item trip-info-price"><span>💳 رسوم المشاركة</span><strong>350 ريالًا</strong><small>رسوم الرحلة للفرد</small></article>
+     <article class="trip-info-item trip-info-early"><span>⏳ تنبيه مهم</span><strong>السداد المبكر أفضل</strong><small>بادر بالسداد مبكرًا حتى نتمكن من تأكيد مشاركتك وترتيب التجهيزات بكل سهولة</small></article>
+    </div>
+    <p class="trip-info-note">✨ نرجو الالتزام بوقت الانطلاق، وتجهيز أغراضك قبل موعد الرحلة. نتمنى لك رحلة ممتعة مليئة بالألفة والذكريات الجميلة.</p>
+   </section>
+   <section id="requirementsPanel" class="participant-info-panel hidden">
+    <div class="trip-info-heading"><span class="trip-info-icon">🎒</span><div><h3>شنطة المسافر</h3><p>استعد لرحلة الطائف 🌧️🏔️</p></div></div>
+    <p class="trip-info-intro">بما أنك أكدت حضورك، حان وقت تجهيز شنطتك! تأكد من إحضار الأغراض التالية حتى تكون رحلتك مريحة وممتعة.</p>
+    <div class="packing-section"><h4>👕 الملابس</h4><ul><li>ثوب (عدد كافٍ).</li><li>شماغ.</li><li>قميص نوم.</li><li>ملابس شتوية 🧥.</li><li>ملابس رياضية (عدد كافٍ).</li><li>ملابس سباحة 🏊.</li><li>طقم كشخة ومميز لوقت النزهة.</li></ul></div>
+    <div class="packing-section"><h4>🧼 أدوات النظافة الشخصية</h4><ul><li>فرشة أسنان ومعجون.</li><li>عطر.</li><li>شامبو وصابون.</li><li>مزيل عرق.</li></ul></div>
+    <div class="packing-section"><h4>🎒 أغراض أخرى</h4><ul><li>جزمة رياضية 👟.</li><li>لحاف خفيف ومخدة.</li><li>منشفة.</li><li>مصحف 📖.</li><li>أغراضك الشخصية والخاصة.</li></ul></div>
+    <p class="trip-info-note">✅ راجع القائمة قبل إغلاق شنطتك، وتأكد أن جميع أغراضك الشخصية معك.</p>
+   </section>
    <p id="participantCardStatus" class="note" role="status">هذه بطاقتك الشخصية داخل موقع رحلة الطائف.</p>
   </div>
   <div class="journey-finished" role="status" aria-live="polite"><div class="finished-mark">✓</div><div class="finished-kicker">TAIF TRIP · THE END</div><h2>وصلت إلى نهاية الرحلة الرقمية</h2><p>شكرًا لمشاركتك معنا. انتهت خطوات الموقع، وباقي نلتقي على خير في الرحلة بإذن الله.</p><strong>ننتظرك معنا في رحلة الطائف بإذن الله.</strong></div>
