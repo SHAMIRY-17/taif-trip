@@ -1124,3 +1124,117 @@ let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.targ
 </script>
 </body>
 </html>
+
+/* Responsive landing refinement: phone, tablet and laptop */
+#landing .hero{
+ position:relative!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ justify-items:center!important;align-content:center!important;
+ min-height:740px!important;height:auto!important;
+ padding:52px 24px 58px!important;overflow:hidden!important;
+}
+#landing .hero>.content{
+ position:relative!important;z-index:4!important;
+ width:min( min(88vw, 560px), 560px)!important;
+ height:min( min(88vw, 560px), 560px)!important;
+ min-height:0!important;max-width:none!important;max-height:none!important;
+ aspect-ratio:1/1!important;flex:none!important;
+ padding:clamp(22px,3.2vw,38px)!important;
+ display:flex!important;flex-direction:column!important;
+ justify-content:center!important;align-items:center!important;
+ overflow:visible!important;gap:0!important;
+}
+#landing .hero>.content .eyebrow{font-size:clamp(10px,1.1vw,13px)!important}
+#landing .hero>.content h1{font-size:clamp(38px,5.3vw,58px)!important;margin:8px 0!important}
+#landing .hero>.content .description{font-size:clamp(11px,1.2vw,14px)!important;line-height:1.75!important}
+#landing .hero>.content .hero-poetry{max-width:100%!important;width:100%!important;margin:13px auto 10px!important;padding:9px 3px!important}
+#landing .hero>.content .poetry-grid{gap:5px 10px!important}
+#landing .hero>.content .poetry-cell{font-size:clamp(10px,1.25vw,14px)!important;line-height:1.65!important}
+#landing .hero>.content .actions{margin-top:4px!important}
+#landing .hero>.content #beginBtn{font-size:clamp(12px,1.3vw,15px)!important;padding:11px 24px!important}
+#landing .hero>.taif-gallery{
+ position:absolute!important;inset:0!important;z-index:2!important;
+ width:100%!important;height:100%!important;display:block!important;
+ pointer-events:none!important;
+}
+#landing .hero .taif-photo{filter:none!important}
+#landing .hero .taif-photo img{
+ filter:saturate(1.02) contrast(1.12) brightness(1.04)!important;
+ object-fit:cover!important;
+}
+#landing .hero .taif-photo figcaption{font-size:11px!important}
+#landing .hero .photo-hada{
+ width:clamp(155px,18vw,225px)!important;height:clamp(120px,14vw,175px)!important;
+ right:3%!important;top:5%!important;left:auto!important;bottom:auto!important;
+}
+#landing .hero .photo-rose{
+ width:clamp(125px,14vw,180px)!important;height:clamp(165px,19vw,235px)!important;
+ left:3%!important;top:25%!important;right:auto!important;bottom:auto!important;
+}
+#landing .hero .photo-mist{
+ width:clamp(170px,19vw,245px)!important;height:clamp(115px,13vw,170px)!important;
+ right:7%!important;bottom:4%!important;left:auto!important;top:auto!important;
+}
+#landing>section:not(.hero){padding:52px clamp(16px,6vw,80px)!important}
+#landing .cards{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ width:min(100%,900px)!important;margin:26px auto 0!important;gap:16px!important;
+}
+#landing .cards .card{
+ display:flex!important;aspect-ratio:auto!important;min-height:205px!important;
+ padding:24px 18px!important;align-items:center!important;justify-content:center!important;
+ text-align:center!important;
+}
+#landing .cards .card p{max-width:34ch!important;font-size:14px!important;line-height:1.8!important}
+
+/* Tablet portrait: keep the square compact, then show all three photos clearly below it. */
+@media(max-width:900px){
+ #landing .hero{min-height:0!important;padding:34px 18px 42px!important;gap:20px!important}
+ #landing .hero>.content{width:min(74vw,500px)!important;height:min(74vw,500px)!important;padding:clamp(20px,3.5vw,32px)!important}
+ #landing .hero>.taif-gallery{
+  position:relative!important;inset:auto!important;z-index:2!important;
+  display:grid!important;grid-template-columns:1fr 1fr!important;
+  grid-template-rows:125px 125px!important;gap:12px!important;
+  width:min(100%,620px)!important;height:auto!important;
+ }
+ #landing .hero .taif-photo{
+  position:relative!important;inset:auto!important;width:100%!important;height:100%!important;
+  transform:none!important;border-radius:24px 42px 24px 42px!important;
+ }
+ #landing .hero .photo-rose{grid-row:span 2!important;border-radius:42px 24px 42px 24px!important}
+ #landing .hero .photo-mist{grid-column:2!important}
+ #landing .hero .taif-photo figcaption{font-size:11px!important}
+}
+
+/* Phone: readable square panel and a clear photo collage beneath it. */
+@media(max-width:520px){
+ #landing .hero{padding:25px 12px 34px!important;gap:16px!important}
+ #landing .hero>.content{
+  width:min(92vw,380px)!important;height:min(92vw,380px)!important;
+  padding:18px 14px!important;border-radius:22px!important;
+ }
+ #landing .hero>.content:before{width:46px!important;margin-bottom:6px!important}
+ #landing .hero>.content .eyebrow{font-size:9px!important;letter-spacing:.4px!important}
+ #landing .hero>.content h1{font-size:clamp(32px,9vw,39px)!important;margin:4px 0 6px!important}
+ #landing .hero>.content .description{font-size:10.5px!important;line-height:1.6!important}
+ #landing .hero>.content .hero-poetry{margin:8px auto 6px!important;padding:6px 0!important}
+ #landing .hero>.content .poetry-grid{gap:3px 5px!important}
+ #landing .hero>.content .poetry-cell{font-size:9.5px!important;line-height:1.48!important}
+ #landing .hero>.content #beginBtn{font-size:11px!important;padding:9px 15px!important}
+ #landing .hero>.taif-gallery{grid-template-rows:105px 105px!important;gap:9px!important}
+ #landing .hero .taif-photo figcaption{right:8px!important;left:8px!important;bottom:7px!important;font-size:9px!important}
+ #landing>section:not(.hero){padding:34px 12px!important}
+ #landing .cards{gap:9px!important}
+ #landing .cards .card{min-height:165px!important;padding:14px 9px!important;border-radius:15px!important}
+ #landing .cards .card .symbol{font-size:30px!important;margin-bottom:5px!important}
+ #landing .cards .card h3{font-size:13px!important;margin:3px 0 5px!important}
+ #landing .cards .card p{font-size:10px!important;line-height:1.55!important}
+}
+
+/* Wide laptop and desktop: photos frame the smaller square without covering it. */
+@media(min-width:901px){
+ #landing .hero{min-height:720px!important}
+ #landing .hero>.content{width:min(40vw,540px)!important;height:min(40vw,540px)!important}
+ #landing .hero .photo-hada{right:4%!important;top:7%!important}
+ #landing .hero .photo-rose{left:4%!important;top:25%!important}
+ #landing .hero .photo-mist{right:7%!important;bottom:5%!important}
+}
