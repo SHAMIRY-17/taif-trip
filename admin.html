@@ -1,16 +1,17 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>إدارة رحلة الطائف</title><style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;padding:18px;background:radial-gradient(ellipse at top,#243a54,#080b12 70%);color:#fff;font-family:Tahoma,Arial}main{max-width:1180px;margin:auto}h1,h2,h3{color:#e6c783}.box{background:linear-gradient(145deg,#17263a,#0b1320);border:1px solid #b99a5b88;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 18px 50px #0006}label{display:block;margin:12px 0 6px;color:#e8d5a8}input,textarea{padding:13px;border-radius:10px;border:1px solid #68758a;background:#080f1b;color:#fff;width:100%;margin:4px 0;direction:rtl}button{padding:12px 17px;background:linear-gradient(135deg,#e5cb91,#a98242);border:0;border-radius:9px;font-weight:bold;cursor:pointer;margin:4px;color:#17120a}.secondary{background:#26364b;color:#f5dfb0;border:1px solid #947b50}.muted{color:#aeb8c6;line-height:1.8}#status{color:#e6c783;min-height:24px}.hidden{display:none!important}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.tabs{display:flex;gap:8px;overflow:auto;padding:8px 0}.tabs button{white-space:nowrap}.tabs button.active{outline:2px solid #f3d99e}.tab{display:none}.tab.active{display:block}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.stat{padding:16px;background:#0b1421;border:1px solid #ffffff20;border-radius:12px}.num{font-size:27px;color:#f2d99e;font-weight:bold}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:650px}th,td{padding:12px;border-bottom:1px solid #ffffff22;text-align:right;vertical-align:top}th{color:#e6c783}.pill{display:inline-block;padding:4px 9px;border-radius:20px;background:#263b50;color:#f3dfb4}.note{border-right:3px solid #d8b66f;padding:12px;background:#101b2a;border-radius:8px;line-height:1.9}a{color:#f1d69b}
-</style></head><body><main>
+.card-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.card-tools input{max-width:220px}.card-preview{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:14px 0;padding:16px;border:1px solid #c5a88066;border-radius:12px;background:#0b1421}.card-preview img{width:110px;height:130px;object-fit:cover;border-radius:12px;border:1px solid #c5a880}.card-preview[hidden]{display:none}</style></head><body><main>
 <div class="topline"><div><h1>TAIF TRIP</h1><p class="muted">مركز إدارة الطلاب والمعلمين والرحلة</p></div><button id="logout" class="secondary">تسجيل الخروج</button></div>
 <section class="box" id="loginBox"><h2>دخول المشرف</h2><label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password"><label>رمز التحقق</label><input id="verification" type="password" autocomplete="one-time-code"><button id="login">دخول لوحة الإدارة</button><p id="status"></p></section>
 <section id="dashboard" class="hidden">
 <div class="stats" id="stats"></div>
 <nav class="tabs" aria-label="أقسام لوحة المشرف">
-<button class="active" data-tab="people">👥 المسجلون</button><button data-tab="game">🚌 اللعبة</button><button data-tab="cinema">🎬 السينما</button><button data-tab="feedback">⭐ التقييمات</button><button data-tab="invite">✉️ الدعوات وواتساب</button>
+<button class="active" data-tab="people">👥 المسجلون</button><button data-tab="game">🚌 اللعبة</button><button data-tab="cinema">🎬 السينما</button><button data-tab="feedback">⭐ التقييمات</button><button data-tab="invite">✉️ الدعوات وواتساب</button><button data-tab="cards">🪪 بطاقات المشاركين</button>
 </nav>
 <section class="box tab active" id="tab-people"><h2>ملفات من دخلوا الموقع</h2><p class="muted">بيانات الاتصال تظهر للمشرف فقط.</p><div class="tablewrap"><table><thead><tr><th>الصفة</th><th>الاسم</th><th>الكنية</th><th>رقم الجوال</th><th>التسجيل</th></tr></thead><tbody id="peopleRows"></tbody></table></div></section>
 <section class="box tab" id="tab-game"><h2>مشاركة اللعبة ونتائجها</h2><div class="note">حاليًا اللعبة لا تحفظ نتيجة كل لاعب أو نسبة تقدمه في قاعدة البيانات؛ لذلك لن أعرض أرقامًا تقديرية. يلزم إضافة حفظ نقاط اللاعب ووقت اللعب ونسبة الإنجاز عند نهاية الجولة.</div><p class="muted">عدد المسجلين: <b id="gameRegistered">0</b></p></section>
-<section class="box tab" id="tab-cinema"><h2>حجوزات السينما</h2><div class="note">بيانات المقاعد والحجوزات لا تصل حاليًا إلى لوحة المشرف من قاعدة البيانات. يلزم ربط اختيار المقعد وحالة الحجز باسم المشارك ورقمه قبل عرضها هنا.</div></section>
+<section class="box tab" id="tab-cinema"><h2>حجوزات السينما</h2><p class="muted">الحجوزات المؤكدة والخصومات المحفوظة من محفظة الرحلة.</p><div class="tablewrap"><table><thead><tr><th>المشارك</th><th>المقعد</th><th>الإجمالي</th><th>الرصيد بعد العملية</th><th>التاريخ</th></tr></thead><tbody id="orderRows"></tbody></table></div></section>
+<section class="box tab" id="tab-cards"><h2>بطاقات المشاركين</h2><p class="muted">اختر المشارك، أضف صورته أو استبدلها. الصور لا تُعرض في القائمة العامة؛ إدارة الصور متاحة للمشرف فقط، والبطاقة الشخصية تُحمّل من جلسة المشارك.</p><div class="tablewrap"><table><thead><tr><th>رقم المشارك</th><th>الاسم</th><th>الكنية</th><th>الصورة</th><th>الإجراء</th></tr></thead><tbody id="cardRows"></tbody></table></div><div id="cardPreview" class="card-preview" hidden><img id="cardPreviewImage" alt="معاينة صورة بطاقة المشارك"><div><b id="cardPreviewName"></b><p id="cardPreviewNumber" class="muted"></p><span id="cardPreviewStatus" class="muted"></span></div></div><p id="cardStatus" class="muted" role="status"></p></section>
 <section class="box tab" id="tab-feedback"><h2>استبيانات الطلاب والمعلمين</h2><div class="tablewrap"><table><thead><tr><th>المشارك</th><th>الصفة</th><th>الإجابات</th><th>التاريخ</th></tr></thead><tbody id="feedbackRows"></tbody></table></div></section>
 <section class="box tab" id="tab-invite"><h2>إدارة الدعوات وإرسالها عبر واتساب</h2><p class="muted">اكتب نص الإعلان الكامل، ثم اختر المشارك. زر واتساب يفتح المحادثة مع النص جاهزًا لتراجعه وتضغط إرسال. لا يمكن للموقع الإرسال الصامت تلقائيًا دون ربط WhatsApp Business Cloud API رسميًا.</p><label>نص إعلان الرحلة</label><textarea id="announcement" rows="7" placeholder="اكتب تفاصيل الرحلة كاملة: الموعد، الانطلاق، الرسوم، البرنامج، العودة..."></textarea><div class="tablewrap"><table><thead><tr><th>المشارك</th><th>الرقم</th><th>الإجراء</th></tr></thead><tbody id="inviteRows"></tbody></table></div><h3>تفعيل الإرسال التلقائي</h3><div class="note">بعد تجهيز حساب WhatsApp Business Cloud API، تُضاف بيانات الربط السرية في إعدادات Cloudflare (ولا توضع في كود الموقع). نحتاج رقم هاتف الأعمال ومعرّف رقم الهاتف ورمز وصول آمن واسم قالب رسالة معتمد. لا توجد هذه البيانات في المشروع حاليًا، لذلك لم أفعّل إرسالًا تلقائيًا غير حقيقي.</div></section>
 </section></main><script>
@@ -22,10 +23,43 @@ $('stats').innerHTML=[['إجمالي المسجلين',d.stats.total],['الطل
 $('gameRegistered').textContent=d.stats.total;
 $('peopleRows').innerHTML=d.participants.length?d.participants.map(p=>'<tr><td><span class="pill">'+(p.role==='teacher'?'معلم':'طالب')+'</span></td><td>'+esc(p.name)+'</td><td>'+esc(p.kunya)+'</td><td dir="ltr">'+esc(p.phone)+'</td><td>'+date(p.created_at)+'</td></tr>').join(''):'<tr><td colspan="5">لا توجد تسجيلات.</td></tr>';
 $('feedbackRows').innerHTML=d.feedback.length?d.feedback.map(f=>{let answers=[];try{answers=JSON.parse(f.answers_json||'[]')}catch(e){}return '<tr><td>'+esc(f.kunya||f.name||('مشارك #'+f.participant_id))+'</td><td>'+ (f.role==='teacher'?'معلم':'طالب')+'</td><td>'+answers.map(a=>'<div><b>'+esc(a.question)+'</b><br>'+esc(a.answer)+'</div>').join('<hr>')+'</td><td>'+date(f.created_at)+'</td></tr>'}).join(''):'<tr><td colspan="4">لم تصل تقييمات بعد.</td></tr>';
+$('orderRows').innerHTML=(d.orders||[]).map(o=>'<tr><td>'+esc(o.kunya||o.name)+' — '+esc(o.name)+'</td><td>'+esc(o.seat)+'</td><td>'+Number(o.total).toLocaleString('ar-SA')+' ريال</td><td>'+Number(o.wallet_after).toLocaleString('ar-SA')+' ريال</td><td>'+date(o.created_at)+'</td></tr>').join('')||'<tr><td colspan="5">لا توجد حجوزات محفوظة.</td></tr>';
+$('cardRows').innerHTML=d.participants.map(p=>'<tr><td>'+esc(p.id)+'</td><td>'+esc(p.name)+'</td><td>'+esc(p.kunya)+'</td><td>'+(p.has_photo?'✓ مضافة':'لم تُضف بعد')+'</td><td><button data-preview-card="'+p.id+'">عرض البطاقة</button><label class="card-tools"><input type="file" accept="image/*" data-upload-card="'+p.id+'"><small>إضافة / استبدال الصورة</small></label></td></tr>').join('')||'<tr><td colspan="5">لا يوجد مشاركون.</td></tr>';
 $('inviteRows').innerHTML=d.participants.map(p=>'<tr><td>'+esc(p.kunya)+' — '+esc(p.name)+'</td><td dir="ltr">'+esc(p.phone)+'</td><td><button data-send="'+p.id+'">فتح واتساب بالدعوة</button></td></tr>').join('')||'<tr><td colspan="3">لا يوجد مشاركون.</td></tr>';
 }
 $('login').onclick=async()=>{$('login').disabled=true;$('status').textContent='جارٍ التحقق…';try{const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({password:$('password').value,verificationCode:$('verification').value})}),d=await r.json();if(!r.ok||!d.success)throw Error(d.message||'بيانات الدخول غير صحيحة');await load();$('loginBox').classList.add('hidden');$('dashboard').classList.remove('hidden')}catch(e){$('status').textContent=e.message;$('password').value='';$('verification').value=''}finally{$('login').disabled=false}};
 $('logout').onclick=async()=>{await fetch('/api/admin/logout',{method:'POST',credentials:'same-origin'});location.reload()};
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.id==='tab-'+b.dataset.tab))});
 $('inviteRows').addEventListener('click',e=>{const b=e.target.closest('[data-send]');if(!b)return;const p=data.participants.find(x=>String(x.id)===b.dataset.send);if(!p)return;const msg='دعوة خاصة إلى '+p.kunya+'\n\n'+$('announcement').value.trim();if(!msg.trim()||!$('announcement').value.trim()){alert('اكتب إعلان الرحلة أولًا.');return}const phone=String(p.phone).replace(/\D/g,'').replace(/^0/,'966');window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(msg),'_blank','noopener')});
+
+$('cardRows').addEventListener('change',async e=>{
+ const input=e.target.closest('[data-upload-card]');if(!input||!input.files?.[0])return;
+ const file=input.files[0];if(!file.type.startsWith('image/')){$('cardStatus').textContent='اختر ملف صورة فقط.';input.value='';return}
+ $('cardStatus').textContent='جارٍ تجهيز الصورة وحفظها…';
+ try{
+  const image=new Image(),url=URL.createObjectURL(file);
+  await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;image.src=url});
+  const scale=Math.min(1,720/Math.max(image.width,image.height)),canvas=document.createElement('canvas');
+  canvas.width=Math.max(1,Math.round(image.width*scale));canvas.height=Math.max(1,Math.round(image.height*scale));
+  canvas.getContext('2d').drawImage(image,0,0,canvas.width,canvas.height);URL.revokeObjectURL(url);
+  const photoData=canvas.toDataURL('image/jpeg',.78);
+  const response=await fetch('/api/admin/cards',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:Number(input.dataset.uploadCard),photoData})});
+  const result=await response.json();if(!response.ok||!result.success)throw Error(result.message||'تعذر حفظ الصورة');
+  $('cardStatus').textContent='✓ تم حفظ الصورة. ستظهر للمشارك في بطاقته الشخصية.';
+  await load();
+ }catch(err){$('cardStatus').textContent=err.message||'تعذر حفظ الصورة.'}
+ finally{input.value=''}
+});
+$('cardRows').addEventListener('click',async e=>{
+ const button=e.target.closest('[data-preview-card]');if(!button)return;
+ $('cardStatus').textContent='جارٍ تحميل البطاقة…';
+ try{
+  const response=await fetch('/api/admin/cards?id='+encodeURIComponent(button.dataset.previewCard),{credentials:'same-origin',cache:'no-store'}),result=await response.json();
+  if(!response.ok||!result.success)throw Error(result.message||'تعذر تحميل البطاقة');
+  const p=result.participant;$('cardPreviewName').textContent=p.kunya+' — '+p.name;$('cardPreviewNumber').textContent='رقم المشارك: '+p.id;
+  $('cardPreviewStatus').textContent=p.photoData?'الصورة الحالية محفوظة ويمكن استبدالها.':'لم تُضف صورة لهذا المشارك بعد.';
+  $('cardPreviewImage').src=p.photoData||'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="110" height="130"%3E%3Crect width="100%25" height="100%25" fill="%23454b4d"/%3E%3C/svg%3E';
+  $('cardPreview').hidden=false;$('cardStatus').textContent='';
+ }catch(err){$('cardStatus').textContent=err.message||'تعذر تحميل البطاقة.'}
+});
 </script></body></html>
