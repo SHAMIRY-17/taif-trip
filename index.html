@@ -1676,13 +1676,13 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
     <div class="wallet-bottom"><span>الرصيد المتاح</span><strong><b id="walletBalance">1,000</b> ريال</strong></div>
     <p class="wallet-note">محفظة افتراضية للرحلة — ليست بطاقة بنكية حقيقية ولا وسيلة دفع مصرفية.</p>
    </div>
-   <div class="transfer-list" aria-label="التحويلات الواردة">
+   <div class="transfer-list" id="studentTransferList" aria-label="التحويلات الواردة">
     <article class="transfer-item"><span class="transfer-icon">🎮</span><div class="transfer-copy"><b>مكافأة لعبة الباص</b><small>تحويل وارد من إنجاز اللعبة</small></div><strong>+500 <small>ريال</small></strong><em>✓ تمت الإضافة</em></article>
     <article class="transfer-item"><span class="transfer-icon">👨🏻‍🏫</span><div class="transfer-copy"><b>مساهمة المعلمين</b><small>رصيد مخصص من المعلمين</small></div><strong>+300 <small>ريال</small></strong><em>✓ تمت الإضافة</em></article>
     <article class="transfer-item"><span class="transfer-icon">🛡️</span><div class="transfer-copy"><b>مساهمة المشرف</b><small>رصيد مخصص من المشرف</small></div><strong>+200 <small>ريال</small></strong><em>✓ تمت الإضافة</em></article>
    </div>
-   <div class="wallet-total"><span>إجمالي الرصيد المضاف</span><strong>1,000 ريال</strong></div>
-   <p class="note wallet-disclaimer">هذه مبالغ تجريبية داخل الموقع فقط، ولا تمثل حوالات بنكية أو أموالًا حقيقية.</p>
+   <div class="wallet-total" id="studentWalletTotal"><span>إجمالي الرصيد المضاف</span><strong>1,000 ريال</strong></div>
+   <p class="note wallet-disclaimer" id="studentWalletDisclaimer">هذه مبالغ تجريبية داخل الموقع فقط، ولا تمثل حوالات بنكية أو أموالًا حقيقية.</p>
    <div class="actions"><button class="secondary" id="backToGameFromWallet">العودة للعبة</button><button id="continueToCinema">متابعة إلى حجز السينما ←</button></div>
   </div>
  </section>
@@ -1903,6 +1903,20 @@ function renderWalletSummary(){
  $('walletName').textContent=selected?.kunya||selected?.name||'اسم المشارك';
  $('walletBalance').textContent=walletBalance.toLocaleString('en-US');
  $('cinemaWalletBalance').textContent=walletBalance.toLocaleString('en-US');
+ const studentOnly=selectedRole==='student';
+ ['studentTransferList','studentWalletTotal','studentWalletDisclaimer'].forEach(id=>$(id)?.classList.toggle('hidden',!studentOnly));
+ const heading=$('walletScreen').querySelector('.wallet-intro h2');
+ const kicker=$('walletScreen').querySelector('.wallet-kicker');
+ const description=$('walletScreen').querySelector('.wallet-intro .muted');
+ if(selectedRole==='teacher'){
+  if(heading)heading.textContent='محفظتك الافتراضية';
+  if(kicker)kicker.textContent='TAIF TRIP · TEACHER WALLET';
+  if(description)description.textContent='رصيدك الافتراضي ومزايا المعلم في رحلة الطائف.';
+ }else{
+  if(heading)heading.textContent='محفظتك وتحويلات الرحلة';
+  if(kicker)kicker.textContent='TAIF TRIP · TRANSFERS';
+  if(description)description.textContent='بعد انتهاء اللعبة، استلم رصيدك الافتراضي وتأكد من تفاصيل المبالغ قبل حجز السينما.';
+ }
 }
 function renderSeats(){
  $('cinemaExperience').classList.add('hidden');
