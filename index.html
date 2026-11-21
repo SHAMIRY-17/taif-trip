@@ -1208,6 +1208,11 @@ img,video,canvas,iframe{max-width:100%}
 @keyframes pov-arrive{0%{transform:translateY(9%) scale(1.08) rotateY(var(--view-angle))}100%{transform:translateY(0) scale(1) rotateY(var(--view-angle))}}
 @media(max-width:600px){.pov-shell{padding:8px}.pov-scene{height:440px}.pov-screen-frame{left:19%;width:62%;top:10%;height:22%}.pov-seat-field{left:3%;right:3%;top:39%}.pov-chair{width:8%}.pov-row.tier-A .pov-chair{width:12%}.pov-near-seat{width:30%;height:35%}.pov-topline{font-size:9px}.pov-controls button{padding:9px 10px;font-size:11px}}
 
+
+.wallet-card{max-width:480px;margin:18px auto 24px;padding:20px 22px;border-radius:20px;color:#f7f2e8;background:linear-gradient(125deg,#182638,#34485d 58%,#92764d);border:1px solid #d9bd83;box-shadow:0 18px 40px #0006;position:relative;overflow:hidden;text-align:right}
+.wallet-top,.wallet-bottom{display:flex;justify-content:space-between;gap:12px;align-items:center}.wallet-top{font-size:11px;letter-spacing:1px;color:#e8d4ac}.wallet-chip{margin:24px 0 14px;width:42px;height:30px;border:1px solid #e5d4a9;border-radius:7px;display:grid;place-items:center;color:#f5e3b7}.wallet-name{font-size:18px;font-weight:800;letter-spacing:.5px}.wallet-bottom{margin-top:16px;padding-top:13px;border-top:1px solid #ffffff3d;font-size:13px}.wallet-bottom strong{font-size:21px;color:#ffe1a0}.wallet-note{font-size:11px;color:#e3e5e8;margin:12px 0 0}
+.payment-choice{max-width:650px;margin:24px auto;padding:20px;border:1px solid #c9a96c77;border-radius:16px;background:#121d2b;text-align:right}.payment-choice label{display:inline-flex;align-items:center;gap:8px;margin:12px 16px 4px 0;padding:12px 18px;border:1px solid #9b865f;border-radius:12px;cursor:pointer}.payment-choice input{accent-color:#c9a96c}
+
 </style>
 </head>
 <body>
@@ -1288,8 +1293,15 @@ img,video,canvas,iframe{max-width:100%}
 
  <section id="cinemaScreen" class="screen">
   <div class="panel">
-   <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step current">2 · السينما</span><span class="step">3 · الدعوة</span></div>
-   <h2>قاعة سينما رحلة الطائف</h2><p class="muted" id="cinemaWelcome">اختر مقعدك من خريطة القاعة؛ المقاعد الأمامية أقرب للشاشة، ولكل فئة تصميمها وسعرها.</p>
+   <h2>قاعة سينما رحلة الطائف</h2>
+   <div class="wallet-card" id="walletCard">
+    <div class="wallet-top"><span>TAIF TRIP · WALLET</span><span>بطاقة المحفظة الافتراضية</span></div>
+    <div class="wallet-chip">▦</div>
+    <div class="wallet-name" id="walletName">اسم المشارك</div>
+    <div class="wallet-bottom"><span>رصيدك الافتراضي</span><strong><b id="walletBalance">1,000</b> ريال</strong></div>
+    <p class="wallet-note">رصيد تجريبي داخل الرحلة فقط، وليس بطاقة بنكية حقيقية.</p>
+   </div>
+<p class="muted" id="cinemaWelcome">اختر مقعدك من خريطة القاعة؛ المقاعد الأمامية أقرب للشاشة، ولكل فئة تصميمها وسعرها.</p>
    <div class="tablet-booking">
     <div class="tablet-top"><span>TAIF CINEMA · حجز المقاعد</span><span class="tablet-camera"></span><span>● متصل</span></div>
     <div class="cinema-room movie-theater">
@@ -1300,7 +1312,7 @@ img,video,canvas,iframe{max-width:100%}
     </div>
     <div class="tablet-bottom"><span>اختر مقعدك المفضل</span><span>TAIF TRIP BOOKING</span></div>
    </div>
-   <div class="actions"><button class="secondary" id="backGame">العودة لبطاقة المشاركة</button><button id="toInvite" disabled>تأكيد المقعد والدخول للقاعة</button></div>
+   <div class="actions"><button class="secondary" id="backGame">العودة للعبة</button><button id="toInvite" disabled>تأكيد المقعد والدخول للقاعة</button></div>
    <div id="cinemaExperience" class="cinema-experience hidden">
     <div class="experience-header"><span>قاعة سينما رحلة الطائف · قاعة واحدة للجميع</span><span id="experienceSeat">المقعد —</span></div>
     <div class="tier-route-note" id="tierRouteNote">اختر مقعدك لتظهر لك رحلة الوصول الخاصة بفئتك.</div>
@@ -1335,8 +1347,14 @@ img,video,canvas,iframe{max-width:100%}
 
  <section id="inviteScreen" class="screen">
   <div class="panel">
-   <div class="steps"><span class="step">1 · بطاقة المشارك</span><span class="step">2 · اللعبة</span><span class="step">3 · السينما</span><span class="step current">3 · الدعوة</span></div>
    <div class="invite-cover"><div class="invite-kicker">بطاقة ترحيبية</div><div class="invite-emblem">✦</div><h2>أهلًا بك في رحلة الطائف</h2><p>وجودك يكمّل فرحتنا… والتحابّ يجمعنا</p><div class="invite-divider"></div><div class="invite-message" id="inviteText">يا مرحبًا بك في رحلة الطائف! يسعدنا وجودك معنا في رحلة تجمعنا بالمودّة والأخوّة والذكريات الجميلة.</div><div class="invite-footer">من القلب… تبدأ الحكاية</div></div>
+   <div class="payment-choice" id="paymentChoice">
+    <h3>كيف تفضّل طريقة الدفع؟</h3>
+    <p class="muted">اختر طريقة الدفع داخل نظام الرحلة الافتراضي.</p>
+    <label><input type="radio" name="paymentMethod" value="شبكة"> 💳 شبكة</label>
+    <label><input type="radio" name="paymentMethod" value="كاش"> 💵 كاش</label>
+    <p class="note" id="paymentStatus">لم يتم اختيار طريقة الدفع بعد.</p>
+   </div>
    <div class="invite-whatsapp-note">📱 <strong>انتظر دعوتك الرسمية على واتساب</strong><br>ستصلك الدعوة الخاصة بك على رقم الجوال المسجّل، وتتضمن تفاصيل الرحلة ورابط دعوتك الشخصية.</div>
    <div class="actions"><button class="secondary" id="restart">العودة للبداية</button></div>
    <p class="note">هذه بطاقة ترحيبية داخل الموقع، وليست الدعوة الرسمية. إرسال الدعوات تلقائيًا عبر واتساب يحتاج تفعيل الربط الرسمي قبل الإطلاق.</p>
@@ -1373,7 +1391,7 @@ $('confirmIdentity').addEventListener('click',async()=>{
  const name=$('fullName').value.trim(),kunya=$('kunya').value.trim(),phone=normalizePhone($('phone').value),teacherCode=$('teacherCode').value.trim();
  const message=!name?'اكتب اسمك.':!kunya?'اكتب الكنية.':!/^05\d{8}$/.test(phone)?'تأكد من رقم الجوال؛ اكتبه بصيغة 05XXXXXXXX.':!$('dataConsent').checked?'فعّل مربع الموافقة للمتابعة.':selectedRole==='teacher'&&!teacherCode?'أدخل رمز المعلمين.':'';
  if(message){$('identityMessage').textContent=message;return}
- selected={name,kunya};$('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
+ selected={name,kunya};if($('walletName'))$('walletName').textContent=name;$('confirmIdentity').disabled=true;$('identityMessage').textContent='جارٍ تسجيل بياناتك…';
  try{
   const r=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,kunya,phone,consent:true,role:selectedRole,teacherCode})});
   const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'تعذر التسجيل');
@@ -1418,6 +1436,34 @@ function walkToSeat(){
  $('povScene').classList.remove('pov-entered');void $('povScene').offsetWidth;$('povScene').classList.add('pov-entered');
  setTimeout(()=>{$('povViewerCaption').textContent='جلست في '+selectedSeat+'؛ أمامك مقاعد رفاقك والشاشة العملاقة. يمكنك الالتفات لرؤيتهم.';$('watchMovie').disabled=false},1800);
 }
+
+let walletBalance=1000;
+function renderSeats(){
+ $('cinemaExperience').classList.add('hidden');
+ const host=$('seatGrid');host.innerHTML='';selectedSeat=null;$('toInvite').disabled=true;
+ const config=[{tier:'A',count:5,label:'ألماسي',icon:'💎'},{tier:'B',count:7,label:'ذهبي',icon:'🥇'},{tier:'C',count:9,label:'فضي',icon:'🥈'},{tier:'D',count:11,label:'برونزي',icon:'🥉'}];
+ config.forEach(item=>{
+  const row=document.createElement('div');row.className='seat-row tier-'+item.tier;
+  const heading=document.createElement('div');heading.className='row-label';heading.innerHTML='<b>الصف '+item.tier+' · '+item.icon+' '+item.label+'</b>';row.appendChild(heading);
+  const line=document.createElement('div');line.className='seat-line';
+  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.type='button';btn.className='seat';btn.textContent=i;btn.setAttribute('aria-label','المقعد '+id+' '+item.label);
+   const allowed=selectedRole==='teacher'?item.tier==='A':item.tier!=='A';btn.disabled=!allowed;
+   btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;$('seatStatus').textContent='اخترت المقعد '+id+' · '+item.label;$('toInvite').disabled=false});
+   line.appendChild(btn)}
+  row.appendChild(line);host.appendChild(row)
+ });
+ $('walletName').textContent=selected?.name||'اسم المشارك';
+ $('walletBalance').textContent=walletBalance.toLocaleString('en-US');
+}
+function showInvite(){
+ if(!selected)selected={name:'ضيفنا',kunya:'ضيفنا'};
+ const safe=String(selected.kunya||'ضيفنا').replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ $('inviteText').innerHTML='<strong>يا '+safe+'، مرحبًا بك!</strong><br>يسرّنا انضمامك إلينا في رحلة الطائف؛ أيامٌ تجمعنا بالمودّة والأخوّة والذكريات الجميلة.<br><br><strong>وجودك يسعدنا، وعنوان جمعتنا: تحابّوا.</strong>'+(selectedSeat?'<br><small>مقعدك في السينما: '+selectedSeat+'</small>':'');
+ showScreen('inviteScreen');
+}
+document.querySelectorAll('input[name="paymentMethod"]').forEach(el=>el.addEventListener('change',()=>{$('paymentStatus').textContent='طريقة الدفع المختارة: '+el.value+' (اختيار مبدئي داخل الموقع).'}));
+$('restart').addEventListener('click',()=>{selected=null;selectedSeat=null;showScreen('landing')});
+
 let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden')});
 </script>
 </body>
