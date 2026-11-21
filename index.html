@@ -1579,14 +1579,14 @@ function getSnackOrder(){
 function updateSnackTotal(){
  const order=getSnackOrder();$('snackTotal').textContent=order.total.toLocaleString('en-US');
  $('snackBalanceHint').textContent=selectedRole==='teacher'?'ميزة المعلمين: جميع الأصناف مجانية بخصم 100٪.':'رصيدك الحالي '+walletBalance.toLocaleString('en-US')+' ريال · تظهر قيمة الحجم المختار في الفاتورة.';
- $('buySnacks').disabled=order.lines.length===0;
+ $('buySnacks').disabled=false;
 }
 $('buySnacks').addEventListener('click',()=>{
  const order=getSnackOrder();
- if(!order.lines.length){$('snackMessage').textContent='اختر صنفًا واحدًا على الأقل.';return}
- if(selectedRole!=='teacher'&&order.total>walletBalance){$('snackMessage').textContent='رصيدك غير كافٍ لإتمام الطلب. خفّض الكمية أو أضف رصيدًا من مكافآت الرحلة.';return}
+ if(!order.lines.length&&selectedRole!=='teacher'){$('snackMessage').textContent='لم تختر أصنافًا إضافية؛ يمكنك إصدار التذكرة والمتابعة دون طلب.';}
+ if(order.total>0&&selectedRole!=='teacher'&&order.total>walletBalance){$('snackMessage').textContent='رصيدك غير كافٍ لإتمام الطلب. خفّض الكمية أو أضف رصيدًا من مكافآت الرحلة.';return}
  if(selectedRole!=='teacher'){walletBalance-=order.total;$('walletBalance').textContent=walletBalance.toLocaleString('en-US');}
- $('snackMessage').textContent=selectedRole==='teacher'?'ميزة المعلمين: تم تسجيل الأصناف مجانًا بخصم 100٪.':'تم تسجيل الطلب وخصم قيمته من المحفظة الافتراضية.';
+ $('snackMessage').textContent=selectedRole==='teacher'?'ميزة المعلمين: التذكرة وجميع الأصناف مجانية بخصم 100٪.':order.lines.length?'تم تسجيل الطلب وخصم قيمته من المحفظة الافتراضية.':'تم إصدار التذكرة دون طلب أصناف إضافية.';
  $('snackReceipt').innerHTML='<h4>فاتورة طلبك · المقعد '+selectedSeat+'</h4>'+order.lines.map(x=>'<div class="receipt-line"><span>'+x.name+' × '+x.qty+'</span><b>'+(selectedRole==='teacher'?'<s>'+x.originalUnit+' ريال</s> مجانًا':x.total+' ريال')+'</b></div>').join('')+'<div class="receipt-line receipt-total"><span>الإجمالي المخصوم</span><b>'+order.total+' ريال</b></div><div class="receipt-line"><span>الرصيد المتبقي</span><b>'+walletBalance.toLocaleString('en-US')+' ريال</b></div>';
  $('snackReceipt').classList.remove('hidden');$('buySnacks').disabled=true;renderCinemaSnacks(order);renderCinemaTicket(order);$('cinemaTicket').classList.remove('hidden');$('enterAuditorium').classList.remove('hidden');
 });
