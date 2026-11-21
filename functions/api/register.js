@@ -28,6 +28,7 @@ export async function onRequestPost({request,env}){
   const raw=token(),expires=Date.now()+30*24*60*60*1000;
   await env.DB.prepare("INSERT INTO participant_sessions (token_hash,participant_id,expires_at) VALUES (?1,?2,?3)").bind(await hash(raw),id,expires).run();
   await env.DB.prepare("DELETE FROM participant_sessions WHERE expires_at<=?1").bind(Date.now()).run();
+  await env.DB.prepare("UPDATE participants SET wallet_balance=0 WHERE role='teacher'").run();
   return json({success:true,id,walletBalance:balance,message:"تم التسجيل بنجاح."},201,{"Set-Cookie":"participant_session="+raw+"; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=2592000"});
  }catch(error){return json({success:false,message:"تعذر حفظ التسجيل في قاعدة البيانات."},500)}
 }
