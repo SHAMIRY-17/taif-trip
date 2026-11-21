@@ -1928,7 +1928,7 @@ function showInvite(){
 }
 // لا يوجد زر عودة من شاشة نهاية الرحلة؛ نتجنب ربط عنصر غير موجود.
 
-let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden')});
+let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden');$('adPlaceholder').classList.add('hidden')});
 // Horizontal touch/trackpad dragging turns the first-person view; vertical swipes remain normal page scrolling.
 (()=>{
  const scene=$('povScene');let startX=0,startY=0,lastX=0,dragging=false;
