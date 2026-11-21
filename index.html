@@ -2041,20 +2041,20 @@ $('createInviteCard').addEventListener('click',drawInvitationCard);
 $('shareInviteWhatsApp').addEventListener('click',async()=>{
  const canvas=$('inviteCanvas');if(canvas.classList.contains('hidden'))drawInvitationCard();
  const name=selected?.kunya||'ضيفنا',text='دعوتك الخاصة لرحلة الطائف يا '+name+' 🌹';
- canvas.toBlob(async blob=>{
-  if(!blob){$('inviteShareStatus').textContent='تعذر إنشاء صورة الدعوة.';return}
-  const file=new File([blob],'taif-trip-invitation.png',{type:'image/png'});
-  try{
-   if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-    await navigator.share({files:[file],title:'دعوة رحلة الطائف',text});
-    $('inviteShareStatus').textContent='تم فتح قائمة المشاركة. اختر واتساب لإرسال صورة الدعوة.';
-   }else{
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='taif-trip-invitation.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),30000);
-    window.open('https://wa.me/?text='+encodeURIComponent(text+' — أرفق صورة الدعوة التي تم تنزيلها.'),'_blank','noopener');
-    $('inviteShareStatus').textContent='تم تنزيل صورة الدعوة وفتح واتساب. أرفق الصورة في المحادثة ثم أرسلها.';
-   }
-  }catch(err){if(err.name!=='AbortError')$('inviteShareStatus').textContent='تعذرت المشاركة من الجهاز. يمكنك إعادة المحاولة.'}
- },'image/png');
+ const dataUrl=canvas.toDataURL('image/png'),binary=atob(dataUrl.split(',')[1]),bytes=new Uint8Array(binary.length);
+ for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+ const blob=new Blob([bytes],{type:'image/png'}),file=new File([blob],'taif-trip-invitation.png',{type:'image/png'});
+ try{
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+   const sharePromise=navigator.share({files:[file],title:'دعوة رحلة الطائف',text});
+   $('inviteShareStatus').textContent='تم فتح قائمة المشاركة. اختر واتساب لإرسال صورة الدعوة.';
+   await sharePromise;
+  }else{
+   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='taif-trip-invitation.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),30000);
+   window.open('https://wa.me/?text='+encodeURIComponent(text+' — أرفق صورة الدعوة التي تم تنزيلها.'),'_blank','noopener');
+   $('inviteShareStatus').textContent='تم تنزيل صورة الدعوة وفتح واتساب. أرفق الصورة في المحادثة ثم أرسلها.';
+  }
+ }catch(err){if(err.name!=='AbortError')$('inviteShareStatus').textContent='تعذرت المشاركة من الجهاز. يمكنك إعادة المحاولة.'}
 });
 
 function showInvite(){
