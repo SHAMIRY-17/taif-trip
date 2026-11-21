@@ -55,7 +55,7 @@ p{color:#d2d9e5;line-height:1.7;margin:7px 0}
  </section>
 </main>
 <iframe id="game" title="لعبة قيادة حافلة رحلة الطائف" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen></iframe>
-<div id="finishDock"><button id="finishOpen" type="button">حفظ وإنهاء</button></div>
+<div id="finishDock"><button id="finishOpen" type="button">العودة</button></div>
 <div id="finishDialog" role="dialog" aria-modal="true" aria-labelledby="finishTitle">
  <div class="finish-card">
   <h2 id="finishTitle">إنهاء مهمة اللعبة</h2>
@@ -72,18 +72,11 @@ p{color:#d2d9e5;line-height:1.7;margin:7px 0}
  const launcher=document.getElementById('launcher'),start=document.getElementById('start'),hint=document.getElementById('hint'),error=document.getElementById('error'),bar=document.getElementById('bar'),game=document.getElementById('game');
  let source=null,failed=null,pressed=false,launched=false,loaded=0;
  const finishDock=document.getElementById('finishDock'),finishDialog=document.getElementById('finishDialog');
- document.getElementById('finishOpen').addEventListener('click',()=>finishDialog.classList.add('show'));
- document.getElementById('finishCancel').addEventListener('click',()=>finishDialog.classList.remove('show'));
- document.getElementById('finishConfirm').addEventListener('click',()=>{
-   finishDialog.classList.remove('show');
-   document.getElementById('finishTitle').textContent='تم إنجاز المهمة';
-   document.querySelector('.finish-card p').textContent='تم تسجيل طلب حفظ الإنجاز. جارٍ إعادتك إلى موقع رحلة الطائف…';
-   finishDialog.classList.add('show');
+ document.getElementById('finishOpen').addEventListener('click',()=>{
    if(window.parent!==window){
      try{window.parent.postMessage({type:'TAIF_TRIP_GAME_COMPLETED'},location.origin);}catch(e){}
    }else{
-     try{window.close();}catch(e){}
-     setTimeout(()=>{if(!window.closed)window.location.href='/?gameCompleted=1';},150);
+     window.location.href='/?gameCompleted=1';
    }
  });
  const paths=Array.from({length:11},(_,i)=>'/game-parts/part-'+String(i).padStart(2,'0')+'.txt');
