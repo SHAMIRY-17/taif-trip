@@ -1428,7 +1428,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .feedback-question select{width:100%;padding:13px;border-radius:10px;border:1px solid #8d7449;background:#111d2d;color:#fff}
 .feedback-note{font-size:12px;color:#b8c0cc;line-height:1.8}
 .invite-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px auto}
-#inviteCanvas{display:block;width:min(100%,520px);height:auto;margin:18px auto;border:1px solid #d8b66f88;border-radius:14px;background:#080d16}
+
 @media(max-width:560px){.poem-line{gap:8px;font-size:13px;padding:10px 2px}.welcome-poem,.feedback-wrap{padding:17px 12px}}
 
 
@@ -2009,6 +2009,7 @@ function renderCinemaTicket(order,total){
  $('ticketDiscount').classList.toggle('hidden',!teacher);$('ticketDiscount').textContent=teacher?'إعفاء كامل للمعلمين: المقعد وجميع الطلبات مجانًا (100٪).':'';
  $('ticketItems').innerHTML='<div>المقعد '+selectedSeat+' — '+(teacher?'مجانًا':selectedSeatPrice+' ريال')+'</div>'+(order.lines.length?order.lines.map(x=>'<div>'+x.name+' — '+(teacher?'مجانًا':x.total+' ريال')+'</div>').join(''):'<div>لا توجد طلبات إضافية.</div>')+'<div><b>الإجمالي المدفوع: '+(teacher?'مجانًا':total+' ريال')+'</b></div>';
  $('ticketStatus').textContent=teacher?'✓ تذكرة معلم مجانية · جاهزة للدخول':'✓ تم حفظ الدفع في محفظة الرحلة · التذكرة مؤكدة وجاهزة للدخول';
+ const stub=document.querySelector('.ticket-stub strong');if(stub)stub.textContent=teacher?'✓ إعفاء المعلم — مجانًا':'✓ مدفوع من المحفظة';
 }
 function renderCinemaSnacks(order){
  const tray=$('povSnackTray');if(!tray)return;
