@@ -1367,41 +1367,28 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 @media(max-width:700px){.role-entry-grid{grid-template-columns:1fr;gap:13px}.role-entry{min-height:205px;display:grid;grid-template-columns:42% 1fr;align-items:end}.role-art{inset:0 0 0 48%}.role-copy{grid-column:1;grid-row:1;align-self:end;padding:18px 14px}.role-art:before{width:150px;height:150px}.teacher-thobe{width:112px;height:130px}.teacher-head{top:24px;width:55px;height:65px}.teacher-shemagh{top:7px;width:90px;height:56px}.student-head{top:26px;width:52px;height:60px}.student-body{width:112px;height:112px}.student-bag{left:calc(50% + 36px);height:82px;width:42px}.student-book{left:calc(50% - 68px);height:49px;width:35px}.supervisor-screen{top:25px;width:125px;height:75px}.supervisor-person{top:45px}.supervisor-desk{width:160px}}
 
 
-/* Saudi teacher headwear: clearly draped red-and-white shemagh with a visible black agal */
+/* Saudi teacher: red-and-white shemagh only, with the pointed marzaq tail; no agal */
 .teacher-head{
- top:43px!important;
+ top:44px!important;
  width:72px!important;
- height:82px!important;
+ height:84px!important;
 }
 .teacher-shemagh{
- width:158px!important;
- height:126px!important;
- top:3px!important;
+ width:160px!important;
+ height:132px!important;
+ top:1px!important;
  border-radius:0!important;
- background-color:#f8f5ed!important;
+ background-color:#faf7ef!important;
  background-image:
   repeating-linear-gradient(0deg,transparent 0 7px,#b51f2b 7px 9px,transparent 9px 12px),
   repeating-linear-gradient(90deg,transparent 0 7px,#b51f2b 7px 9px,transparent 9px 12px),
   repeating-linear-gradient(45deg,transparent 0 15px,#b51f2b38 15px 17px,transparent 17px 20px),
   repeating-linear-gradient(-45deg,transparent 0 15px,#b51f2b30 15px 17px,transparent 17px 20px)!important;
- clip-path:polygon(18% 12%,29% 0,71% 0,82% 12%,91% 36%,100% 100%,78% 84%,66% 100%,50% 80%,34% 100%,22% 84%,0 100%,9% 36%)!important;
+ clip-path:polygon(17% 12%,28% 0,72% 0,83% 12%,92% 34%,100% 100%,79% 82%,66% 100%,50% 79%,34% 100%,21% 82%,0 100%,8% 34%)!important;
  box-shadow:0 8px 13px #0009,inset 0 0 0 2px #fff!important;
  z-index:2;
 }
-.teacher-shemagh:before{
- content:"";
- position:absolute;
- z-index:3;
- left:50%;
- top:0;
- transform:translateX(-50%);
- width:76px;
- height:22px;
- border:7px solid #171717;
- border-radius:50%;
- background:transparent;
- box-shadow:0 2px 4px #0009;
-}
+.teacher-shemagh:before{content:none!important}
 .teacher-shemagh:after{
  content:"";
  position:absolute;
@@ -1409,10 +1396,26 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
  background:linear-gradient(90deg,#a71e2b18,transparent 25% 75%,#a71e2b18);
  pointer-events:none;
 }
+/* Distinct pointed marzaq: a folded triangular shemagh end hanging over the shoulder */
+.teacher-shemagh:before{
+ content:""!important;
+ position:absolute;
+ z-index:4;
+ left:calc(50% - 13px);
+ bottom:-1px;
+ width:55px;
+ height:62px;
+ background-color:#faf7ef;
+ background-image:
+  repeating-linear-gradient(0deg,transparent 0 7px,#b51f2b 7px 9px,transparent 9px 12px),
+  repeating-linear-gradient(90deg,transparent 0 7px,#b51f2b 7px 9px,transparent 9px 12px);
+ clip-path:polygon(0 0,100% 0,50% 100%);
+ filter:drop-shadow(0 3px 3px #0008);
+}
 @media(max-width:700px){
  .teacher-head{top:31px!important;width:59px!important;height:68px!important}
- .teacher-shemagh{width:132px!important;height:105px!important;top:0!important}
- .teacher-shemagh:before{width:64px;height:18px;border-width:6px}
+ .teacher-shemagh{width:134px!important;height:108px!important;top:0!important}
+ .teacher-shemagh:before{left:calc(50% - 10px);width:46px;height:52px}
 }</style>
 <style>
 /* Ticket, tier pricing, payment choice and expanded Taif photo gallery */
