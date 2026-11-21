@@ -4,23 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#090b10">
-<title>Taif Night | لعبة رحلة الطائف</title>
+<title>Taif Night</title>
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#090b10;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-#launcher{position:fixed;inset:0;display:grid;place-items:center;padding:22px;text-align:center;background:radial-gradient(ellipse at 50% 20%,#24334a 0,#111827 42%,#090b10 100%);z-index:2}
-.panel{width:min(520px,100%);padding:30px 22px;border:1px solid #ffffff24;border-radius:24px;background:#101827eF;box-shadow:0 20px 70px #0009}
-.mark{font-size:42px;margin-bottom:10px}
-h1{font-size:clamp(25px,6vw,38px);margin:8px 0 12px}
-p{color:#d2d9e5;line-height:1.9;margin:8px 0}
-.rotate{font-size:54px;margin:18px 0;animation:tilt 1.8s ease-in-out infinite alternate}
+#launcher{position:fixed;inset:0;display:grid;place-items:center;padding:20px;text-align:center;background:radial-gradient(ellipse at 50% 20%,#24334a 0,#111827 42%,#090b10 100%);z-index:2}
+.panel{width:min(500px,100%);padding:24px 20px;border:1px solid #ffffff24;border-radius:22px;background:#101827ef;box-shadow:0 20px 70px #0009}
+.mark{font-size:38px}h1{font-size:clamp(24px,5vw,34px);margin:6px 0 10px}
+p{color:#d2d9e5;line-height:1.7;margin:8px 0}
+.rotate{font-size:48px;margin:12px 0;animation:tilt 1.8s ease-in-out infinite alternate}
 @keyframes tilt{from{transform:rotate(0)}to{transform:rotate(90deg)}}
-#hint{font-weight:700;color:#ffd98a;margin:14px 0}
-button{border:0;border-radius:14px;padding:15px 24px;font-size:17px;font-weight:800;background:#e8b85c;color:#17120a;cursor:pointer;width:100%;margin-top:12px}
-button:disabled{opacity:.4;cursor:not-allowed}
+#hint{font-weight:700;color:#ffd98a;margin:12px 0}
+button{border:0;border-radius:14px;padding:15px 24px;font-size:17px;font-weight:800;background:#e8b85c;color:#17120a;cursor:pointer;width:100%;margin-top:10px}
+button:disabled{opacity:.45;cursor:wait}
 #game{position:fixed;inset:0;width:100%;height:100%;border:0;background:#000;display:none}
-#error{color:#ffb4b4;white-space:pre-wrap;font-size:14px}
-@media (orientation:landscape){.panel{padding:18px 24px}.rotate{font-size:35px;margin:4px 0}h1{margin:3px 0 6px}p{line-height:1.55}}
+#error{color:#ffb4b4;font-size:14px}
+@media (orientation:landscape){.panel{padding:14px 22px}.mark{font-size:27px}.rotate{font-size:28px;margin:2px 0}h1{margin:2px 0 4px}p{line-height:1.4;margin:4px 0}}
 </style>
 </head>
 <body>
@@ -28,14 +27,14 @@ button:disabled{opacity:.4;cursor:not-allowed}
  <section class="panel">
   <div class="mark">🚌</div>
   <h1>Taif Night</h1>
-  <p>قبل أن تبدأ اللعب، أدر جوالك إلى الوضع الأفقي كما في الصورة.</p>
+  <p>أدر جوالك إلى الوضع الأفقي لتشغيل اللعبة بأفضل عرض.</p>
   <div class="rotate" aria-hidden="true">📱</div>
-  <div id="hint">↻ أدر الجوال من عمودي إلى أفقي للمتابعة</div>
-  <button id="start" type="button" disabled>ابدأ اللعب بملء الشاشة</button>
+  <div id="hint">↻ ننتظر تدوير الجوال إلى الوضع الأفقي</div>
+  <button id="start" type="button" disabled>تم، ابدأ اللعب</button>
   <p id="error" role="alert"></p>
  </section>
 </main>
-<iframe id="game" title="لعبة Taif Night" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen></iframe>
+<iframe id="game" title="Taif Night" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen></iframe>
 <script>
 (function(){
  const launcher=document.getElementById('launcher');
@@ -44,37 +43,45 @@ button:disabled{opacity:.4;cursor:not-allowed}
  const error=document.getElementById('error');
  const game=document.getElementById('game');
  const isLandscape=()=>window.matchMedia('(orientation: landscape)').matches;
+ let original=null, loadError=null;
+ const paths=Array.from({length:11},(_,i)=>'/game-parts/part-'+String(i).padStart(2,'0')+'.txt');
+ const gameReady=Promise.all(paths.map(async path=>{
+   const response=await fetch(path,{cache:'force-cache'});
+   if(!response.ok)throw new Error('تعذر تحميل ملفات اللعبة.');
+   return response.text();
+ })).then(parts=>{
+   const source=parts.join('');
+   if(!/^<!doctype html>/i.test(source)||!source.trimEnd().endsWith('</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
+   original=source;
+ }).catch(e=>{loadError=e;});
  function update(){
-   const ready=isLandscape();
-   start.disabled=!ready;
-   hint.textContent=ready?'✓ ممتاز! اضغط لبدء اللعبة':'↻ أدر الجوال من عمودي إلى أفقي للمتابعة';
+   const landscape=isLandscape();
+   start.disabled=!landscape||!original;
+   if(!landscape)hint.textContent='↻ أدر الجوال من عمودي إلى أفقي';
+   else if(loadError)hint.textContent='تعذر تجهيز اللعبة، أعد تحميل الصفحة';
+   else if(!original)hint.textContent='✓ تم تدوير الجوال — لحظات ونجهز اللعبة';
+   else hint.textContent='✓ ممتاز! اضغط «تم، ابدأ اللعب»';
+   if(loadError)error.textContent=loadError.message;
  }
  window.addEventListener('resize',update);
  window.addEventListener('orientationchange',update);
+ gameReady.then(update);
  update();
  start.addEventListener('click',async()=>{
-   if(!isLandscape()){update();return;}
+   if(!isLandscape()||!original){update();return;}
    start.disabled=true;
-   hint.textContent='جارٍ تجهيز اللعبة…';
-   error.textContent='';
    try{
-     const root=document.documentElement;
-     if(root.requestFullscreen){try{await root.requestFullscreen()}catch(_e){}}
-     if(screen.orientation&&screen.orientation.lock){try{await screen.orientation.lock('landscape')}catch(_e){}}
-     const paths=Array.from({length:11},(_,i)=>'/game-parts/part-'+String(i).padStart(2,'0')+'.txt');
-     const parts=await Promise.all(paths.map(async path=>{
-       const response=await fetch(path,{cache:'no-store'});
-       if(!response.ok)throw new Error('تعذر تحميل ملفات اللعبة ('+response.status+').');
-       return response.text();
-     }));
-     const original=parts.join('');
-     if(!/^<!doctype html>/i.test(original)||!original.trimEnd().endsWith('</script>'))throw new Error('ملفات اللعبة غير مكتملة أو لم تصل بالشكل الصحيح.');
+     if(document.documentElement.requestFullscreen){
+       try{await document.documentElement.requestFullscreen()}catch(_e){}
+     }
+     if(screen.orientation&&screen.orientation.lock){
+       try{await screen.orientation.lock('landscape')}catch(_e){}
+     }
      game.srcdoc=original;
      game.style.display='block';
      launcher.style.display='none';
    }catch(e){
-     error.textContent=e&&e.message?e.message:'حدث خطأ أثناء تشغيل اللعبة.';
-     hint.textContent='تعذر التشغيل — حاول مرة أخرى';
+     error.textContent='تعذر بدء اللعبة. أعد المحاولة.';
      start.disabled=false;
    }
  });
