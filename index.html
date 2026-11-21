@@ -2211,7 +2211,6 @@ async function showInvite(){
   selected={...selected,id:p.id,name:p.name,kunya:p.kunya};
   $('participantCardName').textContent=p.name||'—';
   $('participantCardKunya').textContent=p.kunya||'—';
-  $('participantCardNumber').textContent=String(p.id);
   walletBalance=Number(p.walletBalance??walletBalance);
   if(p.photoData){$('participantPhotoImg').src=p.photoData;$('participantPhotoImg').classList.remove('hidden');$('participantPhotoPlaceholder').classList.add('hidden')}
   $('participantCardStatus').textContent='تم تحميل بطاقتك. الصورة والبيانات تظهران لحسابك المسجّل فقط.';
