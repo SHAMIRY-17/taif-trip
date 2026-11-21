@@ -2016,7 +2016,7 @@ function renderWalletSummary(){
 function renderSeats(){
  $('cinemaExperience').classList.add('hidden');
  const host=$('seatGrid');host.innerHTML='';selectedSeat=null;$('toInvite').disabled=true;
- const config=[{tier:'A',count:5,label:'ألماسي',icon:'💎',price:0},{tier:'B',count:7,label:'ذهبي',icon:'🥇',price:600},{tier:'C',count:9,label:'فضي',icon:'🥈',price:500},{tier:'D',count:11,label:'برونزي',icon:'🥉',price:400}];
+ const config=selectedRole==='teacher'?[{tier:'A',count:5,label:'ألماسي',icon:'💎',price:0}]:[{tier:'B',count:7,label:'ذهبي',icon:'🥇',price:600},{tier:'C',count:9,label:'فضي',icon:'🥈',price:500},{tier:'D',count:11,label:'برونزي',icon:'🥉',price:400}];
  config.forEach(item=>{
   const row=document.createElement('div');row.className='seat-row tier-'+item.tier;
   const heading=document.createElement('div');heading.className='row-label';heading.innerHTML='<b>الصف '+item.tier+' · '+item.icon+' '+item.label+(item.tier==='A'?' · خاص بالمعلمين فقط':'')+'</b>';row.appendChild(heading);
