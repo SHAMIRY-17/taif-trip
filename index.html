@@ -1335,6 +1335,31 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 @media(max-width:760px){.snack-size-options{gap:7px}.snack-size-options span{padding:10px 5px}.snack-item{grid-template-columns:1fr!important}.snack-item>div:first-child{grid-column:1/-1}}
 
 </style>
+<style>
+/* Ticket, tier pricing, payment choice and expanded Taif photo gallery */
+.taif-gallery{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:12px!important;width:min(1120px,94%)!important;margin:28px auto 8px!important;position:relative;z-index:2}
+.taif-photo{position:relative!important;min-width:0!important;height:clamp(120px,17vw,205px)!important;margin:0!important;overflow:hidden!important;border:1px solid #d8b66f99!important;border-radius:15px!important;background:#101a29!important;box-shadow:0 12px 30px #0008!important}
+.taif-photo img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;transition:transform .45s!important}
+.taif-photo:hover img{transform:scale(1.06)!important}
+.taif-photo figcaption{position:absolute;inset:auto 0 0;padding:22px 8px 9px;background:linear-gradient(transparent,#080d16ed);color:#f5dfb0;font-size:12px;text-align:center}
+.movie-theater .tier-A .seat{background:linear-gradient(145deg,#dff7ff,#65b9d8 55%,#286d99)!important;color:#08243a!important;border:1px solid #c9f3ff!important;box-shadow:0 0 20px #69d9ff66,inset 0 -6px 0 #174b6b!important}
+.movie-theater .tier-B .seat{background:linear-gradient(145deg,#fff0b6,#c99a3e 55%,#80571d)!important;color:#2d1c05!important;border:1px solid #ffe4a0!important}
+.movie-theater .tier-C .seat{background:linear-gradient(145deg,#f1f5fb,#a9b8ca 55%,#64748b)!important;color:#172333!important;border:1px solid #edf5ff!important}
+.movie-theater .tier-D .seat{background:linear-gradient(145deg,#e7b88c,#a66d43 55%,#633c27)!important;color:#fff8ef!important;border:1px solid #f1c59c!important}
+.seat-price-tag{display:block;font-size:9px;line-height:1.3;margin-top:4px;white-space:nowrap}
+.seat-payment-choice{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:14px auto;padding:14px;border:1px solid #d8b66f66;border-radius:13px;background:#0b1422;color:#f4dfb0}
+.seat-payment-choice label{display:flex;gap:6px;align-items:center;padding:8px 12px;border:1px solid #ffffff28;border-radius:9px;cursor:pointer}.seat-payment-choice input{accent-color:#d8b66f}
+.seat-payment-choice small{flex-basis:100%;color:#b8c4d3;font-size:11px}
+.cinema-ticket{--ticket-accent:#dff7ff;max-width:650px;margin:18px auto;padding:20px;border:2px dashed var(--ticket-accent);border-radius:18px;background:linear-gradient(145deg,#14283a,#080f19);box-shadow:0 18px 48px #0008;color:#f8f3e8;text-align:right;position:relative;overflow:hidden}
+.cinema-ticket:before{content:"";position:absolute;inset:0 auto 0 0;width:7px;background:var(--ticket-accent);box-shadow:0 0 22px var(--ticket-accent)}
+.cinema-ticket.ticket-B{--ticket-accent:#f4d27d;background:linear-gradient(145deg,#3b2b14,#12100c)}.cinema-ticket.ticket-C{--ticket-accent:#dce7f4;background:linear-gradient(145deg,#29384a,#101722)}.cinema-ticket.ticket-D{--ticket-accent:#d7a276;background:linear-gradient(145deg,#422b20,#17100d)}
+.ticket-top{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px dashed #ffffff55;color:var(--ticket-accent);font-size:12px;letter-spacing:1px}
+.ticket-main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;padding:18px 0}.ticket-main small{display:block;color:#b8c4d3;font-size:11px}.ticket-main strong{display:block;margin-top:5px;font-size:18px;color:#fff}
+.ticket-discount{padding:10px;border-radius:10px;background:#174b37;color:#c7ffe0;font-weight:bold;text-align:center;margin-bottom:12px}
+.ticket-items{padding:12px;border-radius:10px;background:#ffffff0b;line-height:2}.ticket-items> b{color:var(--ticket-accent)}.ticket-status{margin-top:14px;padding:10px;border:1px solid #d8b66f55;border-radius:9px;text-align:center;color:#f5dfb0;font-size:12px}
+.ticket-cut{margin-top:12px;overflow:hidden;white-space:nowrap;color:var(--ticket-accent);letter-spacing:5px;text-align:center}
+@media(max-width:760px){.taif-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;width:92%!important;gap:9px!important}.taif-photo{height:125px!important}.taif-photo:first-child{grid-column:span 2;height:160px!important}.ticket-main{gap:10px}.ticket-main strong{font-size:15px}}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -1363,6 +1388,8 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
     <figure class="taif-photo photo-hada"><img src="https://portalcdn.spa.gov.sa/backend/original/202407/ye20dpljMRCACaRvGo7oaYEiOIC04bYdj3FpNtdH.jpg" alt="جبال الهدا والطبيعة في الطائف" loading="lazy"><figcaption>الهدا · حيث تعانق القمم الغيم</figcaption></figure>
     <figure class="taif-photo photo-rose"><img src="https://www.arabnews.pk/sites/default/files/styles/n_670_395/public/2021/04/03/2555466-725545032.jpg?itok=Bzl2YzoL" alt="مدرجات مزارع ورد الطائف في موسم الربيع" loading="lazy"><figcaption>ورد الطائف · عطر المكان</figcaption></figure>
     <figure class="taif-photo photo-mist"><img src="https://s7g10.scene7.com/is/image/jazeeraairways/taif_taif_cable_car-1" alt="تلفريك الهدا فوق جبال الطائف" loading="lazy"><figcaption>تلفريك الهدا · رحلة فوق الجبال</figcaption></figure>
+    <figure class="taif-photo photo-shubra"><img src="https://portalcdn.spa.gov.sa/backend/original/202402/YCDYrtWg1v9tgeJIExBHot9eWQ9mtHNlatT8v5QU.jpg" alt="قطف الورد الطائفي" loading="lazy"><figcaption>موسم الورد الطائفي · حكاية عطر</figcaption></figure>
+    <figure class="taif-photo photo-roses"><img src="https://portalcdn.spa.gov.sa/backend/original/202604/m30gbVOhQtoC5SnYP1zsKW6ru1qg7k0B5yx4RIyH.jpg" alt="بتلات الورد الطائفي في بيت تقليدي" loading="lazy"><figcaption>تراث الورد · من ذاكرة الطائف</figcaption></figure>
    </div>
   </div>
   <section>
@@ -1447,7 +1474,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
      <article class="snack-item"><div class="snack-emoji">🧀</div><div><strong>دوريتوس</strong><small>اختر الحجم المناسب لك.</small></div><label class="snack-add"><input id="doritosInclude" type="checkbox"> إضافة الدوريتوس للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="doritosSize" value="large"><span><b>أ</b> كبير<small>16 ريال</small></span></label><label><input type="radio" name="doritosSize" value="medium" checked><span><b>ب</b> وسط<small>12 ريال</small></span></label></div></article>
      <article class="snack-item"><div class="snack-emoji">🥤</div><div><strong>سلاش كنزا</strong><small>اختر النكهة والحجم المناسب لك.</small></div><label class="snack-flavor">النكهة<select id="slushFlavor"><option value="كنزا كولا">كنزا كولا</option><option value="كنزا ليمون">كنزا ليمون</option><option value="كنزا حمضيات">كنزا حمضيات</option><option value="كنزا دايت">كنزا دايت</option></select></label><label class="snack-add"><input id="slushInclude" type="checkbox"> إضافة السلاش للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="slushSize" value="large"><span><b>أ</b> كبير<small>16 ريال</small></span></label><label><input type="radio" name="slushSize" value="medium" checked><span><b>ب</b> وسط<small>12 ريال</small></span></label></div></article>
     </div>
-    <div class="snack-checkout"><div class="snack-total-line"><span>إجمالي الطلب</span><strong><b id="snackTotal">0</b> ريال</strong></div><p id="snackBalanceHint">سيتم الخصم من رصيد محفظتك الافتراضية بعد تأكيد الشراء.</p><div class="snack-actions"><button class="secondary" id="editSeatOrder">تعديل المقعد</button><button id="buySnacks">تأكيد الشراء والخصم</button></div><p id="snackMessage" class="note" role="status"></p><div id="snackReceipt" class="snack-receipt hidden"></div><button id="enterAuditorium" class="hidden">الدخول إلى قاعة السينما</button></div>
+    <div class="snack-checkout"><div class="seat-payment-choice"><strong>طريقة دفع المقعد</strong><label><input type="radio" name="seatPaymentMethod" value="cash" checked> 💵 كاش</label><label><input type="radio" name="seatPaymentMethod" value="network"> 💳 شبكة</label><small>اختيار الطريقة لا يعني تنفيذ عملية دفع إلكترونية؛ يتم اعتماد السداد من المنظّم.</small></div><div id="cinemaTicket" class="cinema-ticket hidden"><div class="ticket-top"><span>TAIF GRAND CINEMA</span><b id="ticketTier">💎 تذكرة ألماسية</b></div><div class="ticket-main"><div><small>اسم صاحب التذكرة</small><strong id="ticketName">—</strong></div><div><small>رقم المقعد</small><strong id="ticketSeat">—</strong></div><div><small>قيمة المقعد</small><strong id="ticketPrice">—</strong></div><div><small>طريقة الدفع</small><strong id="ticketPayment">—</strong></div></div><div id="ticketDiscount" class="ticket-discount hidden"></div><div class="ticket-items"><b>طلباتك داخل القاعة</b><div id="ticketItems">لم تتم إضافة أصناف.</div></div><div class="ticket-status" id="ticketStatus">بانتظار تأكيد السداد من المنظّم</div><div class="ticket-cut">✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦</div></div><div class="snack-total-line"><span>إجمالي الطلب</span><strong><b id="snackTotal">0</b> ريال</strong></div><p id="snackBalanceHint">سيتم الخصم من رصيد محفظتك الافتراضية بعد تأكيد الشراء.</p><div class="snack-actions"><button class="secondary" id="editSeatOrder">تعديل المقعد</button><button id="buySnacks">تأكيد الشراء والخصم</button></div><p id="snackMessage" class="note" role="status"></p><div id="snackReceipt" class="snack-receipt hidden"></div><button id="enterAuditorium" class="hidden">الدخول إلى قاعة السينما</button></div>
    </div>
    <div id="cinemaExperience" class="cinema-experience hidden">
     <div class="experience-header"><span>قاعة سينما رحلة الطائف · قاعة واحدة للجميع</span><span id="experienceSeat">المقعد —</span></div>
@@ -1493,7 +1520,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 
 <script>
 const $=id=>document.getElementById(id);
-let selected=null,selectedSeat=null,selectedRole='student';
+let selected=null,selectedSeat=null,selectedSeatPrice=0,selectedRole='student';
 const screens=['identity','gameScreen','cinemaScreen','inviteScreen'];
 function showScreen(id){const isLanding=id==='landing';const landing=$('landing');landing.hidden=!isLanding;landing.style.display=isLanding?'block':'none';landing.setAttribute('aria-hidden',String(!isLanding));screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
 $('beginBtn').addEventListener('click',()=>showScreen('identity'));
@@ -1537,13 +1564,14 @@ $('editSeatOrder').addEventListener('click',()=>{$('snackShop').classList.add('h
 function sizeLabel(value){return value==='large'?'كبير':'وسط'}
 function selectedSize(name){return document.querySelector('input[name="'+name+'"]:checked')?.value||'medium'}
 function getSnackOrder(){
+ const teacherFree=selectedRole==='teacher';
  const popcorn=$('popcornInclude').checked,doritos=$('doritosInclude').checked,slush=$('slushInclude').checked;
  const popcornSize=selectedSize('popcornSize'),doritosSize=selectedSize('doritosSize'),slushSize=selectedSize('slushSize');
  const popcornUnit=popcornSize==='large'?24:18,doritosUnit=doritosSize==='large'?16:12,slushUnit=slushSize==='large'?16:12;
  const lines=[];
- if(popcorn)lines.push({name:'فشار '+$('popcornFlavor').value+' · '+sizeLabel(popcornSize),qty:1,unit:popcornUnit,total:popcornUnit,kind:'popcorn'});
- if(doritos)lines.push({name:'دوريتوس · '+sizeLabel(doritosSize),qty:1,unit:doritosUnit,total:doritosUnit,kind:'doritos'});
- if(slush)lines.push({name:'سلاش '+$('slushFlavor').value+' · '+sizeLabel(slushSize),qty:1,unit:slushUnit,total:slushUnit,kind:'slush'});
+ if(popcorn)lines.push({name:'فشار '+$('popcornFlavor').value+' · '+sizeLabel(popcornSize),qty:1,unit:teacherFree?0:popcornUnit,originalUnit:popcornUnit,total:teacherFree?0:popcornUnit,kind:'popcorn'});
+ if(doritos)lines.push({name:'دوريتوس · '+sizeLabel(doritosSize),qty:1,unit:teacherFree?0:doritosUnit,originalUnit:doritosUnit,total:teacherFree?0:doritosUnit,kind:'doritos'});
+ if(slush)lines.push({name:'سلاش '+$('slushFlavor').value+' · '+sizeLabel(slushSize),qty:1,unit:teacherFree?0:slushUnit,originalUnit:slushUnit,total:teacherFree?0:slushUnit,kind:'slush'});
  return {lines,total:lines.reduce((sum,x)=>sum+x.total,0)};
 }
 function updateSnackTotal(){
@@ -1553,12 +1581,12 @@ function updateSnackTotal(){
 }
 $('buySnacks').addEventListener('click',()=>{
  const order=getSnackOrder();
- if(!order.total){$('snackMessage').textContent='اختر صنفًا واحدًا على الأقل.';return}
- if(order.total>walletBalance){$('snackMessage').textContent='رصيدك غير كافٍ لإتمام الطلب. خفّض الكمية أو أضف رصيدًا من مكافآت الرحلة.';return}
- walletBalance-=order.total;$('walletBalance').textContent=walletBalance.toLocaleString('en-US');
- $('snackMessage').textContent='تم تسجيل الطلب وخصم قيمته من المحفظة الافتراضية.';
- $('snackReceipt').innerHTML='<h4>فاتورة طلبك · المقعد '+selectedSeat+'</h4>'+order.lines.map(x=>'<div class="receipt-line"><span>'+x.name+' × '+x.qty+'</span><b>'+x.total+' ريال</b></div>').join('')+'<div class="receipt-line receipt-total"><span>الإجمالي المخصوم</span><b>'+order.total+' ريال</b></div><div class="receipt-line"><span>الرصيد المتبقي</span><b>'+walletBalance.toLocaleString('en-US')+' ريال</b></div>';
- $('snackReceipt').classList.remove('hidden');$('buySnacks').disabled=true;$('enterAuditorium').classList.remove('hidden');renderCinemaSnacks(order);
+ if(!order.lines.length){$('snackMessage').textContent='اختر صنفًا واحدًا على الأقل.';return}
+ if(selectedRole!=='teacher'&&order.total>walletBalance){$('snackMessage').textContent='رصيدك غير كافٍ لإتمام الطلب. خفّض الكمية أو أضف رصيدًا من مكافآت الرحلة.';return}
+ if(selectedRole!=='teacher'){walletBalance-=order.total;$('walletBalance').textContent=walletBalance.toLocaleString('en-US');}
+ $('snackMessage').textContent=selectedRole==='teacher'?'ميزة المعلمين: تم تسجيل الأصناف مجانًا بخصم 100٪.':'تم تسجيل الطلب وخصم قيمته من المحفظة الافتراضية.';
+ $('snackReceipt').innerHTML='<h4>فاتورة طلبك · المقعد '+selectedSeat+'</h4>'+order.lines.map(x=>'<div class="receipt-line"><span>'+x.name+' × '+x.qty+'</span><b>'+(selectedRole==='teacher'?'<s>'+x.originalUnit+' ريال</s> مجانًا':x.total+' ريال')+'</b></div>').join('')+'<div class="receipt-line receipt-total"><span>الإجمالي المخصوم</span><b>'+order.total+' ريال</b></div><div class="receipt-line"><span>الرصيد المتبقي</span><b>'+walletBalance.toLocaleString('en-US')+' ريال</b></div>';
+ $('snackReceipt').classList.remove('hidden');$('buySnacks').disabled=true;renderCinemaSnacks(order);renderCinemaTicket(order);$('cinemaTicket').classList.remove('hidden');$('enterAuditorium').classList.remove('hidden');
 });
 $('enterAuditorium').addEventListener('click',()=>{
  $('snackShop').classList.add('hidden');$('cinemaExperience').classList.remove('hidden');
@@ -1588,6 +1616,24 @@ function buildPovHall(){
  $('povScene').style.setProperty('--view-shift',(angle*36)+'px');
  setPovLook(0);
 }
+
+function renderCinemaTicket(order){
+ const tier=selectedSeat?.charAt(0)||'D',meta={A:['💎 التذكرة الألماسية','ألماسي'],B:['🥇 التذكرة الذهبية','ذهبي'],C:['🥈 التذكرة الفضية','فضي'],D:['🥉 التذكرة البرونزية','برونزي']}[tier];
+ const teacher=selectedRole==='teacher',method=document.querySelector('input[name="seatPaymentMethod"]:checked')?.value||'cash';
+ const payment=method==='network'?'شبكة 💳':'كاش 💵';
+ $('cinemaTicket').className='cinema-ticket ticket-'+tier;
+ $('ticketTier').textContent=teacher?'💎 تذكرة المعلم الألماسية':meta[0];
+ $('ticketName').textContent=(selected?.kunya||selected?.name||'المشارك')+' · '+(selected?.name||'');
+ $('ticketSeat').textContent=selectedSeat;
+ $('ticketPrice').textContent=teacher?'300 ريال ← مجانًا':selectedSeatPrice.toLocaleString('ar-SA')+' ريال';
+ $('ticketPayment').textContent=teacher?'إعفاء المعلمين':payment;
+ $('ticketDiscount').classList.toggle('hidden',!teacher);
+ $('ticketDiscount').textContent=teacher?'خصم المعلمين: 300 ريال (100٪) · التذكرة والطلبات مجانًا تقديرًا للمعلمين.':'';
+ $('ticketItems').innerHTML=order.lines.length?order.lines.map(x=>'<div>'+x.name+' — '+(teacher?'مجانًا (بدلًا من '+x.originalUnit+' ريال)':x.total+' ريال')+'</div>').join(''):'لا توجد طلبات إضافية.';
+ $('ticketStatus').textContent=teacher?'تذكرة معلم مجانية · جاهزة للدخول': 'طريقة الدفع المختارة: '+payment+' · بانتظار تأكيد السداد من المنظّم';
+}
+document.querySelectorAll('input[name="seatPaymentMethod"]').forEach(el=>el.addEventListener('change',()=>{if(!$('cinemaTicket').classList.contains('hidden'))renderCinemaTicket(getSnackOrder())}));
+
 function renderCinemaSnacks(order){
  const tray=$('povSnackTray');if(!tray)return;
  const hasPop=order.lines.some(x=>x.kind==='popcorn'),hasDor=order.lines.some(x=>x.kind==='doritos'),hasDrink=order.lines.some(x=>x.kind==='slush');
@@ -1606,14 +1652,14 @@ let walletBalance=1000;
 function renderSeats(){
  $('cinemaExperience').classList.add('hidden');
  const host=$('seatGrid');host.innerHTML='';selectedSeat=null;$('toInvite').disabled=true;
- const config=[{tier:'A',count:5,label:'ألماسي',icon:'💎'},{tier:'B',count:7,label:'ذهبي',icon:'🥇'},{tier:'C',count:9,label:'فضي',icon:'🥈'},{tier:'D',count:11,label:'برونزي',icon:'🥉'}];
+ const config=[{tier:'A',count:5,label:'ألماسي',icon:'💎',price:300},{tier:'B',count:7,label:'ذهبي',icon:'🥇',price:200},{tier:'C',count:9,label:'فضي',icon:'🥈',price:150},{tier:'D',count:11,label:'برونزي',icon:'🥉',price:100}];
  config.forEach(item=>{
   const row=document.createElement('div');row.className='seat-row tier-'+item.tier;
   const heading=document.createElement('div');heading.className='row-label';heading.innerHTML='<b>الصف '+item.tier+' · '+item.icon+' '+item.label+'</b>';row.appendChild(heading);
   const line=document.createElement('div');line.className='seat-line';
-  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.type='button';btn.className='seat';btn.textContent=i;btn.setAttribute('aria-label','المقعد '+id+' '+item.label);
+  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.type='button';btn.className='seat';btn.innerHTML='<span>'+i+'</span><small class="seat-price-tag">'+(selectedRole==='teacher'?'مجانًا':item.price+' ر')+'</small>';btn.setAttribute('aria-label','المقعد '+id+' '+item.label+' '+(selectedRole==='teacher'?'مجانًا':item.price+' ريال'));
    const allowed=selectedRole==='teacher'?item.tier==='A':item.tier!=='A';btn.disabled=!allowed;
-   btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;$('seatStatus').textContent='تم اختيار '+id+' في الصف '+item.label+' · اضغط تأكيد المقعد للمتابعة.';$('seatSelectionInfo').innerHTML='<span>📍 مقعدك المختار</span><strong>'+id+' · '+item.label+'</strong><small>هذا المقعد محدد لك في شاشة الحجز الحالية.</small>';$('toInvite').disabled=false});
+   btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;selectedSeatPrice=selectedRole==='teacher'?0:item.price;$('seatStatus').textContent='تم اختيار '+id+' في الصف '+item.label+' · قيمة المقعد: '+(selectedRole==='teacher'?'مجانًا للمعلمين':item.price+' ريال')+'.';$('seatSelectionInfo').innerHTML='<span>📍 مقعدك المختار</span><strong>'+id+' · '+item.label+'</strong><small>قيمة المقعد: '+(selectedRole==='teacher'?'مجانًا للمعلمين':item.price+' ريال')+'</small>';$('toInvite').disabled=false});
    line.appendChild(btn)}
   row.appendChild(line);host.appendChild(row)
  });
