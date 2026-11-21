@@ -1334,6 +1334,38 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .tier-legend span:first-child{border-color:#8edaff;background:linear-gradient(120deg,#173d56,#101a29);color:#dff7ff}
 @media(max-width:760px){.snack-size-options{gap:7px}.snack-size-options span{padding:10px 5px}.snack-item{grid-template-columns:1fr!important}.snack-item>div:first-child{grid-column:1/-1}}
 
+
+/* Premium visual gateways for the three existing account types */
+.role-entry-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.role-entry{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:285px;padding:0!important;overflow:hidden;text-align:right;border:1px solid #d7bd8055!important;border-radius:20px!important;background:#101b2b!important;isolation:isolate}
+.role-entry:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,transparent 18%,#07101bd9 75%,#07101bf7)}
+.role-entry:after{content:"";position:absolute;inset:0;z-index:-1;border:1px solid #f0d69e22;border-radius:inherit;pointer-events:none}
+.role-entry:hover,.role-entry.selected{border-color:#f0d69e!important;box-shadow:0 18px 42px #0009,0 0 25px #d9b66d25!important}
+.role-art{position:absolute;inset:0 0 70px;display:block;overflow:hidden;pointer-events:none}
+.role-art:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;top:4px;left:50%;transform:translateX(-50%);border:1px solid #fff2;box-shadow:0 0 0 22px #fff1,0 0 0 48px #fff1}
+.teacher-entry{background:linear-gradient(145deg,#253d50,#101b2b 70%)!important}
+.teacher-art{background:radial-gradient(ellipse at 50% 80%,#d0a45b55,transparent 55%),linear-gradient(135deg,#243e50,#101b2b)}
+.teacher-thobe{position:absolute;left:50%;bottom:-25px;transform:translateX(-50%);width:150px;height:175px;border-radius:62px 62px 8px 8px;background:linear-gradient(90deg,#b8b7ae,#f5f1e8 25%,#fff 52%,#dedbd2 78%,#a9aaa5);box-shadow:0 0 0 1px #fff8,inset 0 0 22px #7775}
+.teacher-head{position:absolute;left:50%;top:38px;transform:translateX(-50%);width:70px;height:83px;border-radius:45% 45% 38% 38%;background:linear-gradient(90deg,#171b20,#34302b 55%,#171b20);filter:brightness(.8)}
+.teacher-shemagh{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:112px;height:68px;border-radius:48% 48% 12px 12px;background:repeating-linear-gradient(135deg,#a51f2b 0 5px,#f2e9dd 5px 10px,#9d1b28 10px 13px);clip-path:polygon(8% 20%,22% 0,78% 0,94% 20%,100% 100%,78% 78%,50% 100%,22% 78%,0 100%);box-shadow:0 5px 12px #0008}
+.teacher-shemagh:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 8px,#9a182333 9px 11px)}
+.student-entry{background:linear-gradient(145deg,#49647a,#15283b 75%)!important}
+.student-art{background:radial-gradient(ellipse at 50% 80%,#d5b16d55,transparent 56%),linear-gradient(135deg,#668196,#1a3044)}
+.student-head{position:absolute;left:50%;top:48px;transform:translateX(-50%);width:66px;height:76px;border-radius:45% 45% 42% 42%;background:linear-gradient(90deg,#5b3827,#9a6545 50%,#4a2d22);box-shadow:0 0 0 8px #1b2733}
+.student-body{position:absolute;left:50%;bottom:-25px;transform:translateX(-50%);width:142px;height:145px;border-radius:42px 42px 8px 8px;background:linear-gradient(90deg,#172c43,#e8edf0 35%,#fff 55%,#d9e1e7 75%,#172c43);box-shadow:inset 0 0 0 2px #ffffff55}
+.student-bag{position:absolute;left:calc(50% + 48px);bottom:3px;width:52px;height:105px;border-radius:18px 18px 8px 8px;background:linear-gradient(90deg,#7d4d2b,#b37b42,#5a3926);border:3px solid #d2a16b;transform:rotate(-8deg)}
+.student-book{position:absolute;left:calc(50% - 87px);bottom:0;width:44px;height:62px;background:linear-gradient(90deg,#a83435,#e6d2a2);border:3px solid #f1e4c8;border-radius:5px;transform:rotate(-9deg);box-shadow:4px 5px 0 #24364a}
+.supervisor-entry{background:linear-gradient(145deg,#3b4655,#111b29 75%)!important}
+.supervisor-art{background:radial-gradient(ellipse at 50% 75%,#d4b16b44,transparent 60%),linear-gradient(135deg,#596779,#172435)}
+.supervisor-screen{position:absolute;left:50%;top:45px;transform:translateX(-50%);width:160px;height:94px;border:7px solid #1b222c;border-radius:8px;background:linear-gradient(135deg,#263d53,#101b2a);box-shadow:0 8px 22px #0008}
+.supervisor-screen:after{content:"";position:absolute;left:50%;bottom:-22px;width:42px;height:17px;transform:translateX(-50%);background:#222b36}
+.supervisor-desk{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:210px;height:22px;border-radius:4px;background:linear-gradient(#b18b54,#634b2e)}
+.supervisor-person{position:absolute;left:50%;top:67px;transform:translateX(-50%);width:47px;height:65px;border-radius:50% 50% 5px 5px;background:#d6dce1;opacity:.9}
+.role-copy{position:relative;z-index:2;display:block;width:100%;padding:18px 18px 20px;background:linear-gradient(180deg,transparent,#07101bf5 22%);text-align:right}
+.role-copy b{display:block;color:#f5dfb0;font-size:19px;margin-bottom:7px}
+.role-copy small{display:block;color:#d2d9e3;font-size:12px;line-height:1.8}
+@media(max-width:700px){.role-entry-grid{grid-template-columns:1fr;gap:13px}.role-entry{min-height:205px;display:grid;grid-template-columns:42% 1fr;align-items:end}.role-art{inset:0 0 0 48%}.role-copy{grid-column:1;grid-row:1;align-self:end;padding:18px 14px}.role-art:before{width:150px;height:150px}.teacher-thobe{width:112px;height:130px}.teacher-head{top:24px;width:55px;height:65px}.teacher-shemagh{top:7px;width:90px;height:56px}.student-head{top:26px;width:52px;height:60px}.student-body{width:112px;height:112px}.student-bag{left:calc(50% + 36px);height:82px;width:42px}.student-book{left:calc(50% - 68px);height:49px;width:35px}.supervisor-screen{top:25px;width:125px;height:75px}.supervisor-person{top:45px}.supervisor-desk{width:160px}}
+
 </style>
 <style>
 /* Ticket, tier pricing, payment choice and expanded Taif photo gallery */
@@ -1422,12 +1454,12 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
    <div class="steps"><span class="step current">1 · بطاقة المشارك</span><span class="step">2 · السينما</span><span class="step">3 · الدعوة</span></div>
    <h2>اختر نوع الدخول</h2>
    <p class="muted">اختر الفئة المناسبة للمتابعة.</p>
-   <div class="participants" id="roleChoices">
-    <button type="button" class="person" data-role="student"><div class="avatar">🎓</div><b>دخول الطالب</b><small>تسجيل ومتابعة تجربة الرحلة</small></button>
-    <button type="button" class="person" data-role="teacher"><div class="avatar">👨‍🏫</div><b>دخول المعلم</b><small>مسار خاص بالمعلمين</small></button>
-    <button type="button" class="person" data-role="supervisor"><div class="avatar">🛡️</div><b>مشرف الموقع</b></button>
-   </div>
-   <div id="registrationFields" class="hidden">
+   <div class="participants role-entry-grid" id="roleChoices">
+     <button type="button" class="person role-entry student-entry" data-role="student"><span class="role-art student-art" aria-hidden="true"><i class="student-head"></i><i class="student-body"></i><i class="student-bag"></i><i class="student-book"></i></span><span class="role-copy"><b>دخول الطالب</b><small>بوابة الطالب · التسجيل ومتابعة الرحلة</small></span></button>
+     <button type="button" class="person role-entry teacher-entry" data-role="teacher"><span class="role-art teacher-art" aria-hidden="true"><i class="teacher-thobe"></i><i class="teacher-head"></i><i class="teacher-shemagh"></i></span><span class="role-copy"><b>دخول المعلم</b><small>بوابة المعلمين · خدمات ومزايا المعلم</small></span></button>
+     <button type="button" class="person role-entry supervisor-entry" data-role="supervisor"><span class="role-art supervisor-art" aria-hidden="true"><i class="supervisor-screen"></i><i class="supervisor-desk"></i><i class="supervisor-person"></i></span><span class="role-copy"><b>دخول المشرف</b><small>إدارة الموقع والإشراف على الرحلة</small></span></button>
+    </div>
+    <div id="registrationFields" class="hidden">
    <h2 id="roleHeading">تسجيل الطالب</h2>
    <p class="muted">أكمل بياناتك في الخانات التالية.</p>
    <label class="field" for="fullName">اسمك الثلاثي</label>
