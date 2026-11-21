@@ -30,7 +30,6 @@ button:disabled{opacity:.45;cursor:wait}
   <p>أدر جوالك إلى الوضع الأفقي لتشغيل اللعبة بأفضل عرض.</p>
   <div class="rotate" aria-hidden="true">📱</div>
   <div id="hint">↻ ننتظر تدوير الجوال إلى الوضع الأفقي</div>
-  <button id="start" type="button" disabled>تم، ابدأ اللعب</button>
   <p id="error" role="alert"></p>
  </section>
 </main>
@@ -43,7 +42,7 @@ button:disabled{opacity:.45;cursor:wait}
  const error=document.getElementById('error');
  const game=document.getElementById('game');
  const isLandscape=()=>window.matchMedia('(orientation: landscape)').matches || window.innerWidth>window.innerHeight || !!(screen.orientation&&screen.orientation.type&&screen.orientation.type.startsWith('landscape'));
- let original=null, loadError=null, countdownTimer=null, countdownValue=3, countdownDone=false;
+ let original=null, loadError=null, countdownTimer=null, countdownValue=3, countdownDone=false, launched=false;
  const paths=Array.from({length:11},(_,i)=>'/game-parts/part-'+String(i).padStart(2,'0')+'.txt');
  const gameReady=Promise.all(paths.map(async path=>{
    const response=await fetch(path,{cache:'force-cache'});
@@ -54,22 +53,29 @@ button:disabled{opacity:.45;cursor:wait}
    if(!/^<!doctype html>/i.test(source)||!source.trimEnd().endsWith('</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
    original=source;
  }).catch(e=>{loadError=e;});
+ function launchGame(){
+   if(launched||!isLandscape()||!original||loadError)return;
+   launched=true;
+   if(document.documentElement.requestFullscreen){document.documentElement.requestFullscreen().catch(()=>{});}
+   if(screen.orientation&&screen.orientation.lock){screen.orientation.lock('landscape').catch(()=>{});}
+   game.srcdoc=original;
+   game.style.display='block';
+   launcher.style.display='none';
+ }
  function beginCountdown(){
    if(countdownTimer||countdownDone||!isLandscape()||!original||loadError)return;
    countdownValue=3;
-   start.disabled=true;
-   start.textContent='استعد... '+countdownValue;
    hint.textContent='✓ تم تدوير الجوال — ستبدأ اللعبة بعد قليل';
    countdownTimer=setInterval(()=>{
      if(!isLandscape()){
-       clearInterval(countdownTimer);countdownTimer=null;start.textContent='ابدأ اللعب';update();return;
+       clearInterval(countdownTimer);countdownTimer=null;update();return;
      }
      countdownValue--;
-     if(countdownValue>0)start.textContent='استعد... '+countdownValue;
+     if(countdownValue>0)hint.textContent='✓ تم تدوير الجوال — تبدأ اللعبة تلقائيًا بعد '+countdownValue+' ثوانٍ';
      else{
        clearInterval(countdownTimer);countdownTimer=null;countdownDone=true;
-       start.disabled=false;start.textContent='ابدأ اللعب';
-       hint.textContent='🎮 جاهز؟ اضغط «ابدأ اللعب» للدخول مباشرة';
+       hint.textContent='🎮 انطلاق اللعبة!';
+       launchGame();
      }
    },1000);
  }
@@ -77,36 +83,18 @@ button:disabled{opacity:.45;cursor:wait}
    const landscape=isLandscape();
    if(!landscape){
      if(countdownTimer){clearInterval(countdownTimer);countdownTimer=null;}
-     countdownDone=false;start.disabled=true;start.textContent='ابدأ اللعب';
-     hint.textContent='↻ أدر الجوال من عمودي إلى أفقي';
-   }else if(loadError){start.disabled=true;hint.textContent='تعذر تجهيز اللعبة، أعد تحميل الصفحة';}
-   else if(!original){start.disabled=true;hint.textContent='✓ تم تدوير الجوال — لحظات ونجهز اللعبة';}
-   else if(countdownDone){start.disabled=false;start.textContent='ابدأ اللعب';hint.textContent='🎮 جاهز؟ اضغط «ابدأ اللعب» للدخول مباشرة';}
-   else beginCountdown();
+     countdownDone=false;
+     hint.textContent='↻ أدر جوالك إلى الوضع الأفقي لتبدأ اللعبة';
+   }else if(loadError){hint.textContent='تعذر تجهيز اللعبة، أعد تحميل الصفحة';}
+   else if(!original){hint.textContent='✓ تم تدوير الجوال — لحظات ونجهز اللعبة';}
+   else if(!launched)beginCountdown();
    if(loadError)error.textContent=loadError.message;
  }
  window.addEventListener('resize',update);
  window.addEventListener('orientationchange',update);
  gameReady.then(update);
  update();
- start.addEventListener('click',async()=>{
-   if(!isLandscape()||!original||!countdownDone){update();return;}
-   start.disabled=true;
-   try{
-     if(document.documentElement.requestFullscreen){
-       try{await document.documentElement.requestFullscreen()}catch(_e){}
-     }
-     if(screen.orientation&&screen.orientation.lock){
-       try{await screen.orientation.lock('landscape')}catch(_e){}
-     }
-     game.srcdoc=original;
-     game.style.display='block';
-     launcher.style.display='none';
-   }catch(e){
-     error.textContent='تعذر بدء اللعبة. أعد المحاولة.';
-     start.disabled=false;
-   }
- });
+
 })();
 </script>
 </body>
