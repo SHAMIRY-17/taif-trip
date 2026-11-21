@@ -240,6 +240,120 @@ footer{background:#070b12;color:#8995a5}
 .invite-whatsapp-note strong{color:#f7d78e}
 @media(max-width:520px){.poetry-grid{gap:5px 10px}.poetry-cell{font-size:12px;min-height:38px}.invite-cover{padding:30px 15px}.invite-whatsapp-note{font-size:13px;padding:12px 8px}}
 
+
+/* تحابّوا — warm Taif identity palette */
+:root{
+ --bg:#F6EFE6;--panel:#EAE0D5;--gold:#C5A880;--gold2:#9B7653;
+ --muted:#715d4c;--line:#C5A88088;
+ --ink:#5C3D28;--caramel:#9B7653;--sage:#C4CBB8;--cream:#F6EFE6;
+}
+html{scroll-behavior:smooth}
+body{
+ isolation:isolate;color:var(--ink);
+ background-color:var(--cream);
+ background-image:
+  linear-gradient(180deg,rgba(246,239,230,.93),rgba(246,239,230,.97)),
+  url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1800&q=85');
+ background-size:cover;background-position:center;background-attachment:fixed;
+}
+body:before{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.12;
+ background-image:
+  url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80'),
+  url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80');
+ background-size:42vw 55vh,38vw 48vh;background-position:left 8vh,right 48vh;
+ background-repeat:no-repeat;filter:saturate(.65) sepia(.12);
+}
+header{
+ background:rgba(246,239,230,.94);color:var(--ink);
+ border-bottom:1px solid var(--gold);box-shadow:0 8px 28px #5c3d2812;
+}
+.logo{color:var(--ink);text-shadow:none}
+.tag{color:#8b725d}
+.hero{
+ background:
+  linear-gradient(180deg,rgba(246,239,230,.76),rgba(246,239,230,.89)),
+  url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1800&q=85') center/cover;
+}
+.hero:before{opacity:.22}
+.hero:after{border-color:#C5A88055;box-shadow:0 0 0 34px #C5A88012,0 0 0 70px #C5A8800a}
+.content{
+ background:rgba(246,239,230,.84);border:1px solid #C5A88099;
+ box-shadow:0 24px 70px #5c3d2817,inset 0 1px #fff;
+ backdrop-filter:blur(12px);
+}
+.eyebrow{color:#8b6847}
+h1,h1 span{color:var(--ink);text-shadow:none;filter:none}
+h1 span{
+ background:linear-gradient(100deg,#5C3D28,#9B7653 60%,#C5A880);
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.description{color:#715d4c}
+.hero-poetry{color:#5C3D28}
+.poetry-cell{color:#5C3D28;text-shadow:none}
+.poetry-cell:nth-child(5),.poetry-cell:nth-child(6){color:#9B7653}
+.hero-poetry:before,.hero-poetry:after{background:linear-gradient(90deg,transparent,#C5A880 15%,#9B7653 50%,#C5A880 85%,transparent)}
+.hero-poetry .poetry-grid:before,.hero-poetry .poetry-grid:after{color:#9B7653;text-shadow:none}
+#beginBtn,button{
+ border-color:#b89a70;color:#fffaf3;
+ background:linear-gradient(135deg,#9B7653,#5C3D28);
+ box-shadow:0 8px 22px #5c3d2820,inset 0 1px #ffffff55;
+}
+button.secondary{background:#EAE0D5;color:#5C3D28;border-color:#C5A880}
+section:not(.screen):not(.hero){background:rgba(246,239,230,.58)}
+.section-title{color:#5C3D28;text-shadow:none}
+#landing .card,.card{
+ color:#5C3D28;background:linear-gradient(145deg,rgba(246,239,230,.97),rgba(234,224,213,.94));
+ border:1px solid #C5A88099;box-shadow:0 14px 35px #5c3d2812,inset 0 1px #fff;
+}
+.card h3{color:#5C3D28}.card p{color:#715d4c}
+.card:before{background:linear-gradient(90deg,transparent,#C5A880,transparent)}
+#landing .cards .card:nth-child(4){display:none}
+.screen{
+ background:
+  linear-gradient(180deg,rgba(246,239,230,.90),rgba(246,239,230,.94)),
+  url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+}
+.panel,.invite-card,.invite-cover{
+ color:#5C3D28;background:linear-gradient(145deg,rgba(246,239,230,.97),rgba(234,224,213,.96));
+ border:1px solid #C5A880;box-shadow:0 18px 48px #5c3d2818,inset 0 1px #fff;
+}
+.panel h2,.card h3{color:#5C3D28}
+.muted,.note{color:#715d4c}
+.steps .step{background:#EAE0D5;color:#715d4c;border-color:#C5A88066}
+.steps .step.current{background:#5C3D28;color:#F6EFE6;border-color:#5C3D28}
+.field{color:#5C3D28}
+input[type=tel],input[type=text],input[type=password]{
+ color:#5C3D28!important;background:#fffaf5!important;border:1px solid #C5A880!important;
+}
+.person{background:#EAE0D5;color:#5C3D28;border-color:#C5A880}
+.person small{color:#715d4c}
+.person.selected{background:#F6EFE6;border-color:#9B7653}
+.avatar{background:linear-gradient(145deg,#C5A880,#9B7653);color:#fff}
+.taif-teasers .teaser{border-color:#C5A880;box-shadow:0 10px 24px #5c3d281b}
+.invite-cover{background:linear-gradient(145deg,#F6EFE6,#EAE0D5)}
+.invite-cover h2,.invite-message{color:#5C3D28}
+.invite-cover>p,.invite-footer,.invite-kicker{color:#9B7653}
+.invite-whatsapp-note{color:#5C3D28;border-color:#C5A880;background:rgba(234,224,213,.65)}
+.invite-whatsapp-note strong{color:#5C3D28}
+footer{background:rgba(246,239,230,.92);color:#8b725d;border-color:#C5A88066}
+.movie-theater,.cinema-room,.tablet-booking,.cinema-experience{
+ background:linear-gradient(145deg,#EAE0D5,#d9cbbb);
+ border-color:#C5A880;box-shadow:0 18px 48px #5c3d2818;
+}
+.movie-screen{background:linear-gradient(135deg,#5C3D28,#9B7653);border-color:#C5A880;color:#F6EFE6}
+.movie-screen small,.row-label,.tier-legend{color:#5C3D28}
+.tier-legend span{background:#F6EFE6;color:#5C3D28;border-color:#C5A880}
+.tablet-booking{border-color:#9B7653}
+.tablet-top,.tablet-bottom{color:#5C3D28}
+.cinema-experience{color:#5C3D28}
+.experience-header{color:#5C3D28}
+.guest-caption{background:#5C3D28;color:#F6EFE6;border-color:#C5A880}
+@media(max-width:600px){
+ body:before{background-size:62vw 34vh,55vw 32vh;background-position:left 9vh,right 55vh;opacity:.09}
+ .hero{background-position:center}
+}
+
 </style>
 </head>
 <body>
@@ -258,7 +372,7 @@ footer{background:#070b12;color:#8995a5}
     <div class="hero-poetry" aria-label="بيتا ترحيب بالرحلة">
      <div class="poetry-grid">
       <div class="poetry-cell">من جدةٍ نبدأ، ووجهتنا الطايف</div><div class="poetry-cell">والورد والضباب يروون السوالف</div>
-      <div class="poetry-cell">نمشي رفقةٍ، والفرح دربٍ يجمعنا</div><div class="poetry-cell">وتبقى ليالينا ذكرى ما تفارقنا</div>
+      <div class="poetry-cell">نمشي رفقةٍ، والفرح دربٍ يجمعنا</div><div class="poetry-cell">وتبقى ليالينا ذكرى لا تفارقنا</div>
       <div class="poetry-cell">وعنواننا «تحابّوا»؛ بالمودّة نلتقي</div><div class="poetry-cell">وبطيب الأخوّة أجملَ العمر نرتقي</div>
      </div>
     </div>
@@ -401,8 +515,6 @@ $('experienceInvite').addEventListener('click',showInvite);
 function buildHallSeats(){const host=$('hallSeats');host.innerHTML='';[{t:'A',n:5},{t:'B',n:7},{t:'C',n:9},{t:'D',n:11}].forEach(r=>{const line=document.createElement('div');line.className='hall-row hall-row-'+r.t;for(let i=1;i<=r.n;i++){const chair=document.createElement('span');chair.className='hall-chair'+(selectedSeat===r.t+i?' destination':'');line.appendChild(chair)}host.appendChild(line)})}
 function walkGuest(){const guest=$('hallGuest');guest.classList.remove('walking','seated');guest.querySelector('.guest-popcorn').classList.remove('popcorn');guest.style.left='7%';guest.style.top='77%';$('guestCaption').textContent='دخلت القاعة… جاري التوجه إلى '+selectedSeat;$('watchMovie').disabled=true;$('experienceInvite').disabled=true;const tier=selectedSeat.charAt(0),num=Number(selectedSeat.slice(1)),counts={A:5,B:7,C:9,D:11},ri={A:0,B:1,C:2,D:3}[tier],x=38+(num-1)/(counts[tier]-1)*48,y=34+ri*12;requestAnimationFrame(()=>{guest.classList.add('walking');guest.style.left=x+'%';guest.style.top=y+'%'});setTimeout(()=>{guest.classList.remove('walking');guest.classList.add('seated');guest.querySelector('.guest-popcorn').classList.add('popcorn');$('guestCaption').textContent='وصلت إلى '+selectedSeat+'… تفضل بالجلوس 🍿';$('watchMovie').disabled=false},2700)}
 function showInvite(){if(!selected)selected={name:'معاينة',kunya:'ضيفنا'};const safeKunya=String(selected.kunya).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));$('inviteText').innerHTML='<strong>يا '+safeKunya+'، مرحبًا بك!</strong><br>يسرّنا انضمامك إلينا في رحلة الطائف؛ أيامٌ تجمعنا بالمودّة والأخوّة، وتملؤها المغامرة والضحكات والذكريات الجميلة.<br><br><strong>وجودك يسعدنا، وعنوان جمعتنا: تحابّوا.</strong>'+(selectedSeat?'<br><small>مقعدك المختار في السينما: '+selectedSeat+'</small>':'');showScreen('inviteScreen')}
-$('shareWhatsApp').addEventListener('click',()=>window.open('https://wa.me/?text='+encodeURIComponent($('inviteText').textContent),'_blank','noopener'));
-$('copyInvite').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('inviteText').textContent);$('copyInvite').textContent='تم النسخ ✓'}catch(e){$('copyInvite').textContent='تعذر النسخ؛ حدّد النص وانسخه'}});
 $('restart').addEventListener('click',()=>{selected=null;selectedSeat=null;showScreen('landing')});
 function renderSeats(preview=false){$('cinemaExperience')?.classList.add('hidden');
  const seats=$('seatGrid');seats.innerHTML='';selectedSeat=null;$('toInvite').disabled=true;
