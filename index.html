@@ -1475,7 +1475,6 @@ function showInvite(){
  $('inviteText').innerHTML='<strong>يا '+safe+'، مرحبًا بك!</strong><br>يسرّنا انضمامك إلينا في رحلة الطائف؛ أيامٌ تجمعنا بالمودّة والأخوّة والذكريات الجميلة.<br><br><strong>وجودك يسعدنا، وعنوان جمعتنا: تحابّوا.</strong>'+(selectedSeat?'<br><small>مقعدك في السينما: '+selectedSeat+'</small>':'');
  showScreen('inviteScreen');
 }
-document.querySelectorAll('input[name="paymentMethod"]').forEach(el=>el.addEventListener('change',()=>{$('paymentStatus').textContent='طريقة الدفع المختارة: '+el.value+' (اختيار مبدئي داخل الموقع).'}));
 $('restart').addEventListener('click',()=>{selected=null;selectedSeat=null;showScreen('landing')});
 
 let videoUrl=null;$('videoFile').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=URL.createObjectURL(file);$('adVideo').src=videoUrl;$('adVideo').classList.remove('hidden')});
