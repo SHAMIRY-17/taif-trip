@@ -1,5 +1,5 @@
 function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store"}})}
-const TEACHER_CODE_SHA256="5d699ceca305df0b2c974ca97b510c81d621e7590527af02c61feee6726391f1";
+const TEACHER_CODE_SHA256="c38217d983803c199aa25bc3779e2c45c45fc90df79c8fbcf670503154d1c7f9";
 async function matchesTeacherCode(value){
  const bytes=new TextEncoder().encode(value);
  const digest=await crypto.subtle.digest("SHA-256",bytes);
