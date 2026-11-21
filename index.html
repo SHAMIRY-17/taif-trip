@@ -1287,6 +1287,18 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 }
 @media(min-width:761px) and (max-width:1050px){.snack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.snack-item:last-child{grid-column:1/-1}}
 
+
+.tablet-booking .cinema-room{touch-action:pan-x pan-y pinch-zoom!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important}
+.tablet-booking .seat-rows{touch-action:pan-x pan-y pinch-zoom!important}
+.seat-neighbors{max-width:850px;margin:14px auto 0;padding:16px 20px;border:1px solid #C5A88088;border-radius:16px;background:linear-gradient(145deg,#50595C,#343B3E);color:#F2E7D4;text-align:right;line-height:1.9}
+.seat-neighbors strong{display:block;color:#F1D6A3;font-size:17px;margin-bottom:5px}
+.seat-neighbors p{margin:0;color:#D7DEDA;font-size:13px}
+.pov-snack-tray{position:absolute;z-index:5;bottom:3%;left:4%;display:flex;align-items:flex-end;gap:9px;padding:10px 13px;border:1px solid #d8c18c88;border-radius:16px;background:linear-gradient(145deg,#222b32dd,#0b1119ee);box-shadow:0 12px 30px #000b;backdrop-filter:blur(7px);font-size:clamp(25px,4vw,42px)}
+.pov-snack-tray:before{content:"";position:absolute;left:-7px;right:-7px;bottom:-8px;height:10px;border-radius:0 0 10px 10px;background:linear-gradient(90deg,#7b6242,#d6b47b,#6f5536);box-shadow:0 5px 10px #0008}
+.tray-cup,.tray-popcorn,.tray-doritos{position:relative;filter:drop-shadow(0 5px 4px #0008)}
+.tray-doritos{font-size:28px;color:#e0a04e;text-shadow:0 0 2px #ffd28a}
+@media(max-width:760px){.pov-snack-tray{left:2%;bottom:4%;gap:5px;padding:7px 9px}.seat-neighbors{padding:12px}}
+
 </style>
 </head>
 <body>
@@ -1394,9 +1406,9 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
    <div id="snackShop" class="snack-shop hidden">
     <div class="snack-heading"><span class="snack-kicker">TAIF CINEMA · CONCESSIONS</span><h3>ماذا تريد أن تتناول قبل العرض؟</h3><p>اختر طلباتك، وشاهد الإجمالي قبل تأكيد الشراء.</p></div>
     <div class="snack-grid">
-     <article class="snack-item"><div class="snack-emoji">🍿</div><div><strong>فشار</strong><small>اختر النكهة · 10 ريالات</small></div><label>النكهة<select id="popcornFlavor"><option value="جبن">جبن</option><option value="ملح">ملح</option><option value="كراميل">كراميل</option></select></label><label>الكمية<select id="popcornQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
-     <article class="snack-item"><div class="snack-emoji">🧀</div><div><strong>دوريتوس</strong><small>8 ريالات للعبوة</small></div><label>الكمية<select id="doritosQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
-     <article class="snack-item"><div class="snack-emoji">🥤</div><div><strong>سلاش كنزا</strong><small>8 ريالات للكوب</small></div><label>النكهة<select id="slushFlavor"><option value="كنزا كولا">كنزا كولا</option><option value="كنزا ليمون">كنزا ليمون</option><option value="كنزا حمضيات">كنزا حمضيات</option><option value="كنزا دايت">كنزا دايت</option></select></label><label>الكمية<select id="slushQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
+     <article class="snack-item"><div class="snack-emoji">🍿</div><div><strong>فشار السينما</strong><small>وسط 18 ريال · كبير 24 ريال</small></div><label>النكهة<select id="popcornFlavor"><option value="جبن">جبن</option><option value="ملح">ملح</option><option value="كراميل">كراميل</option></select></label><label>الحجم<select id="popcornSize"><option value="medium">وسط</option><option value="large">كبير</option></select></label><label>الكمية<select id="popcornQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
+     <article class="snack-item"><div class="snack-emoji">🧀</div><div><strong>دوريتوس</strong><small>وسط 12 ريال · كبير 16 ريال</small></div><label>الحجم<select id="doritosSize"><option value="medium">وسط</option><option value="large">كبير</option></select></label><label>الكمية<select id="doritosQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
+     <article class="snack-item"><div class="snack-emoji">🥤</div><div><strong>سلاش كنزا</strong><small>وسط 12 ريال · كبير 16 ريال</small></div><label>النكهة<select id="slushFlavor"><option value="كنزا كولا">كنزا كولا</option><option value="كنزا ليمون">كنزا ليمون</option><option value="كنزا حمضيات">كنزا حمضيات</option><option value="كنزا دايت">كنزا دايت</option></select></label><label>الحجم<select id="slushSize"><option value="medium">وسط</option><option value="large">كبير</option></select></label><label>الكمية<select id="slushQty"><option value="0">بدون</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></article>
     </div>
     <div class="snack-checkout"><div class="snack-total-line"><span>إجمالي الطلب</span><strong><b id="snackTotal">0</b> ريال</strong></div><p id="snackBalanceHint">سيتم الخصم من رصيد محفظتك الافتراضية بعد تأكيد الشراء.</p><div class="snack-actions"><button class="secondary" id="editSeatOrder">تعديل المقعد</button><button id="buySnacks">تأكيد الشراء والخصم</button></div><p id="snackMessage" class="note" role="status"></p><div id="snackReceipt" class="snack-receipt hidden"></div><button id="enterAuditorium" class="hidden">الدخول إلى قاعة السينما</button></div>
    </div>
@@ -1415,10 +1427,12 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
        <div class="pov-seat-field" id="povSeatField"></div>
        <div class="pov-near-seat pov-near-left"></div><div class="pov-near-seat pov-near-right"></div>
        <div class="pov-welcome-sign" id="povWelcomeSign">أهلًا بك في سينما الرحلة</div>
+       <div class="pov-snack-tray hidden" id="povSnackTray" aria-label="طلباتك بجانب مقعدك"><div class="tray-cup" id="trayCup">🥤</div><div class="tray-popcorn" id="trayPopcorn">🍿</div><div class="tray-doritos" id="trayDoritos">▰</div></div>
       </div>
       <div class="pov-viewer-caption" id="povViewerCaption">أنت الآن عند مدخل القاعة</div>
      </div>
-     <div class="pov-touch-hint">حرّك إصبعك على الشاشة يمينًا ويسارًا للالتفات داخل القاعة</div>
+     <div class="pov-touch-hint">حرّك إصبعك يمينًا ويسارًا للالتفات، واستخدم اللمس للتنقل داخل القاعة.</div>
+    <div class="seat-neighbors" id="seatNeighbors"><strong>رفاق المقاعد حولك</strong><p>ستظهر أسماء وكنى الجالسين بجوارك وأمامك عند تفعيل الحجوزات المشتركة.</p></div>
     </div>
     <div class="experience-controls"><button id="replayWalk" class="secondary">إعادة الدخول إلى مقعدي</button><button id="watchMovie" disabled>شغّل العرض ▶</button><button id="experienceInvite" class="secondary" disabled>متابعة إلى الدعوة</button></div>
     <p class="note">هذه معاينة منظور مقعد فردي داخل قاعة موحّدة. تتغير زاوية الرؤية حسب المقعد، ويمكن الالتفات لرؤية المقاعد المجاورة.</p>
@@ -1482,18 +1496,20 @@ $('enterJourney').addEventListener('click',()=>showScreen('gameScreen'));
 $('backGame').addEventListener('click',()=>showScreen('identity'));
 $('toInvite').addEventListener('click',()=>{if(!selectedSeat)return;$('snackShop').classList.remove('hidden');$('snackShop').scrollIntoView({behavior:'smooth',block:'center'});updateSnackTotal()});
 $('editSeatOrder').addEventListener('click',()=>{$('snackShop').classList.add('hidden');$('seatGrid').scrollIntoView({behavior:'smooth',block:'center'})});
-['popcornQty','doritosQty','slushQty','popcornFlavor','slushFlavor'].forEach(id=>$(id).addEventListener('change',updateSnackTotal));
+['popcornQty','doritosQty','slushQty','popcornFlavor','slushFlavor','popcornSize','doritosSize','slushSize'].forEach(id=>$(id).addEventListener('change',updateSnackTotal));
+function sizeLabel(value){return value==='large'?'كبير':'وسط'}
 function getSnackOrder(){
  const popcorn=Number($('popcornQty').value),doritos=Number($('doritosQty').value),slush=Number($('slushQty').value);
+ const popcornUnit=$('popcornSize').value==='large'?24:18,doritosUnit=$('doritosSize').value==='large'?16:12,slushUnit=$('slushSize').value==='large'?16:12;
  const lines=[];
- if(popcorn)lines.push({name:'فشار '+$('popcornFlavor').value,qty:popcorn,unit:10,total:popcorn*10});
- if(doritos)lines.push({name:'دوريتوس',qty:doritos,unit:8,total:doritos*8});
- if(slush)lines.push({name:'سلاش '+$('slushFlavor').value,qty:slush,unit:8,total:slush*8});
+ if(popcorn)lines.push({name:'فشار '+$('popcornFlavor').value+' · '+sizeLabel($('popcornSize').value),qty:popcorn,unit:popcornUnit,total:popcorn*popcornUnit,kind:'popcorn'});
+ if(doritos)lines.push({name:'دوريتوس · '+sizeLabel($('doritosSize').value),qty:doritos,unit:doritosUnit,total:doritos*doritosUnit,kind:'doritos'});
+ if(slush)lines.push({name:'سلاش '+$('slushFlavor').value+' · '+sizeLabel($('slushSize').value),qty:slush,unit:slushUnit,total:slush*slushUnit,kind:'slush'});
  return {lines,total:lines.reduce((sum,x)=>sum+x.total,0)};
 }
 function updateSnackTotal(){
  const order=getSnackOrder();$('snackTotal').textContent=order.total.toLocaleString('en-US');
- $('snackBalanceHint').textContent='رصيدك الحالي '+walletBalance.toLocaleString('en-US')+' ريال · الأسعار: فشار 10، دوريتوس 8، سلاش كنزا 8 ريالات.';
+ $('snackBalanceHint').textContent='رصيدك الحالي '+walletBalance.toLocaleString('en-US')+' ريال · الأسعار بأسلوب أسعار السينما، وتظهر قيمة الحجم المختار في الفاتورة.';
  $('buySnacks').disabled=order.total===0;
 }
 $('buySnacks').addEventListener('click',()=>{
@@ -1503,7 +1519,7 @@ $('buySnacks').addEventListener('click',()=>{
  walletBalance-=order.total;$('walletBalance').textContent=walletBalance.toLocaleString('en-US');
  $('snackMessage').textContent='تم تسجيل الطلب وخصم قيمته من المحفظة الافتراضية.';
  $('snackReceipt').innerHTML='<h4>فاتورة طلبك · المقعد '+selectedSeat+'</h4>'+order.lines.map(x=>'<div class="receipt-line"><span>'+x.name+' × '+x.qty+'</span><b>'+x.total+' ريال</b></div>').join('')+'<div class="receipt-line receipt-total"><span>الإجمالي المخصوم</span><b>'+order.total+' ريال</b></div><div class="receipt-line"><span>الرصيد المتبقي</span><b>'+walletBalance.toLocaleString('en-US')+' ريال</b></div>';
- $('snackReceipt').classList.remove('hidden');$('buySnacks').disabled=true;$('enterAuditorium').classList.remove('hidden');
+ $('snackReceipt').classList.remove('hidden');$('buySnacks').disabled=true;$('enterAuditorium').classList.remove('hidden');renderCinemaSnacks(order);
 });
 $('enterAuditorium').addEventListener('click',()=>{
  $('snackShop').classList.add('hidden');$('cinemaExperience').classList.remove('hidden');
@@ -1532,6 +1548,13 @@ function buildPovHall(){
  $('povScene').style.setProperty('--view-angle',povSeatAngle+'deg');
  $('povScene').style.setProperty('--view-shift',(angle*36)+'px');
  setPovLook(0);
+}
+function renderCinemaSnacks(order){
+ const tray=$('povSnackTray');if(!tray)return;
+ const hasPop=order.lines.some(x=>x.kind==='popcorn'),hasDor=order.lines.some(x=>x.kind==='doritos'),hasDrink=order.lines.some(x=>x.kind==='slush');
+ $('trayPopcorn').classList.toggle('hidden',!hasPop);$('trayDoritos').classList.toggle('hidden',!hasDor);$('trayCup').classList.toggle('hidden',!hasDrink);
+ tray.classList.toggle('hidden',!order.lines.length);
+ tray.setAttribute('title',order.lines.map(x=>x.name+' × '+x.qty).join('، '));
 }
 function walkToSeat(){
  $('watchMovie').disabled=true;$('experienceInvite').disabled=true;
