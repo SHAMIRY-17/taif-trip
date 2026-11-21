@@ -1447,7 +1447,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .seat-payment-choice{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:14px auto;padding:14px;border:1px solid #d8b66f66;border-radius:13px;background:#0b1422;color:#f4dfb0}
 .seat-payment-choice label{display:flex;gap:6px;align-items:center;padding:8px 12px;border:1px solid #ffffff28;border-radius:9px;cursor:pointer}.seat-payment-choice input{accent-color:#d8b66f}
 .seat-payment-choice small{flex-basis:100%;color:#b8c4d3;font-size:11px}
-.cinema-ticket{--ticket-accent:#dff7ff;max-width:650px;margin:18px auto;padding:20px;border:2px dashed var(--ticket-accent);border-radius:18px;background:linear-gradient(145deg,#14283a,#080f19);box-shadow:0 18px 48px #0008;color:#f8f3e8;text-align:right;position:relative;overflow:hidden}
+.cinema-ticket{--ticket-accent:#dff7ff;max-width:720px;border-radius:9px 24px 24px 9px;clip-path:none;max-width:650px;margin:18px auto;padding:20px;border:2px dashed var(--ticket-accent);border-radius:18px;background:linear-gradient(145deg,#14283a,#080f19);box-shadow:0 18px 48px #0008;color:#f8f3e8;text-align:right;position:relative;overflow:hidden}
 .cinema-ticket:before{content:"";position:absolute;inset:0 auto 0 0;width:7px;background:var(--ticket-accent);box-shadow:0 0 22px var(--ticket-accent)}
 .cinema-ticket.ticket-B{--ticket-accent:#f4d27d;background:linear-gradient(145deg,#3b2b14,#12100c)}.cinema-ticket.ticket-C{--ticket-accent:#dce7f4;background:linear-gradient(145deg,#29384a,#101722)}.cinema-ticket.ticket-D{--ticket-accent:#d7a276;background:linear-gradient(145deg,#422b20,#17100d)}
 .ticket-top{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px dashed #ffffff55;color:var(--ticket-accent);font-size:12px;letter-spacing:1px}
@@ -1739,7 +1739,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
      <article class="snack-item"><div class="snack-emoji">🧀</div><div><strong>دوريتوس</strong><small>اختر الحجم المناسب لك.</small></div><label class="snack-add"><input id="doritosInclude" type="checkbox"> إضافة الدوريتوس للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="doritosSize" value="large"><span><b>أ</b> كبير<small>16 ريال</small></span></label><label><input type="radio" name="doritosSize" value="medium" checked><span><b>ب</b> وسط<small>12 ريال</small></span></label></div></article>
      <article class="snack-item"><div class="snack-emoji">🥤</div><div><strong>سلاش كنزا</strong><small>اختر النكهة والحجم المناسب لك.</small></div><label class="snack-flavor">النكهة<select id="slushFlavor"><option value="كنزا كولا">كنزا كولا</option><option value="كنزا ليمون">كنزا ليمون</option><option value="كنزا حمضيات">كنزا حمضيات</option><option value="كنزا دايت">كنزا دايت</option></select></label><label class="snack-add"><input id="slushInclude" type="checkbox"> إضافة السلاش للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="slushSize" value="large"><span><b>أ</b> كبير<small>16 ريال</small></span></label><label><input type="radio" name="slushSize" value="medium" checked><span><b>ب</b> وسط<small>12 ريال</small></span></label></div></article>
     </div>
-    <div class="snack-checkout"><div class="seat-payment-choice network-only"><strong>الدفع عند شباك السينما</strong><span class="network-mark" aria-label="الدفع عبر الشبكة">💳 شبكة</span><small>تُعرض وسيلة الدفع على التذكرة كعلامة فقط؛ اعتماد السداد لدى المنظّم.</small></div><div class="entry-gate"><span class="gate-attendant">🎟️</span><div><strong>بوابة دخول القاعة</strong><small>جهّز تذكرتك وقدّمها لموظف الاستقبال عند الباب قبل الدخول.</small></div><span class="gate-arrow">←</span></div><div id="cinemaTicket" class="cinema-ticket hidden"><div class="ticket-top"><span>TAIF GRAND CINEMA</span><b id="ticketTier">💎 تذكرة ألماسية</b></div><div class="ticket-main"><div><small>اسم صاحب التذكرة</small><strong id="ticketName">—</strong></div><div><small>رقم المقعد</small><strong id="ticketSeat">—</strong></div><div><small>قيمة المقعد</small><strong id="ticketPrice">—</strong></div><div><small>وسيلة الدفع</small><strong id="ticketPayment" class="network-ticket-label">💳 شبكة</strong></div></div><div id="ticketDiscount" class="ticket-discount hidden"></div><div class="ticket-items"><b>طلباتك داخل القاعة</b><div id="ticketItems">لم تتم إضافة أصناف.</div></div><div class="ticket-status" id="ticketStatus">بانتظار تأكيد السداد من المنظّم</div><div class="ticket-cut">✂ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ✂</div><div class="ticket-stub"><span class="stub-brand">TAIF CINEMA</span><strong>💳 شبكة</strong><small>قسيمة التحقق عند الباب · احتفظ بها مع التذكرة</small><b class="stub-code">▥ ▥ ▥ ▥ ▥ ▥ ▥ ▥ ▥</b></div></div><div class="snack-total-line"><span>إجمالي الطلب</span><strong><b id="snackTotal">0</b> ريال</strong></div><p id="snackBalanceHint">سيتم الخصم من رصيد محفظتك الافتراضية بعد تأكيد الشراء.</p><div class="snack-actions"><button class="secondary" id="editSeatOrder">تعديل المقعد</button><button id="buySnacks">تأكيد الشراء والخصم</button></div><p id="snackMessage" class="note" role="status"></p><div id="snackReceipt" class="snack-receipt hidden"></div><button id="enterAuditorium" class="hidden">الدخول إلى قاعة السينما</button></div>
+    <div class="snack-checkout"><div class="seat-payment-choice"><strong>طريقة الدفع</strong><span class="network-mark">👛 محفظة الرحلة</span><small>يُخصم سعر المقعد والطلبات من رصيدك الافتراضي داخل الموقع بعد التأكيد.</small></div><div class="entry-gate"><span class="gate-attendant">🎟️</span><div><strong>بوابة دخول القاعة</strong><small>جهّز تذكرتك وقدّمها لموظف الاستقبال عند الباب قبل الدخول.</small></div><span class="gate-arrow">←</span></div><div id="cinemaTicket" class="cinema-ticket hidden"><div class="ticket-top"><span>TAIF GRAND CINEMA · تذكرة دخول</span><b id="ticketTier">💎 تذكرة ألماسية</b></div><div class="ticket-main"><div><small>الاسم والكنية</small><strong id="ticketName">—</strong></div><div><small>مقعدك المحدد</small><strong id="ticketSeat">—</strong></div><div><small>سعر المقعد</small><strong id="ticketPrice">—</strong></div><div><small>الدفع بواسطة</small><strong id="ticketPayment">محفظة الرحلة</strong></div></div><div id="ticketDiscount" class="ticket-discount hidden"></div><div class="ticket-items"><b>طلباتك داخل القاعة</b><div id="ticketItems">لم تتم إضافة أصناف.</div></div><div class="ticket-status" id="ticketStatus">بانتظار تأكيد السداد من المنظّم</div><div class="ticket-cut">✂ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ┄ ✂</div><div class="ticket-stub"><span class="stub-brand">TAIF CINEMA · ADMIT ONE</span><strong>✓ مدفوع من المحفظة</strong><small>أبرز هذه التذكرة عند بوابة القاعة</small><b class="stub-code">▥ ▥ ▥ ▥ ▥ ▥ ▥ ▥ ▥</b></div></div><div class="snack-total-line"><span>إجمالي الفاتورة (المقعد + الطلبات)</span><strong><b id="snackTotal">0</b> ريال</strong></div><p id="snackBalanceHint">سيتم خصم الإجمالي من محفظتك الافتراضية بعد التأكيد.</p><div class="snack-actions"><button class="secondary" id="editSeatOrder">تعديل المقعد</button><button id="buySnacks">تأكيد الشراء والخصم وإصدار التذكرة</button></div><p id="snackMessage" class="note" role="status"></p><div id="snackReceipt" class="snack-receipt hidden"></div><button id="enterAuditorium" class="hidden">الدخول إلى قاعة السينما</button></div>
    </div>
    <div id="cinemaExperience" class="cinema-experience hidden">
     <div class="experience-header"><span>قاعة سينما رحلة الطائف · قاعة واحدة للجميع</span><span id="experienceSeat">المقعد —</span></div>
@@ -1921,18 +1921,18 @@ function getSnackOrder(){
  return {lines,total:lines.reduce((sum,x)=>sum+x.total,0)};
 }
 function updateSnackTotal(){
- const order=getSnackOrder();$('snackTotal').textContent=order.total.toLocaleString('en-US');
- $('snackBalanceHint').textContent=selectedRole==='teacher'?'ميزة المعلمين: جميع الأصناف مجانية بخصم 100٪.':'رصيدك الحالي '+walletBalance.toLocaleString('en-US')+' ريال · تظهر قيمة الحجم المختار في الفاتورة.';
+ const order=getSnackOrder();const seatCost=selectedRole==='teacher'?0:selectedSeatPrice;$('snackTotal').textContent=(seatCost+order.total).toLocaleString('en-US');
+ $('snackBalanceHint').textContent=selectedRole==='teacher'?'إعفاء المعلمين كامل: المقعد الألماسي والطلبات مجانًا.':'رصيدك الحالي '+walletBalance.toLocaleString('en-US')+' ريال · سيُخصم سعر المقعد والطلبات معًا.';
  $('buySnacks').disabled=false;
 }
 $('buySnacks').addEventListener('click',()=>{
- const order=getSnackOrder();
- if(!order.lines.length&&selectedRole!=='teacher'){$('snackMessage').textContent='لم تختر أصنافًا إضافية؛ يمكنك إصدار التذكرة والمتابعة دون طلب.';}
- if(order.total>0&&selectedRole!=='teacher'&&order.total>walletBalance){$('snackMessage').textContent='رصيدك غير كافٍ لإتمام الطلب. خفّض الكمية أو أضف رصيدًا من مكافآت الرحلة.';return}
- if(selectedRole!=='teacher'){walletBalance-=order.total;$('walletBalance').textContent=walletBalance.toLocaleString('en-US');}
- $('snackMessage').textContent=selectedRole==='teacher'?'ميزة المعلمين: التذكرة وجميع الأصناف مجانية بخصم 100٪.':order.lines.length?'تم تسجيل الطلب وخصم قيمته من المحفظة الافتراضية.':'تم إصدار التذكرة دون طلب أصناف إضافية.';
- $('snackReceipt').innerHTML='<h4>فاتورة طلبك · المقعد '+selectedSeat+'</h4>'+order.lines.map(x=>'<div class="receipt-line"><span>'+x.name+' × '+x.qty+'</span><b>'+(selectedRole==='teacher'?'<s>'+x.originalUnit+' ريال</s> مجانًا':x.total+' ريال')+'</b></div>').join('')+'<div class="receipt-line receipt-total"><span>الإجمالي المخصوم</span><b>'+order.total+' ريال</b></div><div class="receipt-line"><span>الرصيد المتبقي</span><b>'+walletBalance.toLocaleString('en-US')+' ريال</b></div>';
- $('snackReceipt').classList.remove('hidden');$('buySnacks').disabled=true;renderCinemaSnacks(order);renderCinemaTicket(order);$('cinemaTicket').classList.remove('hidden');$('enterAuditorium').classList.remove('hidden');renderWalletSummary();
+ if(!selectedSeat){$('snackMessage').textContent='اختر مقعدك أولًا.';return}
+ const order=getSnackOrder(),seatCost=selectedRole==='teacher'?0:selectedSeatPrice,total=seatCost+order.total;
+ if(selectedRole!=='teacher'&&total>walletBalance){$('snackMessage').textContent='رصيدك غير كافٍ. قيمة المقعد والطلبات '+total+' ريال، ورصيدك '+walletBalance+' ريال.';return}
+ if(selectedRole!=='teacher'){walletBalance-=total;$('walletBalance').textContent=walletBalance.toLocaleString('en-US')}
+ $('snackMessage').textContent=selectedRole==='teacher'?'✓ تم تأكيد الإعفاء الكامل؛ لا يوجد أي خصم من رصيد المعلم.':'✓ تم الشراء بنجاح! خُصم '+total+' ريال من محفظتك، ورصيدك المتبقي '+walletBalance+' ريال.';
+ $('snackReceipt').innerHTML='<h4>✓ إشعار عملية شراء ناجحة</h4><div class="receipt-line"><span>المقعد '+selectedSeat+'</span><b>'+(selectedRole==='teacher'?'مجانًا':seatCost+' ريال')+'</b></div>'+order.lines.map(x=>'<div class="receipt-line"><span>'+x.name+' × '+x.qty+'</span><b>'+(selectedRole==='teacher'?'مجانًا':x.total+' ريال')+'</b></div>').join('')+'<div class="receipt-line receipt-total"><span>إجمالي الخصم</span><b>'+total+' ريال</b></div><div class="receipt-line"><span>الرصيد المتبقي</span><b>'+walletBalance.toLocaleString('en-US')+' ريال</b></div>';
+ $('snackReceipt').classList.remove('hidden');$('buySnacks').disabled=true;$('buySnacks').textContent='تم الشراء وإصدار التذكرة ✓';renderCinemaSnacks(order);renderCinemaTicket(order,total);$('cinemaTicket').classList.remove('hidden');$('enterAuditorium').classList.remove('hidden');$('enterAuditorium').scrollIntoView({behavior:'smooth',block:'center'});renderWalletSummary();
 });
 $('enterAuditorium').addEventListener('click',()=>{
  $('snackShop').classList.add('hidden');$('cinemaExperience').classList.remove('hidden');
@@ -1963,22 +1963,15 @@ function buildPovHall(){
  setPovLook(0);
 }
 
-function renderCinemaTicket(order){
- const tier=selectedSeat?.charAt(0)||'D',meta={A:['💎 التذكرة الألماسية','ألماسي'],B:['🥇 التذكرة الذهبية','ذهبي'],C:['🥈 التذكرة الفضية','فضي'],D:['🥉 التذكرة البرونزية','برونزي']}[tier];
- const teacher=selectedRole==='teacher';
- const payment='شبكة 💳';
- $('cinemaTicket').className='cinema-ticket ticket-'+tier;
- $('ticketTier').textContent=teacher?'💎 تذكرة المعلم الألماسية':meta[0];
- $('ticketName').textContent=(selected?.kunya||selected?.name||'المشارك')+' · '+(selected?.name||'');
- $('ticketSeat').textContent=selectedSeat;
- $('ticketPrice').textContent=teacher?'مجانًا للمعلمين':selectedSeatPrice.toLocaleString('ar-SA')+' ريال';
- $('ticketPayment').textContent=teacher?'إعفاء المعلمين':payment;
- $('ticketDiscount').classList.toggle('hidden',!teacher);
- $('ticketDiscount').textContent=teacher?'إعفاء كامل للمعلمين: المقعد وجميع الطلبات مجانًا (100٪).':'';
- $('ticketItems').innerHTML=order.lines.length?order.lines.map(x=>'<div>'+x.name+' — '+(teacher?'مجانًا (بدلًا من '+x.originalUnit+' ريال)':x.total+' ريال')+'</div>').join(''):'لا توجد طلبات إضافية.';
- $('ticketStatus').textContent=teacher?'تذكرة معلم مجانية · جاهزة للدخول': 'طريقة الدفع المختارة: '+payment+' · بانتظار تأكيد السداد من المنظّم';
+function renderCinemaTicket(order,total){
+ const tier=selectedSeat?.charAt(0)||'D',meta={A:['💎 التذكرة الألماسية','ألماسي'],B:['🥇 التذكرة الذهبية','ذهبي'],C:['🥈 التذكرة الفضية','فضي'],D:['🥉 التذكرة البرونزية','برونزي']}[tier],teacher=selectedRole==='teacher';
+ $('cinemaTicket').className='cinema-ticket ticket-'+tier;$('ticketTier').textContent=teacher?'💎 تذكرة المعلم الألماسية':meta[0];
+ $('ticketName').textContent=(selected?.kunya||'المشارك')+' · '+(selected?.name||'');$('ticketSeat').textContent=selectedSeat;
+ $('ticketPrice').textContent=teacher?'مجانًا':selectedSeatPrice.toLocaleString('ar-SA')+' ريال';$('ticketPayment').textContent=teacher?'إعفاء المعلمين':'محفظة الرحلة';
+ $('ticketDiscount').classList.toggle('hidden',!teacher);$('ticketDiscount').textContent=teacher?'إعفاء كامل للمعلمين: المقعد وجميع الطلبات مجانًا (100٪).':'';
+ $('ticketItems').innerHTML='<div>المقعد '+selectedSeat+' — '+(teacher?'مجانًا':selectedSeatPrice+' ريال')+'</div>'+(order.lines.length?order.lines.map(x=>'<div>'+x.name+' — '+(teacher?'مجانًا':x.total+' ريال')+'</div>').join(''):'<div>لا توجد طلبات إضافية.</div>')+'<div><b>الإجمالي المدفوع: '+(teacher?'مجانًا':total+' ريال')+'</b></div>';
+ $('ticketStatus').textContent=teacher?'✓ تذكرة معلم مجانية · جاهزة للدخول':'✓ تم الدفع من محفظة الرحلة · التذكرة مؤكدة وجاهزة للدخول';
 }
-
 function renderCinemaSnacks(order){
  const tray=$('povSnackTray');if(!tray)return;
  const hasPop=order.lines.some(x=>x.kind==='popcorn'),hasDor=order.lines.some(x=>x.kind==='doritos'),hasDrink=order.lines.some(x=>x.kind==='slush');
