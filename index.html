@@ -1456,7 +1456,55 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .ticket-stub{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 4px 0;border-top:2px dashed #ffffff66;color:var(--ticket-accent)}
 .ticket-stub .stub-brand{font-size:10px;letter-spacing:1px}.ticket-stub strong{padding:6px 12px;border:1px solid currentColor;border-radius:7px}.ticket-stub small{color:#c4ceda;font-size:10px}.stub-code{width:100%;font-size:20px;letter-spacing:5px;text-align:center;opacity:.85}
 @media(max-width:600px){.entry-gate{padding:11px}.ticket-stub{justify-content:center;text-align:center}.ticket-stub small{width:100%}}
-</style></head>
+</style>
+<style>
+/* Friendly teacher portrait shown on the teacher sign-in screen */
+.teacher-login-avatar{
+ width:116px;height:116px;margin:0 auto 15px;border-radius:50%;position:relative;
+ overflow:hidden;border:3px solid #e7c98b;
+ background:radial-gradient(circle at 50% 22%,#fff9e9 0,#e8d8bd 55%,#c4a77d 100%);
+ box-shadow:0 8px 24px #0008,0 0 0 6px #d8b66f20,0 0 24px #e7c98b35;
+}
+.teacher-login-art{position:absolute;inset:0;display:block;overflow:hidden}
+.teacher-login-art .teacher-thobe{
+ position:absolute!important;left:50%!important;bottom:-23px!important;transform:translateX(-50%)!important;
+ width:112px!important;height:94px!important;border-radius:42px 42px 0 0!important;
+ background:linear-gradient(90deg,#d8d7d1,#fff 28%,#fff 55%,#eeeae1 78%,#d2d0c8)!important;
+ box-shadow:inset 0 0 12px #7772!important;
+}
+.teacher-login-art .teacher-head{
+ position:absolute!important;left:50%!important;top:35px!important;transform:translateX(-50%)!important;
+ width:43px!important;height:51px!important;z-index:3!important;border-radius:44% 44% 42% 42%!important;
+ background:linear-gradient(90deg,#c98f6c,#edc1a0 50%,#c98f6c)!important;filter:none!important;
+}
+.teacher-login-art .teacher-shemagh{
+ position:absolute!important;left:50%!important;top:8px!important;transform:translateX(-50%)!important;
+ width:91px!important;height:83px!important;z-index:2!important;border-radius:38% 38% 8px 8px!important;
+ background-color:#fff!important;
+ background-image:repeating-linear-gradient(0deg,transparent 0 4px,#c51f32 4px 6px,transparent 6px 10px),
+ repeating-linear-gradient(90deg,transparent 0 4px,#c51f32 4px 6px,transparent 6px 10px),
+ repeating-linear-gradient(45deg,transparent 0 9px,#bd1e3066 9px 11px,transparent 11px 15px),
+ repeating-linear-gradient(-45deg,transparent 0 9px,#bd1e3066 9px 11px,transparent 11px 15px)!important;
+ clip-path:polygon(15% 0,85% 0,100% 23%,96% 100%,75% 83%,64% 100%,50% 84%,36% 100%,25% 83%,4% 100%,0 23%)!important;
+ box-shadow:0 4px 8px #0005!important;
+}
+.teacher-login-art .teacher-agal{
+ position:absolute!important;left:50%!important;top:8px!important;transform:translateX(-50%)!important;
+ width:57px!important;height:14px!important;z-index:5!important;border:5px solid #151515!important;
+ border-radius:50%!important;background:transparent!important;box-shadow:0 1px 3px #0008!important;
+}
+.teacher-login-art .teacher-marzaq{
+ position:absolute!important;left:50%!important;top:62px!important;transform:translateX(-50%)!important;
+ width:24px!important;height:28px!important;z-index:4!important;
+ background-color:#fff!important;
+ background-image:repeating-linear-gradient(0deg,transparent 0 4px,#c51f32 4px 6px,transparent 6px 9px),
+ repeating-linear-gradient(90deg,transparent 0 4px,#c51f32 4px 6px,transparent 6px 9px)!important;
+ clip-path:polygon(0 0,100% 0,50% 100%)!important;
+}
+.teacher-login-avatar + #roleHeading{margin-top:0}
+</style>
+
+</head>
 <body>
 <header class="site-header">
  <div class="header-partner"><div class="partner-mark">حفاظ الوحي</div><div class="partner-caption">رفقةٌ على الخير</div></div>
@@ -1510,6 +1558,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
      <button type="button" class="person role-entry supervisor-entry" data-role="supervisor"><span class="role-art supervisor-art" aria-hidden="true"><i class="supervisor-screen"></i><i class="supervisor-desk"></i><i class="supervisor-person"></i></span><span class="role-copy"><b>دخول المشرف</b><small>إدارة الموقع والإشراف على الرحلة</small></span></button>
     </div>
     <div id="registrationFields" class="hidden">
+   <div id="teacherLoginAvatar" class="teacher-login-avatar hidden" aria-hidden="true"><span class="teacher-login-art"><i class="teacher-thobe"></i><i class="teacher-head"></i><i class="teacher-shemagh"></i><i class="teacher-agal"></i><i class="teacher-marzaq"></i></span></div>
    <h2 id="roleHeading">تسجيل الطالب</h2>
    <p class="muted" id="roleIntro">أكمل بياناتك في الخانات التالية.</p>
    <label class="field" for="fullName">اسمك الثلاثي</label>
@@ -1625,12 +1674,12 @@ $('backLanding').addEventListener('click',()=>showScreen('landing'));
 document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>{
  selectedRole=button.dataset.role;if(selectedRole==='supervisor'){window.location.href='/admin.html';return}
  $('roleChoices').classList.add('hidden');$('registrationFields').classList.remove('hidden');
- $('roleHeading').textContent=selectedRole==='teacher'?'تسجيل دخول المعلم':'تسجيل دخول الطالب';$('roleIntro').classList.toggle('hidden',selectedRole==='teacher');
+ $('roleHeading').textContent=selectedRole==='teacher'?'تسجيل دخول المعلم':'تسجيل دخول الطالب';$('teacherLoginAvatar').classList.toggle('hidden',selectedRole!=='teacher');$('roleIntro').classList.toggle('hidden',selectedRole==='teacher');
  $('teacherCodeWrap').classList.toggle('hidden',selectedRole!=='teacher');
  $('confirmIdentity').textContent=selectedRole==='teacher'?'تأكيد بيانات المعلم':'تسجيل ومتابعة';
  $('identityMessage').textContent='';$('confirmIdentity').disabled=false;
 }));
-$('changeRole').addEventListener('click',()=>{$('registrationFields').classList.add('hidden');$('roleChoices').classList.remove('hidden');$('roleIntro').classList.remove('hidden');$('identityMessage').textContent='';$('confirmIdentity').disabled=false});
+$('changeRole').addEventListener('click',()=>{$('registrationFields').classList.add('hidden');$('roleChoices').classList.remove('hidden');$('roleIntro').classList.remove('hidden');$('teacherLoginAvatar').classList.add('hidden');$('identityMessage').textContent='';$('confirmIdentity').disabled=false});
 function normalizeDigits(value){
  return String(value).replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d))).replace(/[۰-۹]/g,d=>String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
 }
