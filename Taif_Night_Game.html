@@ -79,7 +79,12 @@ p{color:#d2d9e5;line-height:1.7;margin:7px 0}
    document.getElementById('finishTitle').textContent='تم إنجاز المهمة';
    document.querySelector('.finish-card p').textContent='تم تسجيل طلب حفظ الإنجاز. جارٍ إعادتك إلى موقع رحلة الطائف…';
    finishDialog.classList.add('show');
-   try{window.parent.postMessage({type:'TAIF_TRIP_GAME_COMPLETED'},location.origin);}catch(e){}
+   if(window.parent!==window){
+     try{window.parent.postMessage({type:'TAIF_TRIP_GAME_COMPLETED'},location.origin);}catch(e){}
+   }else{
+     try{window.close();}catch(e){}
+     setTimeout(()=>{if(!window.closed)window.location.href='/?gameCompleted=1';},150);
+   }
  });
  const paths=Array.from({length:11},(_,i)=>'/game-parts/part-'+String(i).padStart(2,'0')+'.txt');
  function launch(){
