@@ -43,21 +43,45 @@ p{color:#d2d9e5;line-height:1.8;margin:8px 0}
 <iframe id="game" title="لعبة قيادة حافلة رحلة الطائف" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen></iframe>
 <script>
 (function(){
- const launcher=document.getElementById('launcher');
- const start=document.getElementById('start');
- const hint=document.getElementById('hint');
- const error=document.getElementById('error');
- const game=document.getElementById('game');
- const isLandscape=()=>window.matchMedia('(orientation: landscape)').matches || window.innerWidth>window.innerHeight;
- let original=null,loadError=null,launched=false;
+ const launcher=document.getElementById('launcher'),start=document.getElementById('start'),hint=document.getElementById('hint'),error=document.getElementById('error'),game=document.getElementById('game');
+ let original=null,loadError=null,launched=false,pressed=false;
  const paths=Array.from({length:11},(_,i)=>'/game-parts/part-'+String(i).padStart(2,'0')+'.txt');
- Promise.all(paths.map(async path=>{
-   const response=await fetch(path,{cache:'no-cache'});
-   if(!response.ok)throw new Error('تعذر تحميل أحد ملفات اللعبة ('+response.status+').');
+ const loading=Promise.all(paths.map(async path=>{
+   const response=await fetch(path,{cache:'force-cache'});
+   if(!response.ok)throw new Error('تعذر تحميل ملفات اللعبة ('+response.status+').');
    return response.text();
  })).then(parts=>{
-   const source=parts.join('');
-   if(!/^<!doctype html>/i.test(source)||!source.trimEnd().endsWith('</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
+   original=parts.join('');
+   if(!/^<!doctype html>/i.test(original)||!original.trimEnd().endsWith('</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
+   hint.textContent='جاهزة! اضغط ابدأ للانطلاق';
+   if(pressed)launchGame();
+ }).catch(e=>{
+   loadError=e;hint.textContent='تعذر تحميل اللعبة — أعد المحاولة';
+   error.textContent=e.message;start.disabled=false;
+ });
+ function launchGame(){
+   if(launched||!original)return;
+   launched=true;
+   try{if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});}catch(e){}
+   try{if(screen.orientation&&screen.orientation.lock)screen.orientation.lock('landscape').catch(()=>{});}catch(e){}
+   game.srcdoc=original;
+   game.style.display='block';
+   launcher.style.display='none';
+ }
+ start.disabled=false;
+ start.textContent='ابدأ اللعب';
+ hint.textContent='اضغط ابدأ، ونجهز اللعبة في الخلفية';
+ start.addEventListener('click',()=>{
+   if(launched)return;
+   pressed=true;
+   if(original){launchGame();return;}
+   start.disabled=true;
+   start.textContent='جارٍ بدء اللعبة…';
+   hint.textContent='لحظات ونبدأ تلقائيًا — لا تحتاج تضغط مرة ثانية';
+   if(loadError){error.textContent='تعذر التحميل. أعد تحميل الصفحة.';start.disabled=false;start.textContent='حاول مرة أخرى';}
+ });
+})();
+</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
    original=source;
    refresh();
  }).catch(e=>{loadError=e;hint.textContent='تعذر تجهيز اللعبة';error.textContent=e.message;});
