@@ -1627,10 +1627,10 @@ function renderCinemaTicket(order){
  $('ticketTier').textContent=teacher?'💎 تذكرة المعلم الألماسية':meta[0];
  $('ticketName').textContent=(selected?.kunya||selected?.name||'المشارك')+' · '+(selected?.name||'');
  $('ticketSeat').textContent=selectedSeat;
- $('ticketPrice').textContent=teacher?'300 ريال ← مجانًا':selectedSeatPrice.toLocaleString('ar-SA')+' ريال';
+ $('ticketPrice').textContent=teacher?'مجانًا للمعلمين':selectedSeatPrice.toLocaleString('ar-SA')+' ريال';
  $('ticketPayment').textContent=teacher?'إعفاء المعلمين':payment;
  $('ticketDiscount').classList.toggle('hidden',!teacher);
- $('ticketDiscount').textContent=teacher?'خصم المعلمين: 300 ريال (100٪) · التذكرة والطلبات مجانًا تقديرًا للمعلمين.':'';
+ $('ticketDiscount').textContent=teacher?'خصم المعلمين: 300 ريال (100٪) · المقعد الألماسي والطلبات مجانًا تقديرًا للمعلمين.':'';
  $('ticketItems').innerHTML=order.lines.length?order.lines.map(x=>'<div>'+x.name+' — '+(teacher?'مجانًا (بدلًا من '+x.originalUnit+' ريال)':x.total+' ريال')+'</div>').join(''):'لا توجد طلبات إضافية.';
  $('ticketStatus').textContent=teacher?'تذكرة معلم مجانية · جاهزة للدخول': 'طريقة الدفع المختارة: '+payment+' · بانتظار تأكيد السداد من المنظّم';
 }
@@ -1657,9 +1657,9 @@ function renderSeats(){
  const config=[{tier:'A',count:5,label:'ألماسي',icon:'💎',price:300},{tier:'B',count:7,label:'ذهبي',icon:'🥇',price:200},{tier:'C',count:9,label:'فضي',icon:'🥈',price:150},{tier:'D',count:11,label:'برونزي',icon:'🥉',price:100}];
  config.forEach(item=>{
   const row=document.createElement('div');row.className='seat-row tier-'+item.tier;
-  const heading=document.createElement('div');heading.className='row-label';heading.innerHTML='<b>الصف '+item.tier+' · '+item.icon+' '+item.label+'</b>';row.appendChild(heading);
+  const heading=document.createElement('div');heading.className='row-label';heading.innerHTML='<b>الصف '+item.tier+' · '+item.icon+' '+item.label+(item.tier==='A'?' · خاص بالمعلمين فقط':'')+'</b>';row.appendChild(heading);
   const line=document.createElement('div');line.className='seat-line';
-  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.type='button';btn.className='seat';btn.innerHTML='<span>'+i+'</span><small class="seat-price-tag">'+(selectedRole==='teacher'?'مجانًا':item.price+' ر')+'</small>';btn.setAttribute('aria-label','المقعد '+id+' '+item.label+' '+(selectedRole==='teacher'?'مجانًا':item.price+' ريال'));
+  for(let i=1;i<=item.count;i++){const id=item.tier+i,btn=document.createElement('button');btn.type='button';btn.className='seat';btn.innerHTML='<span>'+i+'</span><small class="seat-price-tag">'+(item.tier==='A'?(selectedRole==='teacher'?'مجانًا':'خاص بالمعلمين'):(item.price+' ر'))+'</small>';btn.setAttribute('aria-label','المقعد '+id+' '+item.label+' '+(item.tier==='A'?(selectedRole==='teacher'?'مجانًا للمعلمين':'مخصص للمعلمين فقط'):(item.price+' ريال')));
    const allowed=selectedRole==='teacher'?item.tier==='A':item.tier!=='A';btn.disabled=!allowed;
    btn.addEventListener('click',()=>{document.querySelectorAll('.seat').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');selectedSeat=id;selectedSeatPrice=selectedRole==='teacher'?0:item.price;$('seatStatus').textContent='تم اختيار '+id+' في الصف '+item.label+' · قيمة المقعد: '+(selectedRole==='teacher'?'مجانًا للمعلمين':item.price+' ريال')+'.';$('seatSelectionInfo').innerHTML='<span>📍 مقعدك المختار</span><strong>'+id+' · '+item.label+'</strong><small>قيمة المقعد: '+(selectedRole==='teacher'?'مجانًا للمعلمين':item.price+' ريال')+'</small>';$('toInvite').disabled=false});
    line.appendChild(btn)}
