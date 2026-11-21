@@ -4,36 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#090b10">
-<title>Taif Night</title>
+<title>Taif Night — لعبة رحلة الطائف</title>
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#090b10;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-#launcher{position:fixed;inset:0;display:grid;place-items:center;padding:20px;text-align:center;background:radial-gradient(ellipse at 50% 20%,#24334a 0,#111827 42%,#090b10 100%);z-index:2}
-.panel{width:min(500px,100%);padding:24px 20px;border:1px solid #ffffff24;border-radius:22px;background:#101827ef;box-shadow:0 20px 70px #0009}
-.mark{font-size:38px}h1{font-size:clamp(24px,5vw,34px);margin:6px 0 10px}
-p{color:#d2d9e5;line-height:1.7;margin:8px 0}
-.rotate{font-size:48px;margin:12px 0;animation:tilt 1.8s ease-in-out infinite alternate}
+#launcher{position:fixed;inset:0;display:grid;place-items:center;padding:18px;text-align:center;background:radial-gradient(ellipse at 50% 18%,#34465f 0,#111b2b 48%,#070a10 100%);z-index:2}
+.panel{width:min(520px,100%);padding:clamp(18px,4vw,30px);border:1px solid #d8b66f77;border-radius:24px;background:linear-gradient(145deg,#17263bee,#0c1421f5);box-shadow:0 24px 80px #000b}
+.brand{display:flex;align-items:center;justify-content:center;gap:10px;color:#f2d99f;font-weight:900;letter-spacing:1px;font-size:14px}
+.brand svg{width:52px;height:52px}
+h1{font-size:clamp(25px,5vw,36px);margin:10px 0;color:#f4dfb1}
+p{color:#d2d9e5;line-height:1.8;margin:8px 0}
+.rotate{font-size:54px;margin:14px 0;animation:tilt 1.8s ease-in-out infinite alternate}
 @keyframes tilt{from{transform:rotate(0)}to{transform:rotate(90deg)}}
-#hint{font-weight:700;color:#ffd98a;margin:12px 0}
-button{border:0;border-radius:14px;padding:15px 24px;font-size:17px;font-weight:800;background:#e8b85c;color:#17120a;cursor:pointer;width:100%;margin-top:10px}
-button:disabled{opacity:.45;cursor:wait}
+#hint{font-weight:800;color:#f4d38c;margin:12px 0;min-height:28px}
+#start{border:0;border-radius:14px;padding:16px 24px;font-size:19px;font-weight:900;background:linear-gradient(135deg,#f1d18a,#b88b43);color:#17120a;cursor:pointer;width:100%;margin-top:12px;box-shadow:0 8px 25px #0006}
+#start:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}
+#start:not(:disabled):active{transform:scale(.985)}
 #game{position:fixed;inset:0;width:100%;height:100%;border:0;background:#000;display:none}
 #error{color:#ffb4b4;font-size:14px}
-@media (orientation:landscape){.panel{padding:14px 22px}.mark{font-size:27px}.rotate{font-size:28px;margin:2px 0}h1{margin:2px 0 4px}p{line-height:1.4;margin:4px 0}}
+@media (orientation:landscape){.panel{padding:14px 24px;max-width:650px}.brand svg{width:36px;height:36px}.rotate{font-size:32px;margin:3px 0}h1{margin:3px 0 6px}p{line-height:1.45;margin:4px 0}#start{max-width:360px}}
 </style>
 </head>
 <body>
 <main id="launcher">
  <section class="panel">
-  <div class="mark">🚌</div>
-  <h1>Taif Night</h1>
-  <p>أدر جوالك إلى الوضع الأفقي لتشغيل اللعبة بأفضل عرض.</p>
+  <div class="brand">
+   <svg viewBox="0 0 100 100" role="img" aria-label="شعار رحلة الطائف"><path d="M8 72 34 30l14 22 13-18 31 38Z" fill="none" stroke="#e7c783" stroke-width="5" stroke-linejoin="round"/><path d="M18 77h64M34 83h32" stroke="#e7c783" stroke-width="4" stroke-linecap="round"/><path d="M50 8c-10 9-13 17-13 24a13 13 0 0 0 26 0C63 25 60 17 50 8Z" fill="#e7c783"/><path d="M50 25v12" stroke="#17263b" stroke-width="3" stroke-linecap="round"/></svg>
+   <span>TAIF NIGHT · رحلة الطائف</span>
+  </div>
+  <h1>استعد للمغامرة!</h1>
+  <p>لأفضل تجربة، أدر جوالك إلى الوضع الأفقي ثم اضغط زر بدء اللعب.</p>
   <div class="rotate" aria-hidden="true">📱</div>
-  <div id="hint">↻ ننتظر تدوير الجوال إلى الوضع الأفقي</div>
+  <div id="hint">⏳ جارٍ تجهيز اللعبة…</div>
+  <button id="start" type="button" disabled>ابدأ اللعب</button>
   <p id="error" role="alert"></p>
  </section>
 </main>
-<iframe id="game" title="Taif Night" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen></iframe>
+<iframe id="game" title="لعبة قيادة حافلة رحلة الطائف" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen></iframe>
 <script>
 (function(){
  const launcher=document.getElementById('launcher');
@@ -41,60 +48,46 @@ button:disabled{opacity:.45;cursor:wait}
  const hint=document.getElementById('hint');
  const error=document.getElementById('error');
  const game=document.getElementById('game');
- const isLandscape=()=>window.matchMedia('(orientation: landscape)').matches || window.innerWidth>window.innerHeight || !!(screen.orientation&&screen.orientation.type&&screen.orientation.type.startsWith('landscape'));
- let original=null, loadError=null, countdownTimer=null, countdownValue=3, countdownDone=false, launched=false;
+ const isLandscape=()=>window.matchMedia('(orientation: landscape)').matches || window.innerWidth>window.innerHeight;
+ let original=null,loadError=null,launched=false;
  const paths=Array.from({length:11},(_,i)=>'/game-parts/part-'+String(i).padStart(2,'0')+'.txt');
- const gameReady=Promise.all(paths.map(async path=>{
-   const response=await fetch(path,{cache:'force-cache'});
-   if(!response.ok)throw new Error('تعذر تحميل ملفات اللعبة.');
+ Promise.all(paths.map(async path=>{
+   const response=await fetch(path,{cache:'no-cache'});
+   if(!response.ok)throw new Error('تعذر تحميل أحد ملفات اللعبة ('+response.status+').');
    return response.text();
  })).then(parts=>{
    const source=parts.join('');
    if(!/^<!doctype html>/i.test(source)||!source.trimEnd().endsWith('</script>'))throw new Error('ملفات اللعبة غير مكتملة.');
    original=source;
- }).catch(e=>{loadError=e;});
+   refresh();
+ }).catch(e=>{loadError=e;hint.textContent='تعذر تجهيز اللعبة';error.textContent=e.message;});
+ function refresh(){
+   if(launched)return;
+   if(loadError){start.disabled=true;return;}
+   if(!original){hint.textContent='⏳ جارٍ تجهيز اللعبة…';start.disabled=true;return;}
+   if(isLandscape()){
+     hint.textContent='✓ ممتاز! جوالك بالوضع الأفقي — اضغط وابدأ المغامرة';
+     start.disabled=false;
+   }else{
+     hint.textContent='↻ أدر جوالك للوضع الأفقي، وسيظهر لك زر بدء اللعب';
+     start.disabled=true;
+   }
+ }
  function launchGame(){
-   if(launched||!isLandscape()||!original||loadError)return;
+   if(launched||!original||!isLandscape())return;
    launched=true;
-   if(document.documentElement.requestFullscreen){document.documentElement.requestFullscreen().catch(()=>{});}
-   if(screen.orientation&&screen.orientation.lock){screen.orientation.lock('landscape').catch(()=>{});}
+   start.disabled=true;
+   try{if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});}catch(e){}
+   try{if(screen.orientation&&screen.orientation.lock)screen.orientation.lock('landscape').catch(()=>{});}catch(e){}
    game.srcdoc=original;
    game.style.display='block';
    launcher.style.display='none';
  }
- function beginCountdown(){
-   if(countdownTimer||countdownDone||!isLandscape()||!original||loadError)return;
-   countdownValue=3;
-   hint.textContent='✓ تم تدوير الجوال — ستبدأ اللعبة بعد قليل';
-   countdownTimer=setInterval(()=>{
-     if(!isLandscape()){
-       clearInterval(countdownTimer);countdownTimer=null;update();return;
-     }
-     countdownValue--;
-     if(countdownValue>0)hint.textContent='✓ تم تدوير الجوال — تبدأ اللعبة تلقائيًا بعد '+countdownValue+' ثوانٍ';
-     else{
-       clearInterval(countdownTimer);countdownTimer=null;countdownDone=true;
-       hint.textContent='🎮 انطلاق اللعبة!';
-       launchGame();
-     }
-   },1000);
- }
- function update(){
-   const landscape=isLandscape();
-   if(!landscape){
-     if(countdownTimer){clearInterval(countdownTimer);countdownTimer=null;}
-     countdownDone=false;
-     hint.textContent='↻ أدر جوالك إلى الوضع الأفقي لتبدأ اللعبة';
-   }else if(loadError){hint.textContent='تعذر تجهيز اللعبة، أعد تحميل الصفحة';}
-   else if(!original){hint.textContent='✓ تم تدوير الجوال — لحظات ونجهز اللعبة';}
-   else if(!launched)beginCountdown();
-   if(loadError)error.textContent=loadError.message;
- }
- window.addEventListener('resize',update);
- window.addEventListener('orientationchange',update);
- gameReady.then(update);
- update();
-
+ start.addEventListener('click',launchGame);
+ window.addEventListener('resize',refresh);
+ window.addEventListener('orientationchange',()=>setTimeout(refresh,150));
+ if(screen.orientation&&screen.orientation.addEventListener)screen.orientation.addEventListener('change',refresh);
+ refresh();
 })();
 </script>
 </body>
