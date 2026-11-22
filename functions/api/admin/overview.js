@@ -14,6 +14,9 @@ export async function onRequestGet({request,env}){
   try{const f=await env.DB.prepare("SELECT f.id,f.participant_id,f.role,f.answers_json,f.created_at,p.name,p.kunya FROM trip_feedback f LEFT JOIN participants p ON p.id=f.participant_id ORDER BY f.id DESC LIMIT 500").all();feedback=f.results||[]}catch(e){}
   try{const o=await env.DB.prepare("SELECT o.seat,o.total,o.items_json,o.wallet_after,o.created_at,p.name,p.kunya,p.role FROM cinema_orders o LEFT JOIN participants p ON p.id=o.participant_id ORDER BY o.created_at DESC LIMIT 500").all();orders=o.results||[]}catch(e){}
   const all=participants.results||[];
-  return json({success:true,participants:all,feedback,orders,stats:{total:all.length,students:all.filter(p=>p.role==="student").length,teachers:all.filter(p=>p.role==="teacher").length,feedback:feedback.length,orders:orders.length}});
+  const uniqueRows=await env.DB.prepare("SELECT role,COUNT(DISTINCT phone) AS total FROM participants GROUP BY role").all();
+  const uniqueCounts=Object.fromEntries((uniqueRows.results||[]).map(row=>[row.role,Number(row.total||0)]));
+  const students=uniqueCounts.student||0,teachers=uniqueCounts.teacher||0;
+  return json({success:true,participants:all,feedback,orders,stats:{total:students+teachers,students,teachers,feedback:feedback.length,orders:orders.length}});
  }catch(e){return json({success:false,message:"تعذر تحميل بيانات لوحة المشرف."},500)}
 }
