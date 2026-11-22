@@ -1496,6 +1496,20 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .packing-section li{padding-right:2px}
 @media(max-width:520px){.trip-info-grid{grid-template-columns:1fr}.trip-info-item{padding:13px}.trip-info-heading h3{font-size:18px}}
 
+
+/* Taif trip live countdown */
+.trip-countdown{position:relative;max-width:520px;margin:26px auto 0;padding:19px 22px 16px;border:1px solid #d8b66f99;border-radius:18px;background:linear-gradient(145deg,#17263beF,#0a111df5);box-shadow:0 14px 38px #0008,inset 0 1px #fff2;overflow:hidden}
+.trip-countdown:before{content:"";position:absolute;inset:0 12% auto;height:1px;background:linear-gradient(90deg,transparent,#f3d99e,transparent)}
+.countdown-heading{display:flex;justify-content:center;align-items:center;gap:11px;color:#f1d69a;font-size:clamp(14px,2.5vw,18px);font-weight:700;letter-spacing:.2px}
+.countdown-spark{color:#d9b66d;font-size:14px}
+.countdown-units{display:flex;align-items:center;justify-content:center;gap:clamp(9px,3vw,22px);margin:17px auto 10px}
+.countdown-unit{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:clamp(72px,16vw,104px);padding:11px 8px 9px;border:1px solid #d8b66f66;border-radius:13px;background:linear-gradient(180deg,#26364c,#111b2a);box-shadow:inset 0 1px #ffffff12}
+.countdown-unit strong{font-variant-numeric:tabular-nums;color:#ffe6ad;font-size:clamp(27px,6vw,39px);line-height:1.15;text-shadow:0 0 18px #d8b66f44}
+.countdown-unit span{margin-top:6px;color:#c3cbd6;font-size:12px}
+.countdown-separator{color:#d9b66d;font-size:27px;font-weight:700;transform:translateY(-8px)}
+.countdown-caption{color:#aebccc;font-size:12px;line-height:1.7}
+@media(max-width:480px){.trip-countdown{margin-top:20px;padding:16px 10px 13px}.countdown-units{gap:7px}.countdown-unit{min-width:0;flex:1;padding:10px 4px}.countdown-unit strong{font-size:29px}.countdown-separator{font-size:21px}}
+
 </style>
 <style>
 /* Ticket, tier pricing, payment choice and expanded Taif photo gallery */
@@ -1772,6 +1786,17 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
      </div>
     </div>
     <div class="actions"><button id="beginBtn">ادخل أجواء الرحلة ✦</button></div>
+    <div class="trip-countdown" role="timer" aria-label="العد التنازلي لموعد رحلة الطائف">
+     <div class="countdown-heading"><span class="countdown-spark">✦</span><span>موعدنا مع الطائف يقترب</span><span class="countdown-spark">✦</span></div>
+     <div class="countdown-units">
+      <div class="countdown-unit"><strong id="countdownDays">—</strong><span>الأيام</span></div>
+      <div class="countdown-separator">:</div>
+      <div class="countdown-unit"><strong id="countdownHours">—</strong><span>الساعات</span></div>
+      <div class="countdown-separator">:</div>
+      <div class="countdown-unit"><strong id="countdownMinutes">—</strong><span>الدقائق</span></div>
+     </div>
+     <div class="countdown-caption" id="countdownCaption">نعدّ اللحظات حتى لقائنا في الطائف</div>
+    </div>
    </div>
    <div class="taif-gallery" aria-label="صور من الطائف">
     <figure class="taif-photo photo-hada"><img src="https://portalcdn.spa.gov.sa/backend/original/202407/ye20dpljMRCACaRvGo7oaYEiOIC04bYdj3FpNtdH.jpg" alt="جبال الهدا والطبيعة في الطائف" loading="lazy"><figcaption>الهدا · حيث تعانق القمم الغيم</figcaption></figure>
@@ -2339,5 +2364,33 @@ if('serviceWorker' in navigator){
  });
 }
 </script>
+
+<script id="taif-trip-countdown">
+(()=>{
+ const target = new Date('2026-11-25T07:00:00+03:00').getTime();
+ const days = document.getElementById('countdownDays');
+ const hours = document.getElementById('countdownHours');
+ const minutes = document.getElementById('countdownMinutes');
+ const caption = document.getElementById('countdownCaption');
+ if(!days || !hours || !minutes) return;
+ const two = n => String(n).padStart(2,'0');
+ function updateCountdown(){
+  const remaining = target - Date.now();
+  if(remaining <= 0){
+   days.textContent='00';hours.textContent='00';minutes.textContent='00';
+   caption.textContent='حان موعد لقائنا في الطائف ✦';
+   return;
+  }
+  const totalMinutes = Math.floor(remaining/60000);
+  days.textContent=two(Math.floor(totalMinutes/1440));
+  hours.textContent=two(Math.floor((totalMinutes%1440)/60));
+  minutes.textContent=two(totalMinutes%60);
+  caption.textContent='نعدّ اللحظات حتى لقائنا في الطائف';
+ }
+ updateCountdown();
+ setInterval(updateCountdown,1000);
+})();
+</script>
+
 </body>
 </html>
