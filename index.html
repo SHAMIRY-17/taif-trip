@@ -111,6 +111,10 @@ video{width:100%;max-height:420px;background:#000;border-radius:12px;margin-top:
 /* Integrated standalone night-driving game */
 .external-game-mount{width:100%;max-width:1500px;margin:0 auto 18px;border:1px solid #d6b36c88;border-radius:18px;overflow:hidden;background:#05080d;box-shadow:0 20px 55px #0009}
 #busGameFrame{display:block;width:100%;height:min(78vh,900px);min-height:560px;border:0;background:#05080d}
+.external-game-mount{position:relative}
+.finish-bus-game{position:absolute;z-index:30;left:16px;bottom:16px;min-height:48px;padding:12px 20px;border:1px solid #ffe7b0;background:linear-gradient(135deg,#f5dfaa,#c3974e 58%,#8f672f);color:#17130b;box-shadow:0 8px 24px #000b;font-weight:800}
+@media(max-width:700px){.finish-bus-game{left:10px;bottom:10px;min-height:46px;padding:11px 14px;font-size:13px}}
+
 .student-welcome-card{max-width:850px;margin:18px auto 24px;padding:28px 22px;text-align:center;border:1px solid #d8b66f88;border-radius:20px;background:radial-gradient(ellipse at 50% 0%,#35445b,#111c2b 58%,#090f19);box-shadow:0 18px 50px #0008}
 .student-welcome-mark{font-size:38px;color:#f0d69e}
 .student-welcome-kicker{color:#d8b66f;letter-spacing:2px;font-size:12px}
@@ -1852,16 +1856,7 @@ body:before{display:none!important;background:none!important}
  <section id="identity" class="screen">
   <div class="panel">
    <div class="steps"><span class="step current">1 · التسجيل</span><span class="step">2 · اللعبة</span><span class="step">3 · إكمال الرحلة</span></div>
-<div class="trip-countdown login-countdown" data-trip-countdown role="timer" aria-label="العد التنازلي لموعد انطلاق الرحلة">
-    <div class="countdown-heading"><span class="countdown-spark">✦</span><span>باقي على انطلاق الرحلة</span><span class="countdown-spark">✦</span></div>
-    <div class="countdown-units">
-     <div class="countdown-unit"><strong class="countdown-days">—</strong><span>الأيام</span></div><div class="countdown-separator">:</div>
-     <div class="countdown-unit"><strong class="countdown-hours">—</strong><span>الساعات</span></div><div class="countdown-separator">:</div>
-     <div class="countdown-unit"><strong class="countdown-minutes">—</strong><span>الدقائق</span></div><div class="countdown-separator">:</div>
-     <div class="countdown-unit"><strong class="countdown-seconds">—</strong><span>الثواني</span></div>
-    </div><div class="countdown-caption countdown-caption-text">نلتقي قريبًا في الطائف</div>
-   </div>
-      <h2>اختر نوع الدخول</h2>
+<h2>اختر نوع الدخول</h2>
    <p class="muted">اختر الفئة المناسبة للمتابعة.</p>
    <div class="participants role-entry-grid" id="roleChoices">
      <button type="button" class="person role-entry student-entry" data-role="student"><span class="role-art student-art" aria-hidden="true"><i class="student-head"></i><i class="student-body"></i><i class="student-bag"></i><i class="student-book"></i></span><span class="role-copy"><b>دخول الطالب</b><small>بوابة الطالب · التسجيل ومتابعة الرحلة</small></span></button>
@@ -1907,17 +1902,9 @@ body:before{display:none!important;background:none!important}
  </section>
 
  <section id="gameScreen" class="screen" aria-label="لعبة الباص">
-  <div class="trip-countdown game-countdown" data-trip-countdown role="timer" aria-label="الوقت المتبقي لانطلاق رحلة الطائف">
-   <div class="countdown-heading">✦ العد التنازلي لانطلاق الرحلة ✦</div>
-   <div class="countdown-units">
-    <div class="countdown-unit"><strong class="countdown-days">—</strong><span>الأيام</span></div><div class="countdown-separator">:</div>
-    <div class="countdown-unit"><strong class="countdown-hours">—</strong><span>الساعات</span></div><div class="countdown-separator">:</div>
-    <div class="countdown-unit"><strong class="countdown-minutes">—</strong><span>الدقائق</span></div><div class="countdown-separator">:</div>
-    <div class="countdown-unit"><strong class="countdown-seconds">—</strong><span>الثواني</span></div>
-   </div><div class="countdown-caption countdown-caption-text">كل ثانية تقرّبنا من الانطلاقة</div>
-  </div>
   <div id="externalGameMount" class="external-game-mount">
    <iframe id="busGameFrame" src="/Taif_Night_Game.html" title="لعبة قيادة حافلة رحلة الطائف" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen loading="lazy"></iframe>
+   <button type="button" id="finishBusGame" class="finish-bus-game">انتهيت من اللعبة ✓</button>
   </div>
   
  </section>
@@ -2110,13 +2097,17 @@ let selected=null,selectedSeat=null,selectedSeatPrice=0,selectedRole='student';
 const screens=['identity','welcomeScreen','gameScreen','walletScreen','cinemaScreen','adScreen','feedbackScreen','inviteScreen'];
 function showScreen(id){const isLanding=id==='landing';const landing=$('landing');landing.hidden=!isLanding;landing.style.display=isLanding?'block':'none';landing.setAttribute('aria-hidden',String(!isLanding));screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo(0,0)}
 $('beginBtn').addEventListener('click',()=>showScreen('identity'));
-window.addEventListener('message',event=>{
- if(event.origin!==window.location.origin||event.data?.type!=='TAIF_TRIP_GAME_COMPLETED')return;
+function finishBusGame(){
  const participantKey=selected?.id?String(selected.id):'current';
  try{localStorage.setItem('taifTripGameCompleted:'+participantKey,JSON.stringify({completed:true,completedAt:new Date().toISOString()}));}catch(e){}
  if(selectedRole==='teacher'){showScreen('cinemaScreen');renderSeats();}
  else{showScreen('walletScreen');renderWalletSummary();}
+}
+window.addEventListener('message',event=>{
+ if(event.origin!==window.location.origin||event.data?.type!=='TAIF_TRIP_GAME_COMPLETED')return;
+ finishBusGame();
 });
+$('finishBusGame').addEventListener('click',finishBusGame);
 $('continueToCinema').addEventListener('click',()=>{showScreen('cinemaScreen');renderSeats()});
 $('backToGameFromWallet').addEventListener('click',()=>showScreen('gameScreen'));
 $('backToCinemaFromAd').addEventListener('click',()=>showScreen('cinemaScreen'));
@@ -2420,7 +2411,33 @@ if('serviceWorker' in navigator){
 </script>
 
 <script id="taif-trip-countdown">
-(()=>{document.querySelectorAll('[data-trip-countdown]').forEach(root=>{const caption=root.querySelector('.countdown-caption-text');if(caption)caption.textContent='سيظهر العد التنازلي بعد تثبيت موعد الانطلاقة الصحيح.';root.querySelectorAll('.countdown-unit strong').forEach(el=>el.textContent='—');});})();
+(()=>{
+ const target=new Date('2026-11-25T07:00:00+03:00').getTime();
+ const root=document.querySelector('#landing [data-trip-countdown]');
+ if(!root)return;
+ const days=root.querySelector('.countdown-days');
+ const hours=root.querySelector('.countdown-hours');
+ const minutes=root.querySelector('.countdown-minutes');
+ const seconds=root.querySelector('.countdown-seconds');
+ const caption=root.querySelector('.countdown-caption-text');
+ const two=n=>String(n).padStart(2,'0');
+ function update(){
+  const remaining=target-Date.now();
+  if(remaining<=0){
+   days.textContent='00';hours.textContent='00';minutes.textContent='00';seconds.textContent='00';
+   if(caption)caption.textContent='انطلقت رحلتنا إلى الطائف! رحلة سعيدة بإذن الله.';
+   return;
+  }
+  const total=Math.floor(remaining/1000);
+  days.textContent=String(Math.floor(total/86400));
+  hours.textContent=two(Math.floor(total%86400/3600));
+  minutes.textContent=two(Math.floor(total%3600/60));
+  seconds.textContent=two(total%60);
+  if(caption)caption.textContent='الأربعاء 25 نوفمبر 2026 · الساعة 07:00 صباحًا';
+ }
+ update();
+ window.setInterval(update,1000);
+})();
 </script>
 
 </body>
