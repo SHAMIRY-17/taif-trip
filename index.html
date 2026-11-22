@@ -1791,6 +1791,17 @@ body:before{display:none!important;background:none!important}
 .teacher-thobe,.student-body{filter:drop-shadow(0 8px 12px #0005)}
 @media(max-width:700px){#landing .hero-window{background-position:center!important}#landing .hero-window:after{opacity:.78}}
 </style>
+
+<style id="restore-taif-original-hero-and-poetry">
+/* Restore the approved black-and-gold identity; no photographic/person background. */
+#landing .hero{background:radial-gradient(ellipse at 50% 10%,#263247 0%,#101722 48%,#080b11 100%)!important;min-height:0!important;padding:34px 16px 48px!important;}
+#landing .hero-window-scene,#landing .hero-rose-ground{display:none!important;background:none!important;}
+#landing .hero>.content{margin:0 auto!important;max-width:920px;background:linear-gradient(145deg,#17263b,#090e16)!important;border:1px solid #d8b66f88!important;color:#fff;}
+#landing .hero-poetry{display:block!important;visibility:visible!important;opacity:1!important;}
+#landing .poetry-grid{display:grid!important;}
+#landing .taif-gallery{display:none!important;}
+@media(max-width:700px){#landing .hero{min-height:0!important;padding:22px 12px 32px!important}#landing .hero>.content{margin:0 auto!important;padding:22px 16px!important}#landing .hero-poetry{display:block!important}#landing .poetry-grid{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -2431,26 +2442,7 @@ if('serviceWorker' in navigator){
 </script>
 
 <script id="taif-trip-countdown">
-(()=> {
- const target = new Date('2026-11-25T07:00:00+03:00').getTime();
- const two = n => String(n).padStart(2,'0');
- const update = () => {
-  document.querySelectorAll('[data-trip-countdown]').forEach(root => {
-   const days=root.querySelector('.countdown-days'),hours=root.querySelector('.countdown-hours');
-   const minutes=root.querySelector('.countdown-minutes'),seconds=root.querySelector('.countdown-seconds');
-   const caption=root.querySelector('.countdown-caption-text');
-   if(!days||!hours||!minutes||!seconds||!caption)return;
-   const remaining=Math.max(0,target-Date.now()),totalSeconds=Math.floor(remaining/1000),totalMinutes=Math.floor(totalSeconds/60);
-   days.textContent=two(Math.floor(totalMinutes/1440));
-   hours.textContent=two(Math.floor((totalMinutes%1440)/60));
-   minutes.textContent=two(totalMinutes%60);
-   seconds.textContent=two(totalSeconds%60);
-   caption.textContent=remaining>0?'نعدّ اللحظات حتى انطلاق رحلتنا إلى الطائف':'حان وقت انطلاق رحلتنا إلى الطائف ✦';
-  });
- };
- update();
- window.setInterval(update,1000);
-})();
+(()=>{document.querySelectorAll('[data-trip-countdown]').forEach(root=>{const caption=root.querySelector('.countdown-caption-text');if(caption)caption.textContent='سيظهر العد التنازلي بعد تثبيت موعد الانطلاقة الصحيح.';root.querySelectorAll('.countdown-unit strong').forEach(el=>el.textContent='—');});})();
 </script>
 
 </body>
