@@ -1686,6 +1686,19 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
  .tahabbu-word{width:clamp(70px,18vw,90px)!important;max-height:39px!important}
 }
 </style>
+
+<style id="teacher-motion-upgrade">
+@keyframes teacherCardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes teacherHaloPulse{0%,100%{opacity:.45;transform:translateX(-50%) scale(.96)}50%{opacity:.9;transform:translateX(-50%) scale(1.04)}}
+@keyframes teacherShemaghSway{0%,100%{transform:translateX(-50%) rotate(-1deg)}50%{transform:translateX(-50%) rotate(1deg)}}
+.teacher-entry{animation:teacherCardFloat 4.8s ease-in-out infinite;transition:transform .25s ease,box-shadow .25s ease}
+.teacher-entry:hover,.teacher-entry:focus-visible{transform:translateY(-8px) scale(1.015);box-shadow:0 18px 42px #0009,0 0 28px #d9b66d35}
+.teacher-art:before{animation:teacherHaloPulse 3.8s ease-in-out infinite}
+.teacher-shemagh{transform-origin:50% 15%;animation:teacherShemaghSway 3.2s ease-in-out infinite}
+.teacher-login-avatar{animation:teacherCardFloat 4s ease-in-out infinite}
+.teacher-login-art{filter:drop-shadow(0 8px 18px #d9b66d35)}
+@media(prefers-reduced-motion:reduce){.teacher-entry,.teacher-art:before,.teacher-shemagh,.teacher-login-avatar{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
 <header class="site-header">
