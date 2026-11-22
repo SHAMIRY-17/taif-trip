@@ -1754,6 +1754,26 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
 .attendance-choice[aria-pressed="true"]{outline:2px solid #d8b66f;box-shadow:0 0 0 3px #d8b66f25}
 @media(max-width:560px){.invitation-menu{grid-template-columns:1fr}.attendance-choice-grid{grid-template-columns:1fr}}
 </style>
+<style id="taif-countdown-responsive-fix">
+.trip-countdown-section{display:block!important;width:100%;max-width:none!important;margin:0!important;padding:24px 16px 34px!important;text-align:center!important;background:linear-gradient(180deg,#080d16,#101a29 48%,#080d16)!important;box-sizing:border-box!important}
+.trip-countdown{display:block!important;position:relative!important;width:min(100%,580px)!important;max-width:580px!important;min-width:0!important;height:auto!important;margin:0 auto!important;padding:20px 22px 16px!important;box-sizing:border-box!important;border:1px solid #d8b66f99!important;border-radius:18px!important;background:linear-gradient(145deg,#17263b,#0a111d)!important;box-shadow:0 14px 38px #0008,inset 0 1px #fff2!important;overflow:hidden!important}
+.countdown-heading{display:flex!important;justify-content:center!important;align-items:center!important;gap:11px!important;color:#f1d69a!important;font-size:clamp(14px,2.5vw,18px)!important;font-weight:700!important}
+.countdown-units{display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr)!important;align-items:center!important;justify-items:stretch!important;gap:clamp(7px,2vw,16px)!important;width:100%!important;max-width:430px!important;margin:17px auto 10px!important}
+.countdown-unit{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;min-width:0!important;width:100%!important;padding:11px 5px 9px!important;box-sizing:border-box!important;border:1px solid #d8b66f66!important;border-radius:13px!important;background:linear-gradient(180deg,#26364c,#111b2a)!important}
+.countdown-unit strong{font-variant-numeric:tabular-nums!important;color:#ffe6ad!important;font-size:clamp(25px,6vw,39px)!important;line-height:1.15!important}
+.countdown-unit span{margin-top:6px!important;color:#c3cbd6!important;font-size:12px!important}
+.countdown-separator{color:#d9b66d!important;font-size:clamp(20px,4vw,27px)!important;font-weight:700!important}
+.countdown-caption{color:#aebccc!important;font-size:12px!important;line-height:1.7!important}
+@media(max-width:520px){
+ .trip-countdown-section{padding:18px 12px 28px!important}
+ .trip-countdown{padding:17px 12px 14px!important;border-radius:16px!important}
+ .countdown-units{gap:6px!important;margin:14px auto 9px!important}
+ .countdown-unit{padding:10px 3px 8px!important}
+ .countdown-unit strong{font-size:clamp(24px,8vw,31px)!important}
+ .countdown-unit span{font-size:11px!important}
+}
+</style>
+
 </head>
 <body>
 <header class="site-header">
@@ -1786,17 +1806,7 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
      </div>
     </div>
     <div class="actions"><button id="beginBtn">ادخل أجواء الرحلة ✦</button></div>
-    <div class="trip-countdown" role="timer" aria-label="العد التنازلي لموعد رحلة الطائف">
-     <div class="countdown-heading"><span class="countdown-spark">✦</span><span>موعدنا مع الطائف يقترب</span><span class="countdown-spark">✦</span></div>
-     <div class="countdown-units">
-      <div class="countdown-unit"><strong id="countdownDays">—</strong><span>الأيام</span></div>
-      <div class="countdown-separator">:</div>
-      <div class="countdown-unit"><strong id="countdownHours">—</strong><span>الساعات</span></div>
-      <div class="countdown-separator">:</div>
-      <div class="countdown-unit"><strong id="countdownMinutes">—</strong><span>الدقائق</span></div>
-     </div>
-     <div class="countdown-caption" id="countdownCaption">نعدّ اللحظات حتى لقائنا في الطائف</div>
-    </div>
+
    </div>
    <div class="taif-gallery" aria-label="صور من الطائف">
     <figure class="taif-photo photo-hada"><img src="https://portalcdn.spa.gov.sa/backend/original/202407/ye20dpljMRCACaRvGo7oaYEiOIC04bYdj3FpNtdH.jpg" alt="جبال الهدا والطبيعة في الطائف" loading="lazy"><figcaption>الهدا · حيث تعانق القمم الغيم</figcaption></figure>
@@ -1806,6 +1816,19 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
     <figure class="taif-photo photo-roses"><img src="https://portalcdn.spa.gov.sa/backend/original/202604/m30gbVOhQtoC5SnYP1zsKW6ru1qg7k0B5yx4RIyH.jpg" alt="بتلات الورد الطائفي في بيت تقليدي" loading="lazy"><figcaption>تراث الورد · من ذاكرة الطائف</figcaption></figure>
    </div>
   </div>
+  <section class="trip-countdown-section" aria-label="موعد رحلة الطائف">
+   <div class="trip-countdown" role="timer" aria-label="العد التنازلي لموعد رحلة الطائف">
+    <div class="countdown-heading"><span class="countdown-spark">✦</span><span>موعدنا مع الطائف يقترب</span><span class="countdown-spark">✦</span></div>
+    <div class="countdown-units">
+     <div class="countdown-unit"><strong id="countdownDays">—</strong><span>الأيام</span></div>
+     <div class="countdown-separator">:</div>
+     <div class="countdown-unit"><strong id="countdownHours">—</strong><span>الساعات</span></div>
+     <div class="countdown-separator">:</div>
+     <div class="countdown-unit"><strong id="countdownMinutes">—</strong><span>الدقائق</span></div>
+    </div>
+    <div class="countdown-caption" id="countdownCaption">نعدّ اللحظات حتى لقائنا في الطائف</div>
+   </div>
+  </section>
   <section>
    <div class="eyebrow">DISCOVER YOUR JOURNEY</div><h2 class="section-title">ماذا ينتظرك؟</h2>
    <div class="cards">
@@ -2388,7 +2411,7 @@ if('serviceWorker' in navigator){
   caption.textContent='نعدّ اللحظات حتى لقائنا في الطائف';
  }
  updateCountdown();
- setInterval(updateCountdown,1000);
+ setInterval(updateCountdown,60000);
 })();
 </script>
 
