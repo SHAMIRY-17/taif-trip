@@ -1731,6 +1731,15 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 
+<style id="invitation-four-options">
+.invitation-menu{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.invitation-menu button{min-height:54px}
+.attendance-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.attendance-choice{padding:15px 12px;border:1px solid #d8b66f;border-radius:14px;background:linear-gradient(145deg,#29364a,#111c2a);color:#f7f0df;font-weight:700;cursor:pointer}
+.attendance-choice.secondary{background:#101b2a;border-color:#64748b}
+.attendance-choice[aria-pressed="true"]{outline:2px solid #d8b66f;box-shadow:0 0 0 3px #d8b66f25}
+@media(max-width:560px){.invitation-menu{grid-template-columns:1fr}.attendance-choice-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -1955,9 +1964,11 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
     </div>
     <div class="participant-card-foot"><span>رحلة الطائف · تحابّوا</span><span>بطاقة شخصية للمشارك</span></div>
    </div>
-   <div class="participant-card-actions">
-    <button id="tripDetailsBtn" type="button">تفاصيل الطلعة</button>
-    <button id="requirementsBtn" type="button" class="secondary">متطلباتي الشخصية</button>
+   <div class="participant-card-actions invitation-menu">
+    <button id="requirementsBtn" type="button" class="secondary">🎒 متطلبات الطلعة</button>
+    <button id="tripDetailsBtn" type="button">🏔️ تفاصيل الرحلة</button>
+    <button id="paymentToggleBtn" type="button" class="secondary">💳 طريقة الدفع</button>
+    <button id="attendanceToggleBtn" type="button" class="secondary">📩 هل أنت قادم؟</button>
    </div>
    <section id="tripDetailsPanel" class="participant-info-panel hidden">
     <div class="trip-info-heading"><span class="trip-info-icon">🏔️</span><div><h3>تفاصيل رحلة الطائف</h3><p>ثلاثة أيام من الأجواء الجميلة والرفقة الطيبة بإذن الله</p></div></div>
@@ -1979,7 +1990,7 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
     <div class="packing-section"><h4>🎒 أغراض أخرى</h4><ul><li>جزمة رياضية 👟.</li><li>لحاف خفيف ومخدة.</li><li>منشفة.</li><li>مصحف 📖.</li><li>أغراضك الشخصية والخاصة.</li></ul></div>
     <p class="trip-info-note">✅ راجع القائمة قبل إغلاق شنطتك، وتأكد أن جميع أغراضك الشخصية معك.</p>
    </section>
-   <section id="paymentPanel" class="participant-info-panel payment-panel">
+   <section id="paymentPanel" class="participant-info-panel payment-panel hidden">
     <div class="trip-info-heading"><span class="trip-info-icon">💳</span><div><h3>طريقة سداد رسوم الرحلة</h3><p>اختر الطريقة المناسبة لك</p></div></div>
     <div class="payment-method-grid" role="group" aria-label="طرق الدفع">
      <button type="button" class="payment-method" data-payment="network" aria-pressed="false">
@@ -1999,6 +2010,14 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
      <p>يمكنك اختيار الدفع كاش، وتسليم رسوم الرحلة للمنظّم وقت الرحلة بإذن الله.</p>
     </div>
     <p class="payment-encouragement">🌟 نصيحة من فريق الرحلة: إذا كان السداد المبكر مناسبًا لك، فبادر به؛ فمبادرتك تساعدنا على ترتيب الحجوزات والتجهيزات براحة أكبر. شكرًا لحرصك، ونسعد بانضمامك!</p>
+   </section>
+   <section id="attendancePanel" class="participant-info-panel hidden">
+    <div class="trip-info-heading"><span class="trip-info-icon">📩</span><div><h3>تأكيد حضورك</h3><p>نحتاج نعرف هل ستكون معنا في رحلة الطائف؟</p></div></div>
+    <div class="attendance-choice-grid" role="group" aria-label="تأكيد الحضور">
+     <button type="button" class="attendance-choice" data-attendance="yes">✅ نعم، سأحضر</button>
+     <button type="button" class="attendance-choice secondary" data-attendance="no">❌ لا، لن أحضر</button>
+    </div>
+    <p id="attendanceStatus" class="payment-encouragement" role="status" aria-live="polite">لم يتم تسجيل إجابتك بعد.</p>
    </section>
    <p id="participantCardStatus" class="note" role="status">هذه بطاقتك الشخصية داخل موقع رحلة الطائف.</p>
   </div>
@@ -2245,7 +2264,7 @@ async function showInvite(){
  $('participantCardNumber')?.closest('.participant-field')?.remove();
  $('participantPhotoImg').classList.add('hidden');$('participantPhotoPlaceholder').classList.remove('hidden');
  $('participantPhotoImg').removeAttribute('src');
- $('tripDetailsPanel').classList.add('hidden');$('requirementsPanel').classList.add('hidden');
+ $('tripDetailsPanel').classList.add('hidden');$('requirementsPanel').classList.add('hidden');$('paymentPanel').classList.add('hidden');$('attendancePanel').classList.add('hidden');
  $('participantCardStatus').textContent='جارٍ تحميل بطاقتك الشخصية…';
  showScreen('inviteScreen');
  try{
@@ -2259,12 +2278,29 @@ async function showInvite(){
   walletBalance=Number(p.walletBalance??walletBalance);
   if(p.photoData){$('participantPhotoImg').src=p.photoData;$('participantPhotoImg').classList.remove('hidden');$('participantPhotoPlaceholder').classList.add('hidden')}
   $('participantCardStatus').textContent='تم تحميل بطاقتك. الصورة والبيانات تظهران لحسابك المسجّل فقط.';
+  await loadAttendance();
  }catch(error){
   $('participantCardStatus').textContent='تعذر تحميل الصورة المحفوظة الآن. تظهر بيانات التسجيل الأساسية مؤقتًا.';
  }
 }
-$('tripDetailsBtn').addEventListener('click',()=>{$('tripDetailsPanel').classList.toggle('hidden');$('requirementsPanel').classList.add('hidden')});
-$('requirementsBtn').addEventListener('click',()=>{$('requirementsPanel').classList.toggle('hidden');$('tripDetailsPanel').classList.add('hidden')});
+function showInvitePanel(id){['tripDetailsPanel','requirementsPanel','paymentPanel','attendancePanel'].forEach(panel=>$(panel).classList.toggle('hidden',panel!==id||!$(panel).classList.contains('hidden')))}
+$('tripDetailsBtn').addEventListener('click',()=>showInvitePanel('tripDetailsPanel'));
+$('requirementsBtn').addEventListener('click',()=>showInvitePanel('requirementsPanel'));
+$('paymentToggleBtn').addEventListener('click',()=>showInvitePanel('paymentPanel'));
+$('attendanceToggleBtn').addEventListener('click',()=>showInvitePanel('attendancePanel'));
+async function loadAttendance(){
+ try{const r=await fetch('/api/attendance',{credentials:'same-origin',cache:'no-store'});const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'تعذر تحميل حالة الحضور');
+  document.querySelectorAll('[data-attendance]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.attendance===d.attendance)));
+  $('attendanceStatus').textContent=d.attendance==='yes'?'تم تسجيل حضورك: نعم، سأحضر.':d.attendance==='no'?'تم تسجيل إجابتك: لن أحضر.':'لم يتم تسجيل إجابتك بعد.';
+ }catch(e){$('attendanceStatus').textContent='تعذر تحميل حالة الحضور الآن. حاول تحديث الصفحة.'}
+}
+document.querySelectorAll('[data-attendance]').forEach(button=>button.addEventListener('click',async()=>{
+ const answer=button.dataset.attendance;$('attendanceStatus').textContent='جارٍ حفظ إجابتك…';
+ try{const r=await fetch('/api/attendance',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({attendance:answer})});const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'تعذر الحفظ');
+  document.querySelectorAll('[data-attendance]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+  $('attendanceStatus').textContent=answer==='yes'?'تم حفظ تأكيد حضورك، ننتظرك بإذن الله.':'تم حفظ إجابتك. نأمل أن تتاح لك فرصة الانضمام إلينا لاحقًا.';
+ }catch(e){$('attendanceStatus').textContent=e.message||'تعذر حفظ الإجابة. حاول مرة أخرى.'}
+}));
 document.querySelectorAll('[data-payment]').forEach(button=>button.addEventListener('click',()=>{
  const method=button.dataset.payment;
  document.querySelectorAll('[data-payment]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
