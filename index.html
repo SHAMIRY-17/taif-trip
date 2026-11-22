@@ -2389,29 +2389,31 @@ if('serviceWorker' in navigator){
 </script>
 
 <script id="taif-trip-countdown">
-(()=>{
- const target = new Date('2026-11-25T07:00:00+03:00').getTime();
- const days = document.getElementById('countdownDays');
- const hours = document.getElementById('countdownHours');
- const minutes = document.getElementById('countdownMinutes');
- const caption = document.getElementById('countdownCaption');
- if(!days || !hours || !minutes) return;
- const two = n => String(n).padStart(2,'0');
- function updateCountdown(){
-  const remaining = target - Date.now();
-  if(remaining <= 0){
-   days.textContent='00';hours.textContent='00';minutes.textContent='00';
-   caption.textContent='حان موعد لقائنا في الطائف ✦';
-   return;
-  }
-  const totalMinutes = Math.floor(remaining/60000);
-  days.textContent=two(Math.floor(totalMinutes/1440));
-  hours.textContent=two(Math.floor((totalMinutes%1440)/60));
-  minutes.textContent=two(totalMinutes%60);
-  caption.textContent='نعدّ اللحظات حتى لقائنا في الطائف';
- }
- updateCountdown();
- setInterval(updateCountdown,60000);
+(()=> {
+ const init = () => {
+  const root = document.querySelector('.trip-countdown');
+  const days = document.getElementById('countdownDays');
+  const hours = document.getElementById('countdownHours');
+  const minutes = document.getElementById('countdownMinutes');
+  const caption = document.getElementById('countdownCaption');
+  if (!root || !days || !hours || !minutes || !caption) return;
+  root.style.display = 'block';
+  root.setAttribute('aria-live','off');
+  const target = new Date('2026-11-25T07:00:00+03:00').getTime();
+  const two = n => String(n).padStart(2,'0');
+  const update = () => {
+   const remaining = Math.max(0, target - Date.now());
+   const totalMinutes = Math.floor(remaining / 60000);
+   days.textContent = two(Math.floor(totalMinutes / 1440));
+   hours.textContent = two(Math.floor((totalMinutes % 1440) / 60));
+   minutes.textContent = two(totalMinutes % 60);
+   caption.textContent = remaining > 0 ? 'نعدّ اللحظات حتى لقائنا في الطائف' : 'حان موعد لقائنا في الطائف ✦';
+  };
+  update();
+  window.setInterval(update, 60000);
+ };
+ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+ else init();
 })();
 </script>
 
