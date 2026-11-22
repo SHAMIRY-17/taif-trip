@@ -7,7 +7,7 @@ export async function onRequestPost({request,env}){
  try{body=await request.json()}catch{return json({success:false,message:"بيانات الطلب غير صالحة."},400)}
  const participantId=Number(body.participantId);
  const role=String(body.role||"");
- const answers=Array.isArray(body.answers)?body.answers.slice(0,5):[];
+ const answers=Array.isArray(body.answers)?body.answers.slice(0,10):[];
  if(!Number.isInteger(participantId)||participantId<1||!["student","teacher"].includes(role)||!answers.length){
   return json({success:false,message:"بيانات الاستبيان غير مكتملة."},400);
  }
