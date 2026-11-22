@@ -1260,6 +1260,12 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 .cash-only-note .cash-icon{display:block;font-size:30px;margin-bottom:6px}
 .cash-only-note strong{font-size:20px;color:#F0D7A8}
 .cash-only-note p{margin:8px 0 0;color:#F5F1E8}
+#gameScreen{position:relative!important;min-height:100vh!important;padding-bottom:88px!important}
+.game-next-panel{position:fixed!important;left:18px!important;bottom:18px!important;z-index:10050!important;display:flex!important;align-items:center!important;gap:12px!important;max-width:calc(100vw - 36px)!important;padding:10px 12px!important;border:1px solid #d8b66f!important;border-radius:16px!important;background:linear-gradient(145deg,#17263b,#0a111d)!important;box-shadow:0 12px 32px #0009!important;color:#f5e7c8!important}
+.game-next-panel[hidden]{display:none!important}
+#gameCompletionStatus{margin:0!important;font-size:13px!important;line-height:1.5!important}
+#gameFinishedButton{border:1px solid #f0d59c!important;border-radius:12px!important;padding:12px 16px!important;background:linear-gradient(135deg,#e8d09a,#b99458)!important;color:#17202a!important;font-weight:800!important;white-space:nowrap!important;cursor:pointer!important}
+@media(max-width:520px){.game-next-panel{left:10px!important;bottom:10px!important;right:10px!important;max-width:none!important;justify-content:space-between!important;gap:8px!important;padding:9px!important}#gameCompletionStatus{font-size:11px!important}#gameFinishedButton{padding:11px 12px!important;font-size:12px!important}}
 .journey-finished{max-width:700px;margin:28px auto 10px;padding:28px 22px;border:1px solid #C5A880;border-radius:22px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#697275,#41494C 65%,#343B3E);box-shadow:0 20px 55px #20262966,inset 0 0 0 6px #C5A88012}
 .finished-mark{width:58px;height:58px;margin:0 auto 13px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#E7D4AE,#B99A69);color:#343B3E;font-size:30px;font-weight:bold}
 .finished-kicker{font-size:10px;letter-spacing:4px;color:#E3C99B}
@@ -1835,7 +1841,7 @@ body:before{display:none!important;background:none!important}
   </div>
   <section class="trip-countdown-section" aria-label="موعد رحلة الطائف">
    <div class="trip-countdown" role="timer" aria-label="العد التنازلي لموعد رحلة الطائف">
-    <div class="countdown-heading"><span class="countdown-spark">✦</span><span>موعدنا مع الطائف يقترب</span><span class="countdown-spark">✦</span></div>
+    <div class="countdown-heading"><span class="countdown-spark">✦</span><span>باقي على انطلاق رحلتنا إلى الطائف</span><span class="countdown-spark">✦</span></div>
     <div class="countdown-units">
      <div class="countdown-unit"><strong id="countdownDays">—</strong><span>الأيام</span></div>
      <div class="countdown-separator">:</div>
@@ -1845,7 +1851,7 @@ body:before{display:none!important;background:none!important}
      <div class="countdown-separator">:</div>
      <div class="countdown-unit"><strong id="countdownSeconds">—</strong><span>الثواني</span></div>
     </div>
-    <div class="countdown-caption" id="countdownCaption">نعدّ اللحظات حتى لقائنا في الطائف</div>
+    <div class="countdown-caption" id="countdownCaption">كل ثانية تقرّبنا من أيام الطائف الجميلة</div>
    </div>
   </section>
   <section>
@@ -1911,7 +1917,7 @@ body:before{display:none!important;background:none!important}
   <div id="externalGameMount" class="external-game-mount">
    <iframe id="busGameFrame" src="/Taif_Night_Game.html" title="لعبة قيادة حافلة رحلة الطائف" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen loading="lazy"></iframe>
   </div>
-  <div id="gameNextPanel" hidden><p id="gameCompletionStatus" role="status"></p></div>
+  <div id="gameNextPanel" hidden class="game-next-panel"><p id="gameCompletionStatus" role="status"></p><button id="gameFinishedButton" type="button">انتهيت من اللعبة ←</button></div>
  </section>
 
  <section id="walletScreen" class="screen">
@@ -2106,10 +2112,10 @@ window.addEventListener('message',event=>{
  if(event.origin!==window.location.origin||event.data?.type!=='TAIF_TRIP_GAME_COMPLETED')return;
  const participantKey=selected?.id?String(selected.id):'current';
  try{localStorage.setItem('taifTripGameCompleted:'+participantKey,JSON.stringify({completed:true,completedAt:new Date().toISOString()}));}catch(e){}
- $('gameCompletionStatus').textContent='✓ تم إنجاز المهمة وحفظ الإنجاز على هذا الجهاز.';
- if(selectedRole==='teacher'){showScreen('cinemaScreen');renderSeats();}
- else{showScreen('walletScreen');renderWalletSummary();}
+ $('gameCompletionStatus').textContent='✓ أحسنت! أنهيت تحدّي الطريق بنجاح.';
+ $('gameNextPanel').hidden=false;
 });
+$('gameFinishedButton').addEventListener('click',()=>{ $('gameNextPanel').hidden=true; if(selectedRole==='teacher'){showScreen('cinemaScreen');renderSeats();}else{showScreen('walletScreen');renderWalletSummary();} });
 $('continueToCinema').addEventListener('click',()=>{showScreen('cinemaScreen');renderSeats()});
 $('backToGameFromWallet').addEventListener('click',()=>showScreen('gameScreen'));
 $('backToCinemaFromAd').addEventListener('click',()=>showScreen('cinemaScreen'));
@@ -2435,7 +2441,7 @@ if('serviceWorker' in navigator){
    hours.textContent = two(Math.floor((totalMinutes % 1440) / 60));
    minutes.textContent = two(totalMinutes % 60);
    seconds.textContent = two(totalSeconds % 60);
-   caption.textContent = remaining > 0 ? 'نعدّ اللحظات حتى لقائنا في الطائف' : 'حان موعد لقائنا في الطائف ✦';
+   caption.textContent = remaining > 0 ? 'نعدّ اللحظات حتى لقائنا في الطائف' : 'حان وقت انطلاق رحلتنا إلى الطائف ✦';
   };
   update();
   window.setInterval(update, 1000);
