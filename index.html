@@ -2056,7 +2056,7 @@ $('confirmIdentity').addEventListener('click',async()=>{
  try{
   const r=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,kunya,phone,consent:true,role:selectedRole,teacherCode})});
   const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'تعذر التسجيل');
-  $('identityMessage').textContent='تم التسجيل بنجاح.';
+  $('identityMessage').textContent=d.message||(d.returning?'أهلًا بعودتك!':'تم التسجيل بنجاح.');
   selected.id=d.id||null;walletBalance=Number(d.walletBalance??(selectedRole==='teacher'?0:1000));renderWelcome();showScreen('welcomeScreen');
  }catch(e){$('identityMessage').textContent=e.message||'تعذر الاتصال بالخادم.';updateRegistrationButton()}
 });
