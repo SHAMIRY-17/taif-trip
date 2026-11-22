@@ -2169,7 +2169,7 @@ function renderWelcome(){
   card.classList.remove('hidden');
   const displayName=selected?.kunya||selected?.name||'يا بطل';
   $('studentWelcomeTitle').textContent='حيّاك الله يا '+displayName;
-  $('studentWelcomeMessage').textContent='نورت موقع رحلة الطائف، ونتمنى لك وقتًا مليئًا بالمتعة والذكريات الجميلة.';
+  $('studentWelcomeMessage').textContent=selected?.returning?'أهلًا بعودتك! تم فتح سجلك السابق بنفس رقم الجوال، ولم نُنشئ لك تسجيلًا جديدًا.':'نورت موقع رحلة الطائف، ونتمنى لك وقتًا مليئًا بالمتعة والذكريات الجميلة.';
  }
 }
 function renderFeedbackQuestions(){
@@ -2218,7 +2218,7 @@ $('confirmIdentity').addEventListener('click',async()=>{
   const r=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,kunya,phone,consent:true,role:selectedRole,teacherCode})});
   const d=await r.json();if(!r.ok||!d.success)throw new Error(d.message||'تعذر التسجيل');
   $('identityMessage').textContent=d.message||(d.returning?'أهلًا بعودتك!':'تم التسجيل بنجاح.');
-  selected.id=d.id||null;walletBalance=Number(d.walletBalance??(selectedRole==='teacher'?0:1000));renderWelcome();showScreen('welcomeScreen');
+  selected.id=d.id||null;selected.returning=Boolean(d.returning);walletBalance=Number(d.walletBalance??(selectedRole==='teacher'?0:1000));renderWelcome();showScreen('welcomeScreen');
  }catch(e){$('identityMessage').textContent=e.message||'تعذر الاتصال بالخادم.';updateRegistrationButton()}
 });
 $('enterJourney').addEventListener('click',()=>showScreen('gameScreen'));
