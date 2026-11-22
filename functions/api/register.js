@@ -1,5 +1,5 @@
 function json(data,status=200,headers={}){return new Response(JSON.stringify(data),{status,headers:{"Content-Type":"application/json; charset=UTF-8","Cache-Control":"no-store",...headers}})}
-const TEACHER_CODE_SHA256="c38217d983803c199aa25bc3779e2c45c45fc90df79c8fbcf670503154d1c7f9";
+const TEACHER_CODE_SHA256="fa623ab8d770b0a205f41f14f275f8d08e5f756bd43d4b8c474de0f73a7c357d";
 async function hash(value){const d=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));return Array.from(new Uint8Array(d),b=>b.toString(16).padStart(2,"0")).join("")}
 async function matchesTeacherCode(value){return (await hash(value))===TEACHER_CODE_SHA256}
 function token(){const b=crypto.getRandomValues(new Uint8Array(32));let s="";for(const x of b)s+=String.fromCharCode(x);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
