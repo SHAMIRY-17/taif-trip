@@ -85,15 +85,7 @@ p{color:#d2d9e5;line-height:1.7;margin:7px 0}
  </div>
 </div>
 <script id="trip-launch-countdown">
-(()=>{const target=new Date('2026-11-25T07:00:00+03:00').getTime(),two=n=>String(n).padStart(2,'0');
- const update=()=>document.querySelectorAll('[data-trip-countdown]').forEach(root=>{
-  const d=root.querySelector('.countdown-days'),h=root.querySelector('.countdown-hours'),m=root.querySelector('.countdown-minutes'),sec=root.querySelector('.countdown-seconds');
-  if(!d||!h||!m||!sec)return;
-  const left=Math.max(0,target-Date.now()),total=Math.floor(left/1000),mins=Math.floor(total/60);
-  d.textContent=two(Math.floor(mins/1440));h.textContent=two(Math.floor((mins%1440)/60));m.textContent=two(mins%60);sec.textContent=two(total%60);
- });
- update();setInterval(update,1000);
-})();
+(()=>{document.querySelectorAll('[data-trip-countdown]').forEach(root=>{const caption=root.querySelector('.countdown-caption');if(caption)caption.textContent='سيظهر العد التنازلي بعد تثبيت موعد الانطلاقة الصحيح.';root.querySelectorAll('.countdown-unit strong').forEach(el=>el.textContent='—');});})();
 </script>
 <script>
 (function(){
