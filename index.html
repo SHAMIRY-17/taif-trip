@@ -1807,18 +1807,18 @@ body:before{display:none!important;background:none!important}
 <main>
  <div id="landing">
 <section class="trip-countdown-section" aria-label="موعد رحلة الطائف">
-   <div class="trip-countdown" role="timer" aria-label="العد التنازلي لموعد رحلة الطائف">
+   <div class="trip-countdown" data-trip-countdown role="timer" aria-label="العد التنازلي لموعد رحلة الطائف">
     <div class="countdown-heading"><span class="countdown-spark">✦</span><span>باقي على انطلاق رحلتنا إلى الطائف</span><span class="countdown-spark">✦</span></div>
     <div class="countdown-units">
-     <div class="countdown-unit"><strong id="countdownDays">—</strong><span>الأيام</span></div>
+     <div class="countdown-unit"><strong id="countdownDays" class="countdown-days">—</strong><span>الأيام</span></div>
      <div class="countdown-separator">:</div>
-     <div class="countdown-unit"><strong id="countdownHours">—</strong><span>الساعات</span></div>
+     <div class="countdown-unit"><strong id="countdownHours" class="countdown-hours">—</strong><span>الساعات</span></div>
      <div class="countdown-separator">:</div>
-     <div class="countdown-unit"><strong id="countdownMinutes">—</strong><span>الدقائق</span></div>
+     <div class="countdown-unit"><strong id="countdownMinutes" class="countdown-minutes">—</strong><span>الدقائق</span></div>
      <div class="countdown-separator">:</div>
-     <div class="countdown-unit"><strong id="countdownSeconds">—</strong><span>الثواني</span></div>
+     <div class="countdown-unit"><strong id="countdownSeconds" class="countdown-seconds">—</strong><span>الثواني</span></div>
     </div>
-    <div class="countdown-caption" id="countdownCaption">كل ثانية تقرّبنا من أيام الطائف الجميلة</div>
+    <div class="countdown-caption countdown-caption-text" id="countdownCaption">كل ثانية تقرّبنا من أيام الطائف الجميلة</div>
    </div>
   </section>
   <div class="hero">
@@ -1863,7 +1863,16 @@ body:before{display:none!important;background:none!important}
  <section id="identity" class="screen">
   <div class="panel">
    <div class="steps"><span class="step current">1 · التسجيل</span><span class="step">2 · اللعبة</span><span class="step">3 · إكمال الرحلة</span></div>
-   <h2>اختر نوع الدخول</h2>
+<div class="trip-countdown login-countdown" data-trip-countdown role="timer" aria-label="العد التنازلي لموعد انطلاق الرحلة">
+    <div class="countdown-heading"><span class="countdown-spark">✦</span><span>باقي على انطلاق الرحلة</span><span class="countdown-spark">✦</span></div>
+    <div class="countdown-units">
+     <div class="countdown-unit"><strong class="countdown-days">—</strong><span>الأيام</span></div><div class="countdown-separator">:</div>
+     <div class="countdown-unit"><strong class="countdown-hours">—</strong><span>الساعات</span></div><div class="countdown-separator">:</div>
+     <div class="countdown-unit"><strong class="countdown-minutes">—</strong><span>الدقائق</span></div><div class="countdown-separator">:</div>
+     <div class="countdown-unit"><strong class="countdown-seconds">—</strong><span>الثواني</span></div>
+    </div><div class="countdown-caption countdown-caption-text">نلتقي قريبًا في الطائف</div>
+   </div>
+      <h2>اختر نوع الدخول</h2>
    <p class="muted">اختر الفئة المناسبة للمتابعة.</p>
    <div class="participants role-entry-grid" id="roleChoices">
      <button type="button" class="person role-entry student-entry" data-role="student"><span class="role-art student-art" aria-hidden="true"><i class="student-head"></i><i class="student-body"></i><i class="student-bag"></i><i class="student-book"></i></span><span class="role-copy"><b>دخول الطالب</b><small>بوابة الطالب · التسجيل ومتابعة الرحلة</small></span></button>
@@ -1909,6 +1918,15 @@ body:before{display:none!important;background:none!important}
  </section>
 
  <section id="gameScreen" class="screen" aria-label="لعبة الباص">
+  <div class="trip-countdown game-countdown" data-trip-countdown role="timer" aria-label="الوقت المتبقي لانطلاق رحلة الطائف">
+   <div class="countdown-heading">✦ العد التنازلي لانطلاق الرحلة ✦</div>
+   <div class="countdown-units">
+    <div class="countdown-unit"><strong class="countdown-days">—</strong><span>الأيام</span></div><div class="countdown-separator">:</div>
+    <div class="countdown-unit"><strong class="countdown-hours">—</strong><span>الساعات</span></div><div class="countdown-separator">:</div>
+    <div class="countdown-unit"><strong class="countdown-minutes">—</strong><span>الدقائق</span></div><div class="countdown-separator">:</div>
+    <div class="countdown-unit"><strong class="countdown-seconds">—</strong><span>الثواني</span></div>
+   </div><div class="countdown-caption countdown-caption-text">كل ثانية تقرّبنا من الانطلاقة</div>
+  </div>
   <div id="externalGameMount" class="external-game-mount">
    <iframe id="busGameFrame" src="/Taif_Night_Game.html" title="لعبة قيادة حافلة رحلة الطائف" allow="autoplay; fullscreen; gamepad; orientation-lock" allowfullscreen loading="lazy"></iframe>
   </div>
@@ -2414,33 +2432,24 @@ if('serviceWorker' in navigator){
 
 <script id="taif-trip-countdown">
 (()=> {
- const init = () => {
-  const root = document.querySelector('.trip-countdown');
-  const days = document.getElementById('countdownDays');
-  const hours = document.getElementById('countdownHours');
-  const minutes = document.getElementById('countdownMinutes');
-  const seconds = document.getElementById('countdownSeconds');
-  const caption = document.getElementById('countdownCaption');
-  if (!root || !days || !hours || !minutes || !seconds || !caption) return;
-  root.style.display = 'block';
-  root.setAttribute('aria-live','off');
-  const target = new Date('2026-11-25T07:00:00+03:00').getTime();
-  const two = n => String(n).padStart(2,'0');
-  const update = () => {
-   const remaining = Math.max(0, target - Date.now());
-   const totalSeconds = Math.floor(remaining / 1000);
-   const totalMinutes = Math.floor(totalSeconds / 60);
-   days.textContent = two(Math.floor(totalMinutes / 1440));
-   hours.textContent = two(Math.floor((totalMinutes % 1440) / 60));
-   minutes.textContent = two(totalMinutes % 60);
-   seconds.textContent = two(totalSeconds % 60);
-   caption.textContent = remaining > 0 ? 'نعدّ اللحظات حتى لقائنا في الطائف' : 'حان وقت انطلاق رحلتنا إلى الطائف ✦';
-  };
-  update();
-  window.setInterval(update, 1000);
+ const target = new Date('2026-11-25T07:00:00+03:00').getTime();
+ const two = n => String(n).padStart(2,'0');
+ const update = () => {
+  document.querySelectorAll('[data-trip-countdown]').forEach(root => {
+   const days=root.querySelector('.countdown-days'),hours=root.querySelector('.countdown-hours');
+   const minutes=root.querySelector('.countdown-minutes'),seconds=root.querySelector('.countdown-seconds');
+   const caption=root.querySelector('.countdown-caption-text');
+   if(!days||!hours||!minutes||!seconds||!caption)return;
+   const remaining=Math.max(0,target-Date.now()),totalSeconds=Math.floor(remaining/1000),totalMinutes=Math.floor(totalSeconds/60);
+   days.textContent=two(Math.floor(totalMinutes/1440));
+   hours.textContent=two(Math.floor((totalMinutes%1440)/60));
+   minutes.textContent=two(totalMinutes%60);
+   seconds.textContent=two(totalSeconds%60);
+   caption.textContent=remaining>0?'نعدّ اللحظات حتى انطلاق رحلتنا إلى الطائف':'حان وقت انطلاق رحلتنا إلى الطائف ✦';
+  });
  };
- if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
- else init();
+ update();
+ window.setInterval(update,1000);
 })();
 </script>
 
