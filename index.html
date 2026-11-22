@@ -1539,7 +1539,7 @@ body{background-color:#41484B!important;color:#F0F1ED!important;background-image
 <style>
 .wealth-dua{max-width:620px;margin:16px auto;padding:18px;border:1px solid #C5A880;border-radius:15px;background:linear-gradient(145deg,#35251b,#24170f);text-align:center;color:#F6EFE6}.wealth-dua strong{color:#E8D4B4}.wealth-dua p{font-size:18px;line-height:2;color:#fff6e9;margin:9px 0}.wealth-dua small{color:#D2B49C}
 
-/* دعاء السينما، شارة الشبكة، وبطاقة تسليم التذكرة عند البوابة */
+/* شارة الشبكة، وبطاقة تسليم التذكرة عند البوابة */
 .wealth-dua{max-width:620px;margin:18px auto 24px;padding:18px;border:1px solid #C5A880;border-radius:15px;background:linear-gradient(145deg,#35251b,#24170f);text-align:center;color:#F6EFE6}
 .wealth-dua strong{color:#E8D4B4}.wealth-dua p{font-size:18px;line-height:2;color:#fff6e9;margin:9px 0}.wealth-dua small{color:#D2B49C}
 .network-only{border-color:#d8b66f88}.network-mark{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border:1px solid #d8b66f88;border-radius:999px;background:#18283a;color:#f5dfb0;font-weight:bold}
@@ -1842,6 +1842,8 @@ body:before{display:none!important;background:none!important}
      <div class="countdown-unit"><strong id="countdownHours">—</strong><span>الساعات</span></div>
      <div class="countdown-separator">:</div>
      <div class="countdown-unit"><strong id="countdownMinutes">—</strong><span>الدقائق</span></div>
+     <div class="countdown-separator">:</div>
+     <div class="countdown-unit"><strong id="countdownSeconds">—</strong><span>الثواني</span></div>
     </div>
     <div class="countdown-caption" id="countdownCaption">نعدّ اللحظات حتى لقائنا في الطائف</div>
    </div>
@@ -1852,14 +1854,14 @@ body:before{display:none!important;background:none!important}
     <div class="card"><div class="symbol">🚌</div><h3>لعبة الباص</h3><p>قد رحلتك، تجاوز تحديات الطريق، ومرّ بالمحطات الأربع واجمع رصيدك ومكافآتك في تجربة قيادة ممتعة.</p></div>
     <div class="card"><div class="symbol">🎬</div><h3>سينما الرحلة</h3><p>اختر مقعدك المفضّل، واجلس بجانب رفاقك، واستمتع بأجواء العرض.</p></div>
     <div class="card"><div class="symbol">🪪</div><h3>بطاقة المشارك</h3><p>بطاقتك الخاصة التي تعرّف بك وترافقك في محطات رحلة الطائف.</p></div>
-    <div class="card"><div class="symbol">💌</div><h3>دعوتك الخاصة</h3><p>دعوة باسمك وتفاصيل رحلتك؛ لأن حضورك هو أجمل ما في الحكاية.</p></div>
+    <div class="card"><div class="symbol">💌</div><h3>دعوتك داخل الموقع</h3><p>تظهر لك دعوتك الشخصية وتفاصيل الرحلة بعد إكمال المراحل.</p></div>
    </div>
   </section>
  </div>
 
  <section id="identity" class="screen">
   <div class="panel">
-   <div class="steps"><span class="step current">1 · بطاقة المشارك</span><span class="step">2 · السينما</span><span class="step">3 · الدعوة</span></div>
+   <div class="steps"><span class="step current">1 · التسجيل</span><span class="step">2 · اللعبة</span><span class="step">3 · إكمال الرحلة</span></div>
    <h2>اختر نوع الدخول</h2>
    <p class="muted">اختر الفئة المناسبة للمتابعة.</p>
    <div class="participants role-entry-grid" id="roleChoices">
@@ -1952,7 +1954,7 @@ body:before{display:none!important;background:none!important}
    </div>
    <div class="actions"><button class="secondary" id="backGame">العودة للمحفظة</button><button id="toInvite" disabled>تأكيد المقعد والمتابعة للطلبات</button></div>
    <div id="snackShop" class="snack-shop hidden">
-    <div class="snack-heading"><span class="snack-kicker">TAIF CINEMA · CONCESSIONS</span><h3>ماذا تريد أن تتناول قبل العرض؟</h3><p>اختر طلباتك، وشاهد الإجمالي قبل تأكيد الشراء.</p></div><div class="wealth-dua"><strong>دعاء نبوي للرزق والغنى والبركة</strong><p>«اللهم إني أسألك الهدى والتقى والعفاف والغنى»</p><small>رواه مسلم في صحيحه (2721).</small></div>
+    <div class="snack-heading"><span class="snack-kicker">TAIF CINEMA · CONCESSIONS</span><h3>ماذا تريد أن تتناول قبل العرض؟</h3><p>اختر طلباتك، وشاهد الإجمالي قبل تأكيد الشراء.</p></div>
     <div class="snack-grid">
      <article class="snack-item"><div class="snack-emoji">🍿</div><div><strong>فشار السينما</strong><small>اختر النكهة والحجم المناسب لك.</small></div><label class="snack-flavor">النكهة<select id="popcornFlavor"><option value="جبن">جبن</option><option value="ملح">ملح</option><option value="كراميل">كراميل</option></select></label><label class="snack-add"><input id="popcornInclude" type="checkbox"> إضافة الفشار للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="popcornSize" value="large"><span><b>أ</b> كبير<small>24 ريال</small></span></label><label><input type="radio" name="popcornSize" value="medium" checked><span><b>ب</b> وسط<small>18 ريال</small></span></label></div></article>
      <article class="snack-item"><div class="snack-emoji">🧀</div><div><strong>دوريتوس</strong><small>اختر الحجم المناسب لك.</small></div><label class="snack-add"><input id="doritosInclude" type="checkbox"> إضافة الدوريتوس للطلب</label><div class="snack-size-title">اختر الحجم</div><div class="snack-size-options"><label><input type="radio" name="doritosSize" value="large"><span><b>أ</b> كبير<small>16 ريال</small></span></label><label><input type="radio" name="doritosSize" value="medium" checked><span><b>ب</b> وسط<small>12 ريال</small></span></label></div></article>
@@ -2418,22 +2420,25 @@ if('serviceWorker' in navigator){
   const days = document.getElementById('countdownDays');
   const hours = document.getElementById('countdownHours');
   const minutes = document.getElementById('countdownMinutes');
+  const seconds = document.getElementById('countdownSeconds');
   const caption = document.getElementById('countdownCaption');
-  if (!root || !days || !hours || !minutes || !caption) return;
+  if (!root || !days || !hours || !minutes || !seconds || !caption) return;
   root.style.display = 'block';
   root.setAttribute('aria-live','off');
   const target = new Date('2026-11-25T07:00:00+03:00').getTime();
   const two = n => String(n).padStart(2,'0');
   const update = () => {
    const remaining = Math.max(0, target - Date.now());
-   const totalMinutes = Math.floor(remaining / 60000);
+   const totalSeconds = Math.floor(remaining / 1000);
+   const totalMinutes = Math.floor(totalSeconds / 60);
    days.textContent = two(Math.floor(totalMinutes / 1440));
    hours.textContent = two(Math.floor((totalMinutes % 1440) / 60));
    minutes.textContent = two(totalMinutes % 60);
+   seconds.textContent = two(totalSeconds % 60);
    caption.textContent = remaining > 0 ? 'نعدّ اللحظات حتى لقائنا في الطائف' : 'حان موعد لقائنا في الطائف ✦';
   };
   update();
-  window.setInterval(update, 60000);
+  window.setInterval(update, 1000);
  };
  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
  else init();
