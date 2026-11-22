@@ -18,7 +18,7 @@ export async function onRequestPost({request,env}){
  const phone=String(body.phone||"").replace(/[٠-٩]/g,d=>String("٠١٢٣٤٥٦٧٨٩".indexOf(d))).replace(/[۰-۹]/g,d=>String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))).replace(/[\s-]/g,"");
  if(!["student","teacher"].includes(role))return json({success:false,message:"نوع الدخول غير صالح."},400);
  if(!name||!kunya||!/^05\d{8}$/.test(phone))return json({success:false,message:"تحقق من الاسم والكنية ورقم الجوال."},400);
- if(role==="teacher"&&!(await matchesTeacherCode(String(body.teacherCode||"").trim())))return json({success:false,message:"رمز المعلمين غير صحيح."},401);
+ 
  try{
   await env.DB.prepare("CREATE TABLE IF NOT EXISTS participants (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, kunya TEXT NOT NULL, phone TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'student', consent_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
   for(const sql of ["ALTER TABLE participants ADD COLUMN role TEXT NOT NULL DEFAULT 'student'","ALTER TABLE participants ADD COLUMN photo_data TEXT","ALTER TABLE participants ADD COLUMN wallet_balance INTEGER NOT NULL DEFAULT 1000"])try{await env.DB.prepare(sql).run()}catch(e){}
@@ -26,6 +26,8 @@ export async function onRequestPost({request,env}){
 
   // Reuse the existing identity within the same role; student and teacher records stay separate.
   const existing=await env.DB.prepare("SELECT id,name,kunya,wallet_balance FROM participants WHERE role=?1 AND phone=?2 ORDER BY id ASC LIMIT 1").bind(role,phone).first();
+  // Returning teachers reuse their existing role-specific account; the shared teacher code is only needed for first registration.
+  if(!existing&&role==="teacher"&&!(await matchesTeacherCode(String(body.teacherCode||"").trim())))return json({success:false,message:"لأول تسجيل كمعلم، أدخل رمز المعلمين الذي استلمته من المنظّم."},401);
   if(existing){
    if(normalizeIdentity(existing.name)!==normalizeIdentity(name)||normalizeIdentity(existing.kunya)!==normalizeIdentity(kunya)){
     return json({success:false,message:"هذا الرقم مرتبط بسجل سابق، لكن الاسم أو الكنية لا يطابقان بياناته. راجع المنظّم لتحديث البيانات."},409);
