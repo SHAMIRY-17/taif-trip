@@ -40,7 +40,7 @@ export async function onRequestPost({request,env}){
   // The conditional insert prevents a second record if two registration requests arrive together.
   const balance=role==="teacher"?0:1000;
   const inserted=await env.DB.prepare("INSERT INTO participants (name,kunya,phone,role,consent_at,wallet_balance) SELECT ?1,?2,?3,?4,?5,?6 WHERE NOT EXISTS (SELECT 1 FROM participants WHERE role=?4 AND phone=?3) AND (?4<>'teacher' OR (SELECT COUNT(*) FROM participants WHERE role='teacher')<5)").bind(name,kunya,phone,role,new Date().toISOString(),balance).run();
-  let id=inserted.meta?.last_row_id;
+  let id=Number(inserted.meta?.changes||0)>0?inserted.meta?.last_row_id:null;
   if(!id){
    const raced=await env.DB.prepare("SELECT id,name,kunya,wallet_balance FROM participants WHERE role=?1 AND phone=?2 ORDER BY id ASC LIMIT 1").bind(role,phone).first();
    if(raced){
