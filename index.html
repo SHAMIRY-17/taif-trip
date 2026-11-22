@@ -1774,6 +1774,23 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
 }
 </style>
 
+
+<style id="taif-no-people-and-role-redesign">
+/* Remove external background photos that may contain people; use a calm Taif-inspired illustrated landscape. */
+body{background-image:radial-gradient(ellipse at 18% 18%,#b9a17a33,transparent 34%),radial-gradient(ellipse at 82% 65%,#8b9a8b22,transparent 38%),linear-gradient(145deg,#41484b,#34393b 70%)!important;background-attachment:fixed!important}
+body:before{display:none!important;background:none!important}
+#landing .hero-window img{display:none!important}
+#landing .hero-window{background:linear-gradient(180deg,#b8c2bb 0%,#d4c6a7 43%,#8d9a87 44%,#536b5d 68%,#34483e 100%)!important}
+#landing .hero-window:after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(145deg,transparent 0 18%,#657c68 18% 35%,transparent 35%),linear-gradient(35deg,#34483e 0 28%,transparent 28%),linear-gradient(160deg,transparent 0 45%,#78866d 45% 62%,#405548 62%);opacity:.9}
+#landing .hero-rose-ground{background:linear-gradient(0deg,#59422f,#8b7251 65%,transparent)!important}
+/* Faceless, modest illustrated role figures: no human photographs or facial details. */
+.teacher-head{background:linear-gradient(90deg,#242321,#39352e 52%,#242321)!important;border-radius:48% 48% 18% 18%!important;filter:none!important}
+.teacher-shemagh{z-index:2!important}
+.student-head{background:linear-gradient(90deg,#34312d,#51473a 50%,#34312d)!important;border-radius:50% 50% 15% 15%!important;box-shadow:0 0 0 8px #1b2733!important}
+.student-head:before,.student-head:after,.teacher-head:before,.teacher-head:after{content:none!important;display:none!important}
+.teacher-thobe,.student-body{filter:drop-shadow(0 8px 12px #0005)}
+@media(max-width:700px){#landing .hero-window{background-position:center!important}#landing .hero-window:after{opacity:.78}}
+</style>
 </head>
 <body>
 <header class="site-header">
