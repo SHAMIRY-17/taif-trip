@@ -1835,6 +1835,7 @@ html{overflow-x:hidden}body{min-width:320px;overflow-x:hidden}img,video,iframe{m
     <h3 id="welcomePoemTitle">قصيدتك الخاصة</h3>
     <div id="welcomePoemLines"></div>
    </div>
+   <p id="teacherAttendanceLink" class="hidden" style="text-align:center;margin:16px 0"><a href="/teacher.html" style="color:#e6c783;font-weight:bold;text-decoration:underline">📩 متابعة تأكيد حضور الطلاب والمعلمين</a></p>
    <div class="actions"><button id="welcomeContinue" type="button">دخول أجواء الرحلة ←</button></div>
   </div>
  </section>
@@ -2068,6 +2069,7 @@ const teacherPoems={"أبو حامد":[["يا رفيعَ القدرِ يا عا�
 function renderWelcome(){
  const wrap=$('welcomePoemWrap'),lines=$('welcomePoemLines');
  if(selectedRole==='teacher'){
+  $('teacherAttendanceLink').classList.remove('hidden');
   const normalizeKunya=value=>String(value||'').replace(/[أإآ]/g,'ا').replace(/\\s+/g,'').trim();
   const chosenKunya=normalizeKunya(selected?.kunya);
   const poemKey=Object.keys(teacherPoems).find(key=>normalizeKunya(key)===chosenKunya)||'أبو سعود';
@@ -2076,6 +2078,7 @@ function renderWelcome(){
   lines.innerHTML=poem.map(pair=>'<div class="poem-line"><span>'+pair[0]+'</span><span>'+pair[1]+'</span></div>').join('');
   wrap.classList.remove('hidden');
  }else{
+  $('teacherAttendanceLink').classList.add('hidden');
   wrap.classList.add('hidden');
   const card=$('studentWelcomeCard');
   card.classList.remove('hidden');
